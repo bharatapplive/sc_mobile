@@ -1,65 +1,169 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar> 
-</ion-header>-->
-<ion-content [fullscreen]="true" class="page">
-  <main class="box">
-    <!-- <div class="toggle" role="group" aria-label="Theme switcher">
-      <button type="button" [class.active]="theme === 'light'" (click)="setTheme('light')">Light</button>
-      <button type="button" [class.active]="theme === 'dark'" (click)="setTheme('dark')">Dark</button>
-    </div> -->
+<ion-content class="login-content" [fullscreen]="true">
+  <!-- Atmospheric Background Glow Elements -->
+  <div class="ambient-glow glow-top-left"></div>
+  <div class="ambient-glow glow-bottom-right"></div>
 
-    <header class="head">
-      <div class="icon vibrant-gradient">
-        <span class="material-symbols-outlined">group</span>
-      </div>
-      <h1>Social Circle</h1>
-      <p>Connect with creators, share your story, and join the digital circle.</p>
-    </header>
+  <!-- Floating background particles -->
+  <div class="particles-container" aria-hidden="true">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+  </div>
 
-    <div class="card">
-      <form class="form" action="#" method="POST">
-        <div class="field">
-          <label for="identity">Mobile Number or Email</label>
-          <div class="input">
-            <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required type="text" />
+  <!-- Main Responsive Container -->
+  <div class="main-wrapper">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-sm="10" size-md="8" size-lg="5" size-xl="4" class="login-column">
+
+          <!-- Brand Identity / Header -->
+          <header class="brand-header">
+            <div class="logo-wrapper">
+              <div class="logo-badge">
+                <ion-icon name="people" class="logo-icon"></ion-icon>
+              </div>
+            </div>
+            <h1 class="brand-title">Social Circle</h1>
+            <p class="brand-subtitle">
+              Connect with creators, share your story, and join the digital circle.
+            </p>
+          </header>
+
+          <!-- Login Form Card (Glassmorphism) -->
+          <div class="glass-card">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+              <!-- Mobile / Email Identity Field -->
+              <div class="form-group">
+                <ion-label class="input-label">Mobile Number or Email</ion-label>
+                <ion-item lines="none" class="custom-input-item"
+                  [class.input-error]="identityControl?.invalid && (identityControl?.touched || isSubmitted)">
+                  <ion-icon name="call-outline" slot="start" class="input-icon"></ion-icon>
+                  <ion-input formControlName="identity" type="text" placeholder="+1 (555) 000-0000 or email@address.com"
+                    aria-label="Mobile Number or Email"></ion-input>
+                </ion-item>
+
+                <!-- Identity Validation Messages -->
+                @if (identityControl?.invalid && (identityControl?.touched || isSubmitted)) {
+                <div class="error-message">
+                  @if (identityControl?.errors?.['required']) {
+                  <ion-text color="danger">Mobile number or email is required.</ion-text>
+                  }
+                  @if (identityControl?.errors?.['invalidIdentity'] && !identityControl?.errors?.['required']) {
+                  <ion-text color="danger">Please enter a valid email address or phone number.</ion-text>
+                  }
+                </div>
+                }
+              </div>
+
+              <!-- Password Field -->
+              <div class="form-group">
+                <div class="label-row">
+                  <ion-label class="input-label">Password</ion-label>
+                  <a href="#" class="forgot-link" (click)="$event.preventDefault()">Forgot Password?</a>
+                </div>
+                <ion-item lines="none" class="custom-input-item"
+                  [class.input-error]="passwordControl?.invalid && (passwordControl?.touched || isSubmitted)">
+                  <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
+                  <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'"
+                    placeholder="••••••••" aria-label="Password"></ion-input>
+                  <ion-button slot="end" fill="clear" class="password-toggle-btn" (click)="togglePasswordVisibility()"
+                    type="button" aria-label="Toggle password visibility">
+                    <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" slot="icon-only"></ion-icon>
+                  </ion-button>
+                </ion-item>
+
+                <!-- Password Validation Messages -->
+                @if (passwordControl?.invalid && (passwordControl?.touched || isSubmitted)) {
+                <div class="error-message">
+                  @if (passwordControl?.errors?.['required']) {
+                  <ion-text color="danger">Password is required.</ion-text>
+                  }
+                  @if (passwordControl?.errors?.['minlength']) {
+                  <ion-text color="danger">Password must be at least 6 characters long.</ion-text>
+                  }
+                </div>
+                }
+              </div>
+
+              <!-- Submit Button -->
+              <ion-button type="submit" expand="block" class="submit-button">
+                Log In
+              </ion-button>
+
+            </form>
+
+            <!-- Divider -->
+            <div class="divider-container">
+              <div class="divider-line"></div>
+              <span class="divider-text">or continue with</span>
+              <div class="divider-line"></div>
+            </div>
+
+            <!-- Social Logins -->
+            <ion-grid class="ion-no-padding social-grid">
+              <ion-row class="ion-gutter">
+                <ion-col size="6">
+                  <ion-button fill="outline" expand="block" class="social-button" (click)="onGoogleLogin()">
+                    <div class="social-icon google">
+                      <svg class="w-full h-full" viewBox="0 0 24 24">
+                        <path
+                          d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                          fill="#4285F4"></path>
+                        <path
+                          d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                          fill="#34A853"></path>
+                        <path
+                          d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.26.81-.58z"
+                          fill="#FBBC05"></path>
+                        <path
+                          d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z"
+                          fill="#EA4335"></path>
+                      </svg>
+                    </div>
+                    <span class="social-label">Google</span>
+                  </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-button fill="outline" expand="block" class="social-button" (click)="onAppleLogin()">
+                    <ion-icon name="logo-apple" slot="start" class="social-icon apple-color"></ion-icon>
+                    <span class="social-label">Apple</span>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
           </div>
-        </div>
 
-        <div class="field">
-          <div class="row flex justify-content-between">
-            <label for="password">Password</label>
-            <a href="#">Forgot Password?</a>
-          </div>
-          <div class="input">
-            <span class="material-symbols-outlined">lock</span>
-            <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <button type="button" aria-label="Show password">
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-          </div>
-        </div>
+          <!-- Footer Links -->
+          <footer class="login-footer">
+            <p class="signup-prompt">
+              Don't have an account?
+              <a routerLink="/registration" class="signup-link">Sign Up</a>
+            </p>
+            <div class="footer-links">
+              <a href="#">Privacy</a>
+              <a href="#">Terms</a>
+              <a href="#">Help</a>
+            </div>
+          </footer>
 
-        <button class="btn vibrant-gradient" type="submit">Log In</button>
-      </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
-
-
-    
-    </div>
-
-    <footer class="foot">
-      <p>
-        Don't have an account?
-        <a href="#">Sign Up</a>
-      </p>
-      <div class="links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Help</a>
-      </div>
-    </footer>
-  </main>
+  <!-- Side Decorations (Desktop Only) -->
+  <div class="side-decoration side-left">
+    <div class="bar bar-1"></div>
+    <div class="bar bar-2"></div>
+    <div class="bar bar-3"></div>
+  </div>
+  <div class="side-decoration side-right">
+    <div class="bar bar-1"></div>
+    <div class="bar bar-2"></div>
+    <div class="bar bar-3"></div>
+  </div>
 </ion-content>
