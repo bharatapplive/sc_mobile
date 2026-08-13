@@ -1,0 +1,125 @@
+ion-content{
+    
+    font-family: 'Segoe UI', sans-serif;
+}
+
+ion-button{
+    width: 90%;
+    background: linear-gradient(90deg, #c3bbfd 0%, #f7b3df 100%);
+    border-radius: 18px;
+    color: #2b0b54;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    height: 48px;
+    cursor: pointer;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  background-color: #ffffff;
+}
+
+.header-logo {
+  width: 80px; /* Adjust size as needed */
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b; /* Dark neutral */
+}
+
+.header-subtitle {
+  margin: 8px 0 0 0;
+  font-size: 14px;
+  color: #64748b; /* Muted text */
+  max-width: 320px;
+  line-height: 1.4;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-card{
+    width: 90%;
+    font-size: 17px;
+}
+
+ion-item{
+    border: 1px solid gray;
+    border-radius: 15px;
+    background: #cbced357;
+    --background: #cbced357;
+    padding: 0.2rem;
+    margin-top:5px;
+}
+
+ion-icon{
+    display: inline-block;
+    font-size: 24px;       /* Ionic icons scale using font-size */
+    width: 20px;
+    height: 20px;
+
+    /* 2. Set an explicit color (prevents transparent/white-on-white text) */
+    color: #000000;        /* Dark gray */
+
+    /* 3. Bring to front if behind input background */
+    position: relative;
+    z-index: 10;
+    
+    /* 4. Prevent touch block on non-clickable icons */
+    pointer-events: none;
+}
+
+.separation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.other-Login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+
+.extraBtn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.fb-login{
+    width: 45%;
+    background: #2a76e7;
+    color: white;
+}
+
+.guset-login{
+    width: 45%;
+    background: gray;
+    color: white;
+}
+
+.descript{
+    font-size: 16px;
+}
+
+.descript a{
+    font-size: 18px;
+    font-weight: 650;
+}
