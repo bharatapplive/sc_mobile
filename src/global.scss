@@ -28,6 +28,7 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
@@ -89,6 +90,7 @@ $font-size-display-lg-mobile: 36px;
   --radius-lg: #{$radius-lg};
   --radius-xl: #{$radius-xl};
   --radius-full: #{$radius-full};
+  --radius-xxl: 2rem;
   --spacing-xs: #{$spacing-xs};
   --spacing-sm: #{$spacing-sm};
   --spacing-md: #{$spacing-md};
@@ -96,6 +98,7 @@ $font-size-display-lg-mobile: 36px;
   --spacing-xl: #{$spacing-xl};
   --font-family-base: #{$font-family-base};
   --font-size-body-md: #{$font-size-body-md};
+  --font-size-bigger:50px;
   --font-size-label-lg: #{$font-size-label-lg};
   --font-size-display-lg-mobile: #{$font-size-display-lg-mobile};
 }
@@ -123,9 +126,17 @@ ion-content {
 }
 
 .material-symbols-outlined {
+  margin-right: 10px;
+  color: gray;
   font-family: 'Material Symbols Outlined';
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
+
+.icon vibrant-gradient .material-symbols-outlined{
+  rotate: 100deg;
+  color: white;
+ 
+ }
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.7);
@@ -169,6 +180,8 @@ ion-content {
 
 .text-label-sm {
   font-size: var(--font-size-body-sm);
-  line-height: 16px;
+  line-height: var(--font-size-body-sm);
   letter-spacing: var(--spacing-xs);
 }
+
+
