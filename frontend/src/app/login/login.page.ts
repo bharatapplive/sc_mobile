@@ -41,8 +41,17 @@ export class LoginPage implements OnInit {
 
   onRegisterHandler(form: any){
     if (form.valid) {
+
+      const cleanName = (this.registerPortal.fullname || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, ''); // strip spaces and special chars
+    
+      const uniqueSuffix = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
+      const generatedUsername = `${cleanName}_${uniqueSuffix}`;
+
       const payload = {
         fullname: this.registerPortal.fullname?.trim() || '',
+        username: generatedUsername, // 👈 Included username
         email: this.registerPortal.email?.trim() || '',
         phoneNumber: (this.registerPortal.phone || '').toString().trim(),
         password: this.registerPortal.password
@@ -51,6 +60,7 @@ export class LoginPage implements OnInit {
       this.authServe.register(payload).subscribe({
         next: (user) => {
           localStorage.setItem('uploadPro', JSON.stringify(user._id));
+          console.log(user._id);
           this.step = 'OTP';
         },
         error: (err) => {
@@ -79,14 +89,13 @@ export class LoginPage implements OnInit {
       console.log(request.otp);
       this.authServe.verifyOtp(request).subscribe({
         next: (user) =>{
-          
-          console.log(user._id);
           alert('OTP verified successfully');
 
           localStorage.removeItem('uploadPro');
 
           this.isLogin = true;
           this.step = 'REGISTER';
+          this.registerPortal = { fullname: '', email: '', phone: '', password: '' };
         },
         error: (err) => {
           const serverError = err.error?.message || 'Invalid or expired OTP. Please try again.';
@@ -103,6 +112,7 @@ export class LoginPage implements OnInit {
     }else{
       this.location.replaceState('/register');
     }
+    
   }
 
   cancelOtp(){
