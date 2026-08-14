@@ -10,7 +10,7 @@
         <ion-label>Email or Phone number</ion-label>
         <ion-item lines="none">
           <ion-icon slot="start" name="person"></ion-icon>
-          <ion-input name="identity" #identity="ngModel" [(ngModel)]="loginPortal.identity" aria-placeholder="Enter email or phone number" required minlength="5"></ion-input>
+          <ion-input name="identity" #identity="ngModel" [(ngModel)]="loginPortal.identity" placeholder="@gmail.com or @9123456789" required minlength="5"></ion-input>
         </ion-item>
         <div class="msg">
           @if (identity.touched && identity.errors) {
@@ -29,8 +29,9 @@
         </div>
         <ion-item lines="none">
           <ion-icon slot="start" name="lock-closed"></ion-icon>
-          <ion-input type="password" name="password" #password="ngModel" [(ngModel)]="loginPortal.password" placeholder="••••••••" required minlength="5"></ion-input>
-          <ion-icon slot="end" name="eye"></ion-icon>
+          <ion-input [type]="showPassword ? 'text' : 'password'" name="password" #password="ngModel" [(ngModel)]="loginPortal.password" placeholder="••••••••" required minlength="5"></ion-input>
+          <i [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="showPassword = !showPassword" style="cursor: pointer;">
+          </i>
         </ion-item>
         <div class="msg">
           @if (password.touched && password.errors) {
@@ -63,7 +64,7 @@
           <ion-label>Full Name</ion-label>
           <ion-item lines="none">
             <ion-icon slot="start" name="person"></ion-icon>
-            <ion-input name="fullname" #fullname="ngModel" [(ngModel)]="registerPortal.fullname" placeholder="Enter your full name" required minlength="5"></ion-input>
+            <ion-input name="fullname" #fullname="ngModel" [(ngModel)]="registerPortal.fullname" placeholder="Alan Ritchson" required minlength="5"></ion-input>
           </ion-item>
           <div class="msg">
             @if (fullname.touched && fullname.errors) {
@@ -79,7 +80,7 @@
           <ion-label>Email Address</ion-label>
           <ion-item lines="none">
             <ion-icon slot="start" name="mail"></ion-icon>
-            <ion-input name="email" #email="ngModel" [(ngModel)]="registerPortal.email" placeholder="Enter your email" required></ion-input>
+            <ion-input name="email" #email="ngModel" [(ngModel)]="registerPortal.email" placeholder="@abcgmail.com" required></ion-input>
           </ion-item>
           <div class="msg">
             @if (email.touched && email.errors) {
@@ -95,7 +96,7 @@
           <ion-label>Phone Number</ion-label>
           <ion-item lines="none">
             <ion-icon slot="start" name="call"></ion-icon>
-            <ion-input name="phone" #phone="ngModel" [(ngModel)]="registerPortal.phone" placeholder="••••••••" required minlength="10"></ion-input>
+            <ion-input name="phone" #phone="ngModel" [(ngModel)]="registerPortal.phone" placeholder="@9123456789" required minlength="10"></ion-input>
           </ion-item>
           <div class="msg">
             @if (phone.touched && phone.errors) {
@@ -111,8 +112,8 @@
           <ion-label>Password</ion-label>
           <ion-item lines="none">
             <ion-icon slot="start" name="person"></ion-icon>
-            <ion-input type="password" name="password" #password="ngModel" [(ngModel)]="registerPortal.password" placeholder="Enter your email" required minlength="8"></ion-input>
-            <ion-icon slot="end" name="eye"></ion-icon>
+            <ion-input [type]="showPassword ? 'text' : 'password'" name="password" #password="ngModel" [(ngModel)]="registerPortal.password" placeholder="••••••••••" required minlength="8"></ion-input>
+            <i [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="showPassword = !showPassword" style="cursor: pointer;"></i>
           </ion-item>
           <div class="msg">
             @if (password.touched && password.errors) {
@@ -137,8 +138,7 @@
         <div class="form-card">
           <ion-label>Enter Code</ion-label>
           <ion-item lines="none">
-            <ion-icon slot="start" name="person"></ion-icon>
-            <ion-input type="text" name="otp" #otp="ngModel" [(ngModel)]="verifyPortal.otp" placeholder="123456"></ion-input>
+            <ion-input type="number" name="otp" #otp="ngModel" [(ngModel)]="verifyPortal.otp" placeholder="123456"></ion-input>
           </ion-item>
           <div class="msg">
             @if (otp.touched && otp.errors) {
