@@ -15,7 +15,6 @@ export class LoginPage implements OnInit {
   verifyPortal = {otp:''};
   isLogin = true;
   showPassword = false;
-  otpValue: string = '';
   step: 'REGISTER' | 'OTP' = 'REGISTER';
 
   constructor(
@@ -30,7 +29,7 @@ export class LoginPage implements OnInit {
     if(form.valid){
       this.authServe.login(this.loginPortal.identity, this.loginPortal.password).subscribe({
         next: (user) =>{
-          alert(`Welcome back, ${user.username}`);
+          alert(`Welcome back`);
         },
         error: (err) => {
           alert('Invalid username and password');
@@ -43,9 +42,9 @@ export class LoginPage implements OnInit {
   onRegisterHandler(form: any){
     if (form.valid) {
       const payload = {
-        fullname: this.registerPortal.fullname.trim(),
-        username: this.registerPortal.email.trim(),
-        email: this.registerPortal.phone.trim(),
+        fullname: this.registerPortal.fullname?.trim() || '',
+        email: this.registerPortal.email?.trim() || '',
+        phoneNumber: (this.registerPortal.phone || '').toString().trim(),
         password: this.registerPortal.password
       };
 
@@ -67,17 +66,21 @@ export class LoginPage implements OnInit {
     if(form.valid){
       // Retrieve stored user id
       const userID = JSON.parse(localStorage.getItem('uploadPro') || '""');
+      console.log(userID);
 
       if(!userID){
-        alert('Session expired. Please register again')
+        alert('Session expired. Please register again');
         this.step = 'REGISTER';
         return;
       }
 
-      const request = {userId: userID, otp: this.otpValue};
+      const request = {userId: userID, otp: this.verifyPortal.otp ? this.verifyPortal.otp.toString().trim() : ''};
 
+      console.log(request.otp);
       this.authServe.verifyOtp(request).subscribe({
         next: (user) =>{
+          
+          console.log(user._id);
           alert('OTP verified successfully');
 
           localStorage.removeItem('uploadPro');

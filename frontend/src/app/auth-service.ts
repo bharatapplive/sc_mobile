@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 
 export interface User{
-  _id?: string,
-  username: string;
+  _id?: string;
   email: string;
+  phoneNumber: string;
   password?: string;
 }
 
@@ -58,7 +58,7 @@ export class AuthService {
   }
 
   // 4. VerifyOtp
-  verifyOtp(payload: { userId: string; otp: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/verify-otp`, payload);
+  verifyOtp(payload: { userId: string; otp: string }): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/verify-otp`, payload);
   }
 }
