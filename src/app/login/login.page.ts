@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ export class LoginPage implements OnInit {
   verifyPortal = {otp:''};
   isLogin = true;
   step: 'REGISTER' | 'OTP' = 'REGISTER';
-  constructor() { }
+
+  constructor(
+    private location: Location
+  ) { }
 
   ngOnInit() {
   }
@@ -32,6 +36,11 @@ export class LoginPage implements OnInit {
 
   toggleAuth(){
     this.isLogin = !this.isLogin;
+    if(this.isLogin){
+      this.location.replaceState('/login');
+    }else{
+      this.location.replaceState('/register');
+    }
   }
 
   cancelOtp(){
