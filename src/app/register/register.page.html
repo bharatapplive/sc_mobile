@@ -1,0 +1,112 @@
+<ion-content [fullscreen]="true" class="page">
+  <main class="box">
+    <header class="head">
+      <div class="icon vibrant-gradient">
+        <span class="material-symbols-outlined">person_add</span>
+      </div>
+
+      <h1>Create Account</h1>
+      <p>Join Social Circle and start connecting with creators.</p>
+    </header>
+
+    <div class="card">
+      <form class="form" action="#" method="POST">
+
+        <div class="field">
+          <label for="fullname">Full Name</label>
+          <div class="input">
+            <span class="material-symbols-outlined">person</span>
+            <input
+              id="fullname"
+              name="fullname"
+              type="text"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <div class="input">
+            <span class="material-symbols-outlined">mail</span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="email@example.com"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="mobile">Mobile Number</label>
+          <div class="input">
+            <span class="material-symbols-outlined">phone</span>
+            <input
+              id="mobile"
+              name="mobile"
+              type="tel"
+              placeholder="+91 9876543210"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input">
+            <span class="material-symbols-outlined">lock</span>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              required
+            />
+            <button type="button" aria-label="Show password">
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input">
+            <span class="material-symbols-outlined">lock_reset</span>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              placeholder="••••••••"
+              required
+            />
+            <button type="button" aria-label="Show password">
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn vibrant-gradient" type="submit">
+          Create Account
+        </button>
+
+      </form>
+    </div>
+
+    <footer class="foot">
+      <p>
+        Already have an account?
+        <a routerLink="/login">Log In</a>
+      </p>
+
+      <div class="links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Help</a>
+      </div>
+    </footer>
+
+  </main>
+</ion-content>

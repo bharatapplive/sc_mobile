@@ -1,0 +1,131 @@
+:host {
+  display: block;
+}
+
+.page {
+  background: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-family-base);
+  min-height: 100%;
+}
+
+.box {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-md);
+}
+
+.head {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-sm);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.head h1 {
+  margin: 0;
+  font-size: var(--font-size-display-lg-mobile);
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.head p {
+  margin: var(--spacing-sm) 0 0;
+  font-size: var(--font-size-body-md);
+  color: var(--color-on-surface-variant);
+}
+
+.card {
+  padding: var(--spacing-md);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .card {
+  box-shadow: 0 8px 30px rgba(138, 43, 226, 0.2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label,
+.row a {
+  font-size: var(--font-size-label-lg);
+  color: var(--color-on-surface-variant);
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(123, 116, 134, 0.3);
+  background: var(--color-surface-variant);
+  border-radius: var(--radius-lg);
+  padding: 0 var(--spacing-sm);
+}
+
+.input input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 14px 0;
+  color: var(--color-on-surface);
+}
+
+.input input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.input button {
+  background: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn {
+  border: 0;
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.foot {
+  margin-top: var(--spacing-lg);
+  text-align: center;
+}
+
+.foot a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  opacity: 0.8;
+}
