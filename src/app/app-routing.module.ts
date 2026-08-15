@@ -15,10 +15,28 @@ const routes: Routes = [
     loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationPageModule)
   },
   {
+    path: 'trending',
+    loadChildren: () => import('./trending/trending.module').then(m => m.TrendingPageModule)
+  },
+  {
+    path: 'create',
+    loadChildren: () => import('./create/create.module').then(m => m.CreatePageModule)
+  },
+  {
+    path: 'message',
+    loadChildren: () => import('./message/message.module').then(m => m.MessagePageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+  },
+
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   }
+
 ];
 
 @NgModule({

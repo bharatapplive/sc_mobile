@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
 import { TabsComponent } from '../components/tabs/tabs.component';
+import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { MessagePageRoutingModule } from './message-routing.module';
 
+import { MessagePage } from './message.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    MessagePageRoutingModule,
     TabsComponent
   ],
-  declarations: [HomePage]
+  declarations: [MessagePage]
 })
-export class HomePageModule { }
+export class MessagePageModule { }
