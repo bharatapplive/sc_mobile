@@ -7,10 +7,35 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class AccountPage implements OnInit {
+  theme: 'light' | 'dark' = 'light';
+  showPassword = false;
 
   constructor() { }
 
   ngOnInit() {
+    this.setTheme('light');
   }
 
+  setTheme(theme: 'light' | 'dark') {
+    this.theme = theme;
+    document.documentElement.classList.toggle(
+      'dark',
+      theme === 'dark'
+    );
+  }
+
+  register(event: Event) {
+    const form = event.target as HTMLFormElement;
+
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      form.reportValidity();
+      return;
+    }
+
+    event.preventDefault();
+    window.location.reload();
+  }
 }
+
+
