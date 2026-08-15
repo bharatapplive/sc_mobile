@@ -14,13 +14,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
-    path: 'side-menu',
-    loadChildren: () => import('./side-menu/side-menu.module').then( m => m.SideMenuPageModule)
   },
+ 
   {
-    path: 'load',
-    loadChildren: () => import('./load/load.module').then( m => m.LoadPageModule)
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
 
   

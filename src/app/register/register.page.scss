@@ -1,0 +1,262 @@
+.register-page {
+  --background: #f9f9f9;
+}
+
+.register-container {
+  padding: 24px;
+  max-width: 550px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;.register-page {
+  --background: #f9f9f9;
+}
+
+.register-container {
+  padding: 24px;
+  max-width: 650px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: #17191a;
+    margin: 0;
+  }
+
+  p {
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.form-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(15px);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 8px 25px rgba(107,56,212,0.15);
+}
+
+.register-container ion-item {
+  margin-bottom: 0;
+}
+
+.signup-btn {
+  margin-top: 20px;
+
+  --background: linear-gradient(
+    90deg,
+    #6b38d4,
+    #8455ef,
+    #d9b5ff
+  );
+
+  --border-radius: 12px;
+  height: 50px;
+  font-weight: 600;
+}
+
+.terms {
+  width: 100%;
+  text-align: center;
+  margin-top: 18px;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #666;
+}
+
+.terms a {
+  color: #6b38d4;
+  font-weight: 600;
+  text-decoration: none;
+}
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #6b38d4;
+  }
+
+ 
+}
+.header p {
+  color:#666 !important;
+  font-size: 20px !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.form-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(15px);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(107,56,212,0.15);
+}
+
+ion-item {
+  margin-bottom: 15px;
+  border-radius: 12px;
+  --background: #ffffff;
+}
+
+.signup-btn {
+  margin-top: 20px;
+
+  --background: linear-gradient(
+    90deg,
+    #6b38d4,
+    #8455ef,
+    #d9b5ff
+  );
+
+  --border-radius: 12px;
+  height: 50px;
+  font-weight: 600;
+}
+
+.terms,
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #666;
+}
+
+.login-link a {
+  color: #6b38d4;
+  font-weight: 600;
+  text-decoration: none;
+}
+.input-group {
+  margin-bottom: 14px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #4b465c;
+}
+
+// .custom-input {
+//   --background: #f3f2f5;
+//   --border-radius: 18px;
+//   --padding-start: 16px;
+//   --inner-padding-end: 16px;
+
+//   min-height: 60px;
+//   border-radius: 18px;
+//   margin-top: 4px;
+// }
+
+
+ion-item {
+  margin-bottom: 0;
+}
+
+ion-icon {
+  color: #7d748d;
+  font-size: 18px;
+  margin-right: 8px;
+}
+.custom-input.item-has-focus ion-icon {
+  color: #7c3aed !important;
+}
+// ion-input {
+//   font-size: 16px;
+//   color: #b9b0c8;
+// }
+.custom-input {
+  --background: #f3f2f5;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  min-height: 60px;
+  transition: all 0.3s ease;
+}
+
+.custom-input:focus-within {
+  border: 2px solid #8b5cf6 !important;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+}
+
+.custom-input:focus-within ion-icon {
+  color: #8b5cf6 !important;
+}
+.custom-input:focus-within ion-input {
+  --color: #4b465c;
+}
+
+ion-input {
+  --color: #4b465c;
+  caret-color: #8b5cf6;
+   --highlight-color-focused: #8b5cf6;
+
+}
+.custom-input.item-has-focus {
+  border: 2px solid #7c3aed;
+  border-radius: 18px;
+}
+
+.custom-input.item-has-focus ion-icon {
+  color: #7c3aed !important;
+}
+.signup-btn ion-icon {
+  color: white !important;
+  font-size: 18px;
+  margin-left: 8px;
+}
+.terms {
+  text-align: center;
+  font-size: 13px;
+  color: #7d748d;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.terms a {
+  color: #6b38d4;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bottom-login {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #7d748d;
+}
+
+.bottom-login a {
+  color: #6b38d4;
+  font-weight: 600;
+  text-decoration: none;
+}

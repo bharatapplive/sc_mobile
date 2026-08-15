@@ -1,0 +1,86 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">register</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+<ion-content class="register-page">
+
+  <div class="register-container">
+
+    <div class="header">
+      <h1>Join the Circle</h1>
+      <p>Where creators connect and the digital<br>
+         pulse comes alive.</p>
+    </div>
+
+    <div class="form-card">
+
+      <div class="input-group">
+  <label>Full Name</label>
+  <ion-item lines="none" class="custom-input">
+    <ion-icon name="person-outline" slot="start"></ion-icon>
+    <ion-input placeholder="Alex Rivera"></ion-input>
+  </ion-item>
+</div>
+
+<div class="input-group">
+  <label>Email</label>
+  <ion-item lines="none" class="custom-input">
+    <ion-icon name="mail-outline" slot="start"></ion-icon>
+    <ion-input placeholder="alex@creators.io"></ion-input>
+  </ion-item>
+</div>
+
+<div class="input-group">
+  <label>Mobile Number</label>
+  <ion-item lines="none" class="custom-input">
+    <ion-icon name="call-outline" slot="start"></ion-icon>
+    <ion-input placeholder="+91 9876543210"></ion-input>
+  </ion-item>
+</div>
+
+<div class="input-group">
+  <label>Password</label>
+  <ion-item lines="none" class="custom-input">
+    <ion-icon name="lock-closed-outline"  slot="start"></ion-icon>
+    <ion-input type="password" placeholder="••••••••"></ion-input>
+  <ion-icon
+      name="eye-outline"
+      slot="end">
+    </ion-icon>
+
+  </ion-item>
+</div>
+
+<ion-button expand="block" class="signup-btn">
+  Sign Up
+   <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+</ion-button>
+
+      <!-- <p class="login-link">
+        Already have an account?
+        <a routerLink="/login">Log In</a>
+      </p> -->
+      <p class="terms">
+  By signing up, you agree to our
+  <a href="#">Terms</a> &
+  <a href="#">Privacy Policy</a>.
+</p>
+
+    </div>
+    <p class="bottom-login">
+  Already have an account?
+  <a routerLink="/login">Log In</a>
+</p>
+
+  </div>
+
+</ion-content>
