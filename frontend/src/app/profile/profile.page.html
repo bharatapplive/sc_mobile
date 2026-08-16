@@ -1,13 +1,165 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <div class="header">
+      <ion-button class="icon-class" shape="round" size="small" fill="clear" >
+        <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button class="toggleAccount" shape="round" fill="clear" >
+        <span>{{user?.username}}</span>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="icon-class" shape="round" size="small" fill="clear">
+        <ion-icon name="menu-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Pull to Refresh Component -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="chevron-down-circle-outline" 
+      pullingText="Pull down to refresh" 
+      refreshingSpinner="circles" 
+      refreshingText="Fetching profile...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="container">
+    <div class="profileDetails">
+      <div class="profile-avatar">
+        <ion-avatar>
+          <ion-img [src]="getUserAvatar()" alt="User"></ion-img>
+        </ion-avatar>
+      </div>
+
+      <div class="profile-content">
+        <p>{{user?.fullname}}</p>
+        <div class="follow-list">
+          <div class="list">
+            <p>{{user?.postNumber}}</p>
+            <p>posts</p>
+          </div>
+          <div class="list">
+            <p>{{user?.followerNumber}}</p>
+            <p>followers</p>
+          </div>
+          <div class="list">
+            <p>{{user?.followingNumber}}</p>
+            <p>following</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profileBio">
+      <p>💡 chasing moments & light
+        📍 [Your City]
+        📸 lumia/him022
+        capturing reality, one frame at a time. ✨
+        📩 contact / collab: Him@gmail.com
+        🔗 [your-website-or-portfolio-link]
+      </p>
+      <!-- <ion-button (click)="updatePost()">
+        Update Post
+      </ion-button>
+      
+      <ion-button (click)="updateFollower()">
+        Update Follower
+      </ion-button>
+      
+      <ion-button (click)="followingBtn()">
+        Update Following
+      </ion-button> -->
+    </div>
+
+    <div class="profile-buttons">
+      <ion-button shape="round" fill="clear" (click)="editProfile()">Edit Profile</ion-button>
+      <ion-button shape="round" fill="clear">Share Profile</ion-button>
+    </div>
+
+    <div class="user-content">
+      <div class="header-bar">
+        <ion-segment [(ngModel)]="activeTab" mode="md" class="profile-tabs">
+          <ion-segment-button value="posts">
+            <ion-icon [name]="activeTab === 'posts' ? 'grid' : 'grid-outline'"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="drafts">
+            <ion-icon [name]="activeTab === 'drafts' ? 'musical-notes' : 'musical-notes-outline'"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="replays">
+            <ion-icon [name]="activeTab === 'replays' ? 'sync' : 'sync-outline'"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="activeTab" class="files">
+
+        <div *ngSwitchCase="'posts'" class="grid-main">
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 120</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 12</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 10</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 150</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 250</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 1,290</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 190</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 8</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 80</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 10</span>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'drafts'" class="grid-main">
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="draft-badge">Draft</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="draft-badge">Draft</span>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'replays'" class="grid-main">
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80"></ion-img>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"></ion-img>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

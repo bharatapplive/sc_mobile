@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
+interface UserProfile {
+  avatarUrl?: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -9,6 +13,10 @@ import { filter } from 'rxjs';
   standalone: false,
 })
 export class AppComponent implements OnInit {
+
+  user: UserProfile | null = null;
+  
+  private readonly API_URL = 'http://localhost:3000';
 
   activeTab: string = 'feeds';
   showTabs = true;
@@ -68,6 +76,16 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/profile']);
         break;
     }
+  }
+
+  // 1. GET AVATAR...
+  getUserAvatar(): string{
+    if(this.user?.avatarUrl)
+    {
+      return `${this.API_URL}${this.user.avatarUrl}`;
+    }
+    // Default placeholder fallback
+    return 'assets/images/default-avatar.png';
   }
 
   onLogout(){

@@ -16,6 +16,11 @@
         <ion-tab-button (click)="onChangeMode('search')" [class.tab-selected]="activeTab === 'search'">
             <ion-icon [name]="activeTab === 'search' ? 'search' : 'search-outline'"></ion-icon>
         </ion-tab-button>
+        <ion-tab-button (click)="onChangeMode('profile')" [class.tab-selected]="activeTab === 'profile'">
+            <ion-avatar class="person">
+              <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
+            </ion-avatar>
+        </ion-tab-button>
         <ion-tab-button (click)="onLogout()">
             <ion-icon name="log-out-outline"></ion-icon>
         </ion-tab-button>
