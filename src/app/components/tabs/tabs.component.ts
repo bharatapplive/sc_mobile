@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EnvironmentInjector, inject } from '@angular/core';
+import { Component, EnvironmentInjector, inject , signal} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -25,7 +25,7 @@ export class TabsComponent {
       send,
     });
   }
-
+  activeTab = signal<TabName>('home');
   // Environment injector is used for lazy loading child routes
   private injector = inject(EnvironmentInjector);
 
@@ -37,4 +37,7 @@ export class TabsComponent {
     { id: 'profile', icon: 'person', label: 'Profile', route: '/profile' },
   ];
 
+  selectTab(tabId: TabName): void {
+    this.activeTab.set(tabId);
+  }
 }
