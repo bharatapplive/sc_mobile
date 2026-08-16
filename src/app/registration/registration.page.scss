@@ -1,0 +1,260 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #e9e3e3;
+  overflow-x: hidden;
+}
+
+.page {
+  background: linear-gradient(135deg, #f5f7fa 0%, #f0ebf8 100%);
+}
+
+main.box {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.head {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  
+}
+
+.head .icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+}
+
+.head h1 {
+  font-size: 35px;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.head p {
+  font-size: 20px;
+  color: #000000;
+  line-height: 1.4;
+  font-weight: 300;
+  font-family: sora, sans-serif;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.08);
+  border-radius: 20px;
+  padding: 32px 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 0.5px;
+  font-family: outfit, sans-serif;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(206, 200, 200, 0.5);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.input:focus-within {
+  box-shadow: 0 0 0 2px rgba(107, 56, 212, 0.2);
+  border-color: #6b38d4;
+  background: #e8e8f2;
+}
+
+.input span.material-symbols-outlined {
+  color: #6b38d4;
+  font-size: 24px;
+  flex-shrink: 0;
+  height: 24px;
+  width: 24px;
+}
+
+.input input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+  outline: none;
+}
+
+.input input::placeholder {
+  color: #999;
+}
+
+.btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  margin-top: 12px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(107, 56, 212, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.foot {
+  text-align: center;
+  font-size: 13px;
+  color: #000000c9;
+  line-height: 1.6;
+  font-weight: 700;
+  margin: 40px 0 0 0;
+  line-height: 1.1;
+}
+
+.foot a {
+  color: #6b38d4;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.foot a:hover {
+  text-decoration: underline;
+}
+
+.social-auth-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666464;
+}
+
+.social-auth-divider::before,
+.social-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(107, 56, 212, 0.2);
+}
+
+.text-center {
+  text-align: center;
+  padding: 20px;
+}
+
+.text-center p {
+  font-size: 16px;
+  color: #666464;
+  font-weight: 500;
+}
+
+.text-center a {
+  color: #6b38d4;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.text-center a:hover {
+  text-decoration: underline;
+}
+
+.electric-gradient {
+  background: linear-gradient(135deg, #6b38d4 0%, #8455ef 50%, #d9b5ff 100%);
+}
+
+.vibrant-gradient {
+  background: linear-gradient(135deg, #6b38d4 0%, #8455ef 50%, #d9b5ff 100%);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.ambient-glow {
+  filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.15));
+}
+
+.text-primary {
+  color: #6b38d4;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-body-md {
+  font-size: 14px;
+}
+
+.text-body-md {
+  font-size: 14px;
+}
+
+.text-on-surface-variant {
+  color: #666464;
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+      

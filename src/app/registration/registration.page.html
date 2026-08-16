@@ -1,0 +1,67 @@
+<ion-content [fullscreen]="true" class="page">
+    <main class="box">
+        <header class="head">
+        <div class="icon vibrant-gradient">
+            <span class="material-symbols-outlined">group</span>
+        </div>
+        <h1>Join the Circle.</h1>
+        <p>Where creators connect and the digital pulse comes alive.</p>
+        </header>
+    
+        <div class="card">
+        <form class="form" action="#" method="POST">
+            <div class="field">
+            <label for="fullName">Full Name</label>
+            <div class="input">
+                <span class="material-symbols-outlined">person</span>
+                <input id="fullName" name="fullName" placeholder="John Doe" required type="text" />
+            </div>
+            </div>
+    
+            <div class="field">
+            <label for="email">Email Address</label>
+            <div class="input">
+                <span class="material-symbols-outlined">alternate_email</span>
+                <input id="email" name="email" placeholder="john.doe@example.com" required type="email" />
+            </div>
+            </div>
+            <div class="field">
+            <label for="mobile">Mobile Number</label>
+            <div class="input">
+                <span class="material-symbols-outlined">smartphone</span>
+                <input id="mobile" name="mobile" placeholder="+1 (555) 000-0000" required type="tel" />
+            </div>
+            </div>
+    
+            <div class="field">
+            <label for="password">Password</label>
+            <div class="input">
+                <span class="material-symbols-outlined">lock</span>
+                <input id="password" name="password" placeholder="••••••••" required type="password" />
+            </div>
+            </div>
+            <button class="btn vibrant-gradient" type="submit"><span class="">Sign Up</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+        </form>
+        <div class="foot">
+            <p>By signing up, you agree to our
+                <a class="text-primary hover:underline" href="#">Terms</a> &amp;
+                <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+            </p>
+        </div>
+        </div>
+        
+    </main>
+    <!-- Social Auth Divider -->
+    <div class="social-auth-divider">
+        <span>OR CONTINUE WITH</span>
+    </div>
+    <!-- Login Link -->
+    <div class="text-center">
+        <p class="font-body-md text-body-md text-on-surface-variant">
+            Already have an account?
+            <a class="text-primary font-bold hover:underline" href="#">Log In</a>
+        </p>
+    </div>
+</ion-content>
