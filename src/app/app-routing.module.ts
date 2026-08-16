@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { RegistrationComponent } from './registration/registration.component';
+
 
 const routes: Routes = [
   {
@@ -15,11 +15,14 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
   },
-  {
-    path: 'registration',
-    component: RegistrationComponent
-  }
+
+
+
+
 ];
 
 @NgModule({

@@ -1,0 +1,150 @@
+<ion-content [fullscreen]="true">
+
+  <div class="page-container">
+
+    <!-- App Logo -->
+    <div class="logo">
+      <div class="logo-circle"></div>
+      <span>Social Circle</span>
+    </div>
+
+    <!-- Heading -->
+    <div class="heading">
+      <h1>Join the Circle.</h1>
+
+      <p>
+        Where creators connect and the digital<br>
+        pulse comes alive.
+      </p>
+    </div>
+
+    <!-- Registration Card -->
+    <div class="signup-card">
+
+      <!-- Full Name -->
+      <div class="input-group">
+        <label>Full Name</label>
+
+        <div class="input-box">
+          <ion-icon name="person-outline"></ion-icon>
+
+          <ion-input
+            type="text"
+            placeholder="Alex Rivera"
+            [(ngModel)]="fullName">
+          </ion-input>
+        </div>
+      </div>
+
+
+      <!-- Email -->
+      <div class="input-group">
+        <label>Email</label>
+
+        <div class="input-box">
+          <ion-icon name="at-outline"></ion-icon>
+
+          <ion-input
+            type="email"
+            placeholder="alex@creators.io"
+            [(ngModel)]="email">
+          </ion-input>
+        </div>
+      </div>
+
+
+      <!-- Mobile Number -->
+      <div class="input-group">
+        <label>Mobile Number</label>
+
+        <div class="input-box">
+          <ion-icon name="phone-portrait-outline"></ion-icon>
+
+          <ion-input
+            type="tel"
+            placeholder="+1 (555) 000-0000"
+            [(ngModel)]="mobile">
+          </ion-input>
+        </div>
+      </div>
+
+
+      <!-- Password -->
+      <div class="input-group">
+        <label>Password</label>
+
+        <div class="input-box">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+
+          <ion-input
+            [type]="passwordType"
+            placeholder="••••••••"
+            [(ngModel)]="password">
+          </ion-input>
+
+          <ion-icon
+            class="eye-icon"
+            [name]="passwordType === 'password'
+              ? 'eye-outline'
+              : 'eye-off-outline'"
+            (click)="showPassword()">
+          </ion-icon>
+        </div>
+      </div>
+
+
+      <!-- Sign Up Button -->
+      <ion-button
+        expand="block"
+        class="signup-button"
+        (click)="signUp()">
+
+        <span>Sign Up</span>
+
+        <ion-icon
+          slot="end"
+          name="arrow-forward-outline">
+        </ion-icon>
+
+      </ion-button>
+
+
+      <!-- Terms -->
+      <p class="terms">
+        By signing up, you agree to our
+        <span>Terms</span> & <span>Privacy<br>Policy</span>.
+      </p>
+
+    </div>
+
+
+    <!-- Login Section -->
+    <div class="login-section">
+
+      <div class="avatars">
+
+        <div class="avatar">A</div>
+        <div class="avatar">B</div>
+        <div class="avatar">C</div>
+
+        <div class="more">+2k</div>
+
+      </div>
+
+
+      <p>
+        Already have an account?
+        <span (click)="login()">Log In</span>
+      </p>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2024 Social Circle. All rights reserved.
+    </div>
+
+  </div>
+
+</ion-content>

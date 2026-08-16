@@ -1,0 +1,333 @@
+ion-content {
+  --background: #f5f5f5;
+}
+
+.page-container {
+  width: 100%;
+  min-height: 100%;
+  padding: 25px 20px 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* ---------------- LOGO ---------------- */
+
+.logo {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+
+  gap: 10px;
+
+  color: #6633cc;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  margin-bottom: 45px;
+  
+}
+
+.logo-circle {
+  width: 17px;
+  height: 17px;
+
+  border: 3px solid #6633cc;
+
+  border-radius: 50%;
+}
+
+
+/* ---------------- HEADING ---------------- */
+
+.heading {
+  text-align: center;
+
+  margin-bottom: 35px;
+}
+
+.heading h1 {
+  margin: 0 0 10px;
+
+  color: #111111;
+
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.heading p {
+  margin: 0;
+
+  color: #777777;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+}
+
+
+/* ---------------- CARD ---------------- */
+
+.signup-card {
+  width: 30%;
+  align-self: center;
+
+  box-sizing: border-box;
+
+  padding: 28px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 18px;
+
+  box-shadow: 0 50px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ---------------- INPUT ---------------- */
+
+.input-group {
+  margin-bottom: 21px;
+}
+
+.input-group label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #333333;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+.input-box {
+  width: 100%;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  background: #f5f5f5;
+
+  border-radius: 14px;
+}
+
+
+/* Ionic Icon */
+
+.input-box ion-icon {
+  flex-shrink: 0;
+
+  font-size: 22px;
+
+  color: #777777;
+
+  margin-right: 10px;
+}
+
+
+/* Ionic Input */
+
+.input-box ion-input {
+  flex: 1;
+
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+
+  --color: #333333;
+  --placeholder-color: #888888;
+
+  font-size: 16px;
+}
+
+
+/* Password Eye */
+
+.eye-icon {
+  flex-shrink: 0;
+
+  margin-left: 8px;
+  margin-right: 0 !important;
+
+  cursor: pointer;
+}
+
+
+/* ---------------- SIGN UP BUTTON ---------------- */
+
+.signup-button {
+  height: 58px;
+
+  margin: 8px 0 0;
+
+  --border-radius: 14px;
+
+  --background: linear-gradient(
+    90deg,
+    #6424d8,
+    #b66cff
+  );
+
+  --color: white;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  text-transform: none;
+}
+
+.signup-button ion-icon {
+  font-size: 22px;
+}
+
+
+/* ---------------- TERMS ---------------- */
+
+.terms {
+  margin: 23px 0 0;
+
+  text-align: center;
+
+  color: #555555;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.terms span {
+  color: #6424d8;
+
+  font-weight: 600;
+}
+
+
+/* ---------------- LOGIN ---------------- */
+
+.login-section {
+  text-align: center;
+
+  margin-top: 65px;
+}
+
+
+/* Avatars */
+
+.avatars {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 35px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: -8px;
+
+  background: #eeeeee;
+
+  border: 2px solid #ffffff;
+
+  border-radius: 50%;
+
+  color: #777777;
+
+  font-weight: 600;
+}
+
+.more {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: -5px;
+
+  background: #d8a9ff;
+
+  border-radius: 50%;
+
+  color: #6424d8;
+
+  font-weight: 700;
+}
+
+
+/* Login Text */
+
+.login-section p {
+  margin: 0;
+
+  color: #777777;
+
+  font-size: 16px;
+}
+
+.login-section span {
+  color: #6424d8;
+
+  font-weight: 700;
+}
+
+
+/* ---------------- FOOTER ---------------- */
+
+.footer {
+  margin-top: 70px;
+
+  text-align: center;
+
+  color: #aaaaaa;
+
+  font-size: 12px;
+}
+
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 380px) {
+
+  .page-container {
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+  }
+
+  .heading h1 {
+    font-size: 31px;
+  }
+
+  .heading p {
+    font-size: 15px;
+  }
+
+  .signup-card {
+    padding: 25px 17px;
+  }
+}

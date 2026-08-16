@@ -6,7 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RegistrationComponent } from './registration/registration.component';
+
 
 @NgModule({
   declarations: [AppComponent, ],
