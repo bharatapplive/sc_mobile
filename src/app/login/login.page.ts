@@ -26,14 +26,14 @@ export class LoginPage implements OnInit {
 
   login(event: Event) {
     const form = event.target as HTMLFormElement;
+    
+    event.preventDefault();
 
     if (!form.checkValidity()) {
-      event.preventDefault();
       form.reportValidity();
       return;
     }
-
-    event.preventDefault();
-    window.location.reload();
+    
+    window.location.href = '/tabs';
   }
 }
