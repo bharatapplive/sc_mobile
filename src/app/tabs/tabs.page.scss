@@ -1,0 +1,17 @@
+.floating-tab-bar {
+  position: absolute;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  left: 16px;
+  right: 16px;
+  width: calc(100% - 32px);
+  
+  height: 64px;
+  border-radius: 24px;
+  --background: #414177;
+  --color: #ffffff;
+  --color-selected: #ffffff;
+  --border: none;
+  
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}

@@ -1,0 +1,37 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>tabs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">tabs</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+<ion-tabs>
+  <ion-tab-bar slot="bottom" class="floating-tab-bar">
+    <ion-tab-button tab="feed">
+      <ion-icon name="planet-outline"></ion-icon>
+    </ion-tab-button>   
+
+    <ion-tab-button tab="reels">
+      <ion-icon name="caret-forward-circle-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="messages">
+      <ion-icon name="paper-plane-outline"></ion-icon>
+      <ion-badge class="dot-badge" color="danger"></ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="search">
+      <ion-icon name="search-sharp"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
