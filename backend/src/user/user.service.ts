@@ -28,9 +28,12 @@ export class UserService {
             $or: [{ email: cleanEmail }, { phoneNumber: cleanPhone }],
             });
 
-            if(user){
+            if(user?.isVerified)
+            {
                 throw new ConflictException('This account is already Exist.');
-            }else{
+            }
+            else
+            {
                 const otp = this.generateOtp();
                 const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
@@ -54,14 +57,16 @@ export class UserService {
                 try {
                     await this.smsService.sendOtpSms(newUser.phoneNumber, otp);
                 } catch (smsError: any) {
-                  console.warn('⚠️ User saved, but SMS sending failed:', smsError.message);
+                    console.warn('⚠️ Twilio trial template restriction caught:', smsError.message);
+                    // Log OTP to terminal for local development testing
+                    console.log(`🔑 [DEV MODE OTP] Phone: ${newUser.phoneNumber} | OTP: ${otp}`);
                 }
-                return {
+                return{
                     _id: newUser._id.toString(),
                     email: newUser.email,
                     phoneNumber: newUser.phoneNumber,
                     message: 'OTP sent to your mobile phone.',
-                    };
+                };
             }
             
         }catch (error: any){
