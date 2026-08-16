@@ -1,0 +1,546 @@
+ion-content {
+    --background: #f9f9f9;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background-decoration {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+}
+
+.glow-one {
+    width: 40%;
+    height: 40%;
+    top: -10%;
+    left: -10%;
+    background: rgba(107, 56, 212, 0.05);
+}
+
+.glow-two {
+    width: 30%;
+    height: 30%;
+    top: 20%;
+    right: -5%;
+    background: rgba(217, 181, 255, 0.1);
+}
+
+.glow-three {
+    width: 25%;
+    height: 25%;
+    bottom: -5%;
+    left: 20%;
+    background: rgba(208, 188, 255, 0.1);
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particle-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.top-header {
+    position: relative;
+    z-index: 5;
+
+    height: 64px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand-circle {
+    width: 22px;
+    height: 22px;
+
+    border: 3px solid #6b38d4;
+    border-radius: 50%;
+}
+
+.brand h1 {
+    margin: 0;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+
+    background: linear-gradient(90deg,
+            #6b38d4,
+            #6f5092);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.desktop-login {
+    display: none;
+
+    color: #6b38d4;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main-container {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 480px;
+
+    margin: 0 auto;
+
+    padding: 40px 16px 48px;
+}
+
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.welcome-section h2 {
+    margin: 0;
+
+    color: #1a1c1c;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 36px;
+    line-height: 42px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.02em;
+}
+
+.welcome-section p {
+    max-width: 320px;
+
+    margin: 8px auto 0;
+
+    color: #494454;
+
+    font-size: 16px;
+    line-height: 24px;
+}
+
+
+/* =========================
+   SIGNUP CARD
+========================= */
+
+.signup-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 24px;
+
+    background: rgba(255, 255, 255, 0.7);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 32px rgba(139, 92, 246, 0.08);
+}
+
+.card-decoration {
+    position: absolute;
+
+    width: 96px;
+    height: 96px;
+
+    top: 0;
+    right: 0;
+
+    margin-top: -48px;
+    margin-right: -48px;
+
+    border-radius: 50%;
+
+    background: rgba(107, 56, 212, 0.05);
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-left: 4px;
+    margin-bottom: 8px;
+
+    color: #494454;
+
+    font-size: 14px;
+    line-height: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.05em;
+}
+
+.input-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 56px;
+
+    background: #f3f3f4;
+
+    border: 1px solid transparent;
+
+    border-radius: 12px;
+
+    transition: 0.3s;
+}
+
+.input-wrapper:focus-within {
+    border-color: rgba(107, 56, 212, 0.3);
+
+    box-shadow:
+        0 0 0 2px rgba(107, 56, 212, 0.2);
+}
+
+.input-wrapper>ion-icon {
+    position: absolute;
+
+    left: 16px;
+
+    font-size: 23px;
+
+    color: #7b7486;
+
+    z-index: 2;
+}
+
+.input-wrapper input {
+    width: 100%;
+
+    height: 56px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    padding: 16px 16px 16px 48px;
+
+    color: #1a1c1c;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 16px;
+}
+
+.input-wrapper input::placeholder {
+    color: #7b7486;
+}
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+.password-toggle {
+    position: absolute;
+
+    right: 12px;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+
+    color: #7b7486;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   SIGN UP BUTTON
+========================= */
+
+.button-container {
+    padding-top: 4px;
+}
+
+.signup-button {
+    width: 100%;
+
+    min-height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(135deg,
+            #6b38d4 0%,
+            #8455ef 50%,
+            #d9b5ff 100%);
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(107, 56, 212, 0.2);
+
+    transition: 0.2s;
+}
+
+.signup-button ion-icon {
+    font-size: 24px;
+}
+
+.signup-button:hover {
+    filter: brightness(1.1);
+}
+
+.signup-button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   TERMS
+========================= */
+
+.terms {
+    margin-top: 16px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid rgba(123, 116, 134, 0.2);
+
+    text-align: center;
+}
+
+.terms p {
+    margin: 0;
+
+    color: #494454;
+
+    font-size: 12px;
+    line-height: 16px;
+
+    font-weight: 600;
+}
+
+.terms a {
+    color: #6b38d4;
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   PROFILE IMAGES
+========================= */
+
+.profile-teasers {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 96px;
+
+    padding: 8px;
+
+    overflow: hidden;
+}
+
+.profile-teasers img,
+.avatar-count {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    border: 4px solid #f9f9f9;
+}
+
+.profile-teasers img {
+    object-fit: cover;
+
+    margin-left: -12px;
+}
+
+.profile-teasers img:first-child {
+    margin-left: 0;
+}
+
+.avatar-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: -12px;
+
+    background: #d9b5ff;
+
+    color: #614283;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-section {
+    margin-top: 48px;
+
+    text-align: center;
+}
+
+.login-section p {
+    margin: 0;
+
+    color: #494454;
+
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.login-section a {
+    color: #6b38d4;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    position: relative;
+    z-index: 3;
+
+    padding: 16px;
+
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+
+    color: #cbc3d7;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 768px) {
+
+    .top-header {
+        padding: 0 48px;
+    }
+
+    .desktop-login {
+        display: block;
+    }
+
+    .main-container {
+        padding-top: 56px;
+    }
+
+    .signup-card {
+        padding: 40px;
+    }
+
+    .welcome-section h2 {
+        font-size: 48px;
+        line-height: 56px;
+    }
+}

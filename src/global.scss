@@ -39,6 +39,8 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
 
 $color-primary: #6b38d4;
 $color-secondary: #6f5092;
@@ -185,3 +187,34 @@ ion-content {
 }
 
 
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Montserrat', sans-serif;
+
+  background: #f9f9f9;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+button,
+input {
+  font-family: 'Montserrat', sans-serif;
+}
