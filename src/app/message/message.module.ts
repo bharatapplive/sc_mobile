@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TabsComponent } from '../components/tabs/tabs.component';
 import { IonicModule } from '@ionic/angular';
 
 import { MessagePageRoutingModule } from './message-routing.module';
@@ -14,7 +13,6 @@ import { MessagePage } from './message.page';
     FormsModule,
     IonicModule,
     MessagePageRoutingModule,
-    TabsComponent
   ],
   declarations: [MessagePage]
 })
