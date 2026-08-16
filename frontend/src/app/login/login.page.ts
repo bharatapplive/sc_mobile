@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Location } from '@angular/common';
 import { AuthService } from '../auth-service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,9 @@ export class LoginPage implements OnInit {
 
   constructor(
     private location: Location,
-    private readonly authServe: AuthService
+    private readonly authServe: AuthService,
+    private navCtrl: NavController, // 👈 Inject NavController
+    private zone: NgZone           // 👈 Inject NgZone
   ) { }
 
   ngOnInit() {
@@ -29,7 +32,12 @@ export class LoginPage implements OnInit {
     if(form.valid){
       this.authServe.login(this.loginPortal.identity, this.loginPortal.password).subscribe({
         next: (user) =>{
-          alert(`Welcome back`);
+          this.zone.run(() => {
+            alert(`Welcome back, ${user.phoneNumber || user.email || 'User'}!`);
+            
+            // Replaces router.navigate for robust root navigation in Ionic
+            this.navCtrl.navigateRoot('/feeds');
+          });
         },
         error: (err) => {
           alert('Invalid username and password');
@@ -117,10 +125,5 @@ export class LoginPage implements OnInit {
 
   cancelOtp(){
     this.step = 'REGISTER';
-  }
-
-  showLoginPassword(){
-    this.showPassword = !this.showPassword;
-    console.log(this.showPassword);
   }
 }
