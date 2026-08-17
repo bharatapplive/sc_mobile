@@ -1,0 +1,167 @@
+<!---<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>registration</ion-title>
+  </ion-toolbar>
+</ion-header>>----->
+
+
+<ion-content [fullscreen]="true" class="page">
+  <main class="box">
+
+    <header class="head">
+      <div class="icon vibrant-gradient">
+        <span class="material-symbols-outlined">person_add</span>
+      </div>
+
+      <h1>Create Account</h1>
+
+      <p>
+        Join Social Circle, connect with creators, and share your story.
+      </p>
+    </header>
+
+    <div class="card">
+      <form class="form">
+
+        <!-- Full Name -->
+        <div class="field">
+          <label for="name">Full Name</label>
+
+          <div class="input">
+            <span class="material-symbols-outlined">person</span>
+
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Mobile / Email -->
+        <div class="field">
+          <label for="identity">Mobile Number or Email</label>
+
+          <div class="input">
+            <span class="material-symbols-outlined">contact_mail</span>
+
+            <input
+              id="identity"
+              name="identity"
+              type="text"
+              placeholder="+91 9876543210 or email@address.com"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Username -->
+        <div class="field">
+          <label for="username">Username</label>
+
+          <div class="input">
+            <span class="material-symbols-outlined">alternate_email</span>
+
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Choose a username"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <label for="password">Password</label>
+
+          <div class="input">
+            <span class="material-symbols-outlined">lock</span>
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Create a password"
+              required
+            />
+
+            <button
+              type="button"
+              aria-label="Show password"
+            >
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="field">
+          <label for="confirmPassword">Confirm Password</label>
+
+          <div class="input">
+            <span class="material-symbols-outlined">lock_reset</span>
+
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm your password"
+              required
+            />
+
+            <button
+              type="button"
+              aria-label="Show password"
+            >
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="terms">
+          <input
+            id="terms"
+            name="terms"
+            type="checkbox"
+            required
+          />
+
+          <label for="terms">
+            I agree to the
+            <a href="#">Terms & Conditions</a>
+            and
+            <a href="#">Privacy Policy</a>.
+          </label>
+        </div>
+
+        <!-- Register -->
+        <button
+          class="btn vibrant-gradient"
+          type="submit"
+        >
+          Create Account
+        </button>
+
+      </form>
+    </div>
+
+    <footer class="foot">
+      <p>
+        Already have an account?
+        <a routerLink="/login">Log In</a>
+      </p>
+
+      <div class="links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Help</a>
+      </div>
+    </footer>
+
+  </main>
+</ion-content>
