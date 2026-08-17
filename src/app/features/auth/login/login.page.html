@@ -1,14 +1,5 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar> 
-</ion-header>-->
 <ion-content [fullscreen]="true" class="page">
   <main class="box">
-    <!-- <div class="toggle" role="group" aria-label="Theme switcher">
-      <button type="button" [class.active]="theme === 'light'" (click)="setTheme('light')">Light</button>
-      <button type="button" [class.active]="theme === 'dark'" (click)="setTheme('dark')">Dark</button>
-    </div> -->
 
     <header class="head">
       <div class="icon vibrant-gradient">
@@ -19,12 +10,18 @@
     </header>
 
     <div class="card">
-      <form class="form" action="#" method="POST">
+      <form class="form" (ngSubmit)="login()">
         <div class="field">
           <label for="identity">Mobile Number or Email</label>
           <div class="input">
             <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required type="text" />
+            <input 
+              id="identity" 
+              name="identity" 
+              placeholder="+91 9876543210 or EMAIL_ADDRESS" 
+              required 
+              type="text" 
+              [(ngModel)]="identity" />
           </div>
         </div>
 
@@ -35,9 +32,15 @@
           </div>
           <div class="input">
             <span class="material-symbols-outlined">lock</span>
-            <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <button type="button" aria-label="Show password">
-              <span class="material-symbols-outlined">visibility</span>
+            <input 
+              id="password" 
+              name="password" 
+              placeholder="••••••••" 
+              required 
+              [type]="showPassword ? 'text' : 'password'" 
+              [(ngModel)]="password" />
+            <button type="button" aria-label="Toggle password" (click)="togglePassword()">
+              <span class="material-symbols-outlined">{{ showPassword ? 'visibility_off' : 'visibility' }}</span>
             </button>
           </div>
         </div>
@@ -47,13 +50,13 @@
 
 
 
-    
+
     </div>
 
     <footer class="foot">
       <p>
         Don't have an account?
-        <a href="#">Sign Up</a>
+        <a routerLink="/registration">Sign Up</a>
       </p>
       <div class="links">
         <a href="#">Privacy</a>

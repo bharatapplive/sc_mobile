@@ -3,6 +3,7 @@
 }
 
 .page {
+  --background: var(--color-background);
   background: var(--color-background);
   color: var(--color-on-surface);
   font-family: var(--font-family-base);
@@ -80,6 +81,23 @@ html.dark .card {
   background: var(--color-surface-variant);
   border-radius: var(--radius-lg);
   padding: 0 var(--spacing-sm);
+  gap: var(--spacing-xs);
+  transition: all 0.3s ease;
+}
+
+.input:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(107, 56, 212, 0.15);
+}
+
+.input span {
+  color: var(--color-on-surface-variant);
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.input:focus-within span {
+  color: var(--color-primary);
 }
 
 .input input {
@@ -88,11 +106,30 @@ html.dark .card {
   background: transparent;
   padding: 14px 0;
   color: var(--color-on-surface);
+  font-family: inherit;
+  font-size: 15px;
 }
 
 .input input:focus {
   outline: none;
   box-shadow: none;
+}
+
+.input button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-on-surface-variant);
+  transition: color 0.3s ease;
+}
+
+.input button:hover {
+  color: var(--color-primary);
 }
 
 .btn {
@@ -168,16 +205,33 @@ html.dark .card {
   text-align: center;
 }
 
+.foot p {
+  color: var(--color-on-surface-variant);
+  font-size: 14px;
+  margin: 0;
+}
+
 .foot a {
   color: var(--color-primary);
   text-decoration: none;
+  font-weight: 600;
 }
 
 .links {
   display: flex;
   justify-content: center;
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
-  opacity: 0.8;
+  margin-top: var(--spacing-md);
+}
+
+.links a {
+  color: var(--color-on-surface-variant) !important;
+  font-size: 13px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.links a:hover {
+  opacity: 1;
 }
 
