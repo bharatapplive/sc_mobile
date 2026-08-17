@@ -18,29 +18,37 @@ export class AccountPage {
   constructor() {}
 
   showPassword() {
+
     if (this.passwordType === 'password') {
       this.passwordType = 'text';
     } else {
       this.passwordType = 'password';
     }
+
   }
 
   signUp() {
+
     if (
       this.fullName === '' ||
       this.email === '' ||
       this.mobile === '' ||
       this.password === ''
     ) {
+
       alert('Please fill all the fields.');
+
       return;
     }
 
     alert('Account created successfully!');
+
   }
 
   login() {
+
     console.log('Login clicked');
+
   }
 
 }

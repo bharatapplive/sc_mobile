@@ -172,3 +172,17 @@ ion-content {
   line-height: 16px;
   letter-spacing: var(--spacing-xs);
 }
+ion-content {
+  --background: #ffffff;
+  --color: #111111;
+}
+
+ion-content h1,
+ion-content h2,
+ion-content h3 {
+  color: #111111;
+}
+
+ion-content p {
+  color: #555555;
+}
