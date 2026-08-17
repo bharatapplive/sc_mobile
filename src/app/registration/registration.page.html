@@ -1,0 +1,189 @@
+<ion-content class="registration-content" [fullscreen]="true">
+  <!-- Atmospheric Background Glow Blobs -->
+  <div class="ambient-blob blob-top-left"></div>
+  <div class="ambient-blob blob-top-right"></div>
+  <div class="ambient-blob blob-bottom-left"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <ion-icon name="ellipse" class="brand-icon"></ion-icon>
+      <h1 class="brand-logo-text">Social Circle</h1>
+    </div>
+    <div class="nav-actions">
+      <a routerLink="/login" class="nav-login-link">Login</a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-sm="10" size-md="8" size-lg="5" size-xl="4" class="registration-column">
+
+          <!-- Hero Header -->
+          <div class="hero-header">
+            <h2 class="hero-title">Join the Circle.</h2>
+            <p class="hero-subtitle">Where creators connect and the digital pulse comes alive.</p>
+          </div>
+
+          <!-- Glassmorphism Registration Card -->
+          <section class="glass-card">
+            <!-- Visual Accent Blob -->
+            <div class="card-accent"></div>
+
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+              <!-- Full Name -->
+              <div class="form-group">
+                <ion-label class="input-label">Full Name</ion-label>
+                <ion-item lines="none" class="custom-input-item"
+                  [class.input-error]="fullNameControl?.invalid && (fullNameControl?.touched || isSubmitted)">
+                  <ion-icon name="person-outline" slot="start" class="input-icon"></ion-icon>
+                  <ion-input formControlName="fullName" type="text" placeholder="Alex Rivera" aria-label="Full Name"
+                    (ionInput)="onInput($event)"></ion-input>
+                </ion-item>
+                @if (fullNameControl?.invalid && (fullNameControl?.touched || isSubmitted)) {
+                <div class="error-message">
+                  @if (fullNameControl?.errors?.['required']) {
+                  <ion-text color="danger">Full name is required.</ion-text>
+                  }
+                  @if (fullNameControl?.errors?.['minlength']) {
+                  <ion-text color="danger">Full name must be at least 2 characters long.</ion-text>
+                  }
+                </div>
+                }
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <ion-label class="input-label">Email</ion-label>
+                <ion-item lines="none" class="custom-input-item"
+                  [class.input-error]="emailControl?.invalid && (emailControl?.touched || isSubmitted)">
+                  <ion-icon name="mail-outline" slot="start" class="input-icon"></ion-icon>
+                  <ion-input formControlName="email" type="email" placeholder="alex@creators.io" aria-label="Email"
+                    (ionInput)="onInput($event)"></ion-input>
+                </ion-item>
+                @if (emailControl?.invalid && (emailControl?.touched || isSubmitted)) {
+                <div class="error-message">
+                  @if (emailControl?.errors?.['required']) {
+                  <ion-text color="danger">Email is required.</ion-text>
+                  }
+                  @if (emailControl?.errors?.['email']) {
+                  <ion-text color="danger">Please enter a valid email address.</ion-text>
+                  }
+                </div>
+                }
+              </div>
+
+              <!-- Mobile Number -->
+              <div class="form-group">
+                <ion-label class="input-label">Mobile Number</ion-label>
+                <ion-item lines="none" class="custom-input-item"
+                  [class.input-error]="mobileControl?.invalid && (mobileControl?.touched || isSubmitted)">
+                  <ion-icon name="phone-portrait-outline" slot="start" class="input-icon"></ion-icon>
+                  <ion-input formControlName="mobileNumber" type="tel" placeholder="+1 (555) 000-0000"
+                    aria-label="Mobile Number" (ionInput)="onInput($event)" maxlength="10" minlength="10"></ion-input>
+                </ion-item>
+                @if (mobileControl?.invalid && (mobileControl?.touched || isSubmitted)) {
+                <div class="error-message">
+                  @if (mobileControl?.errors?.['required']) {
+                  <ion-text color="danger">Mobile number is required.</ion-text>
+                  }
+                  @if (mobileControl?.errors?.['invalidPhone']) {
+                  <ion-text color="danger">Please enter a valid mobile number.</ion-text>
+                  }
+                  @if (mobileControl?.errors?.['minlength']) {
+                  <ion-text color="danger">Mobile number must be at least 10 digits long.</ion-text>
+                  }
+                  @if (mobileControl?.errors?.['maxlength']) {
+                  <ion-text color="danger">Mobile number must be at most 10 digits long.</ion-text>
+                  }
+                </div>
+                }
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <ion-label class="input-label">Password</ion-label>
+                <ion-item lines="none" class="custom-input-item"
+                  [class.input-error]="passwordControl?.invalid && (passwordControl?.touched || isSubmitted)">
+                  <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
+                  <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'"
+                    placeholder="••••••••" aria-label="Password" (ionInput)="onInput($event)"></ion-input>
+                  <ion-button slot="end" fill="clear" class="password-toggle-btn" (click)="togglePasswordVisibility()"
+                    type="button" aria-label="Toggle password visibility">
+                    <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" slot="icon-only"></ion-icon>
+                  </ion-button>
+                </ion-item>
+                @if (passwordControl?.invalid && (passwordControl?.touched || isSubmitted)) {
+                <div class="error-message">
+                  @if (passwordControl?.errors?.['required']) {
+                  <ion-text color="danger">Password is required.</ion-text>
+                  }
+                  @if (passwordControl?.errors?.['minlength']) {
+                  <ion-text color="danger">Password must be at least 6 characters long.</ion-text>
+                  }
+                </div>
+                }
+              </div>
+
+              <!-- Submit Button -->
+              <div class="submit-wrapper">
+                <ion-button type="submit" expand="block" class="signup-button">
+                  <span class="btn-text">Sign Up</span>
+                  <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                </ion-button>
+              </div>
+
+            </form>
+
+            <!-- Terms & Privacy Disclaimer -->
+            <div class="disclaimer-container">
+              <p class="disclaimer-text">
+                By signing up, you agree to our
+                <a href="#" (click)="$event.preventDefault()" class="disclaimer-link">Terms</a> &amp;
+                <a href="#" (click)="$event.preventDefault()" class="disclaimer-link">Privacy Policy</a>.
+              </p>
+            </div>
+          </section>
+
+          <!-- Social Divider -->
+          <div class="social-divider">
+            <div class="divider-line"></div>
+            <span class="divider-text">OR CONTINUE WITH</span>
+            <div class="divider-line"></div>
+          </div>
+
+          <!-- Profile Avatar Teasers -->
+          <div class="profile-teasers">
+            <img class="avatar-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBDINAECxFp3qnoDphDcAUy59oeT9Ku4rblZUXLvPP0CW3SzWf0f5F1_ZDAuqkVd74ZzzOzXhALhJeYoPEVT0ces-O9vZa9nSgSnIvky_G9PRlAlhsZWzv6Zl6ryaNRxhtcqdtEJjKk5RsxELBd1Rgc-uRSiRgNkbnKEguSFbVvGI_r0F_5XVxD5A5ITaygA7Gs4j0PvJFJ06RPfmGqrQ7yu07A-cWrLAFJEmKDfPZY-lEj11biG9ABf3TsMgOPlPvYNVxmFtWJp8"
+              alt="Creator portrait" />
+            <img class="avatar-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN31FfUNAbjLsIVpRA0v78Ma38KJSvLEn7Wzh_0jQVIb94iGJtRNHeliVA4_YW5NxtzGfXkfQJoOrDwbSpVyBjilIzqr-Y0k92djnx7b5hWjIT7MTS-GIhnYUBYldyVvgj1SX13teqpjCt9xGDvGxvfMCLm4dUWTAbV7t6MEZH5ouNgimfDnHrTKvNVOzXkRZw4y6McPvt7m-869L6xwZdwmVe7IFzD3P_AqaGgg9KZT6C7BbZtL29avv7010SbAEmbxk2xyPp5qU"
+              alt="Creator portrait" />
+            <img class="avatar-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvXTsHkuTdS0tPhJ3leJkzgD3jyYjpApGnDr0GYD50puZF7NSCaqiuLyWCEdX09yY1u9m6ZJGDMDzu8NhOBuGNRsIxQfw8rua31kFdG0M0-OCl2SVuSYbY77XnW7UqGWV8VIXtEoQn_c1yDVMLJ8LzFzaX_aPLrqpdo-uDFujLuJhs-fCXM8qw_Pqk_Bn-E82v6OsdCNxvDnQvUvmmQpFW54BSX4WARrTc8QjKAdUoFwYYk2g76ec8gMqGzqny65_iT1ItLPJc00I"
+              alt="Creator portrait" />
+            <div class="avatar-badge">+2k</div>
+          </div>
+
+          <!-- Login Prompt -->
+          <div class="login-prompt-container">
+            <p class="login-prompt-text">
+              Already have an account?
+              <a routerLink="/login" class="login-link">Log In</a>
+            </p>
+          </div>
+
+          <!-- Footer Copyright -->
+          <footer class="page-footer">
+            <p class="copyright-text">© 2024 Social Circle. All rights reserved.</p>
+          </footer>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </main>
+</ion-content>
