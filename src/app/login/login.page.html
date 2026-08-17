@@ -24,7 +24,8 @@
           <label for="identity">Mobile Number or Email</label>
           <div class="input">
             <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required type="text" />
+            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required
+              type="text" />
           </div>
         </div>
 
@@ -44,16 +45,12 @@
 
         <button class="btn vibrant-gradient" type="submit">Log In</button>
       </form>
-
-
-
-    
     </div>
 
     <footer class="foot">
       <p>
         Don't have an account?
-        <a href="#">Sign Up</a>
+        <a (click)="navigateToSignUp()" style="cursor: pointer;">Sign Up</a>
       </p>
       <div class="links">
         <a href="#">Privacy</a>
