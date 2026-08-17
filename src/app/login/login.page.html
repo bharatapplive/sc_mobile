@@ -17,52 +17,130 @@
     </header>
 
     <div class="card">
-      <form class="form" action="#" method="POST">
-        <div class="field">
-          <label for="identity">Mobile Number or Email</label>
-          <div class="input">
-            <ion-icon name="call-outline"></ion-icon>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required type="text" />
-          </div>
-        </div>
+      <form class="form" (ngSubmit)="login()">
 
-        <div class="field">
-          <div class="row flex justify-content-between">
-            <label for="password">Password</label>
-            <a href="#">Forgot Password?</a>
-          </div>
-          <div class="input">
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <button type="button" aria-label="Show password">
-              <ion-icon name="eye-outline"></ion-icon>
-            </button>
-          </div>
-        </div>
-<button class="btn vibrant-gradient" type="submit">Log In</button>
-     <a routerLink="/register">
-  Create New Account
-</a>
-      <div class="divider">OR CONTINUE WITH</div>
+  <div class="field">
+
+    <label for="identity">
+      Mobile Number or Email
+    </label>
+
+    <div class="input">
+
+      <ion-icon name="call-outline"></ion-icon>
+
+      <input
+        id="identity"
+        name="identity"
+        [(ngModel)]="identity"
+        placeholder="+91 9876543210 or email@address.com"
+        required
+        type="text"
+      />
+
+    </div>
+  </div>
+
+
+  <div class="field">
+
+    <div class="row flex justify-content-between">
+
+      <label for="password">
+        Password
+      </label>
+
+      <a href="#">
+        Forgot Password?
+      </a>
+
+    </div>
+
+    <div class="input"><ion-icon name="lock-closed-outline"></ion-icon>
+      <input
+  id="password"
+  name="password"
+  [(ngModel)]="password"
+  placeholder="••••••••"
+  required
+  [type]="showPassword ? 'text' : 'password'"
+/>
+
+    
+
+      <button
+  type="button"
+  class="password-toggle"
+  (click)="togglePassword()"
+  aria-label="Show or hide password">
+
+  <ion-icon
+    class="password-eye"
+    [name]="showPassword ? 'eye-off-outline' : 'eye-outline'">
+  </ion-icon>
+
+</button>
       
 
-      <div class="social-buttons-container">
-        <button class="social-btn" type="button">
-          <!-- In Ionic/Angular, save your icons in the src/assets folder -->
-          
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" style="width: 20px; margin-right: 8px;">
-          Google
-        </button>
-        
-        <button class="social-btn" type="button">
-          
-          <ion-icon name="logo-apple" style="color: #000000; font-size: 20px; margin-right: 8px;"></ion-icon>
-          Apple
-        </button>
-      </div>
-      
-      
-      </form>
+    </div>
+
+  </div>
+
+
+  
+
+  <button
+    class="btn vibrant-gradient"
+    type="submit">
+
+    Log In
+
+  </button>
+
+
+
+  <a routerLink="/register">
+    Create New Account
+  </a>
+
+
+  <div class="divider">
+    OR CONTINUE WITH
+  </div>
+
+
+  <div class="social-buttons-container">
+
+    <button
+      class="social-btn"
+      type="button">
+
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+        alt="Google"
+        style="width: 20px; margin-right: 8px;">
+
+      Google
+
+    </button>
+
+
+    <button
+      class="social-btn"
+      type="button">
+
+      <ion-icon
+        name="logo-apple"
+        style="color: #000000; font-size: 20px; margin-right: 8px;">
+      </ion-icon>
+
+      Apple
+
+    </button>
+
+  </div>
+
+</form>
 
 
 

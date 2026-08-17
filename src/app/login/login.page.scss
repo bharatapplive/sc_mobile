@@ -301,3 +301,36 @@ html.dark .card {
 .input > ion-icon {
   color: #6b7280; 
 }
+.password-toggle {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #222222 !important;
+  opacity: 1 !important;
+
+  cursor: pointer;
+}
+
+.password-toggle ion-icon {
+  font-size: 22px;
+  color: #222222 !important;
+  opacity: 1 !important;
+}
+
+.password-toggle:hover {
+  background: transparent !important;
+}
+
+.password-toggle:active {
+  background: transparent !important;
+}
+
+.password-toggle:focus {
+  outline: none;
+}

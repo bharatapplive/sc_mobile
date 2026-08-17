@@ -17,69 +17,120 @@
 
     <div class="header">
       <h1>Join the Circle</h1>
-      <p>Where creators connect and the digital<br>
-         pulse comes alive.</p>
+      <p>
+        Where creators connect and the digital<br>
+        pulse comes alive.
+      </p>
     </div>
 
     <div class="form-card">
 
+      <!-- FULL NAME -->
       <div class="input-group">
-  <label> Full Name</label>
-  <ion-item lines="none" class="custom-input">
-    <ion-icon name="person-outline" slot="start"></ion-icon>
-    <ion-input placeholder="Alex Rivera"></ion-input>
-  </ion-item>
-</div>
+        <label>Full Name</label>
 
-<div class="input-group">
-  <label>Email</label>
-  <ion-item lines="none" class="custom-input">
-    <ion-icon name="mail-outline" slot="start"></ion-icon>
-    <ion-input placeholder="alex@creators.io"></ion-input>
-  </ion-item>
-</div>
+        <ion-item lines="none" class="custom-input">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
 
-<div class="input-group">
-  <label>Mobile Number</label>
-  <ion-item lines="none" class="custom-input">
-    <ion-icon name="call-outline" slot="start"></ion-icon>
-    <ion-input placeholder="+91 9876543210"></ion-input>
-  </ion-item>
-</div>
+          <ion-input
+            type="text"
+            placeholder="Alex Rivera"
+            [(ngModel)]="fullName">
+          </ion-input>
+        </ion-item>
+      </div>
 
-<div class="input-group">
-  <label>Password</label>
-  <ion-item lines="none" class="custom-input">
-    <ion-icon name="lock-closed-outline"  slot="start"></ion-icon>
-    <ion-input type="password" placeholder="••••••••"></ion-input>
-  <ion-icon
-      name="eye-outline"
-      slot="end">
-    </ion-icon>
 
-  </ion-item>
-</div>
+      <!-- EMAIL -->
+      <div class="input-group">
+        <label>Email</label>
 
-<ion-button expand="block" class="signup-btn">
-  Sign Up
-   <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
-</ion-button>
+        <ion-item lines="none" class="custom-input">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
 
-      <!-- <p class="login-link">
-        Already have an account?
-        <a routerLink="/login">Log In</a>
-      </p> -->
+          <ion-input
+            type="email"
+            placeholder="alex@creators.io"
+            [(ngModel)]="email">
+          </ion-input>
+        </ion-item>
+      </div>
+
+
+      <!-- MOBILE -->
+      <div class="input-group">
+        <label>Mobile Number</label>
+
+        <ion-item lines="none" class="custom-input">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+
+          <ion-input
+            type="tel"
+            placeholder="+91 9876543210"
+            [(ngModel)]="mobile">
+          </ion-input>
+        </ion-item>
+      </div>
+
+
+      <!-- PASSWORD -->
+      <div class="input-group">
+        <label>Password</label>
+
+        <ion-item lines="none" class="custom-input">
+          <ion-icon
+            name="lock-closed-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-input
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="••••••••"
+            [(ngModel)]="password">
+          </ion-input>
+
+          <ion-icon
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+            slot="end"
+            (click)="togglePassword()">
+          </ion-icon>
+
+        </ion-item>
+      </div>
+
+
+      <!-- SIGN UP BUTTON -->
+      <ion-button
+        expand="block"
+        class="signup-btn"
+        (click)="register()">
+
+        Sign Up
+
+        <ion-icon
+          name="arrow-forward-outline"
+          slot="end">
+        </ion-icon>
+
+      </ion-button>
+
+
       <p class="terms">
-  By signing up, you agree to our
-  <a href="#">Terms</a> &
-  <a href="#">Privacy Policy</a>.
-</p>
+        By signing up, you agree to our
+        <a href="#">Terms</a> &
+        <a href="#">Privacy Policy</a>.
+      </p>
 
     </div>
+
+
     <p class="bottom-login">
-  Already have an account?
-  <a routerLink="/login">Log In</a>
-</p>
+      Already have an account?
+
+      <a routerLink="/login">
+        Log In
+      </a>
+    </p>
 
   </div>
 
