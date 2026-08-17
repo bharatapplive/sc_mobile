@@ -17,4 +17,4 @@ import { RegistrationPage } from './registration.page';
   ],
   declarations: [RegistrationPage]
 })
-export class RegistrationPageModule {}
+export class RegistrationPageModule { }
