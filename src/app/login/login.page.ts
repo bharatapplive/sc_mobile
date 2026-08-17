@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginPage implements OnInit {
   theme: 'light' | 'dark' = 'light';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.setTheme('light');
@@ -20,4 +21,7 @@ export class LoginPage implements OnInit {
     document.documentElement.classList.toggle('dark', theme === 'dark');
   }
 
+  login() {
+    this.router.navigate(['/tabs/home']);
+  }
 }
