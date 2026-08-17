@@ -36,9 +36,78 @@ ion-content{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px 0;
+  margin-top: 15px;
   font-family: 'Segoe UI', sans-serif;
   width: 100%;
+
+  .profileDetails{
+    margin: 0;
+    width: 95%;
+
+    .profile-avatar{
+      width: 68px;
+      height: 68px;
+      border: 2px solid #7c3aed;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .profile-content{
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+      font-size: 15px;
+      margin-bottom: 15px;
+
+      p{
+        font-weight: 500;
+        margin: 0 0 10px 0;
+      }
+
+      .follow-list{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .list {
+          p{
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .profileBio{
+    width: 95%;
+    height: 125px;
+    overflow: auto;
+
+    p{
+      padding: 0;
+      margin:0;
+    }
+  }
+
+  .profile-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 90%;
+
+    ion-button{
+      border-radius: 14px;
+      background: linear-gradient(90deg, #c3bbfd 0%, #f7b3df 100%);
+      color: #2b0b54;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      width: 45%;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
 }
 
 .header{
@@ -61,117 +130,50 @@ ion-content{
   --color:  white;
 }
 
-.profileDetails{
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.profile-avatar{
-  width: 68px;
-  height: 68px;
-  border: 1px solid gray;
-  border-radius: 50%;
-  margin-top: 5px;
-}
-
-.profile-content{
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-.profile-content p{
-  margin: 0 0 10px 0;
-}
-
-.follow-list{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.list p{
-  margin: 0;
-}
-
-.profileBio{
-  width: 90%;
-  border: 1px solid gray;
-  margin-top: 5px;
-}
-
-.profileBio p{
-  padding: 0;
-  margin: 5px;
-}
-
-.profile-buttons
-{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 90%;
-  margin-top: 5px;
-}
-
-.profile-buttons ion-button{
-  border-radius: 18px;
-  background: linear-gradient(90deg, #c3bbfd 0%, #f7b3df 100%);
-  color: #2b0b54;
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  width: 45%;
-  height: 20px;
-  cursor: pointer;
-}
-
 .user-content{
-  width: 90%;
+  align-items: center;
+  width: 95%;
   margin-top: 5px;
-}
 
-.user-content .header-bar{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
+  .header-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 
-.user-content .header-bar ion-segment-button{
-  width: 30%;
-  color: white;
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-}
+    ion-segment-button{
+      width: 30%;
+      color: black;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+  }
 
-.user-content .files{
-  display: flex ;
-}
+  .files{
+    display: flex;
+    align-items: center;
 
-.user-content .grid-main{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
+    .grid-main{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
 
-.grid-main .grid-box{
-  display: flex;
-  align-items: center;
-  width: 130px;
-  height: 130px;
-  position: relative;
-  aspect-ratio: 9 / 16; // Tall reel-style portrait ratio
-  overflow: hidden;
-}
+      .grid-box{
+        display: flex;
+        align-items: center;
+        width: 130px;
+        height: 130px;
+        position: relative;
+        aspect-ratio: 9 / 16; // Tall reel-style portrait ratio
+        overflow: hidden;
 
-.grid-main .grid-box ion-img{
-  width: 100%;
-  height: 100%;
+        ion-img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
 }
 
 .view-count, .duration-badge, .draft-badge {

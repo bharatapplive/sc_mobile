@@ -3,6 +3,11 @@
   height: 48px;
   border-radius: 50%;
   border: 2px solid #797680; /* Story ring border color */
+
+  &.active,
+  &.selected {
+    border: 2px solid #7c3aed; /* Vibrant Purple */
+  }
 }
 
 .footer-button-container ion-icon{

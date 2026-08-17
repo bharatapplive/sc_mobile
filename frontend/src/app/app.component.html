@@ -4,20 +4,20 @@
   <ion-toolbar *ngIf="showTabs">
     <div class="footer-button-container">
       <ion-tab-bar slot="bottom">
-        <ion-tab-button (click)="onChangeMode('feeds')" [class.tab-selected]="activeTab === 'feeds'">
+        <ion-tab-button tab="feeds" (click)="onChangeMode('feeds')">
           <ion-icon [name]="activeTab === 'feeds' ? 'home' : 'home-outline'"></ion-icon>
         </ion-tab-button>
-        <ion-tab-button (click)="onChangeMode('reels')" [class.tab-selected]="activeTab === 'reels'">
+        <ion-tab-button tab="reels" (click)="onChangeMode('reels')">
               <ion-icon [name]="activeTab === 'reels' ? 'play' : 'play-outline'"></ion-icon>
         </ion-tab-button>
-        <ion-tab-button (click)="onChangeMode('chat')" [class.tab-selected]="activeTab === 'chat'">
+        <ion-tab-button tab="chat" (click)="onChangeMode('chat')">
             <ion-icon [name]="activeTab === 'chat' ? 'paper-plane' : 'paper-plane-outline'"></ion-icon>
         </ion-tab-button>
-        <ion-tab-button (click)="onChangeMode('search')" [class.tab-selected]="activeTab === 'search'">
+        <ion-tab-button tab="search" (click)="onChangeMode('search')">
             <ion-icon [name]="activeTab === 'search' ? 'search' : 'search-outline'"></ion-icon>
         </ion-tab-button>
-        <ion-tab-button (click)="onChangeMode('profile')" [class.tab-selected]="activeTab === 'profile'">
-            <ion-avatar class="person">
+        <ion-tab-button tab="profile" (click)="onChangeMode('profile')">
+            <ion-avatar class="person" [class.active]="activeTab === 'profile'">
               <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
             </ion-avatar>
         </ion-tab-button>

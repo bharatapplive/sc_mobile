@@ -8,7 +8,7 @@ export const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   avatarUrl: { 
     type: String, 
-    default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' 
+    default: 'https://pixabay.com/images/download/openclipart-vectors-avatar-1295397_1920.png' 
   },
   postNumber: { type: Number, default: 0 },
   followerNumber: { type: Number, default: 0 },

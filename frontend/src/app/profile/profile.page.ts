@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -68,9 +66,9 @@ export class ProfilePage implements OnInit {
           this.following = userData.followingNumber;
 
           // Hide spinner if triggered by pull-to-refresh
-        if (event) {
-          event.target.complete();
-        }
+          if (event) {
+            event.target.complete();
+          }
           
         },
         error: (err) => {
@@ -91,11 +89,11 @@ export class ProfilePage implements OnInit {
 
   // 1. GET AVATAR...
   getUserAvatar(): string{
-    if(this.user?.avatarUrl)
-    {
-      return `${this.API_URL}${this.user.avatarUrl}`;
-    }
-    // Default placeholder fallback
+    // if(this.user?.avatarUrl)
+    // {
+    //   return `${this.API_URL}${this.user.avatarUrl}`;
+    // }
+    // // Default placeholder fallback
     return 'assets/images/default-avatar.png';
   }
 

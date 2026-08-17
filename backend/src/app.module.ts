@@ -14,6 +14,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true, // 👈 Makes process.env available everywhere
     }),
     MongooseModule.forRoot('mongodb://localhost:27017/Lumia'),
+    // 👈 Mounts the 'uploads' directory to be publicly accessible
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',

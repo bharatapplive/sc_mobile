@@ -2,15 +2,15 @@
   <div class="container">
     <div class="header">
       <img src="assets/icon/Logo.png" alt="Social Circle Logo" class="header-logo" />
-      <h1 class="header-title">Social Circle</h1>
-      <p class="header-subtitle">Connect with creators, share your story, and join the digital circle.</p>
+      <h1 class="header-title">{{title}}</h1>
+      <p class="header-subtitle">{{subtitle}}</p>
     </div>
     <form #loginForm="ngForm" (ngSubmit)="OnLoginHandler(loginForm)" [style.display]="isLogin ? 'flex' : 'none'">
       <div class="form-card">
         <ion-label>Email or Phone number</ion-label>
         <ion-item lines="none">
           <ion-icon slot="start" name="person"></ion-icon>
-          <ion-input name="identity" #identity="ngModel" [(ngModel)]="loginPortal.identity" placeholder="Abc@gmail.com or +9123456789" required minlength="5"></ion-input>
+          <ion-input name="identity" #identity="ngModel" [(ngModel)]="loginPortal.identity" placeholder="Abc@gmail.com or +917823456789" required minlength="5"></ion-input>
         </ion-item>
         <div class="msg">
           @if (identity.touched && identity.errors) {
@@ -83,7 +83,7 @@
           <ion-label>Email Address</ion-label>
           <ion-item lines="none">
             <ion-icon slot="start" name="mail"></ion-icon>
-            <ion-input name="email" #email="ngModel" [(ngModel)]="registerPortal.email" placeholder="@abcgmail.com" required></ion-input>
+            <ion-input name="email" #email="ngModel" [(ngModel)]="registerPortal.email" placeholder="abc@gmail.com" required></ion-input>
           </ion-item>
           <div class="msg">
             @if (email.touched && email.errors) {
@@ -99,7 +99,7 @@
           <ion-label>Phone Number</ion-label>
           <ion-item lines="none">
             <ion-icon slot="start" name="call"></ion-icon>
-            <ion-input name="phone" #phone="ngModel" [(ngModel)]="registerPortal.phone" placeholder="@9123456789" required minlength="10"></ion-input>
+            <ion-input name="phone" #phone="ngModel" [(ngModel)]="registerPortal.phone" placeholder="+917823456789" required minlength="10"></ion-input>
           </ion-item>
           <div class="msg">
             @if (phone.touched && phone.errors) {
@@ -160,3 +160,8 @@
     </div>
   </div>
 </ion-content>
+<ion-footer class="footer-class">
+  <ion-toolbar>
+    <p>@ 2024 Social Circle. All rights reserved.</p>
+  </ion-toolbar>
+</ion-footer>

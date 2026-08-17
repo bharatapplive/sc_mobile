@@ -18,6 +18,9 @@ export class LoginPage implements OnInit {
   showPassword = false;
   step: 'REGISTER' | 'OTP' = 'REGISTER';
 
+  title: string = 'Social Circle';
+  subtitle: string = 'Connect with creators, share your story, and join the digital circle.';
+
   constructor(
     private location: Location,
     private readonly authServe: AuthService,
@@ -116,9 +119,13 @@ export class LoginPage implements OnInit {
   toggleAuth(){
     this.isLogin = !this.isLogin;
     if(this.isLogin){
-      this.location.replaceState('/login');
+      this.location.replaceState('/login');    
+      this.title = 'Social Circle';
+      this.subtitle= 'Connect with creators, share your story, and join the digital circle.';
     }else{
-      this.location.replaceState('/register');
+      this.location.replaceState('/register');      
+      this.title = 'Join the circle';
+      this.subtitle= 'Where creators connect and the digital pulse comes alive.';
     }
     
   }

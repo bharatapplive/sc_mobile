@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { filter } from 'rxjs';
 
 interface UserProfile {
@@ -25,10 +27,44 @@ export class AppComponent implements OnInit {
   private tabTimeout: any;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit(): void {    
+    const rawId = localStorage.getItem('userID');
+    const userId = rawId ? JSON.parse(rawId) : null;
+
+    this.http.get<UserProfile>(`${this.API_URL}/user/${userId}`).subscribe(
+      {
+        next: (userData) => {
+          this.user = userData;
+          
+        },
+        error: (err) => {
+          console.error('Failed to load user profile:', err);
+        },
+      }
+    );
+
+    // Listen for route changes to sync active tab state on refresh and navigation
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        const currentRoute = event.urlAfterRedirects || event.url;
+        
+        // Extract the main route segment (e.g., '/profile' -> 'profile')
+        const routeSegment = currentRoute.split('/')[1];
+
+        if (routeSegment) {
+          this.activeTab = routeSegment;
+        }
+
+        // Hide tabs on login page
+        this.showTabs = !currentRoute.includes('/login');
+      });
+
     this.listenToRouterEvents(); 
   }
 
@@ -58,33 +94,25 @@ export class AppComponent implements OnInit {
 
   onChangeMode(tabName: string){
     this.activeTab = tabName;
-
-    switch(tabName){
-      case 'feeds':
-        this.router.navigate(['/feeds']);
-        break;
-      case 'reels':
-        this.router.navigate(['/reels']);
-        break;
-      case 'chat':
-        this.router.navigate(['/chat']);
-        break;
-      case 'search':
-        this.router.navigate(['/search']);
-        break;
-      case 'profile':
-        this.router.navigate(['/profile']);
-        break;
-    }
+    this.navCtrl.navigateRoot(`/${tabName}`, { animated: false });
   }
 
   // 1. GET AVATAR...
   getUserAvatar(): string{
-    if(this.user?.avatarUrl)
-    {
-      return `${this.API_URL}${this.user.avatarUrl}`;
-    }
-    // Default placeholder fallback
+    // const avatar = this.user?.avatarUrl?.trim();
+
+    // if (avatar) {
+    //   // Return absolute URLs directly
+    //   if (avatar.startsWith('http://') || avatar.startsWith('https://')) {
+    //     return avatar;
+    //   }
+      
+    //   // Ensure slash separator between API_URL and avatar path
+    //   const formattedPath = avatar.startsWith('/') ? avatar : `/${avatar}`;
+    //   return `${this.API_URL}${formattedPath}`;
+    // }
+
+    // Default fallback placeholder
     return 'assets/images/default-avatar.png';
   }
 }
