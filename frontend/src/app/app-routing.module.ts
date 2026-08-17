@@ -10,26 +10,11 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'feeds',
-    loadChildren: () => import('./feeds/feeds.module').then( m => m.FeedsPageModule)
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-  {
-    path: 'reels',
-    loadChildren: () => import('./reels/reels.module').then( m => m.ReelsPageModule)
-  },
-  {
-    path: 'chat',
-    loadChildren: () => import('./chatbox/chatbox.module').then( m => m.ChatboxPageModule)
-  },
-  {
-    path: 'search',
-    loadChildren: () => import('./search-box/search-box.module').then( m => m.SearchBoxPageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'home' }
+
 ];
 
 @NgModule({

@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
             alert(`Welcome back, ${user.phoneNumber || user.email || 'User'}!`);
             
             // Replaces router.navigate for robust root navigation in Ionic
-            this.navCtrl.navigateRoot('/feeds');
+            this.navCtrl.navigateRoot('/home');
           });
         },
         error: (err) => {
