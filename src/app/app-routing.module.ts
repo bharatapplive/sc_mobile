@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+
   {
     path: '',
     redirectTo: 'login',
@@ -22,15 +23,24 @@ const routes: Routes = [
       import('./registration/registration.module').then(
         m => m.RegistrationPageModule
       )
+  },
+
+  {
+    path: 'tabs',
+    loadChildren: () =>
+      import('./tabs/tabs.module').then(
+        m => m.TabsPageModule
+      )
   }
+
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules
-    })
+    RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [
+    RouterModule
+  ]
 })
 export class AppRoutingModule {}
