@@ -174,4 +174,7 @@ export class ProfilePage implements OnInit {
 
   } 
 
+  onLogout(){
+    this.router.navigate(['/login']);
+  }
 }

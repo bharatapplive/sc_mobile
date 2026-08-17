@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedsPage implements OnInit {
 
+  // example.component.ts
+  defaultAvatar = 'assets/images/default-avatar.png';
+
   constructor() { }
 
   ngOnInit() {

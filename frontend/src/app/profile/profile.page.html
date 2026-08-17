@@ -1,15 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <div class="header">
-      <ion-button class="icon-class" shape="round" size="small" fill="clear" >
-        <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+    <div class="panels">
+      <ion-button fill="clear">
+        <ion-icon name="add"></ion-icon>
       </ion-button>
-      <ion-button class="toggleAccount" shape="round" fill="clear" >
-        <span>{{user?.username}}</span>
-        <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-button fill="clear">
+        <ion-label>its.ranaji008</ion-label>
       </ion-button>
-      <ion-button class="icon-class" shape="round" size="small" fill="clear">
-        <ion-icon name="menu-outline" slot="icon-only"></ion-icon>
+      <ion-button fill="clear" (click)="onLogout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </div>
   </ion-toolbar>

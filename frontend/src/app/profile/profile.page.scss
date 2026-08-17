@@ -1,3 +1,37 @@
+ion-content{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    &::part(scroll) {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;          /* Chrome, Safari, Opera */
+      width: 0 !important;   /* Hides vertical scrollbar width */
+    }
+  }
+}
+
+// 1. Header Panel......
+.panels{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ion-icon{
+        font-size: 20px;
+        color: #7c3aed;
+    }
+
+    ion-label{
+        font-size: 15px;
+        color: #7c3aed;
+        text-transform: none;
+    }
+}
+
 .container{
   display: flex;
   flex-direction: column;

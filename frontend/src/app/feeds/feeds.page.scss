@@ -1,0 +1,195 @@
+ion-content{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    &::part(scroll) {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;          /* Chrome, Safari, Opera */
+      width: 0 !important;   /* Hides vertical scrollbar width */
+    }
+  }
+}
+
+// 1. Header Panel......
+.panels{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ion-icon{
+        font-size: 20px;
+        color: #7c3aed;
+    }
+
+    ion-label{
+        font-size: 15px;
+        color: #7c3aed;
+        text-transform: none;
+    }
+}
+
+
+// 2. Main-Content Panel.....
+.mainHolder{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+
+    // 2.1 Story Panel...
+    .story-panel{
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        margin-left: 15px;
+        gap: 20px;
+        
+        .story-context{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 68px;
+            height: 86px;
+        }
+
+        .story-relative {
+            position: relative;
+            display: inline-block;
+
+            .story-add-absolute {
+                position: absolute;
+                bottom: -8px;
+                right: -8px;
+                width: 28px;          /* 👈 Equal width and height for a perfect circle */
+                height: 14px;
+                border-radius: 50%;
+                border: 2px solid #ffffff;  /* Clean white border separation */
+                background-color: #7c3aed;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                display: flex;       /* 👈 Flexbox centers the icon perfectly */
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+
+            .add-btn {
+                font-size: 36px;     /* 👈 Fits neatly inside the 24px circle */
+                font-weight: bold;
+                color: white;      /* White plus icon against dark background */
+            }
+        }
+
+    }
+
+    // 2.2 Post Panel...
+    .post-panel{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        margin: 0 15px;
+        padding-top: 15px;
+
+        .post-article{
+            display: flex;
+            flex-direction: column;
+            background: rgb(230, 228, 228);
+            border-radius: 10px;
+
+            .post-header{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0 10px;
+                height: 70px;
+
+                .divided{
+                    display: flex;
+                    align-items: center;
+
+                    ion-avatar{
+                        width: 52px;
+                        height: 52px;
+                    }
+
+                    .avatar-title{
+                        display: flex;
+                        flex-direction: column;
+                        height: 48px;
+                        margin-left: 10px;
+                        margin-top: 10px;
+                    }
+                }
+
+                ion-button{
+                    color: black;
+                }
+            }
+
+            .post-content{
+                height: auto;
+                margin: 5px 0;
+            }
+
+            .post-bottom{
+                display: flex;
+                flex-direction: column;
+
+                .toggle-icon{
+                    display: flex;
+                    justify-content: space-between;
+
+                    ion-button{
+                        color: black;
+                        font-size: 18px;
+                    }
+                }
+
+                .subtitle-panel{
+                    display: flex;
+                    flex-direction: column;
+                    margin: 10px;
+
+                    p{
+                        margin: 0;
+                        padding: 2px 0;
+
+                        span{
+                            color: black;
+                            font-weight: bold;
+                        }
+                    }
+
+                    ion-button{
+                        width: 145px;
+                        color: black;
+                        font-size: 10px;
+                        margin: 0;
+                        margin-left: -10px;
+                        padding: 2px 0;
+                    }
+
+                    .para{
+                        font-size: 10px;
+                    }
+                }
+            }
+
+            a{
+                color: black;
+                font-weight: bold;
+            }
+        }
+    }
+
+    //Most Requirements
+    .person {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid  #7c3aed;
+    }
+}

@@ -87,8 +87,4 @@ export class AppComponent implements OnInit {
     // Default placeholder fallback
     return 'assets/images/default-avatar.png';
   }
-
-  onLogout(){
-    this.router.navigate(['/login']);
-  }
 }

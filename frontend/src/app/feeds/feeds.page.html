@@ -1,13 +1,212 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>feeds</ion-title>
+    <div class="panels">
+      <ion-button fill="clear">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-label>its.ranaji008</ion-label>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">feeds</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="mainHolder">
+
+    <section class="story-panel">
+      <div class="story-context">
+        <div class="story-relative">
+          <ion-avatar class="person">
+              <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+          </ion-avatar>
+          <ion-button class="story-add-absolute" fill="clear" shape="round" size="small">
+            <ion-icon class="add-btn" slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+        </div>
+        <span>you</span>
+      </div>
+      <div class="story-context">
+        <ion-avatar class="person">
+            <ion-img [src]="'https://lh3.googleusercontent.com/aida-public/AB6AXuDUHRi2-QhqqHpB_7BDvc9gqBi41cVDvXGyWahFdHvx5valgXZu4CNqVG-63xYsHRoZxfcqW8jsb8v3LqjP6tjk0CntOABI9j4eUWNtHiJ4WhjqhTHPX4yr8-zXZr8K7Y56lr1QYN-h1jntrJpSm_nBAF1BVWOQdOdn7OfWJY-wA_OujyY2ZtUffzVZf44QMLGcQmb-P3mnbWlp2n9ub_M8W3jCj04Mtu_QngNOg3p5gqeZ00WoVy38kARhkH_LwyihDXN565uQ44c'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>slex_vibe</span>
+      </div>
+      <div class="story-context">
+        <ion-avatar class="person">
+            <ion-img [src]="'https://lh3.googleusercontent.com/aida-public/AB6AXuB4K6UQl8YeKnRlYyIDiquAUTWhbTD7uhwPjKbnUymtss9SBPtqSwhz49am_QUusP0hq0BCRdwV-1n4maK76ZHZpz9fc5iV8vpqbJiUrUjiTFkiaAsbgEWs533oGa3zMIIYVZviHlxf8_635qeq22fxqXcRecOmBJDmGuMQw8MYuXPX3XQtZ4H7tr4lILvvwn9uPkFsIbqq4HMMsEf_i7mlXraO05B7YZwA_wS2dRQUAHzX8xR-LV9VVL5qmOQ30PCArNcjOfrj1No'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>neo_pixel</span>
+      </div>
+      <div class="story-context">
+        <ion-avatar class="person">
+            <ion-img [src]="'https://lh3.googleusercontent.com/aida-public/AB6AXuD97OZyo9vcgdGRd6eFUx4FiL7ww4LY9areHnQZHPzWqwv-r7I2NKJIAZnJaOJrEzfn_hUQ9VWx2bIluVg-ROYwuj-6C8Q_5L6S4mzwK9b22SYx9rnaP1iLKAKYz44MdwibsoSSmrBCmBSmBGX_knwkDKgMid99ryMeKc2eU0koiPlPRT2Q1Qp6H5knrBDrhdNpw_SP3u-PVumwBTHGCOoEuqHvineDkFfKHgr3yNhLERA17_1f-kRvzVONqqdS-z6wOSYWOLgJy4s'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>luna.art</span>
+      </div>
+      <div class="story-context">
+        <ion-avatar class="person">
+            <ion-img [src]="'https://lh3.googleusercontent.com/aida-public/AB6AXuByww0uE6lke2FnrYFMVZzWGb_W99pu6A1lsmf0NifQFgWXG_43MKKbr74wKZmjEoON1H68ZYtRDckqav2JvLRYu8eG0BeOx7Iu5NYjEmwT3cZSG4W3gDzvSUvHAg11P97N9sY2lWdowEyPQob1FT7kLUc33jwbYbbCGTO2kxUw0rNM2xy0QSGe-6Mh5p9PXSbfM_H5dhAHPHhiZOqZXZ3dnkNdR0yRjZqa6JwRa_tpfEWqG3jc9LAnr_54YmVRmz66ahHqJNwV-Zo'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>travel_joy</span>
+      </div>
+      <div class="story-context">
+        <ion-avatar class="person">
+            <ion-img [src]="'https://lh3.googleusercontent.com/aida-public/AB6AXuByww0uE6lke2FnrYFMVZzWGb_W99pu6A1lsmf0NifQFgWXG_43MKKbr74wKZmjEoON1H68ZYtRDckqav2JvLRYu8eG0BeOx7Iu5NYjEmwT3cZSG4W3gDzvSUvHAg11P97N9sY2lWdowEyPQob1FT7kLUc33jwbYbbCGTO2kxUw0rNM2xy0QSGe-6Mh5p9PXSbfM_H5dhAHPHhiZOqZXZ3dnkNdR0yRjZqa6JwRa_tpfEWqG3jc9LAnr_54YmVRmz66ahHqJNwV-Zo'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>rok.joyi</span>
+      </div>
+    </section>
+
+    <div class="post-panel">
+
+      <article class="post-article">
+        <div class="post-header">
+          <div class="divided">
+            <ion-avatar class="person">
+                <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+            </ion-avatar>
+            <div class="avatar-title">
+              <a><span>its.ranaji008</span></a>
+              <span>Roorkee, Uk</span>
+            </div>
+          </div>
+          <ion-button shape="round" fill="clear" size="small">
+            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="post-content">
+            <ion-img [src]="'https://lh3.googleusercontent.com/aida-public/AB6AXuCsWBVJPlrQGM44JrCYJvROiMwcleZ4Z1X_InBV0T2QJPpl1AXzXhzLbrZX33Am4f5hSfuxU_l2lyFuios0OD8p-8SHDElmmTJE4TeejidYZXE0RX_khNTFEiHkDjE6bxDRIJihLNVSi9k8FKc-lu1kLuk6Tsv0zzgMhNwjhAuSqi9huled7w03ITPC3MLHRYP2PGPeZGfwersBOml-a7FX9IVJF1hKd29nvbcIXEH-BeF2-G5jZpG7iEfK7UQi7f7EBxly17w4VzQ'"></ion-img>
+        </div>
+
+        <div class="post-bottom">
+          <div class="toggle-icon">
+            <div class="left-toggle">
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+              </ion-button>
+            </div>
+            <ion-button shape="round" fill="clear" size="small">
+              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div class="subtitle-panel">
+            <p>1,284 likes</p>
+            <p><span>its.ranaji008</span> Exploring the boundaries of digital reality today. 
+              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
+            <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
+            <p class="para">2 HOURS AGO</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-article">
+        <div class="post-header">
+          <div class="divided">
+            <ion-avatar class="person">
+                <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+            </ion-avatar>
+            <div class="avatar-title">
+              <a><span>its.ranaji008</span></a>
+              <span>Roorkee, Uk</span>
+            </div>
+          </div>
+          <ion-button shape="round" fill="clear" size="small">
+            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="post-content">
+            <ion-img [src]="'https://lh3.googleusercontent.com/aida-public/AB6AXuBmLGb7vfQlCMYgMw6_dxjvV2S8n602NQnJurBCYkF-DUmasGuXouXqcig2gD33CiP5P9RL2S_zzbgDwVW-gMW99qYRADXXqh6tcoRcl_1T5vdpNQzL_U-wlEB-Hvpia3eq4wdN5tdn2wQpmlz8CGD2FYCv0HGD9W7PlMAU8J50CoVcXpykmG4SByutTHKxjgeb7YUO_Otnn2KBTmMwB8hy_YtW8g92nz6JZWKP2RAk5gtXbmpFIH1HxNDyi6KkN8z8FRSApGpHcCU'"></ion-img>
+        </div>
+
+        <div class="post-bottom">
+          <div class="toggle-icon">
+            <div class="left-toggle">
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+              </ion-button>
+            </div>
+            <ion-button shape="round" fill="clear" size="small">
+              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div class="subtitle-panel">
+            <p>1,284 likes</p>
+            <p><span>its.ranaji008</span> Exploring the boundaries of digital reality today. 
+              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
+            <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
+            <p class="para">2 HOURS AGO</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-article">
+        <div class="post-header">
+          <div class="divided">
+            <ion-avatar class="person">
+                <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+            </ion-avatar>
+            <div class="avatar-title">
+              <a><span>its.ranaji008</span></a>
+              <span>Roorkee, Uk</span>
+            </div>
+          </div>
+          <ion-button shape="round" fill="clear" size="small">
+            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="post-content">
+            <ion-img [src]="''"></ion-img>
+        </div>
+
+        <div class="post-bottom">
+          <div class="toggle-icon">
+            <div class="left-toggle">
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+              </ion-button>
+            </div>
+            <ion-button shape="round" fill="clear" size="small">
+              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div class="subtitle-panel">
+            <p>1,284 likes</p>
+            <p><span>its.ranaji008</span> Exploring the boundaries of digital reality today. 
+              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
+            <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
+            <p class="para">2 HOURS AGO</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
 </ion-content>
