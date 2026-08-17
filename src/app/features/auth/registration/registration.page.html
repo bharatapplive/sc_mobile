@@ -1,13 +1,94 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registration</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="register-page">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registration</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="register-container">
+
+    <div class="header">
+      <h1>Join the Circle</h1>
+      <p>
+        Where creators connect and the digital<br>
+        pulse comes alive.
+      </p>
+    </div>
+
+    <div class="form-card">
+
+
+      <div class="input-group">
+        <label>Full Name</label>
+
+        <ion-item lines="none" class="custom-input">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+
+          <ion-input type="text" placeholder="Aman Sharma" [(ngModel)]="fullName">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+
+        <ion-item lines="none" class="custom-input">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+
+          <ion-input type="email" placeholder="Aman@dev.com" [(ngModel)]="email">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div class="input-group">
+        <label>Mobile Number</label>
+
+        <ion-item lines="none" class="custom-input">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+
+          <ion-input type="tel" placeholder="+91 9876543210" [(ngModel)]="mobile">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+
+        <ion-item lines="none" class="custom-input">
+          <ion-icon name="lock-closed-outline" slot="start">
+          </ion-icon>
+
+          <ion-input [type]="showPassword ? 'text' : 'password'" placeholder="••••••••" [(ngModel)]="password">
+          </ion-input>
+
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" slot="end" (click)="togglePassword()">
+          </ion-icon>
+
+        </ion-item>
+      </div>
+
+      <ion-button expand="block" class="signup-btn" (click)="register()">
+
+        Sign Up
+
+        <ion-icon name="arrow-forward-outline" slot="end">
+        </ion-icon>
+
+      </ion-button>
+
+
+      <p class="terms">
+        By signing up, you agree to our
+        <a href="#">Terms</a> &
+        <a href="#">Privacy Policy</a>.
+      </p>
+
+    </div>
+
+
+    <p class="bottom-login">
+      Already have an account?
+
+      <a routerLink="/login">
+        Log In
+      </a>
+    </p>
+
+  </div>
+
 </ion-content>
