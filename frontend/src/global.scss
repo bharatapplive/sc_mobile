@@ -34,3 +34,10 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
+
+html, body {
+  /* Disables elastic bouncing on mobile web/webview browsers */
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
+

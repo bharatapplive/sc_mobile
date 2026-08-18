@@ -1,12 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { filter, Subscription } from 'rxjs';
+import { AuthService } from '../auth-service';
 
-interface UserProfile {
-  avatarUrl?: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -16,9 +13,7 @@ interface UserProfile {
 })
 export class HomePage implements OnInit {
 
-  user: UserProfile | null = null;
-  
-  private readonly API_URL = 'http://localhost:3000';
+  avatarUrl?: string = '';
 
   activeTab: string = '/feeds';
   showTabs = true;
@@ -26,25 +21,20 @@ export class HomePage implements OnInit {
 
   constructor(
     private router: Router,
-    private http: HttpClient,
+    private readonly authServe: AuthService,
     private navCtrl: NavController
   ) { }
 
   ngOnInit() {
-    const rawId = localStorage.getItem('userID');
-    const userId = rawId ? JSON.parse(rawId) : null;
 
-    this.http.get<UserProfile>(`${this.API_URL}/user/${userId}`).subscribe(
-      {
-        next: (userData) => {
-          this.user = userData;
-          
-        },
-        error: (err) => {
-          console.error('Failed to load user profile:', err);
-        },
-      }
-    );
+     this.authServe.loadUserData().subscribe({
+      next: (userData) => {
+        this.avatarUrl = userData.avatarUrl?.trim();       
+      },
+      error: (err) => {
+        console.error('Failed to load user profile:', err);
+      },
+    });
 
     // Clean subscription tracking
     this.routerSub = this.router.events
@@ -72,18 +62,13 @@ export class HomePage implements OnInit {
 
   // 1. GET AVATAR...
   getUserAvatar(): string{
-    // const avatar = this.user?.avatarUrl?.trim();
 
-    // if (avatar) {
-    //   // Return absolute URLs directly
-    //   if (avatar.startsWith('http://') || avatar.startsWith('https://')) {
-    //     return avatar;
-    //   }
-      
-    //   // Ensure slash separator between API_URL and avatar path
-    //   const formattedPath = avatar.startsWith('/') ? avatar : `/${avatar}`;
-    //   return `${this.API_URL}${formattedPath}`;
-    // }
+    if (this.avatarUrl) {
+      // Return absolute URLs directly
+      if (this.avatarUrl.startsWith('http://') || this.avatarUrl.startsWith('https://')) {
+        return this.avatarUrl;
+      }
+    }
 
     // Default fallback placeholder
     return 'assets/images/default-avatar.png';

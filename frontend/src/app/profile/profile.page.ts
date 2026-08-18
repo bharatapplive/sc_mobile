@@ -1,19 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth-service';
 
-interface UserProfile {
-  _id: string;
-  fullname: string;
-  username: string;
-  avatarUrl?: string;
-  postNumber: number;
-  followerNumber: number;
-  followingNumber: number;
-  profileBio: string;
-}
 
 @Component({
   selector: 'app-profile',
@@ -26,25 +15,24 @@ export class ProfilePage implements OnInit {
 
   
   @Input() userId: string ='';
-  post: number = 0;
+  fullname: string = '';
+  username: string = '';
+  postNumber: number = 0;
   follower: number = 0;
   following: number = 0;
+  avatarUrl?: string = '';
 
   isFollowing: boolean = false;
   isGrid = true;
   isDraft = false;
   isReply = false;
 
-  user: UserProfile | null = null;
-
   activeTab: string = 'posts';
 
-  private readonly API_URL = 'http://localhost:3000';
 
   constructor(
-    private http: HttpClient,
-    private actionSheetCtrl: ActionSheetController,
-    private router: Router
+    private router: Router,
+    private readonly authServe: AuthService
   ) {}
 
   ngOnInit() {
@@ -53,34 +41,32 @@ export class ProfilePage implements OnInit {
   
   loadUserProfile(event?: any){
     
-    const rawId = localStorage.getItem('userID');
-    const userId = rawId ? JSON.parse(rawId) : null;
+    this.authServe.loadUserData().subscribe({
+      next: (userData) => {
+        this.fullname = userData.fullname;
+        this.username = userData.username;
+        this.postNumber = userData.postNumber ?? 0;
+        this.follower = userData.followerNumber ?? 0;
+        this.following = userData.followingNumber ?? 0;
 
-    this.http.get<UserProfile>(`${this.API_URL}/user/${userId}`).subscribe(
-      {
-        next: (userData) => {
-          this.user = userData;
-          this.userId = userData._id;
-          this.post = userData.postNumber;
-          this.follower = userData.followerNumber;
-          this.following = userData.followingNumber;
-
-          // Hide spinner if triggered by pull-to-refresh
-          if (event) {
-            event.target.complete();
-          }
-          
-        },
-        error: (err) => {
-          console.error('Failed to load user profile:', err);
+        this.avatarUrl = userData.avatarUrl?.trim();
         
-          // Hide spinner if triggered by pull-to-refresh
-          if (event) {
-            event.target.complete();
-          }
-        },
-      }
-    );
+        
+        // Hide spinner if triggered by pull-to-refresh
+        if (event) {
+          event.target.complete();
+        }        
+      },
+      error: (err) => {
+        console.error('Failed to load user profile:', err);
+      
+        // Hide spinner if triggered by pull-to-refresh
+        if (event) {
+          event.target.complete();
+        }
+      },
+    });
+      
   }
   
   handleRefresh(event: any){
@@ -88,28 +74,31 @@ export class ProfilePage implements OnInit {
   }
 
   // 1. GET AVATAR...
-  getUserAvatar(): string{
-    // if(this.user?.avatarUrl)
-    // {
-    //   return `${this.API_URL}${this.user.avatarUrl}`;
-    // }
-    // // Default placeholder fallback
+  getUserAvatar(){
+         
+    if (this.avatarUrl) {
+      // Return absolute URLs directly
+      if (this.avatarUrl.startsWith('http://') || this.avatarUrl.startsWith('https://')) {
+        return this.avatarUrl;
+      }
+    }
+    // Default fallback placeholder
     return 'assets/images/default-avatar.png';
   }
 
   // 2. UPDATE POST..
   updatePost(){    
-    this.post++;
-    const payload = {userId: this.userId, postNumber: Number(this.post)};
+    this.postNumber++;
+    // const payload = {userId: this.userId, postNumber: Number(this.postNumber)};
 
-    this.http.patch<{postNumber: number}>(`${this.API_URL}/user/post`,payload).subscribe(
-      {
-        next:(response) => {
-          console.log('Successfully updated on server:', response);
-        },
-        error: (err) => console.error('Upload failed:', err)
-      }
-    )
+    // this.http.patch<{postNumber: number}>(`${this.API_URL}/user/post`,payload).subscribe(
+    //   {
+    //     next:(response) => {
+    //       console.log('Successfully updated on server:', response);
+    //     },
+    //     error: (err) => console.error('Upload failed:', err)
+    //   }
+    // )
   }
 
   // 3. UPDATE FOLLOWER..
@@ -120,14 +109,14 @@ export class ProfilePage implements OnInit {
 
     const payload = {userId: this.userId, followerNumber: this.follower};
 
-    this.http.patch<{followerNumber: number}>(`${this.API_URL}/user/follower`, payload).subscribe(
-      {
-        next:(response) => {
-          console.log('Successfully updated on server:', response);
-        },
-        error: (err) => console.error('Upload failed:', err)
-      }
-    )
+    // this.http.patch<{followerNumber: number}>(`${this.API_URL}/user/follower`, payload).subscribe(
+    //   {
+    //     next:(response) => {
+    //       console.log('Successfully updated on server:', response);
+    //     },
+    //     error: (err) => console.error('Upload failed:', err)
+    //   }
+    // )
   }
 
   // 4. UPDATE FOLLOWING..
@@ -138,14 +127,14 @@ export class ProfilePage implements OnInit {
 
     const payload = {userId: this.userId, followingNumber: this.following};
 
-    this.http.patch<{followingNumber: number}>(`${this.API_URL}/user/following`, payload).subscribe(
-      {
-        next:(response) => {
-          console.log('Successfully updated on server:', response);
-        },
-        error: (err) => console.error('Upload failed:', err)
-      }
-    )
+    // this.http.patch<{followingNumber: number}>(`${this.API_URL}/user/following`, payload).subscribe(
+    //   {
+    //     next:(response) => {
+    //       console.log('Successfully updated on server:', response);
+    //     },
+    //     error: (err) => console.error('Upload failed:', err)
+    //   }
+    // )
   }
 
   // 5. FOLLOWING PEOPLES
@@ -173,6 +162,6 @@ export class ProfilePage implements OnInit {
   } 
 
   onLogout(){
-    this.router.navigate(['/login']);
+    this.authServe.logout();
   }
 }

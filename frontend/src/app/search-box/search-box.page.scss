@@ -1,0 +1,283 @@
+ion-content{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    --background: #edc1ff3f;
+    font-family: 'Segoe UI', sans-serif;
+    &::part(scroll) {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;          /* Chrome, Safari, Opera */
+      width: 0 !important;   /* Hides vertical scrollbar width */
+    }
+  }
+}
+
+// 1. Header Panel......
+.panels{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ion-icon{
+        font-size: 20px;
+        color: #7c3aed;
+    }
+
+    ion-label{
+        font-size: 20px;
+        color: #4c1d95;
+        text-transform: none;
+    }
+}
+
+// 2. Conatiner.....
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+
+    .search-Bar-container{
+        width: 90%;
+
+        ion-item{
+            border-radius: 16px;
+            background: #f1f5f9;
+            --min-height: 48px;
+            margin-top: 10px;
+
+            ion-icon{
+                color: #64748b;
+                font-size: 21px;
+                font-weight: bold;
+                margin-right: 8px;
+            }
+
+            ion-input {
+                --color: #0f172a;
+                --placeholder-color: #94a3b8;
+                --placeholder-opacity: 1;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .tab-bar{
+        width: 95%;
+        margin: 15px 0;
+
+        .tags-scroll-container{
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            gap: 10px;padding: 4px 16px;
+            white-space: nowrap;
+
+            .chips{
+                flex: 0 0 auto;
+                margin: 0;
+                background: rgba(226, 226, 226, 0.801);
+                border-radius: 14px;
+                color: #0f172a;
+                font-size: 16px;
+                padding: 2px;
+                font-weight: bold;
+                text-transform: none; 
+                
+                /* Target inner native button for custom gradients */
+                &::part(native) {
+                    transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+                }
+
+                &:active::part(native) {
+                    transform: scale(0.95);
+                }
+
+                &:hover:not(.active) {
+                    --background: #ddd6fe;
+                }
+
+                /* Active State */
+                &.active {
+                    color: #ffffff;
+                    --background: linear-gradient(135deg, #7c3aed, #a78bfa);
+                    
+                    &::part(native) {
+                        box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35);
+                    }
+                }
+            }           
+        }
+    }
+
+    .file-container{
+        width: 95%;
+        background: white;
+        padding: 8px;
+        border-radius: 14px;
+
+        // Theme Variables
+        $primary-color: #8b5cf6; // Purple accent
+        $glass-bg: rgba(255, 255, 255, 0.12);
+        $glass-border: rgba(255, 255, 255, 0.2);
+        $text-white: #ffffff;
+
+        // Masonry Grid Wrapper
+        .masonry-grid {
+            column-count: 2; // Default 2 columns for mobile
+            column-gap: 12px;
+            width: 100%;
+            margin-top: 15px;
+
+            @media (min-width: 640px) {
+                column-count: 3;
+                column-gap: 16px;
+            }
+
+            @media (min-width: 1024px) {
+                column-count: 4;
+                column-gap: 20px;
+            }
+        }
+
+        // Masonry Card Item
+        .masonry-item {
+            position: relative;
+            display: inline-block; // Essential for CSS Column masonry flow
+            width: 100%;
+            margin-bottom: 12px;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+
+            @media (min-width: 640px) {
+                margin-bottom: 16px;
+            }
+
+            // Glassmorphism & Ambient Glow
+            &.glass-card {
+                background: $glass-bg;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid $glass-border;
+                box-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.1);
+            }
+
+            // Image Zoom on Hover
+            .card-img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &:hover .card-img {
+                transform: scale(1.08);
+            }
+
+            // Heart Favorite Icon
+            .favorite-icon {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: $text-white;
+                font-size: 18px;
+                z-index: 2;
+            }
+
+            // Overlays
+            .card-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 12px;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+                color: $text-white;
+                z-index: 2;
+
+                &.space-between {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .user-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    .avatar {
+                        width: 26px;
+                        height: 26px;
+                        border: 1.5px solid rgba(255, 255, 255, 0.6);
+                    }
+
+                    .username {
+                        font-size: 0.8rem;
+                        font-weight: 500;
+                    }
+                }
+
+                .caption {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .action-icon {
+                    font-size: 18px;
+                }
+            }
+
+            // Floating Badges & Tags
+            .badge {
+                position: absolute;
+                z-index: 2;
+
+                &.top-left {
+                    top: 10px;
+                    left: 10px;
+                }
+
+                span {
+                    display: inline-block;
+                    padding: 4px 10px;
+                    border-radius: 20px;
+                    background: rgba($primary-color, 0.25);
+                    backdrop-filter: blur(8px);
+                    border: 1px solid rgba($primary-color, 0.4);
+                    color: #ddd6fe;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                }
+            }
+
+            .tag-chip {
+                position: absolute;
+                z-index: 2;
+
+                &.bottom-left {
+                    bottom: 12px;
+                    left: 12px;
+                }
+
+                padding: 4px 12px;
+                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(8px);
+                color: $primary-color;
+                font-size: 0.75rem;
+                font-weight: 600;
+                border: 1px solid rgba($primary-color, 0.2);
+            }
+        }
+    }
+}
+

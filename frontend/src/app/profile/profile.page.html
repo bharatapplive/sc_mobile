@@ -2,14 +2,16 @@
   <ion-toolbar>
     <div class="panels">
       <ion-button fill="clear">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear">
         <ion-label>its.ranaji008</ion-label>
       </ion-button>
-      <ion-button fill="clear" (click)="onLogout()">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
+      <div>
+        <ion-button fill="clear">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="onLogout()">
+          <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+        </ion-button>
+      </div>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -26,57 +28,112 @@
   </ion-refresher>
 
   <div class="container">
-    <div class="profileDetails">
-      <div class="profile-avatar">
-        <ion-avatar>
-          <ion-img [src]="getUserAvatar()" alt="User"></ion-img>
-        </ion-avatar>
-      </div>
+    <section class="profile-panel">
+      <div class="profileDetails">
+        <div class="profile-avatar">
+          <ion-avatar>
+            <ion-img [src]="getUserAvatar()" alt="User"></ion-img>
+          </ion-avatar>
+        </div>
 
-      <div class="profile-content">
-        <p>{{user?.fullname}}</p>
-        <div class="follow-list">
-          <div class="list">
-            <p>{{user?.postNumber}}</p>
-            <p>posts</p>
-          </div>
-          <div class="list">
-            <p>{{user?.followerNumber}}</p>
-            <p>followers</p>
-          </div>
-          <div class="list">
-            <p>{{user?.followingNumber}}</p>
-            <p>following</p>
+        <div class="profile-content">
+          <h2>{{fullname}}</h2>
+          <div class="follow-list">
+            <div class="list">
+              <p>{{postNumber}}</p>
+              <p>posts</p>
+            </div>
+            <div class="list">
+              <p>{{follower}}</p>
+              <p>followers</p>
+            </div>
+            <div class="list">
+              <p>{{following}}</p>
+              <p>following</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="profileBio">
-      <p>💡 chasing moments & light<br>
-        📍 [Roorkee, UK]<br>
-        📸 lumia/its.ranaji008 capturing reality, one frame at a time. ✨ <br>
-        📩 contact / collab: Him@gmail.com<br>
-      </p>
-      <!-- <ion-button (click)="updatePost()">
-        Update Post
-      </ion-button>
-      
-      <ion-button (click)="updateFollower()">
-        Update Follower
-      </ion-button>
-      
-      <ion-button (click)="followingBtn()">
-        Update Following
-      </ion-button> -->
-    </div>
+      <div class="creator">
+        <h2>Digital Creator</h2>
+      </div>
 
-    <div class="profile-buttons">
-      <ion-button shape="round" fill="clear" (click)="editProfile()">Edit Profile</ion-button>
-      <ion-button shape="round" fill="clear">Share Profile</ion-button>
-    </div>
+      <div class="profileBio">
+        <p>💡 chasing moments & light<br>
+          📍 [Roorkee, UK]<br>
+          📸 capturing reality, one frame at a time. ✨ <br>
+          📩 contact / collab: Him@gmail.com<br>
+        </p>
+        <!-- <ion-button (click)="updatePost()">
+          Update Post
+        </ion-button>
+        
+        <ion-button (click)="updateFollower()">
+          Update Follower
+        </ion-button>
+        
+        <ion-button (click)="followingBtn()">
+          Update Following
+        </ion-button> -->
+      </div>
 
-    <div class="user-content">
+      <div class="add-links">
+        <ion-button shape="round" fill="clear" size="small">
+          <ion-icon slot="icon-only" name="link-outline"></ion-icon>
+          <span>Add link's</span>
+        </ion-button>
+      </div>
+
+      <div class="profile-buttons">
+        <ion-button class="edit-btn" shape="round" fill="clear" size="small" (click)="editProfile()">
+          <ion-icon slot="icon-only" name="pencil"></ion-icon>
+          <span>Edit Profile</span>
+        </ion-button>
+        <ion-button class="share-btn" shape="round" fill="clear" size="small">
+          <ion-icon lot="icon-only" name="share-social-outline"></ion-icon>
+          <span>Share Profile</span>
+        </ion-button>
+        <ion-button class="follow-btn" shape="round" fill="clear" size="small">
+          <ion-icon lot="icon-only" name="add-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </section>
+
+    <section class="highlight-panel">
+      <div class="highlight-context">
+        <ion-button class="add-btn" shape="round" fill="clear">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+        <span>Add</span>
+      </div>
+      <div class="highlight-context">
+        <ion-avatar class="story">
+            <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>New York</span>
+      </div>
+      <div class="highlight-context">
+        <ion-avatar class="story">
+            <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>Fashion</span>
+      </div>
+      <div class="highlight-context">
+        <ion-avatar class="story">
+            <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>Work</span>
+      </div>
+      <div class="highlight-context">
+        <ion-avatar class="story">
+            <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
+        </ion-avatar>
+        <span>Travel</span>
+      </div>
+    </section>
+
+    <section class="user-content">
       <div class="header-bar">
         <ion-segment [(ngModel)]="activeTab" mode="md" class="profile-tabs">
           <ion-segment-button value="posts">
@@ -158,6 +215,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </ion-content>

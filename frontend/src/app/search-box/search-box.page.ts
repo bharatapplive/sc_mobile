@@ -8,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBoxPage implements OnInit {
 
+  selectedTag: string = '#Trending';
+
+  tags: string[] = [
+    '#Trending',
+    '#Fashion',
+    '#Gaming',
+    '#VibeCheck',
+    '#TechLife',
+    '#Photography'
+  ];
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectTag(tag: string) {
+    this.selectedTag = tag;
   }
 
 }

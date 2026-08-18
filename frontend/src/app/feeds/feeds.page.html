@@ -2,14 +2,16 @@
   <ion-toolbar>
     <div class="panels">
       <ion-button fill="clear">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear">
         <ion-label>its.ranaji008</ion-label>
       </ion-button>
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="menu"></ion-icon>
-      </ion-button>
+      <div>
+        <ion-button fill="clear">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+      </div>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -21,7 +23,7 @@
       <div class="story-context">
         <div class="story-relative">
           <ion-avatar class="person">
-              <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+              <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>  
           </ion-avatar>
           <ion-button class="story-add-absolute" fill="clear" shape="round" size="small">
             <ion-icon class="add-btn" slot="icon-only" name="add"></ion-icon>
@@ -67,7 +69,7 @@
         <div class="post-header">
           <div class="divided">
             <ion-avatar class="person">
-                <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+                <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>  
             </ion-avatar>
             <div class="avatar-title">
               <a><span>its.ranaji008</span></a>
@@ -115,10 +117,10 @@
         <div class="post-header">
           <div class="divided">
             <ion-avatar class="person">
-                <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+                <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>  
             </ion-avatar>
             <div class="avatar-title">
-              <a><span>apex_editor</span></a>
+              <a><span>slex_vibe</span></a>
               <span>New York, Uk</span>
             </div>
           </div>
@@ -151,7 +153,7 @@
 
           <div class="subtitle-panel">
             <p>5,284 likes</p>
-            <p><span>apex_editor</span> Exploring the boundaries of digital reality today. 
+            <p><span>slex_vibe</span> Exploring the boundaries of digital reality today. 
               This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
             <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
             <p class="para">2 HOURS AGO</p>
@@ -163,10 +165,10 @@
         <div class="post-header">
           <div class="divided">
             <ion-avatar class="person">
-                <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
+                <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>  
             </ion-avatar>
             <div class="avatar-title">
-              <a><span>travel_joy</span></a>
+              <a><span>luna_art</span></a>
               <span>Germany</span>
             </div>
           </div>
@@ -199,7 +201,7 @@
 
           <div class="subtitle-panel">
             <p>10,284 likes</p>
-            <p><span>travel_joy</span> Exploring the boundaries of digital reality today. 
+            <p><span>luna_art</span> Exploring the boundaries of digital reality today. 
               This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
             <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
             <p class="para">2 HOURS AGO</p>

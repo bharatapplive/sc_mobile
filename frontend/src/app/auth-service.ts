@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, tap, throwError } from 'rxjs';
@@ -7,7 +7,16 @@ export interface User{
   _id?: string;
   email: string;
   phoneNumber: string;
+  username:string;
+  fullname:string;
+  
+  // Mark missing fields as optional
   password?: string;
+  avatarUrl?: string;
+  postNumber?: number;
+  followerNumber?: number;
+  followingNumber?: number;
+  profileBio?: string;
 }
 
 @Injectable({
@@ -18,7 +27,7 @@ export class AuthService {
   
   isAuthenticated = signal<boolean>(false);
 
-  private apiUrl = 'http://localhost:3000/user';
+  private apiUrl = 'http://localhost:3000';
 
   // Signals for managing global user state
   currentUser = signal<User | null>(null);
@@ -30,7 +39,7 @@ export class AuthService {
 
   //1. REGISTER
   register(userData: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/register`, userData).pipe(
+    return this.http.post<User>(`${this.apiUrl}/user/register`, userData).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Server side error during registration:', error);
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
@@ -40,7 +49,7 @@ export class AuthService {
 
   // 2.LOGIN
   login(identity: string, password: string): Observable<User>{
-    return this.http.post<User>(`${this.apiUrl}/login`,{identity, password}).pipe(
+    return this.http.post<User>(`${this.apiUrl}/user/login`,{identity, password}).pipe(
       tap((user)=>
       {
         this.currentUser.set(user);
@@ -57,8 +66,16 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // 4. VerifyOtp
+  // 4. VerifyOtp..
   verifyOtp(payload: { userId: string; otp: string }): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/verify-otp`, payload);
+    return this.http.post<User>(`${this.apiUrl}/user/verify-otp`, payload);
+  }
+
+  // 5. Get User Profile..
+  loadUserData() {
+    const rawId = localStorage.getItem('userID');
+    const userId = rawId ? JSON.parse(rawId) : null;
+
+    return this.http.get<User>(`${this.apiUrl}/user/${userId}`);
   }
 }
