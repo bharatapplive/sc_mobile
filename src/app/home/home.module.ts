@@ -4,7 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { StoryListComponent } from './components/story-list/story-list.component';
+import { HeaderComponent } from '../components/header/header.component';
+import { FeedComponent } from './components/feed/feed.component';
 
 @NgModule({
   imports: [
@@ -12,6 +14,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
+    StoryListComponent,
+    HeaderComponent,
+    FeedComponent
   ],
   declarations: [HomePage]
 })

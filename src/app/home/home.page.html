@@ -1,13 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  <app-header></app-header>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="custom">
-    <h2>Home Page</h2>
+<ion-content [fullscreen]="true" class="home-content">
+  <div class="main-layout">
+    <app-story-list></app-story-list>
+    <app-feed></app-feed>
   </div>
 </ion-content>

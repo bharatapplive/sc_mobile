@@ -1,0 +1,41 @@
+<div class="post-actions-container">
+  <div class="left-actions">
+    <ion-button
+      fill="clear"
+      class="action-btn like-btn"
+      [class.liked]="isLiked"
+      (click)="toggleLike()"
+      aria-label="Like"
+    >
+      <span class="material-symbols-outlined icon" [class.filled]="isLiked">favorite</span>
+    </ion-button>
+
+    <ion-button
+      fill="clear"
+      class="action-btn comment-btn"
+      (click)="commentClick.emit()"
+      aria-label="Comment"
+    >
+      <span class="material-symbols-outlined icon">chat_bubble</span>
+    </ion-button>
+
+    <ion-button
+      fill="clear"
+      class="action-btn share-btn"
+      (click)="shareClick.emit()"
+      aria-label="Share"
+    >
+      <span class="material-symbols-outlined icon">send</span>
+    </ion-button>
+  </div>
+
+  <ion-button
+    fill="clear"
+    class="action-btn bookmark-btn"
+    [class.bookmarked]="isBookmarked"
+    (click)="toggleBookmark()"
+    aria-label="Bookmark"
+  >
+    <span class="material-symbols-outlined icon" [class.filled]="isBookmarked">bookmark</span>
+  </ion-button>
+</div>

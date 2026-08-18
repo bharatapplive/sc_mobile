@@ -1,0 +1,88 @@
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.story-avatar-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+
+  &.current-user {
+    border: 2px solid rgba(203, 195, 215, 0.3);
+    padding: 2px;
+  }
+
+  &.story-gradient-border {
+    background: linear-gradient(45deg, #6b38d4, #8455ef, #dbb8ff);
+    padding: 2px;
+  }
+}
+
+.inner-border {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #f9f9f9;
+  overflow: hidden;
+}
+
+.avatar-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar-box {
+  width: 100%;
+  height: 100%;
+  --border-radius: 50%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.add-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #6b38d4;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #f9f9f9;
+
+  .add-icon {
+    font-size: 14px;
+  }
+}
+
+.story-username {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #1a1c1c;
+  max-width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.current-user-text {
+    color: #494454;
+  }
+}

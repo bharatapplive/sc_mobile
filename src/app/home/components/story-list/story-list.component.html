@@ -1,0 +1,5 @@
+<section class="stories-container hide-scrollbar">
+  @for (story of stories; track story.id) {
+    <app-story-item [story]="story"></app-story-item>
+  }
+</section>

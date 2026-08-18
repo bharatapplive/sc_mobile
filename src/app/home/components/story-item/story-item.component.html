@@ -1,0 +1,24 @@
+<div class="story-item flex flex-col items-center shrink-0">
+  @if (story.isCurrentUser) {
+    <div class="story-avatar-wrapper current-user">
+      <div class="avatar-ring">
+        <ion-avatar class="avatar-box">
+          <img [src]="story.avatarUrl" [alt]="story.altText || story.username" />
+        </ion-avatar>
+      </div>
+      <div class="add-badge">
+        <span class="material-symbols-outlined add-icon">add</span>
+      </div>
+    </div>
+    <span class="story-username current-user-text">Your Story</span>
+  } @else {
+    <div class="story-avatar-wrapper story-gradient-border">
+      <div class="inner-border">
+        <ion-avatar class="avatar-box">
+          <img [src]="story.avatarUrl" [alt]="story.altText || story.username" />
+        </ion-avatar>
+      </div>
+    </div>
+    <span class="story-username">{{ story.username }}</span>
+  }
+</div>

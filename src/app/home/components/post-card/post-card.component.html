@@ -1,0 +1,64 @@
+<ion-card class="post-card glass-card">
+  <!-- Card Header -->
+  <div class="card-header">
+    <div class="author-info">
+      <div class="avatar-wrapper" [class.story-gradient]="post.author.hasStory" [class.no-story]="!post.author.hasStory">
+        <div class="avatar-inner">
+          <ion-avatar class="author-avatar">
+            <img [src]="post.author.avatarUrl" [alt]="post.author.altText || post.author.name" />
+          </ion-avatar>
+        </div>
+      </div>
+      <div class="author-details">
+        <p class="author-name">{{ post.author.name }}</p>
+        @if (post.author.location) {
+          <p class="author-location">{{ post.author.location }}</p>
+        }
+      </div>
+    </div>
+    <ion-button fill="clear" class="more-btn" aria-label="More options">
+      <span class="material-symbols-outlined">more_horiz</span>
+    </ion-button>
+  </div>
+
+  <!-- Media Section -->
+  <div class="media-container" [ngClass]="post.aspectRatio ? 'aspect-' + post.aspectRatio.replace('/', '-') : 'aspect-square'">
+    @if (post.imageUrl) {
+      <img class="post-image" [src]="post.imageUrl" [alt]="post.imageAltText || post.caption" />
+      <div class="hover-overlay"></div>
+    } @else if (post.interactiveOverlay) {
+      <div class="interactive-media">
+        <div class="interactive-backdrop"></div>
+        <div class="glass-card overlay-card">
+          <div>
+            <p class="overlay-title">{{ post.interactiveOverlay.title }}</p>
+            <p class="overlay-subtitle">{{ post.interactiveOverlay.subtitle }}</p>
+          </div>
+          <span class="material-symbols-outlined play-icon">play_circle</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Card Body & Actions -->
+  <div class="card-body">
+    <app-post-actions
+      [isLiked]="post.isLiked || false"
+      [isBookmarked]="post.isBookmarked || false"
+      (likeToggle)="onLikeToggle($event)"
+      (bookmarkToggle)="onBookmarkToggle($event)"
+    ></app-post-actions>
+
+    <div class="post-details">
+      <p class="likes-count">{{ post.likes | number }} likes</p>
+      <p class="caption">
+        <span class="caption-author">{{ post.author.name }}</span>
+        <span class="caption-text"> {{ post.caption }}</span>
+      </p>
+      @if (post.commentCount > 0) {
+        <button class="comments-link">View all {{ post.commentCount }} comments</button>
+      }
+      <p class="time-ago">{{ post.timeAgo }}</p>
+    </div>
+  </div>
+</ion-card>

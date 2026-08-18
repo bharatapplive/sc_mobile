@@ -1,0 +1,61 @@
+.post-actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+
+  .left-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.action-btn {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --ripple-color: transparent;
+  margin: 0;
+  height: 24px;
+  min-height: 24px;
+  color: #494454;
+  transition: transform 0.2s ease, color 0.2s ease;
+
+  &:active {
+    transform: scale(1.25);
+  }
+
+  .icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  &.like-btn {
+    &:hover {
+      color: #ba1a1a;
+    }
+    &.liked {
+      color: #ba1a1a;
+      .icon {
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    }
+  }
+
+  &.comment-btn,
+  &.share-btn,
+  &.bookmark-btn {
+    &:hover {
+      color: #6b38d4;
+    }
+  }
+
+  &.bookmark-btn.bookmarked {
+    color: #6b38d4;
+    .icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  }
+}

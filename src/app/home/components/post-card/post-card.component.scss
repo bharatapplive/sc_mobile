@@ -1,0 +1,233 @@
+.post-card {
+  margin: 0 0 24px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 195, 215, 0.2);
+  box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+
+  transition: all 0.7s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.card-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.avatar-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 1.5px;
+
+  &.story-gradient {
+    background: linear-gradient(45deg, #6b38d4, #8455ef, #dbb8ff);
+  }
+
+  &.no-story {
+    border: 2px solid rgba(203, 195, 215, 0.3);
+  }
+}
+
+.avatar-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #f9f9f9;
+  overflow: hidden;
+}
+
+.author-avatar {
+  width: 100%;
+  height: 100%;
+  --border-radius: 50%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.author-details {
+  .author-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    color: #1a1c1c;
+    margin: 0;
+  }
+
+  .author-location {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    line-height: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #494454;
+    margin: 2px 0 0 0;
+  }
+}
+
+.more-btn {
+  --padding-start: 4px;
+  --padding-end: 4px;
+  --color: #494454;
+  margin: 0;
+
+  &:hover {
+    --color: #6b38d4;
+  }
+}
+
+.media-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &.aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  &.aspect-4-5 {
+    aspect-ratio: 4 / 5;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background-color 0.2s ease;
+    pointer-events: none;
+  }
+
+  &:hover .hover-overlay {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.interactive-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(132, 85, 239, 0.1);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.interactive-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(132, 85, 239, 0.25), rgba(111, 80, 146, 0.15));
+}
+
+.overlay-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .overlay-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1c1c;
+    margin: 0;
+  }
+
+  .overlay-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #494454;
+    margin: 2px 0 0 0;
+  }
+
+  .play-icon {
+    font-size: 28px;
+    color: #6b38d4;
+    cursor: pointer;
+  }
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.post-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .likes-count {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1c1c;
+    margin: 0;
+  }
+
+  .caption {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #1a1c1c;
+    margin: 4px 0 0 0;
+
+    .caption-author {
+      font-weight: 700;
+    }
+  }
+
+  .comments-link {
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #494454;
+    margin-top: 8px;
+    cursor: pointer;
+
+    &:hover {
+      color: #6b38d4;
+    }
+  }
+
+  .time-ago {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #494454;
+    margin: 4px 0 0 0;
+  }
+}

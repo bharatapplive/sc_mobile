@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs } from '@ionic/angular/standalone';
+import { IonTabBar, IonTabButton, IonIcon, IonLabel , IonTabs} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { home, search, person, add, send } from 'ionicons/icons';
 
@@ -12,7 +12,7 @@ type TabName = 'home' | 'trending' | 'create' | 'messages' | 'profile';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterLink, IonTabBar, IonTabButton, RouterLinkActive, IonIcon, IonLabel, IonTabs]
+  imports: [CommonModule, IonTabs ,  RouterLink, IonTabBar, IonTabButton, RouterLinkActive, IonIcon, IonLabel]
 })
 export class TabsComponent {
   constructor() {

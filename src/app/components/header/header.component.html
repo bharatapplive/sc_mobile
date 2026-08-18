@@ -1,0 +1,14 @@
+<ion-toolbar class="header-toolbar">
+  <ion-buttons slot="start" (click)="cameraBtnHandler()">
+    <ion-button class="action-btn" aria-label="Camera">
+      <span class="material-symbols-outlined icon-btn">camera_alt</span>
+    </ion-button>
+    <div class="brand-title">Social Circle</div>
+  </ion-buttons>
+
+  <ion-buttons slot="end" (click)="notificationBtnHandler()" routerLink="/notification" routerDirection="forward">
+    <ion-button class="action-btn" aria-label="Notifications">
+      <span class="material-symbols-outlined icon-btn">notifications</span>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>

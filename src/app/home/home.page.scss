@@ -1,36 +1,20 @@
-#container {
-  text-align: center;
+.home-content {
+  &::part(scroll)::-webkit-scrollbar {
+    display: none;
+  }
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  &::part(scroll) {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  --background: #f9f9f9;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-
-
-.custom {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: black;
+.main-layout {
+  max-width: 672px;
+  margin: 0 auto;
+  // Ensure content isn't hidden behind the footer on any device
+  // 64px base footer + safe area inset for home-indicator devices
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
 }
