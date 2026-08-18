@@ -1,0 +1,185 @@
+:host{
+  display:block;
+}
+
+.feed-page{
+  --background:#fafafa;
+}
+
+/* Header */
+
+.feed-toolbar{
+  --background:#ffffff;
+  --border-color:#ececec;
+}
+
+.logo-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.logo-title ion-icon{
+  color:#7c3aed;
+  font-size:24px;
+}
+
+.logo-title span{
+  font-size:22px;
+  font-weight:700;
+  color:#222;
+}
+
+/* Stories */
+
+.stories{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  padding:16px 14px;
+  background:white;
+  border-bottom:1px solid #ececec;
+}
+
+.stories::-webkit-scrollbar{
+  display:none;
+}
+
+.story{
+  min-width:72px;
+  text-align:center;
+}
+
+.story span{
+  display:block;
+  margin-top:8px;
+  font-size:12px;
+  color:#444;
+}
+
+.avatar-wrapper{
+  position:relative;
+}
+
+.avatar-wrapper img{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  padding:3px;
+  background:linear-gradient(135deg,#7c3aed,#ec4899);
+}
+
+.plus-badge{
+  position:absolute;
+  right:-2px;
+  bottom:-2px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#7c3aed;
+  border:2px solid white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.plus-badge ion-icon{
+  color:white;
+  font-size:14px;
+}
+
+/* Feed Card */
+
+.feed-card{
+  background:white;
+}
+
+.post-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 12px;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.profile-pic{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #9333ea;
+}
+
+.user-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.user-text strong{
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+}
+
+.user-text small{
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Feed Image */
+
+.post-image{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  display:block;
+}
+
+/* Action Icons */
+
+.post-actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 12px;
+}
+
+.left-icons{
+  display:flex;
+  gap:20px;
+}
+
+.post-actions ion-icon{
+  font-size:28px;
+  color:#111;
+}
+
+/* Caption */
+
+.post-content{
+  padding:0 12px 18px;
+}
+
+.post-content strong{
+  font-size:16px;
+}
+
+.post-content p{
+  margin:8px 0;
+  line-height:1.5;
+  color:#333;
+}
+
+.post-content small{
+  color:#7c3aed;
+}

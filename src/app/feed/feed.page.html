@@ -1,13 +1,122 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>feed</ion-title>
+  <ion-toolbar class="feed-toolbar">
+
+    <ion-title>
+      <div class="logo-title">
+         <ion-icon name="camera-outline"></ion-icon>
+         <span>Social Circle</span>
+      </div>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">feed</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="feed-page">
+
+  <!-- Stories -->
+
+  <div class="stories">
+
+    <div class="story">
+      <div class="avatar-wrapper">
+        <img src="assets/images/story-you.png" alt="Your Story">
+
+        <div class="plus-badge">
+          <ion-icon name="add"></ion-icon>
+        </div>
+      </div>
+
+      <span>Your Story</span>
+    </div>
+
+    <div class="story">
+      <div class="avatar-wrapper">
+        <img src="assets/images/story-anaya.png" alt="Anaya">
+      </div>
+
+      <span>Anaya</span>
+    </div>
+
+    <div class="story">
+      <div class="avatar-wrapper">
+        <img src="assets/images/story-kaira.png" alt="Kaira">
+      </div>
+
+      <span>Kaira</span>
+    </div>
+
+    <div class="story">
+      <div class="avatar-wrapper">
+        <img src="assets/images/story-riya.png" alt="Riya">
+      </div>
+
+      <span>Riya</span>
+    </div>
+
+    <div class="story">
+      <div class="avatar-wrapper">
+        <img src="assets/images/story-kabir.png" alt="Kabir">
+      </div>
+
+      <span>Kabir</span>
+    </div>
+
+  </div>
+
+  <!-- Feed Post -->
+
+  <div class="feed-card">
+
+    <div class="post-header">
+
+      <div class="user-info">
+
+        <img src="assets/images/story-you.png" class="profile-pic" alt="Sneha Singh">
+
+        <div class="user-text">
+          <strong>Sneha Singh</strong>
+          <small>Bokaro, India</small>
+        </div>
+
+      </div>
+
+      <ion-icon name="ellipsis-vertical"></ion-icon>
+
+    </div>
+
+    <img src="assets/images/feed-post.png" alt="Nature" class="post-image">
+
+    <div class="post-actions">
+
+      <div class="left-icons">
+        <ion-icon name="heart-outline"></ion-icon>
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        <ion-icon name="paper-plane-outline"></ion-icon>
+      </div>
+
+      <ion-icon name="bookmark-outline"></ion-icon>
+
+    </div>
+
+    <div class="post-content">
+
+      <strong>1,024 likes</strong>
+
+      <p>
+        <strong>Sneha Singh</strong>
+        Nature has a way of making every journey unforgettable. 🌿✨
+      </p>
+
+      <small>#Nature #Travel #SocialCircle</small>
+
+    </div>
+
+  </div>
+
 </ion-content>
