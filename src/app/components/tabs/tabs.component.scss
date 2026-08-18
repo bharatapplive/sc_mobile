@@ -1,0 +1,71 @@
+// Tab bar themed using app's light color system from global.scss
+
+ion-tab-bar {
+  --background: var(--color-surface);
+  --border: 1px solid var(--color-outline-variant);
+  --color: var(--color-outline);
+  --color-selected: var(--color-primary);
+
+  padding-bottom: env(safe-area-inset-bottom, 4px);
+  height: 64px;
+  box-shadow: 0 -2px 12px rgba(107, 56, 212, 0.08);
+}
+
+ion-tab-button {
+  --color: var(--color-outline);
+  --color-selected: var(--color-primary);
+  --ripple-color: transparent;
+
+  font-family: var(--font-family-base);
+  position: relative;
+  transition: color 0.25s ease;
+
+  ion-icon {
+    font-size: 22px;
+    margin-bottom: 0;
+    transition: transform 0.25s ease, color 0.25s ease;
+    color: var(--color-outline); // inactive: grey
+  }
+
+  ion-label {
+    font-size: 10px;
+    font-weight: 500;
+    font-family: var(--font-family-base);
+    color: var(--color-outline);
+    transition: color 0.25s ease;
+    margin-top: 3px;
+  }
+
+  // ── ACTIVE STATE ─────────────────────────────────────────────
+  &.is-active {
+    // Top accent line
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 3px;
+      background: var(--color-primary);
+      border-radius: 0 0 6px 6px;
+    }
+
+    ion-icon {
+      font-size: 26px;                        // bigger icon when active
+      color: var(--color-primary);            // purple icon
+      background: rgba(107, 56, 212, 0.12);   // soft pill bg
+      border-radius: 14px;
+      padding: 5px 14px;
+      transform: translateY(-2px);            // float up slightly
+    }
+
+    // label is hidden on active tab (already handled by @if in HTML)
+  }
+
+  // ── INACTIVE HOVER ────────────────────────────────────────────
+  &:not(.is-active):hover ion-icon {
+    color: var(--color-secondary);
+    transform: translateY(-1px);
+  }
+}

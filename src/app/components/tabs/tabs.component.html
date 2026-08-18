@@ -1,0 +1,11 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    @for(tab of tabs; track tab.id){
+    <ion-tab-button [tab]="tab.id" [routerLink]="tab.route" [class.is-active]="activeTab() === tab.id"
+      [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">
+      <ion-icon aria-hidden="true" [name]="tab.icon"></ion-icon>
+      <ion-label>{{ tab.label }}</ion-label>
+    </ion-tab-button>
+    }
+  </ion-tab-bar>
+</ion-tabs>
