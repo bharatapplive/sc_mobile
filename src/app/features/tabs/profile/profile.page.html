@@ -1,0 +1,196 @@
+<ion-header class="ion-no-border modern-header">
+  <ion-toolbar>
+    <div class="profile-top-bar">
+      <div class="username-group">
+        <h1 class="header-username">{{ user.username }}</h1>
+        <ion-icon *ngIf="user.isVerified" class="verified-icon" name="checkmark-circle"></ion-icon>
+      </div>
+
+      <div class="top-actions">
+        <button class="icon-action-btn" aria-label="Create new">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </button>
+        <button class="icon-action-btn logout-btn" (click)="onLogout()" aria-label="Log out">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="profile-content">
+  <!-- Pull to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content 
+      pullingIcon="chevron-down-circle-outline" 
+      pullingText="Pull to refresh" 
+      refreshingSpinner="crescent" 
+      refreshingText="Updating profile...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="profile-container">
+    <!-- Profile Info Header -->
+    <section class="profile-hero-card">
+      <div class="hero-top-row">
+        <!-- Avatar with Story Ring -->
+        <div class="avatar-holder">
+          <div class="avatar-ring">
+            <ion-avatar class="main-avatar">
+              <ion-img [src]="user.avatar" [alt]="user.fullname"></ion-img>
+            </ion-avatar>
+          </div>
+          <span class="live-dot" title="Active creator"></span>
+        </div>
+
+        <!-- Stats Counters -->
+        <div class="stats-group">
+          <div class="stat-box">
+            <span class="stat-number">{{ user.postsCount }}</span>
+            <span class="stat-label">Posts</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">{{ user.followersCount }}</span>
+            <span class="stat-label">Followers</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">{{ user.followingCount }}</span>
+            <span class="stat-label">Following</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Bio & Meta -->
+      <div class="bio-section">
+        <h2 class="display-name">{{ user.fullname }}</h2>
+        <span class="category-badge">{{ user.category }}</span>
+        
+        <p class="bio-text">
+          <span>💡 Chasing moments & light across the world</span>
+          <span>📍 New Delhi, India</span>
+          <span>📸 Capturing reality, one frame at a time ✨</span>
+        </p>
+
+        <a [href]="user.website" target="_blank" rel="noopener noreferrer" class="link-chip">
+          <ion-icon name="link-outline"></ion-icon>
+          <span>amanfolio.me</span>
+        </a>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="profile-actions-row">
+        <button class="action-btn primary-btn" (click)="editProfile()">
+          <ion-icon name="create-outline"></ion-icon>
+          Edit Profile
+        </button>
+        <button class="action-btn secondary-btn" (click)="shareProfile()">
+          <ion-icon name="share-social-outline"></ion-icon>
+          Share
+        </button>
+        <button class="action-btn icon-only-btn" (click)="toggleFollow()" [class.following]="isFollowing" aria-label="Follow">
+          <ion-icon [name]="isFollowing ? 'person-checkmark-outline' : 'person-add-outline'"></ion-icon>
+        </button>
+      </div>
+    </section>
+
+    <!-- Story Highlights Section -->
+    <section class="highlights-section">
+      <div class="highlights-scroll">
+        <div class="highlight-item add-highlight">
+          <div class="highlight-ring add-ring">
+            <div class="highlight-circle">
+              <ion-icon name="add"></ion-icon>
+            </div>
+          </div>
+          <span class="highlight-title">New</span>
+        </div>
+
+        <div *ngFor="let item of highlights" class="highlight-item">
+          <div class="highlight-ring">
+            <div class="highlight-circle">
+              <ion-img [src]="item.coverImage" [alt]="item.title"></ion-img>
+            </div>
+          </div>
+          <span class="highlight-title">{{ item.title }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Tabs Segment -->
+    <section class="gallery-section">
+      <div class="tabs-segment-bar">
+        <button 
+          class="segment-tab-btn" 
+          [class.active]="activeTab === 'posts'" 
+          (click)="setTab('posts')">
+          <ion-icon [name]="activeTab === 'posts' ? 'grid' : 'grid-outline'"></ion-icon>
+          <span>Posts</span>
+        </button>
+
+        <button 
+          class="segment-tab-btn" 
+          [class.active]="activeTab === 'reels'" 
+          (click)="setTab('reels')">
+          <ion-icon [name]="activeTab === 'reels' ? 'play-circle' : 'play-circle-outline'"></ion-icon>
+          <span>Reels</span>
+        </button>
+
+        <button 
+          class="segment-tab-btn" 
+          [class.active]="activeTab === 'saved'" 
+          (click)="setTab('saved')">
+          <ion-icon [name]="activeTab === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+          <span>Saved</span>
+        </button>
+      </div>
+
+      <!-- 1. Posts Grid (Square 1:1) -->
+      <div *ngIf="activeTab === 'posts'" class="media-grid posts-grid">
+        <div *ngFor="let item of posts" class="grid-card">
+          <ion-img [src]="item.image" alt="Post" class="grid-img"></ion-img>
+          
+          <span *ngIf="item.isMultiple" class="badge-icon" title="Multiple photos">
+            <ion-icon name="copy"></ion-icon>
+          </span>
+
+          <div class="grid-overlay">
+            <span class="overlay-stat">
+              <ion-icon name="heart"></ion-icon> {{ item.likes }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Reels Grid (Tall 9:16) -->
+      <div *ngIf="activeTab === 'reels'" class="media-grid reels-grid">
+        <div *ngFor="let item of reels" class="reel-card">
+          <ion-img [src]="item.image" alt="Reel preview" class="reel-img"></ion-img>
+          
+          <div class="reel-views-tag">
+            <ion-icon name="play"></ion-icon>
+            <span>{{ item.views }}</span>
+          </div>
+
+          <div class="reel-overlay">
+            <ion-icon name="play-circle"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Saved Grid -->
+      <div *ngIf="activeTab === 'saved'" class="media-grid posts-grid">
+        <div *ngFor="let item of saved" class="grid-card">
+          <ion-img [src]="item.image" alt="Saved post" class="grid-img"></ion-img>
+          <span class="badge-icon">
+            <ion-icon name="bookmark"></ion-icon>
+          </span>
+          <div class="grid-overlay">
+            <span class="overlay-stat">
+              <ion-icon name="heart"></ion-icon> {{ item.likes }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>
