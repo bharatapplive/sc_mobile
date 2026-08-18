@@ -125,6 +125,7 @@ body {
 
 ion-content {
   --background: var(--color-background);
+  --overflow: auto;
 }
 
 .material-symbols-outlined {
@@ -142,6 +143,7 @@ ion-content {
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
