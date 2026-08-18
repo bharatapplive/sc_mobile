@@ -18,7 +18,18 @@ const routes: Routes = [
   {
     path: 'registration',
     loadChildren: () => import('./features/auth/registration/registration.module').then(m => m.RegistrationPageModule)
+  },  {
+    path: 'search',
+    loadChildren: () => import('./features/tabs/search/search.module').then( m => m.SearchPageModule)
   },
+  {
+    path: 'post',
+    loadChildren: () => import('./features/tabs/post/post.module').then( m => m.PostPageModule)
+  },
+  {
+    path: 'favourite',
+    loadChildren: () => import('./features/tabs/favourite/favourite.module').then( m => m.FavouritePageModule)
+  }
 
 ];
 

@@ -9,7 +9,7 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 /* Core CSS required for Ionic components to work properly */
@@ -70,12 +70,14 @@ $spacing-md: 24px;
 $spacing-lg: 40px;
 $spacing-xl: 64px;
 
-$font-family-base: 'Montserrat', sans-serif;
+$font-family-base: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 $font-size-body-md: 16px;
 $font-size-label-lg: 14px;
 $font-size-display-lg-mobile: 36px;
 
 :root {
+  --ion-font-family: #{$font-family-base};
+  --font-family-base: #{$font-family-base};
   --color-primary: #{$color-primary};
   --color-secondary: #{$color-secondary};
   --color-background: #{$color-background};
@@ -94,7 +96,6 @@ $font-size-display-lg-mobile: 36px;
   --spacing-md: #{$spacing-md};
   --spacing-lg: #{$spacing-lg};
   --spacing-xl: #{$spacing-xl};
-  --font-family-base: #{$font-family-base};
   --font-size-body-md: #{$font-size-body-md};
   --font-size-label-lg: #{$font-size-label-lg};
   --font-size-display-lg-mobile: #{$font-size-display-lg-mobile};
@@ -112,14 +113,16 @@ html.dark {
   --color-outline-variant: #{$dark-color-outline-variant};
 }
 
-body {
+*, *::before, *::after {
+  font-family: var(--font-family-base);
+}
+
+body, ion-app, ion-content {
   font-family: var(--font-family-base);
   background: var(--color-background);
   color: var(--color-on-surface);
-}
-
-ion-content {
-  --background: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .material-symbols-outlined {

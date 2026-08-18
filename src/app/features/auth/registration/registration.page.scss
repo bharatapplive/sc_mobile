@@ -162,7 +162,7 @@ ion-item {
 .input-group label {
     display: block;
     margin-bottom: 6px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-family-base);
     font-size: 16px;
     font-weight: 700;
     color: #4b465c;
