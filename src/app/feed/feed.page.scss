@@ -64,7 +64,7 @@ ion-toolbar {
 }
 
 .icon-filled {
-  font-variation-settings: 'FILL' 1;
+  font-variation-settings: "FILL" 1;
 }
 
 .feed-main {
@@ -196,20 +196,18 @@ ion-toolbar {
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-sm);
-}
-
-.post-user {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.avatar-wrap {
-  width: 40px;
-  height: 40px;
-  padding: 1.5px;
-  border-radius: 50%;
-  overflow: hidden;
+  .post-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .avatar-wrap {
+      width: 40px;
+      height: 40px;
+      padding: 1.5px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
 }
 
 .avatar-inner {
@@ -264,76 +262,68 @@ ion-toolbar {
   width: 100%;
   aspect-ratio: 1;
   background: #eee;
-}
-
-.post-image {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
+  .post-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
 }
 
 // Post Content
 .post-content {
   padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-md);
-}
-
-.post-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.action-group {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+  .post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+  }
+  .post-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    .likes {
+      margin: 0;
+      font-size: var(--font-size-label-lg);
+      line-height: 20px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .caption {
+      margin: 0;
+      font-size: var(--font-size-body-md);
+      line-height: 24px;
+      color: var(--color-on-surface);
+      .caption-user {
+        font-weight: 700;
+      }
+    }
+    .comment-link {
+      all: unset;
+      color: var(--color-on-surface-variant);
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .time-stamp {
+      margin: 0;
+      font-size: 10px;
+      line-height: 1.2;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-on-surface-variant);
+    }
+  }
 }
 
 // Post Meta
-.post-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.likes {
-  margin: 0;
-  font-size: var(--font-size-label-lg);
-  line-height: 20px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-
-.caption {
-  margin: 0;
-  font-size: var(--font-size-body-md);
-  line-height: 24px;
-  color: var(--color-on-surface);
-}
-
-.caption-user {
-  font-weight: 700;
-}
-
-.comment-link {
-  all: unset;
-  color: var(--color-on-surface-variant);
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.time-stamp {
-  margin: 0;
-  font-size: 10px;
-  line-height: 1.2;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-on-surface-variant);
-}
 
 // Shader Card
 .shader-card {
