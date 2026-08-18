@@ -1,13 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>chatbox</ion-title>
+    <div class="panels">
+      <ion-button fill="clear">
+        <ion-label>Social Circle</ion-label>
+      </ion-button>
+      <div>
+        <ion-button fill="clear">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">chatbox</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+    <section class="search-Bar-container">
+      <ion-item lines="none">
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+          <ion-input type="text" name="searchbar" placeholder="Search trends, creators, or tags.." required minlength="5"></ion-input>
+      </ion-item>
+    </section>
+
+  </div>
 </ion-content>

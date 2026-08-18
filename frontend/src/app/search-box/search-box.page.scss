@@ -42,12 +42,12 @@ ion-content{
 
     .search-Bar-container{
         width: 90%;
-
+        margin-bottom: 10px;
+        
         ion-item{
             border-radius: 16px;
             background: #f1f5f9;
             --min-height: 48px;
-            margin-top: 10px;
 
             ion-icon{
                 color: #64748b;

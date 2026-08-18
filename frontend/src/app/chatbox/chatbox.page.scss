@@ -1,0 +1,68 @@
+ion-content{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    --background: #edc1ff3f;
+    font-family: 'Segoe UI', sans-serif;
+    &::part(scroll) {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;          /* Chrome, Safari, Opera */
+      width: 0 !important;   /* Hides vertical scrollbar width */
+    }
+  }
+}
+
+// 1. Header Panel......
+.panels{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ion-icon{
+        font-size: 20px;
+        color: #7c3aed;
+    }
+
+    ion-label{
+        font-size: 20px;
+        color: #4c1d95;
+        text-transform: none;
+    }
+}
+
+// 2. Conatiner.....
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+
+    .search-Bar-container{
+        width: 90%;
+        margin-bottom: 10px;
+        
+        ion-item{
+            border-radius: 16px;
+            background: #f1f5f9;
+            --min-height: 48px;
+
+            ion-icon{
+                color: #64748b;
+                font-size: 21px;
+                font-weight: bold;
+                margin-right: 8px;
+            }
+
+            ion-input {
+                --color: #0f172a;
+                --placeholder-color: #94a3b8;
+                --placeholder-opacity: 1;
+                font-weight: 500;
+            }
+        }
+    }
+
+}
