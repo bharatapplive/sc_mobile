@@ -1,13 +1,180 @@
-<ion-header>
+<ion-header class="home-header">
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    
+    <div class="app-logo" slot="start">
+      <ion-icon name="camera-outline"></ion-icon>
+      <span>Social Circle</span>
+    </div>
+
+    
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true">
 
-  <h1>Home</h1>
+  <!-- Stories -->
+  <div class="stories">
 
-  <p>Welcome to the Home page.</p>
+    <div class="story">
+      <div class="story-image add-story">
+        <img
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200"
+        />
+        <span class="plus">+</span>
+      </div>
+      <p>you</p>
+    </div>
+
+    <div class="story">
+      <div class="story-image">
+        <img
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=2000"
+        />
+      </div>
+      <p>alex_vibe</p>
+    </div>
+
+    <div class="story">
+      <div class="story-image">
+        <img
+          src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200"
+        />
+      </div>
+      <p>neo_pixel</p>
+    </div>
+
+    <div class="story">
+      <div class="story-image">
+        <img
+          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200"
+        />
+      </div>
+      <p>luna.art</p>
+    </div>
+
+    <div class="story">
+      <div class="story-image">
+        <img
+          src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200"
+        />
+      </div>
+      <p>travel_joy</p>
+    </div>
+
+  </div>
+
+
+  <!-- POST 1 -->
+  <div class="post-card">
+
+    <div class="post-header">
+
+      <div class="user-info">
+
+        <img
+          class="post-avatar"
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"
+        />
+
+        <div>
+          <h3>creative-soul</h3>
+          <p>Tokyo, Japan</p>
+        </div>
+
+      </div>
+
+      <ion-icon
+        class="more-icon"
+        name="ellipsis-horizontal">
+      </ion-icon>
+
+    </div>
+
+
+    <img
+      class="post-image"
+      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900"
+    />
+
+
+    <div class="post-actions">
+
+      <div class="left-actions">
+
+        <ion-icon name="heart-outline"></ion-icon>
+
+        <ion-icon name="chatbubble-outline"></ion-icon>
+
+        <ion-icon name="send-outline"></ion-icon>
+
+      </div>
+
+      <ion-icon name="bookmark-outline"></ion-icon>
+
+    </div>
+
+
+    <div class="post-content">
+
+      <strong>1,284 likes</strong>
+
+      <p>
+        <b>Ayushi Singh</b>
+        Exploring the boundaries of digital reality today.
+        This installation in Tokyo is pure magic.
+        ✨ #DigitalArt #TokyoVibes
+      </p>
+
+      <p class="comments">
+        View all 42 comments
+      </p>
+
+      <p class="time">
+        2 HOURS AGO
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- POST 2 -->
+  <div class="post-card">
+
+    <div class="post-header">
+
+      <div class="user-info">
+
+        <img
+          class="post-avatar"
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"
+        />
+
+        <div>
+          <h3>apex_editor</h3>
+          <p>New York, USA</p>
+        </div>
+
+      </div>
+
+      <ion-icon
+        class="more-icon"
+        name="ellipsis-horizontal">
+      </ion-icon>
+
+    </div>
+
+    <img
+      class="post-image"
+      src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900"
+    />
+
+  </div>
 
 </ion-content>

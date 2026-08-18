@@ -1,17 +1,234 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Profile</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Ayushi Singh</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
 
-  <div class="profile">
-    <ion-icon name="person-circle-outline"></ion-icon>
+<ion-content>
 
-    <h1>Profile</h1>
+  <!-- PROFILE CARD -->
+  <div class="profile-card">
 
-    <p>Your profile information will appear here.</p>
+    <div class="profile-top">
+
+      <!-- Profile photo -->
+      <div class="profile-photo-box">
+
+        <img
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300"
+          class="profile-photo"
+        />
+
+        <span class="online-dot"></span>
+
+      </div>
+
+
+      <!-- Statistics -->
+      <div class="stats">
+
+        <div class="stat">
+          <strong>10</strong>
+          <span>Posts</span>
+        </div>
+
+        <div class="stat">
+          <strong>2.43K</strong>
+          <span>Followers</span>
+        </div>
+
+        <div class="stat">
+          <strong>364</strong>
+          <span>Following</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Name -->
+    <h2>Ayushi Singh</h2>
+
+
+    <!-- Creator label -->
+    <div class="creator-label">
+      Content Creator
+    </div>
+
+
+    <!-- Bio -->
+    <div class="bio">
+
+      <p>💡 Traveling the world one moment at a time</p>
+
+      <p>📍 New Delhi, India</p>
+
+      <p>📸 Photography ✨</p>
+
+    </div>
+
+
+    <!-- Website -->
+    <div class="website">
+
+      <ion-icon name="link-outline"></ion-icon>
+
+      <span>google.com</span>
+
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="profile-buttons">
+
+      <button class="edit-btn">
+        <ion-icon name="create-outline"></ion-icon>
+        <span>Edit Profile</span>
+      </button>
+
+      <button class="share-btn">
+        <ion-icon name="share-social-outline"></ion-icon>
+        <span>Share</span>
+      </button>
+
+      <button class="add-person-btn">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- HIGHLIGHTS -->
+  <div class="highlights">
+
+    <!-- New -->
+    <div class="highlight">
+
+      <div class="new-highlight">
+        <ion-icon name="add-outline"></ion-icon>
+      </div>
+
+      <span>New</span>
+
+    </div>
+
+
+    <!-- Tokyo -->
+    <div class="highlight">
+
+      <img
+        src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=200"
+      />
+
+      <span>Tokyo 🗼</span>
+
+    </div>
+
+
+    <!-- Design -->
+    <div class="highlight">
+
+      <img
+        src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=200"
+      />
+
+      <span>Design 🎨</span>
+
+    </div>
+
+
+    <!-- Travel -->
+    <div class="highlight">
+
+      <img
+        src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=200"
+      />
+
+      <span>Travel ✈️</span>
+
+    </div>
+
+
+    <!-- Moments -->
+    <div class="highlight">
+
+      <img
+        src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=200"
+      />
+
+      <span>Moments</span>
+
+    </div>
+
+  </div>
+
+
+  <!-- POSTS / REELS / SAVED -->
+  <div class="profile-tabs">
+
+    <button class="active">
+      <ion-icon name="grid-outline"></ion-icon>
+      <span>Posts</span>
+    </button>
+
+    <button>
+      <ion-icon name="play-circle-outline"></ion-icon>
+      <span>Reels</span>
+    </button>
+
+    <button>
+      <ion-icon name="bookmark-outline"></ion-icon>
+      <span>Saved</span>
+    </button>
+
+  </div>
+
+
+  <!-- PHOTO GRID -->
+  <div class="photo-grid">
+
+    <img
+      src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=500"
+    />
+
+    <img
+      src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500"
+    />
+
+    <img
+      src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500"
+    />
+
+    <img
+      src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=500"
+    />
+
+    <img
+      src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=500"
+    />
+
+    <img
+      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500"
+    />
+
   </div>
 
 </ion-content>

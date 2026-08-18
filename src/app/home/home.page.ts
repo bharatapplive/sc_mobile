@@ -6,6 +6,10 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule]
 })
-export class HomePage {}
+export class HomePage {
+
+  constructor() {}
+
+}
