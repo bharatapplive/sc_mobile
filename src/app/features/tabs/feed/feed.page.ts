@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 export interface Story {
   id: string;
@@ -41,7 +41,7 @@ export interface Post {
   styleUrls: ['./feed.page.scss'],
   standalone: false,
 })
-export class FeedPage implements OnInit {
+export class FeedPage {
   defaultAvatar = 'assets/images/user-profile.jpg';
 
   stories: Story[] = [
@@ -54,39 +54,39 @@ export class FeedPage implements OnInit {
     },
     {
       id: '1',
-      username: 'slex_vibe',
+      username: 'Ajay_Sir',
       avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80',
       hasUnseen: true,
     },
     {
       id: '2',
-      username: 'neo_pixel',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      username: 'Himanshu_Rana',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
       hasUnseen: true,
     },
     {
       id: '3',
-      username: 'luna.art',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
-      hasUnseen: true,
-    },
-    {
-      id: '4',
-      username: 'travel_joy',
+      username: 'Ayushi_Singh',
       avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
       hasUnseen: false,
     },
     {
+      id: '4',
+      username: 'Saurav_ali',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+      hasUnseen: true,
+    },
+    {
       id: '5',
-      username: 'rok.joyi',
-      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
-      hasUnseen: false,
+      username: 'Deepa_mam',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
+      hasUnseen: true,
     },
     {
       id: '6',
-      username: 'apex_editor',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
-      hasUnseen: true,
+      username: 'rok.joyi',
+      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
+      hasUnseen: false,
     }
   ];
 
@@ -118,9 +118,9 @@ export class FeedPage implements OnInit {
     {
       id: 'p2',
       author: {
-        username: 'apex_editor',
+        username: 'Himanshu_rana',
         avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
-        location: 'Manhattan, New York',
+        location: 'Rorkee, Uttarkhand',
         isVerified: true,
       },
       image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1080&q=80',
@@ -142,9 +142,9 @@ export class FeedPage implements OnInit {
     {
       id: 'p3',
       author: {
-        username: 'travel_joy',
+        username: 'Ayushi_Singh',
         avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
-        location: 'Amalfi Coast, Italy',
+        location: 'Uttrakhand,India',
         isVerified: false,
       },
       image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1080&q=80',
@@ -163,10 +163,6 @@ export class FeedPage implements OnInit {
       animatingHeart: false,
     }
   ];
-
-  constructor() { }
-
-  ngOnInit() { }
 
   toggleLike(post: Post) {
     post.isLiked = !post.isLiked;

@@ -8,12 +8,12 @@
         <ion-icon [name]="activeTab === 'feeds' ? 'newspaper' : 'newspaper-outline'"></ion-icon>
       </ion-tab-button>
 
-      <ion-tab-button tab="reels" (click)="onChangeMode('reels')">
-        <ion-icon [name]="activeTab === 'reels' ? 'play' : 'play-outline'"></ion-icon>
-      </ion-tab-button>
-
       <ion-tab-button tab="chat" (click)="onChangeMode('chat')">
         <ion-icon [name]="activeTab === 'chat' ? 'paper-plane' : 'paper-plane-outline'"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="reels" (click)="onChangeMode('reels')">
+        <ion-icon [name]="activeTab === 'reels' ? 'play' : 'play-outline'"></ion-icon>
       </ion-tab-button>
 
       <ion-tab-button tab="search" (click)="onChangeMode('search')">

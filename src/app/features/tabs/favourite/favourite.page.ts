@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-favourite',
@@ -6,11 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favourite.page.scss'],
   standalone: false,
 })
-export class FavouritePage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class FavouritePage {
 }

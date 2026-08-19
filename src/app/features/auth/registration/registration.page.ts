@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -8,21 +8,17 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./registration.page.scss'],
   standalone: false,
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
+  private router = inject(Router);
+  private alertController = inject(AlertController);
 
   fullName = '';
+  UserName = '';
   email = '';
   mobile = '';
   password = '';
 
   showPassword = false;
-
-  constructor(
-    private router: Router,
-    private alertController: AlertController
-  ) { }
-
-  ngOnInit() { }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
@@ -33,6 +29,7 @@ export class RegisterPage implements OnInit {
     // Check empty fields
     if (
       !this.fullName ||
+      !this.UserName ||
       !this.email ||
       !this.mobile ||
       !this.password
@@ -79,6 +76,7 @@ export class RegisterPage implements OnInit {
 
     const newUser = {
       fullName: this.fullName,
+      UserName: this.UserName,
       email: this.email,
       mobile: this.mobile,
       password: this.password

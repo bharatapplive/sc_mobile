@@ -18,11 +18,11 @@ const routes: Routes = [
         loadChildren: () => import('../tabs/feed/feed.module').then(m => m.FeedPageModule)
       },
       {
-        path: 'reels',
+        path: 'post',
         loadChildren: () => import('../tabs/post/post.module').then(m => m.PostPageModule)
       },
       {
-        path: 'chat',
+        path: 'favourite',
         loadChildren: () => import('../tabs/favourite/favourite.module').then(m => m.FavouritePageModule)
       },
       {
@@ -32,6 +32,14 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('../tabs/profile/profile.module').then(m => m.ProfilePageModule)
+      },
+      {
+        path: 'chat',
+        loadChildren: () => import('../tabs/chat/chat.module').then(m => m.ChatPageModule)
+      },
+      {
+        path: 'reels',
+        loadChildren: () => import('../tabs/reels/reels.module').then(m => m.ReelsPageModule)
       }
     ]
   }
@@ -41,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomePageRoutingModule {}
+export class HomePageRoutingModule { }

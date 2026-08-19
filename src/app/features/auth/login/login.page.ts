@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -9,15 +9,13 @@ import { AlertController } from '@ionic/angular';
   standalone: false,
 })
 export class LoginPage implements OnInit {
+  private router = inject(Router);
+  private alertController = inject(AlertController);
+
   theme: 'light' | 'dark' = 'light';
   identity = '';
   password = '';
   showPassword = false;
-
-  constructor(
-    private router: Router,
-    private alertController: AlertController
-  ) { }
 
   ngOnInit() {
     this.setTheme('light');

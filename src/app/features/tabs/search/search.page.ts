@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -6,11 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.page.scss'],
   standalone: false,
 })
-export class SearchPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class SearchPage {
 }

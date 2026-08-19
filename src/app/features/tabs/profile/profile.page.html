@@ -21,11 +21,8 @@
 <ion-content [fullscreen]="true" class="profile-content">
   <!-- Pull to Refresh -->
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content 
-      pullingIcon="chevron-down-circle-outline" 
-      pullingText="Pull to refresh" 
-      refreshingSpinner="crescent" 
-      refreshingText="Updating profile...">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="crescent" refreshingText="Updating profile...">
     </ion-refresher-content>
   </ion-refresher>
 
@@ -64,7 +61,7 @@
       <div class="bio-section">
         <h2 class="display-name">{{ user.fullname }}</h2>
         <span class="category-badge">{{ user.category }}</span>
-        
+
         <p class="bio-text">
           <span>💡 Chasing moments & light across the world</span>
           <span>📍 New Delhi, India</span>
@@ -87,7 +84,8 @@
           <ion-icon name="share-social-outline"></ion-icon>
           Share
         </button>
-        <button class="action-btn icon-only-btn" (click)="toggleFollow()" [class.following]="isFollowing" aria-label="Follow">
+        <button class="action-btn icon-only-btn" (click)="toggleFollow()" [class.following]="isFollowing"
+          aria-label="Follow">
           <ion-icon [name]="isFollowing ? 'person-checkmark-outline' : 'person-add-outline'"></ion-icon>
         </button>
       </div>
@@ -119,26 +117,17 @@
     <!-- Content Tabs Segment -->
     <section class="gallery-section">
       <div class="tabs-segment-bar">
-        <button 
-          class="segment-tab-btn" 
-          [class.active]="activeTab === 'posts'" 
-          (click)="setTab('posts')">
+        <button class="segment-tab-btn" [class.active]="activeTab === 'posts'" (click)="setTab('posts')">
           <ion-icon [name]="activeTab === 'posts' ? 'grid' : 'grid-outline'"></ion-icon>
           <span>Posts</span>
         </button>
 
-        <button 
-          class="segment-tab-btn" 
-          [class.active]="activeTab === 'reels'" 
-          (click)="setTab('reels')">
+        <button class="segment-tab-btn" [class.active]="activeTab === 'reels'" (click)="setTab('reels')">
           <ion-icon [name]="activeTab === 'reels' ? 'play-circle' : 'play-circle-outline'"></ion-icon>
           <span>Reels</span>
         </button>
 
-        <button 
-          class="segment-tab-btn" 
-          [class.active]="activeTab === 'saved'" 
-          (click)="setTab('saved')">
+        <button class="segment-tab-btn" [class.active]="activeTab === 'saved'" (click)="setTab('saved')">
           <ion-icon [name]="activeTab === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
           <span>Saved</span>
         </button>
@@ -148,7 +137,7 @@
       <div *ngIf="activeTab === 'posts'" class="media-grid posts-grid">
         <div *ngFor="let item of posts" class="grid-card">
           <ion-img [src]="item.image" alt="Post" class="grid-img"></ion-img>
-          
+
           <span *ngIf="item.isMultiple" class="badge-icon" title="Multiple photos">
             <ion-icon name="copy"></ion-icon>
           </span>
@@ -165,7 +154,7 @@
       <div *ngIf="activeTab === 'reels'" class="media-grid reels-grid">
         <div *ngFor="let item of reels" class="reel-card">
           <ion-img [src]="item.image" alt="Reel preview" class="reel-img"></ion-img>
-          
+
           <div class="reel-views-tag">
             <ion-icon name="play"></ion-icon>
             <span>{{ item.views }}</span>

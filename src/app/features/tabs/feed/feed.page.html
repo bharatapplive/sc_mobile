@@ -1,219 +1,132 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <div class="panels">
-      <ion-button fill="clear">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear">
-        <ion-label>itz_liveXlife221</ion-label>
-      </ion-button>
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="menu"></ion-icon>
-      </ion-button>
+    <div class="feed-top-bar">
+      <button class="top-btn" aria-label="Add story or post">
+        <ion-icon name="add-outline"></ion-icon>
+      </button>
+
+      <h1 class="top-username">itz_liveXlife221</h1>
+
+      <button class="top-btn" aria-label="Open menu">
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="mainHolder">
+  <!-- Pull to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
 
-    <!-- Stories Panel -->
-    <section class="story-panel">
-      <div class="story-context">
-        <div class="story-relative">
-          <ion-avatar class="person">
-            <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
-          </ion-avatar>
-          <ion-button class="story-add-absolute" fill="clear" shape="round" size="small">
-            <ion-icon class="add-btn" slot="icon-only" name="add"></ion-icon>
-          </ion-button>
+  <main class="feed-container">
+    <!-- Stories Carousel -->
+    <section class="stories-section">
+      <div class="stories-row">
+        <div *ngFor="let story of stories" class="story-item">
+          <!-- Story Avatar with Purple Ring -->
+          <div class="story-ring" [class.user-ring]="story.isUser">
+            <img [src]="story.avatar || defaultAvatar" [alt]="story.username" class="story-avatar-img" />
+            
+            <!-- User + Badge -->
+            <div *ngIf="story.isUser" class="story-add-badge">
+              <ion-icon name="add"></ion-icon>
+            </div>
+          </div>
+
+          <span class="story-label">{{ story.username }}</span>
         </div>
-        <span>you</span>
-      </div>
-
-      <div class="story-context">
-        <ion-avatar class="person">
-          <ion-img [src]="'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>slex_vibe</span>
-      </div>
-
-      <div class="story-context">
-        <ion-avatar class="person">
-          <ion-img [src]="'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>neo_pixel</span>
-      </div>
-
-      <div class="story-context">
-        <ion-avatar class="person">
-          <ion-img [src]="'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>luna.art</span>
-      </div>
-
-      <div class="story-context">
-        <ion-avatar class="person">
-          <ion-img [src]="'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>travel_joy</span>
-      </div>
-
-      <div class="story-context">
-        <ion-avatar class="person">
-          <ion-img [src]="'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>rok.joyi</span>
       </div>
     </section>
 
-    <!-- Posts Panel -->
-    <div class="post-panel">
+    <!-- Feed Posts List -->
+    <section class="feed-posts-list">
+      <article *ngFor="let post of posts" class="feed-card">
+        <!-- Post Header -->
+        <div class="card-header">
+          <div class="user-block">
+            <div class="avatar-ring">
+              <img [src]="post.author.avatar || defaultAvatar" [alt]="post.author.username" class="avatar-img" />
+            </div>
 
-      <!-- Post 1 -->
-      <article class="post-article">
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="person">
-              <ion-img [src]="defaultAvatar" alt="User Avatar"></ion-img>  
-            </ion-avatar>
-            <div class="avatar-title">
-              <a><span>itz_liveXlife221</span></a>
-              <span>New Delhi, India</span>
+            <div class="user-info">
+              <h2 class="username">{{ post.author.username }}</h2>
+              <span *ngIf="post.author.location" class="location">{{ post.author.location }}</span>
             </div>
           </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-          </ion-button>
+
+          <button class="options-btn" aria-label="More options">
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
+          </button>
         </div>
 
-        <div class="post-content">
-          <ion-img [src]="'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1080&q=80'"></ion-img>
+        <!-- Post Image -->
+        <div class="card-media" (dblclick)="onDoubleTap(post)">
+          <img [src]="post.image" [alt]="post.caption" class="media-img" />
+          
+          <div *ngIf="post.animatingHeart" class="heart-pulse-wrap">
+            <ion-icon name="heart" class="heart-pulse-icon"></ion-icon>
+          </div>
         </div>
 
-        <div class="post-bottom">
-          <div class="toggle-icon">
-            <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-              </ion-button>
+        <!-- Post Footer Details -->
+        <div class="card-footer">
+          <!-- Action Icons Row -->
+          <div class="actions-row">
+            <div class="left-actions">
+              <button 
+                class="action-icon-btn" 
+                [class.is-liked]="post.isLiked" 
+                (click)="toggleLike(post)" 
+                aria-label="Like post">
+                <ion-icon [name]="post.isLiked ? 'heart' : 'heart-outline'"></ion-icon>
+              </button>
+
+              <button 
+                class="action-icon-btn" 
+                (click)="toggleComments(post)" 
+                aria-label="Comment on post">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+              </button>
+
+              <button 
+                class="action-icon-btn" 
+                aria-label="Share post">
+                <ion-icon name="paper-plane-outline"></ion-icon>
+              </button>
             </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
+
+            <button 
+              class="action-icon-btn" 
+              [class.is-saved]="post.isSaved" 
+              (click)="toggleSave(post)" 
+              aria-label="Save post">
+              <ion-icon [name]="post.isSaved ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+            </button>
           </div>
 
-          <div class="subtitle-panel">
-            <p>1,284 likes</p>
-            <p><span>itz_liveXlife221</span> Exploring the boundaries of digital reality today. This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
-            <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
-            <p class="para">2 HOURS AGO</p>
+          <!-- Likes and Caption Meta -->
+          <div class="meta-section">
+            <p class="likes-count">{{ post.likesCount | number }} likes</p>
+
+            <p class="caption-line">
+              <span class="caption-username">{{ post.author.username }}</span>
+              <span class="caption-text">{{ post.caption }}</span>
+            </p>
+
+            <button 
+              *ngIf="post.commentsCount > 0" 
+              class="view-comments-btn" 
+              (click)="toggleComments(post)">
+              View all {{ post.commentsCount }} comments
+            </button>
+
+            <span class="time-ago-label">{{ post.timeAgo }}</span>
           </div>
         </div>
       </article>
-
-      <!-- Post 2 -->
-      <article class="post-article">
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="person">
-              <ion-img [src]="'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80'" alt="User Avatar"></ion-img>  
-            </ion-avatar>
-            <div class="avatar-title">
-              <a><span>apex_editor</span></a>
-              <span>New York, USA</span>
-            </div>
-          </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-          </ion-button>
-        </div>
-
-        <div class="post-content">
-          <ion-img [src]="'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1080&q=80'"></ion-img>
-        </div>
-
-        <div class="post-bottom">
-          <div class="toggle-icon">
-            <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-              </ion-button>
-            </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
-          </div>
-
-          <div class="subtitle-panel">
-            <p>5,284 likes</p>
-            <p><span>apex_editor</span> Architectural minimalism hitting different in the golden morning light 🏙️ Lines and shadows in harmony. #Architecture #NYC</p>
-            <ion-button class="view-btn" fill="clear" size="small">View all 88 comments</ion-button>
-            <p class="para">4 HOURS AGO</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- Post 3 -->
-      <article class="post-article">
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="person">
-              <ion-img [src]="'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80'" alt="User Avatar"></ion-img>  
-            </ion-avatar>
-            <div class="avatar-title">
-              <a><span>travel_joy</span></a>
-              <span>Amalfi Coast, Italy</span>
-            </div>
-          </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-          </ion-button>
-        </div>
-
-        <div class="post-content">
-          <ion-img [src]="'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1080&q=80'"></ion-img>
-        </div>
-
-        <div class="post-bottom">
-          <div class="toggle-icon">
-            <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-              </ion-button>
-            </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
-          </div>
-
-          <div class="subtitle-panel">
-            <p>10,420 likes</p>
-            <p><span>travel_joy</span> Crystal waters and Mediterranean breeze. Taking a quick reset before the next creative project launches 🌊☀️ #SummerVibes</p>
-            <ion-button class="view-btn" fill="clear" size="small">View all 156 comments</ion-button>
-            <p class="para">7 HOURS AGO</p>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </div>
+    </section>
+  </main>
 </ion-content>

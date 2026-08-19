@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
   standalone: false,
 })
 export class HomePage {
+  private router = inject(Router);
+
   activeTab: string = 'feeds';
-  showTabs = true;
+  showTabs: boolean = true;
 
-  constructor(private router: Router) {}
-
-  onChangeMode(tab: string) {
+  onChangeMode(tab: string): void {
     this.activeTab = tab;
     this.router.navigate([`/home/${tab}`]);
   }

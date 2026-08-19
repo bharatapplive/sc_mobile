@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 export interface ProfileHighlight {
@@ -22,17 +22,17 @@ export interface ProfileMediaItem {
   styleUrls: ['./profile.page.scss'],
   standalone: false,
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
   activeTab: 'posts' | 'reels' | 'saved' = 'posts';
   isFollowing = false;
 
   user = {
     username: 'itz_liveXlife221',
     fullname: 'Aman Sharma',
-    category: 'Digital Creator & Visual Artist',
+    category: 'Fullstack devloper & Video Editor',
     avatar: 'assets/images/user-profile.jpg',
-    bio: '💡 Chasing moments & light across the world\n📍 New Delhi, India\n📸 Capturing reality, one frame at a time ✨\n📩 Contact & collab: hello@amansharma.dev',
-    website: 'https://amansharma.dev',
+    bio: '💡 eating => programing =>sleeping  \n📍 New Delhi, India\n📸 Capturing reality, one frame at a time ✨\n📩 Contact & collab: [EMAIL_ADDRESS]',
+    website: 'https://www.amanfolio.me',
     postsCount: 24,
     followersCount: '14.2K',
     followingCount: 382,
@@ -42,7 +42,7 @@ export class ProfilePage implements OnInit {
   highlights: ProfileHighlight[] = [
     {
       id: 'h1',
-      title: 'Tokyo 🇯🇵',
+      title: 'Chandni Chowk',
       coverImage: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=200&q=80',
     },
     {
@@ -94,9 +94,7 @@ export class ProfilePage implements OnInit {
     { id: 's3', image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80', likes: '4.8K' }
   ];
 
-  constructor(private router: Router) { }
-
-  ngOnInit() { }
+  private router = inject(Router);
 
   getUserAvatar(): string {
     return this.user.avatar;
@@ -126,7 +124,7 @@ export class ProfilePage implements OnInit {
         title: `${this.user.fullname} (@${this.user.username})`,
         text: this.user.bio,
         url: window.location.href
-      }).catch(() => {});
+      }).catch(() => { });
     }
   }
 

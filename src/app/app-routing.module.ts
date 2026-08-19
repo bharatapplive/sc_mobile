@@ -29,6 +29,14 @@ const routes: Routes = [
   {
     path: 'favourite',
     loadChildren: () => import('./features/tabs/favourite/favourite.module').then( m => m.FavouritePageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./features/tabs/chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'reels',
+    loadChildren: () => import('./features/tabs/reels/reels.module').then( m => m.ReelsPageModule)
   }
 
 ];
