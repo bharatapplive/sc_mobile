@@ -1,0 +1,248 @@
+:host {
+    display: block;
+    --profile-border: rgba(123, 116, 134, 0.2);
+}
+
+.profile-header {
+    ion-toolbar {
+        --background: rgba(255, 255, 255, 0.8);
+        --border-width: 0 0 1px;
+        --border-color: var(--color-outline-variant);
+        --min-height: 64px;
+        backdrop-filter: blur(20px);
+    }
+    .profile-header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 960px;
+        margin: auto;
+        padding: 0 16px;
+    }
+    .profile-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--color-primary);
+        h1 {
+            margin: 0;
+            color: var(--color-primary);
+            font-size: 24px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+    }
+    .profile-send {
+        padding: 8px;
+        border: 0;
+        background: transparent;
+        color: var(--color-on-surface);
+        cursor: pointer;
+        transition: transform 150ms ease;
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+.profile-main {
+    box-sizing: border-box;
+    max-width: 960px;
+    margin: auto;
+    padding: 80px 16px 32px;
+    color: var(--color-on-surface);
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .profile-avatar-frame {
+        width: 96px;
+        height: 96px;
+        padding: 4px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    }
+    .profile-avatar-inner {
+        border: 4px solid var(--color-surface);
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .profile-name {
+        margin: 0;
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 700;
+    }
+    .profile-actions {
+        display: flex;
+        gap: 8px;
+        button {
+            padding: 8px 16px;
+            border: 0;
+            border-radius: 12px;
+            background: #e8e8e8;
+            color: var(--color-primary);
+            font: 700 14px/20px var(--font-family-base);
+            cursor: pointer;
+            transition: 150ms ease;
+            &:hover {
+                background: rgba(107, 56, 212, 0.1);
+            }
+            &:active {
+                transform: scale(0.96);
+            }
+        }
+    }
+    .profile-stats {
+        align-items: center;
+    }
+    .stat {
+        gap: 4px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+    .stat span + span,
+    .profile-bio p:last-child,
+    .story-item span {
+        color: var(--color-on-surface-variant);
+        font-weight: 400;
+    }
+    .profile-bio p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 24px;
+        &:first-child {
+            font-weight: 700;
+        }
+    }
+    .mobile-actions {
+        display: none;
+    }
+    .story-highlights {
+        display: flex;
+        gap: 24px;
+        overflow-x: auto;
+        padding: 24px 0;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .story-item {
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 600;
+    }
+    .story-image {
+        width: 64px;
+        height: 64px;
+        padding: 2px;
+        overflow: hidden;
+        border: 2px solid var(--color-outline-variant);
+        border-radius: 50%;
+        background: var(--color-surface);
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid var(--color-surface);
+        }
+    }
+    .profile-tabs {
+        display: flex;
+        margin-top: 16px;
+        border-top: 1px solid var(--profile-border);
+        button {
+            position: relative;
+            flex: 1;
+            padding: 16px;
+            border: 0;
+            background: transparent;
+            color: var(--color-on-surface-variant);
+            cursor: pointer;
+            &.active {
+                color: var(--color-primary);
+            }
+        }
+    }
+    .active-tab-indicator {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--color-primary), #8455ef);
+    }
+    .post-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        padding-top: 8px;
+    }
+    .post-tile {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: var(--color-surface-variant);
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 500ms ease;
+        }
+        &:hover img {
+            transform: scale(1.05);
+        }
+        .post-likes {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            font-size: 14px;
+            font-weight: 700;
+            transition: opacity 150ms ease;
+        }
+        &:hover .post-likes {
+            opacity: 1;
+        }
+    }
+    .post-likes .material-symbols-outlined {
+        font-size: 18px;
+        font-variation-settings:
+            "FILL" 1,
+            "wght" 400,
+            "GRAD" 0,
+            "opsz" 24;
+    }
+    .desktop-actions {
+        display: none;
+    }
+    .mobile-actions {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+        padding: 16px 0;
+        button {
+            flex: 1;
+        }
+    }
+}
