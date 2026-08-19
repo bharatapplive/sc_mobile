@@ -172,3 +172,25 @@ ion-content {
   line-height: 16px;
   letter-spacing: var(--spacing-xs);
 }
+
+
+.page-content {
+  &::part(scroll)::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::part(scroll) {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  --background: #f9f9f9;
+}
+
+.main-layout {
+  max-width: 672px;
+  margin: 0 auto;
+  // Ensure content isn't hidden behind the footer on any device
+  // 64px base footer + safe area inset for home-indicator devices
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+}

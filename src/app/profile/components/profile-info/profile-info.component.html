@@ -1,0 +1,51 @@
+<section class="profile-info-section" *ngIf="profile">
+  <!-- Profile Avatar -->
+  <div class="avatar-wrapper">
+    <div class="avatar-gradient-ring">
+      <div class="avatar-inner">
+        <img [src]="profile.avatarUrl" [alt]="profile.avatarAlt" class="avatar-img" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats & Meta -->
+  <div class="profile-meta">
+    <!-- Username Row -->
+    <div class="username-row">
+      <h2 class="username">{{ profile.username }}</h2>
+      <!-- Desktop Actions -->
+      <div class="desktop-actions">
+        <button class="action-btn">Edit Profile</button>
+        <button class="action-btn">Share Profile</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-value">{{ profile.postCount }}</span>
+        <span class="stat-label">Posts</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ profile.followerCount }}</span>
+        <span class="stat-label">Followers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ profile.followingCount }}</span>
+        <span class="stat-label">Following</span>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="bio-section">
+      <p class="full-name">{{ profile.fullName }}</p>
+      <p class="bio-line" *ngFor="let line of profile.bio">{{ line }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Action Buttons -->
+<div class="mobile-actions" *ngIf="profile">
+  <button class="action-btn mobile-btn">Edit Profile</button>
+  <button class="action-btn mobile-btn">Share Profile</button>
+</div>

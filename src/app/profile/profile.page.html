@@ -1,12 +1,44 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<!-- profile.page.html -->
 
-<ion-content [fullscreen]="true">
-  <div class="custom">
-    <h2>Profile Page</h2>
-  </div>
+<app-header></app-header>
+
+<ion-content class="page-content">
+  <main class="main-layout">
+<!-- 
+    <app-profile-header
+      [profile]="profile.username">
+    </app-profile-header> -->
+
+    <!-- <app-profile-stats
+      [profile]="profile">
+    </app-profile-stats> -->
+
+    <app-profile-info></app-profile-info>
+
+    <!-- <app-profile-actions
+      [profile]="profile">
+    </app-profile-actions> -->
+
+    <app-highlights></app-highlights>
+
+    <!-- <app-profile-tabs
+      [activeTab]="activeTab()"
+      (tabChange)="onTabChange($event)">
+    </app-profile-tabs> -->
+<!-- 
+    @switch (activeTab()) {
+      @case ('posts') {
+        <app-post-grid [posts]="posts"></app-post-grid>
+      }
+
+      @case ('media') {
+        <app-post-grid [posts]="mediaPosts"></app-post-grid>
+      }
+
+      @case ('tagged') {
+        <app-post-grid [posts]="taggedPosts"></app-post-grid>
+      }
+    } -->
+
+  </main>
 </ion-content>
-

@@ -1,0 +1,10 @@
+<section class="highlights-container">
+  <div class="highlight-item" *ngFor="let highlight of highlights">
+    <div class="highlight-ring">
+      <div class="highlight-inner">
+        <img [src]="highlight.imageUrl" [alt]="highlight.imageAlt" class="highlight-img" />
+      </div>
+    </div>
+    <span class="highlight-label">{{ highlight.label }}</span>
+  </div>
+</section>

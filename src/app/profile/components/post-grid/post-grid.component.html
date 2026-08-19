@@ -1,0 +1,11 @@
+<section class="post-grid">
+  <div class="post-cell" *ngFor="let post of posts">
+    <img [src]="post.imageUrl" [alt]="post.imageAlt" class="post-img" />
+    <div class="post-overlay">
+      <span class="like-count">
+        <span class="material-symbols-outlined like-icon">favorite</span>
+        {{ post.likeCount }}
+      </span>
+    </div>
+  </div>
+</section>

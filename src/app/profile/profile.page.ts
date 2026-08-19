@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from './services/profile.service';
+import { Profile } from './models/profile.model';
 
 @Component({
   selector: 'app-profile',
@@ -6,11 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
   standalone: false
 })
-export class ProfilePage implements OnInit {
-
+export class ProfilePage{
   constructor() { }
-
-  ngOnInit() {
+  onTabChange(change: any) {
+    console.log(change)
   }
-
 }

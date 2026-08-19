@@ -1,0 +1,11 @@
+<nav class="profile-nav-tabs">
+  <button
+    *ngFor="let tab of tabs"
+    class="nav-tab-btn"
+    [class.is-active]="activeTab === tab.id"
+    (click)="selectTab(tab.id)"
+  >
+    <span class="material-symbols-outlined">{{ tab.icon }}</span>
+    <div class="active-indicator" *ngIf="activeTab === tab.id"></div>
+  </button>
+</nav>
