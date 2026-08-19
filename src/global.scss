@@ -70,12 +70,12 @@ $radius-full: 9999px;
 $spacing-xs: 8px;
 $spacing-sm: 16px;
 $spacing-md: 24px;
-$spacing-lg: 40px;
+$spacing-lg: 44px;
 $spacing-xl: 64px;
 
 $font-family-base: 'Montserrat', sans-serif;
 $font-size-body-md: 16px;
-$font-size-label-lg: 14px;
+$font-size-label-lg: 16px;
 $font-size-display-lg-mobile: 36px;
 
 :root {
@@ -126,6 +126,14 @@ body {
 ion-content {
   --background: var(--color-background);
   --overflow: auto;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .material-symbols-outlined {
@@ -185,7 +193,8 @@ ion-content {
 .text-label-sm {
   font-size: var(--font-size-body-sm);
   line-height: var(--font-size-body-sm);
-  letter-spacing: var(--spacing-xs);
+  letter-spacing: var(--spacing-lg);
+  font-weight: 200;
 }
 
 
@@ -219,4 +228,15 @@ ion-content {
 button,
 input {
   font-family: 'Montserrat', sans-serif;
+}
+
+ion-tab-bar,ion-tab-button{
+  background-color: var(--color-surface);
+  border-radius: none;
+  -webkit-border-radius: none;
+  -moz-border-radius: none;
+  -ms-border-radius: none;
+  -o-border-radius: none;
+  color: var(--color-on-surface);
+ 
 }
