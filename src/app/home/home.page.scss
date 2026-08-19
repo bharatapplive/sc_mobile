@@ -23,11 +23,9 @@ ion-button {
 
 ion-icon {
   font-size: 25px;
-}
+} 
 
-
-/* Logo */
-
+// Logo 
 .app-logo {
   display: flex;
   align-items: center;
@@ -43,16 +41,26 @@ ion-icon {
   color: #7c3aed;
 }
 
-
-/* Stories */
+//  Stories 
 
 .stories {
   display: flex;
   gap: 18px;
   padding: 18px 15px;
   background: #faf9f6;
+
   overflow-x: auto;
+  
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+
+.stories::-webkit-scrollbar {
+  display: none;
+  
+}
+
 
 .story {
   min-width: 70px;
@@ -100,7 +108,7 @@ ion-icon {
 }
 
 
-/* Posts */
+// Posts
 
 .post-card {
   margin: 12px 0;
@@ -149,7 +157,7 @@ ion-icon {
 }
 
 
-/* Post image */
+// Post image
 
 .post-image {
   width: 100%;
@@ -159,7 +167,7 @@ ion-icon {
 }
 
 
-/* Actions */
+// Actions
 
 .post-actions {
   display: flex;
@@ -179,7 +187,7 @@ ion-icon {
 }
 
 
-/* Content */
+// Content
 
 .post-content {
   padding: 5px 18px 18px;
@@ -206,4 +214,27 @@ ion-icon {
   margin-top: 12px !important;
   font-size: 10px !important;
   color: #999 !important;
+}
+.extra-content {
+  padding: 12px;
+}
+
+.content-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 12px;
+}
+
+.content-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.content-card p {
+  margin: 0;
+  color: #666666;
+  font-size: 14px;
+  line-height: 20px;
 }

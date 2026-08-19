@@ -3,7 +3,7 @@ ion-content {
 }
 
 ion-toolbar {
-  --background: #ffffff;
+  --background: #fff;
   --border-width: 0;
 }
 
@@ -14,20 +14,14 @@ ion-title {
   text-align: center;
 }
 
-
-
-  //  PROFILE CARD
-
+// Profile
 
 .profile-card {
-  background: #ffffff;
   margin: 12px;
   padding: 22px 16px 18px;
+  background: #fff;
   border-radius: 26px;
 }
-
-
-//  TOP AREA 
 
 .profile-top {
   display: flex;
@@ -35,124 +29,79 @@ ion-title {
   gap: 22px;
 }
 
-
-// PROFILE PHOTO 
+.profile-photo-box,
+.profile-photo {
+  width: 105px;
+  height: 105px;
+}
 
 .profile-photo-box {
   position: relative;
-  width: 105px;
-  height: 105px;
   flex-shrink: 0;
 }
 
 .profile-photo {
-  width: 105px;
-  height: 105px;
-
-  object-fit: cover;
-
-  border-radius: 50%;
-
   padding: 4px;
-
+  object-fit: cover;
   border: 4px solid #e83d8e;
-
+  border-radius: 50%;
   box-shadow: 0 0 0 2px #8b32ed;
 }
 
 .online-dot {
   position: absolute;
-
   right: 1px;
   bottom: 5px;
-
   width: 17px;
   height: 17px;
-
   background: #18c777;
-
+  border: 3px solid #fff;
   border-radius: 50%;
-
-  border: 3px solid #ffffff;
 }
 
-
-
-  //  STATISTICS
-
+// Stats
 
 .stats {
   flex: 1;
-
   display: flex;
-
   justify-content: space-between;
-
   text-align: center;
 }
 
 .stat {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
 }
 
 .stat strong {
   font-size: 19px;
-
-  font-weight: 700;
-
   color: #222;
 }
 
 .stat span {
   margin-top: 5px;
-
   font-size: 12px;
-
   color: #888;
 }
 
-
-
-  //  NAME
-
+// Info
 
 .profile-card h2 {
   margin: 17px 0 7px;
-
   font-size: 23px;
-
-  font-weight: 700;
-
   color: #222;
 }
 
-
-//  CREATOR LABEL 
-
 .creator-label {
   display: inline-block;
-
   padding: 6px 10px;
-
-  border-radius: 8px;
-
   background: #eee2ff;
-
+  border-radius: 8px;
   color: #8834e8;
-
   font-size: 12px;
-
   font-weight: 600;
 }
-
-
-
-  //  BIO
-
 
 .bio {
   margin-top: 12px;
@@ -160,130 +109,68 @@ ion-title {
 
 .bio p {
   margin: 5px 0;
-
   font-size: 14px;
-
-  color: #555;
-
   line-height: 1.5;
+  color: #555;
 }
-
-
-/* WEBSITE */
 
 .website {
   display: flex;
-
   align-items: center;
-
   gap: 7px;
-
   margin-top: 9px;
-
   color: #8834e8;
-
   font-size: 14px;
-
   font-weight: 600;
 }
 
-.website ion-icon {
-  font-size: 18px;
-}
-
-
-
-  //  PROFILE BUTTONS
+// Buttons
 
 .profile-buttons {
   display: flex;
-
   gap: 9px;
-
   margin-top: 19px;
 }
 
 .profile-buttons button {
   height: 47px;
-
-  border: none;
-
+  border: 0;
   border-radius: 14px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 6px;
-
   font-size: 14px;
-
   font-weight: 600;
 }
 
-
-//  EDIT
-
 .edit-btn {
   flex: 1;
-
-  color: #ffffff;
-
-  background: linear-gradient(
-    90deg,
-    #8030e8,
-    #d13ae7
-  );
-
-  box-shadow: 0 5px 14px rgba(130, 48, 232, 0.25);
+  color: #fff;
+  background: linear-gradient(90deg, #8030e8, #d13ae7);
 }
-
-
-//  SHARE
 
 .share-btn {
-  flex: 0.65;
-
+  flex: .65;
   background: #f0f1f3;
-
   color: #333;
 }
-
-
-//  ADD PERSON
 
 .add-person-btn {
   width: 48px;
-
   background: #f0f1f3;
-
-  color: #333;
 }
 
-
-//  HIGHLIGHTS
+// Highlights
 
 .highlights {
   display: flex;
-
   gap: 15px;
-
   overflow-x: auto;
-
-  background: #ffffff;
-
   margin: 12px;
-
   padding: 16px 10px;
-
+  background: #fff;
   border-radius: 24px;
 }
 
 .highlight {
   min-width: 68px;
-
   text-align: center;
 }
 
@@ -291,141 +178,80 @@ ion-title {
 .new-highlight {
   width: 64px;
   height: 64px;
-
-  border-radius: 50%;
-
   object-fit: cover;
+  border-radius: 50%;
 }
-
-
-//  IMAGE BORDER 
 
 .highlight img {
   padding: 3px;
-
-  border: 2px solid #dddddd;
+  border: 2px solid #ddd;
 }
 
-
-//  NEW BUTTON 
-
 .new-highlight {
-  border: 2px dashed #aaaaaa;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
+  border: 2px dashed #aaa;
 }
 
 .new-highlight ion-icon {
   font-size: 27px;
-
   color: #8834e8;
 }
 
 .highlight span {
   display: block;
-
   margin-top: 7px;
-
   font-size: 12px;
-
   color: #333;
-
-  white-space: nowrap;
 }
 
-
-
-  //  POSTS / REELS / SAVED
-
+// Tabs
 
 .profile-tabs {
   display: flex;
-
-  background: #ffffff;
-
+  gap: 5px;
   margin: 12px;
-
   padding: 5px;
-
+  background: #fff;
   border-radius: 17px;
-
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .profile-tabs button {
   flex: 1;
-
   height: 45px;
-
-  border: none;
-
+  border: 0;
   border-radius: 13px;
-
   background: transparent;
-
   color: #777;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 6px;
-
   font-size: 14px;
-
   font-weight: 600;
 }
 
 .profile-tabs button.active {
   background: #f3eaff;
-
   color: #8834e8;
 }
 
-.profile-tabs ion-icon {
-  font-size: 19px;
-}
-
-
-
-  //  PHOTO GRID
-
+// Grid
 
 .photo-grid {
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
   gap: 5px;
-
   padding: 5px 12px 25px;
 }
 
 .photo-grid img {
   width: 100%;
-
   height: 125px;
-
   object-fit: cover;
-
   border-radius: 11px;
-
-  display: block;
 }
 
-
-
-  //  MOBILE ADJUSTMENT
-
+// Mobile
 
 @media (max-width: 380px) {
-
   .profile-top {
     gap: 14px;
   }
@@ -443,5 +269,4 @@ ion-title {
   .profile-card h2 {
     font-size: 21px;
   }
-
 }
