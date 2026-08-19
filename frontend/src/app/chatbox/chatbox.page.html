@@ -25,5 +25,222 @@
       </ion-item>
     </section>
 
+    <section class="story-panel">
+      <div class="story-context">
+        <ion-avatar class="person">
+          <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>  
+        </ion-avatar>
+        <span>Your note</span>
+      </div>
+      
+      <div class="story-context">
+        <div class="online-relative">
+          <ion-avatar class="person">
+            <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <ion-icon class="story-add-absolute" name="online"></ion-icon>
+        </div>
+        <span>luna.art</span>
+      </div>
+      <div class="story-context">
+        <div class="online-relative">
+          <ion-avatar class="person">
+            <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <ion-icon class="story-add-absolute" name="online"></ion-icon>
+        </div>
+        <span>neo_pixel</span>
+      </div>
+      <div class="story-context">
+        <div class="online-relative">
+          <ion-avatar class="person">
+            <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <ion-icon class="story-add-absolute" name="online"></ion-icon>
+        </div>
+        <span>travel_joy</span>
+      </div>
+      <div class="story-context">
+        <div class="online-relative">
+          <ion-avatar class="person">
+            <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
+        </div>
+        <span>rok.joyi</span>
+      </div>
+      <div class="story-context">
+        <div class="online-relative">
+          <ion-avatar class="person">
+            <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
+        </div>
+        <span>slex_vibe</span>
+      </div>
+    </section>
+
+    <section class="switch-msg">
+      <div class="filter">
+        <ion-button shape="round" size="small" fill="clear">
+          <ion-icon slot="icon-only" name="options-outline"></ion-icon>
+          <ion-icon slot="icon-only" name="chevron-down-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button shape="round" size="small" fill="clear" *ngFor="let tag of tags" [class.active]="selectedTag === tag"
+          (click)="selectTag(tag)"><span>{{tag}}</span></ion-button>
+      </div>
+
+      <div class="list-msg">
+        <div class="list-card">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <ion-icon class="story-add-absolute" name="online"></ion-icon>
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Luna Art</span>
+              <h6>Now</h6>
+            </div>
+            <p>Helo! Ranaji How are you. Where are you now a days</p>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <ion-icon class="story-add-absolute" name="online"></ion-icon>
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Neo Pixel</span>
+              <h6>02mins ago</h6>
+            </div>
+            <p>Helo! Ranaji..</p>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <ion-icon class="story-add-absolute" name="online"></ion-icon>
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Travel Joy</span>
+              <h6>15mins ago</h6>
+            </div>
+            <p>Congratulation! ranaji, you got travel tour at 50% off</p>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Rok Joyi</span>
+              <h6>1days ago</h6>
+            </div>
+            <p>Hello..</p>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Slex Vibe</span>
+              <h6>3days ago</h6>
+            </div>
+            <p>Congratulation! ranaji, you got an anti piece price on our brand</p>
+          </div>
+        </div>
+            
+      </div>
+    </section>
+    
+    <section class="follow-list">
+      <div class="header-bar">
+        <span>Accounts to follow</span>
+        <ion-button shape="round" size="small" fill="clear">See all</ion-button>
+      </div>
+
+      <div class="person-list">
+        <div class="avatar">
+          <ion-avatar>           
+            <ion-img [src]="'assets/images/rock.avif'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <div class="title">
+            <span>aman.rock</span>
+            <span>Aman Aman</span>
+          </div>
+        </div>
+        <div class="tabs">
+          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="person-list">
+        <div class="avatar">
+          <ion-avatar>           
+            <ion-img [src]="'assets/images/barbidoll.jpg'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <div class="title">
+            <span>ayushi.cuteii</span>
+            <span>Ayushi Singh</span>
+          </div>
+        </div>
+        <div class="tabs">
+          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="person-list">
+        <div class="avatar">
+          <ion-avatar>           
+            <ion-img [src]="'assets/images/Cutipie.jpg'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <div class="title">
+            <span>rishu.raj</span>
+            <span>Rishav Raj</span>
+          </div>
+        </div>
+        <div class="tabs">
+          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="person-list">
+        <div class="avatar">
+          <ion-avatar>           
+            <ion-img [src]="'assets/images/Magal.avif'" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <div class="title">
+            <span>bhim.kumar</span>
+            <span>Bhim Kumar</span>
+          </div>
+        </div>
+        <div class="tabs">
+          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+      </div>
+    </section>
   </div>
 </ion-content>

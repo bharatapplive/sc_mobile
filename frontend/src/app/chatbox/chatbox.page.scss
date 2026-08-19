@@ -38,7 +38,7 @@ ion-content{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 15px;
 
     .search-Bar-container{
         width: 90%;
@@ -65,4 +65,216 @@ ion-content{
         }
     }
 
+    // 2.1 Story Panel...
+    .story-panel{
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        width: 95%;
+        padding-left: 5px;
+        gap: 20px;
+        margin-top: 15px;
+        
+        .story-context{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 68px;
+            height: 90px;
+
+            span{
+                font-size: 14px;
+                margin-top: 2px;
+            }
+        }
+    }
+    
+    // 2.3 Message Panel...
+    .switch-msg{
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        width: 95%;
+
+        .filter{
+            display: flex;
+            align-items: flex-start;
+
+            ion-button{
+                text-transform: none;
+                background: white;
+                border-radius: 14px;
+                padding: 0 8px;
+
+                span{
+                    padding-left: 5px;
+                }
+
+                &:hover:not(.active) {
+                    --background: #ddd6fe;
+                }
+
+                /* Active State */
+                &.active {
+                    color: #ffffff;
+                    --background: linear-gradient(135deg, #7c3aed, #a78bfa);
+                    
+                    &::part(native) {
+                        box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35);
+                    }
+                }
+            }
+        }
+
+        .list-msg{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 20px;
+            overflow: auto;
+            gap: 15px;
+
+            .list-card{
+                display: flex;
+                width: 100%;
+                background: white;
+                border-radius: 14px;
+                padding: 10px;
+                gap: 25px;
+
+                .card-title-msg{
+                    display: flex;
+                    flex-direction: column;
+                    width: 80%;
+
+                    .person-name-time{
+                        display: flex;
+                        justify-content: space-between;
+
+                        span{
+                            font-size: 17px;
+                            font-weight: 400;
+                        }
+
+                        h6{
+                            margin: 0px;
+                            font-size: 13px;
+                            font-weight: 400;
+                        }
+                    }
+                    
+                    p {
+                        width: 95%;
+                        font-size: 16px;
+                        font-weight: 350;
+                        margin: 0;
+                        margin-top: 2px;
+
+                        // SCSS Single-line Ellipsis
+                        overflow: hidden;
+                        white-space: nowrap; // Keeps text on one line
+                        text-overflow: ellipsis; // Adds "..." at the right edge
+
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    // 2.4 Follow Panel...
+    .follow-list{
+        display: flex;
+        flex-direction: column;
+        background: white;
+        border-radius: 14px;
+        margin-top: 15px;
+        width: 95%;
+        padding: 0 10px;
+
+        .header-bar{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .person-list{
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+
+            .avatar{
+                width: 50%;
+                display: flex;
+                gap: 15px;
+
+                .title{
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                ion-avatar{
+                    width: 52px;
+                    height: 52px;
+                    border-radius: 50%;
+                }
+            }
+
+            .tabs{
+                display: flex;
+                align-items: center;
+
+                ion-button{
+                    background: #3a8eed;
+                    color: white;
+                    border-radius: 10px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+
+    // #Important...
+    .person {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid  #7c3aed;
+    }
+
+    // #Important...
+    .msg-person{
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+    }
+
+    // #Important...
+    .online-relative{
+        position: relative;
+        display: inline-block;
+
+        .story-add-absolute {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            width: 10px;          /* 👈 Equal width and height for a perfect circle */
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;  /* Clean white border separation */
+            background-color: #3aed49;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;       /* 👈 Flexbox centers the icon perfectly */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .add-btn {
+            font-size: 36px;     /* 👈 Fits neatly inside the 24px circle */
+            font-weight: bold;
+            color: white;      /* White plus icon against dark background */
+        }
+    }
 }

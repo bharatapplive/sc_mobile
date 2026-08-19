@@ -31,103 +31,115 @@ ion-button{
   color: #070707;
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 24px 16px;
-
-    .header-logo {
-        width: 80px; /* Adjust size as needed */
-        height: auto;
-        margin-bottom: 12px;
-    }
-
-    .header-title {
-        margin: 0;
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-        color: #4c1d95; /* Dark neutral */
-    }
-
-    .header-subtitle {
-        margin: 8px 0 0 0;
-        font-size: 14px;
-        color: #64748b; /* Muted text */
-        max-width: 320px;
-        line-height: 1.4;
-    }
-}
-
-form{
+.container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
 
-    .form-card{
-        width: 90%;
-        font-size: 17px;
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 24px 16px;
+        width: 95%;
 
-        ion-item{
-            border-radius: 16px;
-            --background: #f1f5f9;
-            --padding-start: 16px;
-            --padding-end: 16px;
-            --min-height: 68px;
-            margin-top: 10px;
+        .header-logo {
+            width: 80px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 12px;
+        }
 
-            ion-icon{
-                color: #64748b;
-                font-size: 21px;
-                margin-right: 8px;
+        .header-title {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #4c1d95; /* Dark neutral */
+        }
+
+        .header-subtitle {
+            margin: 8px 0 0 0;
+            font-size: 14px;
+            color: #64748b; /* Muted text */
+            max-width: 320px;
+            line-height: 1.4;
+        }
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+
+        .form-card{
+            width: 90%;
+            font-size: 17px;
+
+            ion-item{
+                border-radius: 16px;
+                --background: #f1f5f9;
+                --padding-start: 16px;
+                --padding-end: 16px;
+                --min-height: 68px;
+                margin-top: 10px;
+
+                ion-icon{
+                    color: #64748b;
+                    font-size: 21px;
+                    margin-right: 8px;
+                }
+
+                ion-input {
+                    --color: #0f172a;
+                    --placeholder-color: #94a3b8;
+                    --placeholder-opacity: 1;
+                    font-weight: 500;
+                }
             }
+            
+            .separation{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
 
-            ion-input {
-                --color: #0f172a;
-                --placeholder-color: #94a3b8;
-                --placeholder-opacity: 1;
-                font-weight: 500;
+                .forgot-link {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #7c3aed;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
             }
         }
         
-        .separation{
+        /* OR CONTINUE WITH Divider */
+        .divider {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            text-align: center;
 
-            .forgot-link {
-                font-size: 16px;
-                font-weight: 600;
-                color: #7c3aed;
-                text-decoration: none;
-                cursor: pointer;
+            &::before,
+            &::after {
+                content: '';
+                flex: 1;
+                border-bottom: 2px solid #4e4e4e;
+            }
+
+            span {
+                padding: 0 12px;
+                font-size: 14px;
+                font-weight: 700;
+                color: #94a3b8;
+                letter-spacing: 0.5px;
             }
         }
     }
-    
-    /* OR CONTINUE WITH Divider */
-    .divider {
-        display: flex;
-        align-items: center;
-        text-align: center;
 
-        &::before,
-        &::after {
-            content: '';
-            flex: 1;
-            border-bottom: 2px solid #4e4e4e;
-        }
-
-        span {
-            padding: 0 12px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #94a3b8;
-            letter-spacing: 0.5px;
-        }
+    .auth-card{
+        width: 100%;
     }
 }
 
