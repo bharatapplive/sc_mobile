@@ -1,0 +1,26 @@
+ion-tab-bar.custom-tab-bar {
+  height: 68px;
+  --background: #ffffff;
+
+  border-top: 1px solid #eeeeee;
+  padding: 5px 8px 8px;
+
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.custom-tab-bar ion-tab-button {
+  --color: #777777;
+  --color-selected: #000000;
+
+  --background: transparent;
+
+  font-size: 25px;
+}
+
+.custom-tab-bar ion-icon {
+  font-size: 25px;
+}
+
+.custom-tab-bar ion-tab-button.tab-selected {
+  font-weight: 600;
+}

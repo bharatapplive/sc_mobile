@@ -1,20 +1,346 @@
-<ion-header [translucent]="true">
+<ion-header class="top-header">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <div class="header-content">
+      <div class="brand">
+        <ion-icon name="camera-outline"></ion-icon>
+        <h1>SocialCircle</h1>
+      </div>
+
+      <div class="header-actions">
+        <button>
+          <ion-icon name="heart"></ion-icon>
+          <span class="notification-dot"></span>
+        </button>
+
+        <button>
+          <ion-icon name="send-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- Category Filter -->
+  <div class="category-bar">
+    <button class="category active">
+      All Posts
+    </button>
+
+    <button class="category">
+      <ion-icon name="sparkles"></ion-icon>
+      Inner Circle
+    </button>
   </div>
+
+  <!-- Stories -->
+  <section class="stories">
+
+    <!-- Your Story -->
+    <div class="story">
+      <div class="story-avatar your-story">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY_Pn66Ga0rKdp_5iLZaB0AMSzWE2I3v4qLzifG9jZ7Q4WakuSq2rnzYb75EtWxN5CvN8FDMF6tFdNkLdUXysXJgQWAUurC4v23-x2xM1XRV3MBGizGaD21mqJfPv6MgvLl3qzenrdvR3GFQ4Kwm4CzPFAGhuxFlQyo3MK6tH0eWaKOVjv9lGfYyuS7TEHKCVMvjvIbwn9L8_0GtP41OT4LS61PifqZ_tyd5-wpP0wtrOeYV15DrQK"
+        />
+
+        <span class="add-story">
+          <ion-icon name="add"></ion-icon>
+        </span>
+      </div>
+
+      <span>Your Story</span>
+    </div>
+
+    <!-- Story -->
+    <div class="story">
+      <div class="story-ring online">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0iDFJ94NN1jhPGy_nP5-uMvw--oKT4hX61RNdx3tjL6qab7gtIy9pwCUrtJPFRLQueUB_CvlVkLs4wcmCJK0LS1f1MkbQ-0C9t7WLkvApKvMa69J3UXnTf7hu-MyvP8Q9TI0ODY4zhVuHGkUmZNWPZoN6D06weB9XGY7CnQrCD-aH4QZoyMumyRVtqiAThVPIcddnIz5d9ISq3ee6bu6_PIy5scfJv-5KfpIxP84rJiGeNXueISEJ"
+        />
+      </div>
+
+      <span>elara_vibe</span>
+    </div>
+
+    <div class="story">
+      <div class="story-ring online">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3T1Oxb-yQY8IYOB8S4l_MkbFQIVD5KF32l5sUdG-rAvFPx3zKLc3jheIN-8QvvgXY7o6FrM_V_9ARSuu7RwEUsqrn21c6RCWFZrvRI9op6yFwthcDEhLUV8S3QlnNe1emPIP7qSm_dzQgpVnDEBfeK92LxFnKYO30rPYOuolCPFF6-JNkrSDfhpR2FfKzLVCyvhsSAqBJushFIusmfQ6rjgkgIhYXJEvZ5-Rc_txGztqjLUN8BEw8"
+        />
+      </div>
+
+      <span>jaxon.drift</span>
+    </div>
+
+    <div class="story">
+      <div class="story-ring live">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKs3FIW-oYR9kn1aslKccB51uClXSqyKBMuWO0iLb3hCHG_rydKHify44dQK1OLOpLf3ZvJVQzpH7RwNpbiih3LTcZBss2AXkZasP5IgsYCxDQysvm4x4xxEBfS5TG0iy5nH72kDlnW9gAug_tilEdYxR535RROLYE_8LRiV3IwFEJIVaj7u7RJ2P7yZWULmad64nJduOgjWHFAelb276GCOMjcCBaXJEnZFNFDujYDkMA4awhaHs0"
+        />
+        <small>LIVE</small>
+      </div>
+
+      <span>nomad_eats</span>
+    </div>
+
+    <div class="story">
+      <div class="story-ring">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2QqrO1R534NAudW2n4S2Y7KYu6q8Rc_kE7tHfeoJyPtIYPHejZMN-P1-ZzapPsbzugSwQgxBjWi5v7Kx3QYRbLSo_JQ_PNyYoH_LFg6pNJnXNcbSszP1OOd-ss-AUvASo2e4PZjit1i7WnEDefEISZ-ubEv1c_R4WcqxzyR6_FLpx4b_vhzxJBw2b3byN6Vsx1iEa_xV9KyCv63TlNhZogjGXhrTSGGUq5l88vMQzoEvg1ZDcHrXm"
+        />
+      </div>
+
+      <span>art.flux</span>
+    </div>
+
+  </section>
+
+  <!-- Feed -->
+  <section class="feed">
+
+    <!-- POST 1 -->
+    <article class="post">
+
+      <div class="post-header">
+
+        <div class="user-info">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmYsxtJ52j1TLPQo74xiyttfEsX3g7rc7ILOsSxt8h4dPsBJg9690LbLb9irJbTrWJ-FS-ABWmfLJ6Zv5kh2XWi9_MuU2bqwHBoUTNpov32nPq6_n_Ql9C9a4eExZBXrUtKVJk5rlb8m0QvYmrh70SK3VQd3bIrv49LEtWMlkuZ1Jk7KZF320X4nKZILlzaxN-EDv-H1zoio2Dup1OeuHlEMUI-wOoHSS7eqHiBgDOQZSOGeUT5MGy"
+          />
+
+          <div>
+            <strong>pixel_journey</strong>
+            <small>Tokyo, Japan</small>
+          </div>
+        </div>
+
+        <ion-button fill="clear">
+          <ion-icon name="ellipsis-horizontal"></ion-icon>
+        </ion-button>
+
+      </div>
+
+      <div class="post-image">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMKya55f3I8-goK65U5opZAVMOxOSyAGzs8hkz4OefSgHBxrzzb1LCOysLt-LryVWzm_f0MmS0IMEd20Mnne849TADwPdZrsJD576P_RsIj7lQyewL6oYZbM7Wi9ZE5PLxBR8LTMNO7PG8OHqYK0j45J4edf-QCpLPPWq4XUzA2CqshCUw7m9HtQmGw9DkYFU6P8j1ATZKmUkgAQGxq0PDIB_CHNevpbQiXUgdbqDEM9toNmXA1nbQ"
+        />
+
+        <div class="image-count">
+          <ion-icon name="layers-outline"></ion-icon>
+          1/3
+        </div>
+      </div>
+
+      <div class="post-actions">
+
+        <div class="left-actions">
+
+          <button class="liked">
+            <ion-icon name="heart"></ion-icon>
+          </button>
+
+          <button>
+            <ion-icon name="chatbubble-outline"></ion-icon>
+          </button>
+
+          <button>
+            <ion-icon name="send-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <button>
+          <ion-icon name="bookmark-outline"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="post-content">
+
+        <p class="likes">
+          Liked by <strong>jaxon.drift</strong> and
+          <strong>1,240 others</strong>
+        </p>
+
+        <p>
+          <strong>pixel_journey</strong>
+          The city never sleeps, and neither do the dreams we build
+          in the neon glow. ✨
+          #TokyoNight #HyperPresence
+        </p>
+
+        <button class="comments">
+          View all 42 comments
+        </button>
+
+        <small>2 HOURS AGO</small>
+
+      </div>
+
+    </article>
+
+
+    <!-- Suggested -->
+    <section class="suggested">
+
+      <div class="suggested-header">
+        <h3>Suggested for you</h3>
+        <button>See All</button>
+      </div>
+
+      <div class="suggestion-list">
+
+        <div class="suggestion-card">
+
+          <button class="close">
+            <ion-icon name="close"></ion-icon>
+          </button>
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWCWyncmA4NOL1NQIMFZMohjUV6KnWE9qGFIhMTNJhWaRIdMuDt_d6m-ONu6Tn9kiV0vHV0ZuUZGISpf47IGnsBHiFzaxx9HA1JOgwOokmvd8ZdBtuIVjCzm6DfhO_B8k2SvSPxe6nukZK-GHXkEMlepdwwWY2VJYY-NbFdRUxzykVf_21LmnQzFpyG7nYAI61SUNjB_w07N20iMUjWHEgQADDyQyp9tv07xyvk-GKOtiaTF9mP6e9"
+          />
+
+          <strong>cyberspace_art</strong>
+          <small>Followed by elara_vibe</small>
+
+          <button class="follow">
+            Follow
+          </button>
+
+        </div>
+
+        <div class="suggestion-card">
+
+          <button class="close">
+            <ion-icon name="close"></ion-icon>
+          </button>
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuACjR-HVLN6KHI09F4D171aLSyvhi2Hm8LPU8YgU967tVJJ_5Yr4X-Z4CDWnzeA1mM0I42OzbtJAveoPnIORMqtrOYkcPUyIWK-BzSrJ23cf9HT5Pb3ht_m_fADWJxZAp9QN-A4SncZpupFls1zxNMrAwyYk4OHWPTja-9SgOQFhTtR6Vo94-kyOTZjOlILEdRwT3psYq2fuvblckh1IfZs0FxjGiRI1R6u46-VK-tsWmFSpmTrovu-"
+          />
+
+          <strong>morning.grind</strong>
+          <small>New to HyperPresence</small>
+
+          <button class="follow">
+            Follow
+          </button>
+
+        </div>
+
+        <div class="suggestion-card">
+
+          <button class="close">
+            <ion-icon name="close"></ion-icon>
+          </button>
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvHSl-vE5lDHzRo0dw2e_hWWAkZJKjRB7oBfB-EEGru9cLcXFHNVf7euT7aR39jaNRQ4XhcTrd9FDTPxB68Ijhxeq5NRFh6ilBKUOIF7H3ABMyHUfvFOf4KJZIat_IHHbvHfFrOE5IijTgEMvlQx3di0vunORJkHBxqlqM7FJUpxuXJQnw7hPTGejdqGzZJAMndD-hr1ajp4KM8oSrLR00pzT7cc7GdiCAQm3uRwhoP7nP848U9Gg8"
+          />
+
+          <strong>sole_hype</strong>
+          <small>Suggested for you</small>
+
+          <button class="follow">
+            Follow
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- POST 2 -->
+    <article class="post">
+
+      <div class="post-header">
+
+        <div class="user-info">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiGmdcvhFLeF1c8TU3R35ZA3iJmiDg0NbbEfkLBf4ja3v0q-NN7esPhY72axrgGX0zpiy62OKKSXZtWuOHQ_9uyRDINWkaBksJoiA4a9c-vqBtVFLPf08Qf5zUkJl_NLmXrw7KWXqo5zVZN8ICW6FpQsuL2nLy_y2RXXKCpVGdQETXODe-76sQaTeokbLIlFbx0zKtWuT2UVkvCQfYKWYz9Uwv3z2oiMjimYVqnws7JtEq8C2FpZCx"
+          />
+
+          <div>
+            <strong>time_masters</strong>
+            <small>Sponsored</small>
+          </div>
+
+        </div>
+
+        <ion-button fill="clear">
+          <ion-icon name="ellipsis-horizontal"></ion-icon>
+        </ion-button>
+
+      </div>
+
+      <div class="video-post">
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvPLZ4X13i5tjpB5gxqGtNLOI39-6xAEa8qe-ELux9U6ZAKmlJFai3lsk5yhMOr0WqJKO-wvQmcLyPGO1sqeunVYJ4V2zmWLFKsLqGiwCm0zqyxOLngmTq_m96WW5xMnDMpgyCkbAHnCnv8XJlrVpFO-6-YR3Ic8eCzi9dcl0Qp7tTy6hOBaU0ABodXjjCMKQeDF4rt4GWy1XFIt4i3JzofxaGDbl2KtiseqYgWNVlY6YNXtWZP5ds"
+        />
+
+        <div class="play">
+          <ion-icon name="play-circle"></ion-icon>
+        </div>
+
+        <div class="sound">
+          <ion-icon name="volume-mute"></ion-icon>
+          Tap for sound
+        </div>
+
+      </div>
+
+      <div class="post-actions">
+
+        <div class="left-actions">
+
+          <button>
+            <ion-icon name="heart-outline"></ion-icon>
+          </button>
+
+          <button>
+            <ion-icon name="chatbubble-outline"></ion-icon>
+          </button>
+
+          <button>
+            <ion-icon name="send-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <button>
+          <ion-icon name="bookmark-outline"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="post-content">
+
+        <p>
+          <strong>time_masters</strong>
+          Redefining the essence of structure. The future of living is here.
+          🏛️✨
+        </p>
+
+        <button class="learn-more">
+          Learn More
+          <ion-icon name="open-outline"></ion-icon>
+        </button>
+
+      </div>
+
+    </article>
+
+  </section>
+
+  <!-- Create Post -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

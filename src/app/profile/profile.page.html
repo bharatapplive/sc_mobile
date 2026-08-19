@@ -1,12 +1,262 @@
-<ion-header [translucent]="true">
+<ion-header class="profile-header">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <div class="top-bar">
+      <div class="brand">
+        <ion-icon name="camera-outline"></ion-icon>
+        <span>SocialCircle</span>
+      </div>
+
+      <div class="header-actions">
+        <ion-button fill="clear" (click)="openNotifications()">
+          <ion-icon name="heart-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="openMenu()">
+          <ion-icon name="menu-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="custom">
-    <h2>Profile Page</h2>
-  </div>
+
+  <!-- Profile -->
+  <section class="profile-section">
+
+    <div class="profile-top">
+
+      <!-- Profile Image -->
+      <div class="avatar-wrapper">
+        <div class="avatar-border">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuASqu1QrcW5f6FBCnYgX0804a-FwyHMJG374pTpYudpKAMCewYeFd_EMJI6rv1aZzBJO5hUwTG1PRbweqf_u74ab6jPBfyMIeP3O8mI8r_fT14LcyREfA70IhnWmmRC4R_Z-Mphja40abJ-OzTDXKd7QIEDxMUKbY9Sk_HO14dIC_ug0vBV-ez_2tHY4fQ2d6YfP902zMryvxXldF7h9tXge0sEftiahCNlpP03YhUAHaowca15mXuk"
+            alt="Profile"
+          />
+        </div>
+
+        <button class="add-avatar">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+
+        <div class="stat">
+          <strong>128</strong>
+          <span>Posts</span>
+        </div>
+
+        <div class="stat">
+          <strong>14.2K</strong>
+          <span>Followers</span>
+        </div>
+
+        <div class="stat">
+          <strong>842</strong>
+          <span>Following</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bio -->
+    <div class="bio">
+
+      <h2>Prime Saurabh</h2>
+
+      <p>
+        Digital Nomad & Visual Architect.
+        📍 Tokyo/Berlin
+      </p>
+
+      <p>
+        Designing the future of cultural resonance. 🎨✨
+      </p>
+
+      <a href="#">
+        <ion-icon name="link-outline"></ion-icon>
+        hyperpresence.io/alex-r
+      </a>
+
+    </div>
+
+    <!-- Buttons -->
+    <div class="profile-actions">
+
+      <ion-button expand="block" fill="solid">
+        Edit Profile
+      </ion-button>
+
+      <ion-button expand="block" fill="solid">
+        Share Profile
+      </ion-button>
+
+      <ion-button class="add-person" fill="solid">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+
+  </section>
+
+
+  <!-- Highlights -->
+  <section class="highlights">
+
+    <div class="highlight">
+
+      <div class="highlight-image">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuArUDT08nEkKIlJKCqbL_tucbp0sFy0mKCdZG6LRs13m63ly9MLgf0KdnsFClEVdUsoDIl4OER20w5SaS3niR55f-swQHQkAyd6NKkM_-OEY_HfQLAPuKqalKQvSPr4toY4fbIKJL5VLfyCEktrWdTqz8pi3DaIN3gqRO_XyECBtxEW0pzFlntM2k2KQgydFjaeMNLqVNezag4EedthZUFDex_7S-4C5ON5v8uSyQ6Cexk2038EuCmJ"
+          alt="Travel"
+        />
+      </div>
+
+      <span>Travel</span>
+
+    </div>
+
+    <div class="highlight">
+
+      <div class="highlight-image">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDkGMl73JwjbwbGLY7zESIMVdFx66XJRFibpEXoMUKXBy6jyJodEx6v-csYBMeZW7zZIX1aiZHdzSbpT-4CvVlKS5sgWtiHEzDPWek1uBJrzNl77R_Bu1zl8SzYMyZnuNLwiKYeHm7-7E3gS5dBeEPnyOrwn-bqf4Spo0YmMa5m90EOnOymU-ieG59uJr0z0MuUFbPwFOwnnQLowpDKRgw-3o9eBNEK17D3d9Ls1cqgdJRDypT1GBI"
+          alt="Work"
+        />
+      </div>
+
+      <span>Work</span>
+
+    </div>
+
+    <div class="highlight">
+
+      <div class="highlight-image">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAObkq5tRa-DOH8UPaPbRVDJnARLOGiIZL8v-OBGRJoTLSrcp91PAAkEbLhLnVjNahAd0FMzG_Q3xgPvO6z3rtaTTL45lnYY_nwUbRWQpX1JHRgCIBg0AxakutzrJlBRybIww4BxlO1FJJqpp1pPfQzqFzUHD_L2RhOOyEgijaLFUNyUCguYfK_6NSXSWTYzNiACbB7yI6KTDPlu7SD1IvD0E5hyX2HMUqXkcuuo3p3Bqqx6nhPwlJR"
+          alt="Lifestyle"
+        />
+      </div>
+
+      <span>Lifestyle</span>
+
+    </div>
+
+    <div class="highlight">
+
+      <div class="highlight-image new-highlight">
+        <ion-icon name="add"></ion-icon>
+      </div>
+
+      <span>New</span>
+
+    </div>
+
+  </section>
+
+
+  <!-- Tabs -->
+  <section class="profile-tabs">
+
+    <button
+      [class.active]="activeTab === 'posts'"
+      (click)="changeTab('posts')">
+
+      <ion-icon name="grid-outline"></ion-icon>
+
+    </button>
+
+    <button
+      [class.active]="activeTab === 'reels'"
+      (click)="changeTab('reels')">
+
+      <ion-icon name="play-circle-outline"></ion-icon>
+
+    </button>
+
+    <button
+      [class.active]="activeTab === 'tagged'"
+      (click)="changeTab('tagged')">
+
+      <ion-icon name="person-outline"></ion-icon>
+
+    </button>
+
+  </section>
+
+
+  <!-- Posts Grid -->
+  <section class="posts-grid" *ngIf="activeTab === 'posts'">
+
+    <div class="post" *ngFor="let post of posts">
+
+      <img [src]="post.image" alt="Post">
+
+      <div class="post-overlay">
+
+        <div>
+          <ion-icon name="heart"></ion-icon>
+          <span>{{ post.likes }}</span>
+        </div>
+
+      </div>
+
+      <ion-icon
+        *ngIf="post.type === 'reel'"
+        class="post-type"
+        name="play-circle-outline">
+      </ion-icon>
+
+      <ion-icon
+        *ngIf="post.type === 'multiple'"
+        class="post-type"
+        name="layers-outline">
+      </ion-icon>
+
+    </div>
+
+  </section>
+
+
+  <!-- Reels -->
+  <section class="posts-grid" *ngIf="activeTab === 'reels'">
+
+    <div
+      class="post"
+      *ngFor="let post of posts"
+      [hidden]="post.type !== 'reel'">
+
+      <img [src]="post.image" alt="Reel">
+
+      <div class="post-overlay">
+        <div>
+          <ion-icon name="heart"></ion-icon>
+          <span>{{ post.likes }}</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Tagged -->
+  <section class="empty-tab" *ngIf="activeTab === 'tagged'">
+
+    <ion-icon name="person-outline"></ion-icon>
+
+    <h3>Photos of you</h3>
+
+    <p>
+      Photos and videos you're tagged in will appear here.
+    </p>
+
+  </section>
+
 </ion-content>
+
+
 
