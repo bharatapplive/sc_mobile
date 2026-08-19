@@ -34,6 +34,6 @@ export class LoginPage implements OnInit {
       return;
     }
     
-    window.location.href = '/tabs';
+    window.location.href = '/home';
   }
 }
