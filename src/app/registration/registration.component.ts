@@ -1,77 +1,45 @@
 import { Component } from '@angular/core';
-
-import {
-  FormBuilder,
-  Validators,
-  AbstractControl,
-  ValidationErrors,
-  ReactiveFormsModule
-} from '@angular/forms';
-
-import { CommonModule } from '@angular/common';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
+  standalone: false // Yahan change kiya hai
 })
 export class RegisterComponent {
 
-  showPassword = false;
-  showConfirmPassword = false;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-outline';
 
-  registerForm = this.fb.group(
-    {
-      emailOrMobile: ['', Validators.required],
+  constructor(private toastController: ToastController, private router: Router) {}
 
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6)
-        ]
-      ],
-
-      confirmPassword: [
-        '',
-        Validators.required
-      ]
-    },
-    {
-      validators: this.passwordMatchValidator
+  togglePasswordMode() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.passwordIcon = 'eye-off-outline';
+    } else {
+      this.passwordType = 'password';
+      this.passwordIcon = 'eye-outline';
     }
-  );
-
-  constructor(private fb: FormBuilder) {}
-
-  passwordMatchValidator(
-    control: AbstractControl
-  ): ValidationErrors | null {
-
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password !== confirmPassword) {
-      return { passwordMismatch: true };
-    }
-
-    return null;
   }
 
-  register() {
+  async showMessage(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000, 
+      position: 'bottom',
+      color: 'dark'
+    });
+    toast.present();
+  }
 
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
-      return;
-    }
+  signUp() {
+    this.showMessage('Creating your account... Please wait!');
+  }
 
-    console.log('Registration Data:', this.registerForm.value);
-
-    alert('Account created successfully!');
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

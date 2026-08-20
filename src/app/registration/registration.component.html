@@ -1,148 +1,72 @@
-<div class="register-page">
+<ion-content class="custom-bg">
+  <div class="main-container">
+    
+    <!-- Header Section -->
+    <div class="header-section">
+      <div class="logo-box">
+        <ion-icon name="people"></ion-icon>
+      </div>
+      <h1 class="title">Create Account</h1>
+      <p class="subtitle">Join Social Circle and start sharing your story with the world.</p>
+    </div>
 
-  <!-- Logo -->
-  <div class="logo">
-    <span>♟</span>
-  </div>
-
-  <!-- Heading -->
-  <h1>Social Circle</h1>
-
-  <p class="subtitle">
-    Connect with creators, share your story, and join the digital circle
-  </p>
-
-  <!-- Registration Card -->
-  <div class="register-card">
-
-    <h2>Create Account</h2>
-
-    <p class="description">
-      Join Social Circle today
-    </p>
-
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-
-      <!-- Email / Mobile -->
+    <!-- Form Section -->
+    <div class="form-section">
+      
+      <!-- 1. Full Name Input -->
       <div class="input-group">
-
-        <label>Mobile Number or Email</label>
-
+        <ion-label class="input-label">Full Name</ion-label>
         <div class="input-box">
-
-          <span>👤</span>
-
-          <input
-            type="text"
-            formControlName="emailOrMobile"
-            placeholder="Enter mobile number or email"
-          />
-
+          <ion-icon name="person-outline" class="icon-left"></ion-icon>
+          <ion-input type="text" placeholder="Name"></ion-input>
         </div>
-
-        <small
-          *ngIf="
-            registerForm.get('emailOrMobile')?.touched &&
-            registerForm.get('emailOrMobile')?.invalid
-          "
-        >
-          Mobile number or email is required
-        </small>
-
       </div>
 
-      <!-- Password -->
+      <!-- 2. Username Input (Instagram Style) -->
       <div class="input-group">
-
-        <label>Password</label>
-
+        <ion-label class="input-label">Username</ion-label>
         <div class="input-box">
-
-          <span>🔒</span>
-
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            formControlName="password"
-            placeholder="Create password"
-          />
-
-          <button
-            type="button"
-            class="eye-btn"
-            (click)="showPassword = !showPassword"
-          >
-            {{ showPassword ? '🙈' : '👁️' }}
-          </button>
-
+          <ion-icon name="at-outline" class="icon-left"></ion-icon>
+          <ion-input type="text" placeholder="username"></ion-input>
         </div>
-
-        <small
-          *ngIf="
-            registerForm.get('password')?.touched &&
-            registerForm.get('password')?.invalid
-          "
-        >
-          Password must be at least 6 characters
-        </small>
-
       </div>
 
-      <!-- Confirm Password -->
+      <!-- 3. Email Input -->
       <div class="input-group">
-
-        <label>Confirm Password</label>
-
+        <ion-label class="input-label">Email Address</ion-label>
         <div class="input-box">
-
-          <span>🔒</span>
-
-          <input
-            [type]="showConfirmPassword ? 'text' : 'password'"
-            formControlName="confirmPassword"
-            placeholder="Confirm password"
-          />
-
-          <button
-            type="button"
-            class="eye-btn"
-            (click)="showConfirmPassword = !showConfirmPassword"
-          >
-            {{ showConfirmPassword ? '🙈' : '👁️' }}
-          </button>
-
+          <ion-icon name="mail-outline" class="icon-left"></ion-icon>
+          <ion-input type="email" placeholder="username@social.com"></ion-input>
         </div>
-
-        <small
-          *ngIf="
-            registerForm.hasError('passwordMismatch') &&
-            registerForm.get('confirmPassword')?.touched
-          "
-        >
-          Passwords do not match
-        </small>
-
       </div>
 
-      <!-- Register Button -->
-      <button
-        type="submit"
-        class="register-btn"
-        [disabled]="registerForm.invalid"
-      >
-        Create Account
-      </button>
+      <!-- 4. Date of Birth Input (Instagram Style) -->
+      <div class="input-group">
+        <ion-label class="input-label">Date of Birth</ion-label>
+        <div class="input-box">
+          <ion-icon name="calendar-outline" class="icon-left"></ion-icon>
+          <ion-input type="date"></ion-input>
+        </div>
+      </div>
 
-    </form>
+      <!-- 5. Password Input -->
+      <div class="input-group">
+        <ion-label class="input-label">Password</ion-label>
+        <div class="input-box">
+          <ion-icon name="lock-closed-outline" class="icon-left"></ion-icon>
+          <ion-input [type]="passwordType" placeholder="Create a password"></ion-input>
+          <ion-icon [name]="passwordIcon" class="icon-right" style="cursor: pointer;" (click)="togglePasswordMode()"></ion-icon>
+        </div>
+      </div>
 
-    <!-- Login -->
-    <p class="login-text">
-      Already have an account?
+      <!-- Sign Up Button -->
+      <ion-button expand="block" class="login-btn" (click)="signUp()" style="margin-top: 25px;">Sign Up</ion-button>
+    </div>
 
-      <a routerLink="/login">
-        Log In
-      </a>
-    </p>
+    <!-- Footer Section -->
+    <div class="footer-section">
+      <p>Already have an account? <a style="cursor: pointer;" (click)="goToLogin()">Log In</a></p>
+    </div>
 
   </div>
-
-</div>
+</ion-content>
