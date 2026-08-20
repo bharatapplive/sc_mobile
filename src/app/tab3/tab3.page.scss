@@ -1,0 +1,38 @@
+.reels-container {
+  height: 100%;
+  background: #000;
+}
+
+.reel {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reel-content {
+  text-align: center;
+  color: white;
+}
+
+.reel-content h2 {
+  font-size: 28px;
+}
+
+.reel-content p {
+  font-size: 16px;
+}
+
+.reel-actions {
+  position: absolute;
+  right: 10px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reel-actions ion-button {
+  --color: white;
+  font-size: 28px;
+}

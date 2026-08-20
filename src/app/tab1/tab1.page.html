@@ -1,0 +1,172 @@
+<ion-header class="feed-header">
+  <ion-toolbar>
+    <ion-title>socile cricle</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button>
+        <ion-icon name="paper-plane-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- Stories -->
+  <div class="stories">
+    <div class="story">
+      <div class="story-avatar add-story">
+        <ion-icon name="add"></ion-icon>
+      </div>
+      <span>Your story</span>
+    </div>
+
+    <div class="story">
+      <img
+        class="story-avatar"
+        src="https://i.pravatar.cc/150?img=12"
+      />
+      <span>Rahul</span>
+    </div>
+
+    <div class="story">
+      <img
+        class="story-avatar"
+        src="https://i.pravatar.cc/150?img=32"
+      />
+      <span>Priya</span>
+    </div>
+
+    <div class="story">
+      <img
+        class="story-avatar"
+        src="https://i.pravatar.cc/150?img=47"
+      />
+      <span>Aman</span>
+    </div>
+
+    <div class="story">
+      <img
+        class="story-avatar"
+        src="https://i.pravatar.cc/150?img=52"
+      />
+      <span>Neha</span>
+    </div>
+  </div>
+
+  <!-- Post 1 -->
+  <div class="post">
+
+    <div class="post-header">
+      <div class="user-info">
+        <img src="https://i.pravatar.cc/100?img=12">
+        <strong>rahul_dev</strong>
+      </div>
+
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+    </div>
+
+    <img
+      class="post-image"
+      src="https://picsum.photos/600/600?random=1"
+    >
+
+    <div class="post-actions">
+
+      <div>
+        <ion-button fill="clear">
+          <ion-icon name="heart-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear">
+          <ion-icon name="chatbubble-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear">
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <ion-button fill="clear">
+        <ion-icon name="bookmark-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+
+    <div class="post-content">
+      <strong>245 likes</strong>
+
+      <p>
+        <strong>rahul_dev</strong>
+        Beautiful day! 🌄
+      </p>
+
+      <span class="comments">
+        View all 18 comments
+      </span>
+    </div>
+
+  </div>
+
+  <!-- Post 2 -->
+  <div class="post">
+
+    <div class="post-header">
+      <div class="user-info">
+        <img src="https://i.pravatar.cc/100?img=32">
+        <strong>priya_design</strong>
+      </div>
+
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+    </div>
+
+    <img
+      class="post-image"
+      src="https://picsum.photos/600/600?random=2"
+    >
+
+    <div class="post-actions">
+
+      <div>
+        <ion-button fill="clear">
+          <ion-icon name="heart-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear">
+          <ion-icon name="chatbubble-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear">
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <ion-button fill="clear">
+        <ion-icon name="bookmark-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+
+    <div class="post-content">
+      <strong>128 likes</strong>
+
+      <p>
+        <strong>priya_design</strong>
+        Working on something new ✨
+      </p>
+
+      <span class="comments">
+        View all 9 comments
+      </span>
+    </div>
+
+  </div>
+
+  <!-- Bottom Navigation -->
+  <app-bottom-nav></app-bottom-nav>
+
+</ion-content>

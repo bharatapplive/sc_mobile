@@ -1,0 +1,124 @@
+.feed-header {
+  ion-toolbar {
+    --background: #ffffff;
+    --color: #000000;
+  }
+
+  ion-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+
+.stories {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid #eeeeee;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.story {
+  min-width: 68px;
+  text-align: center;
+  font-size: 11px;
+  color: #222;
+}
+
+.story-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+  border: 2px solid #e1306c;
+  padding: 2px;
+}
+
+.add-story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eeeeee;
+  border: 1px solid #cccccc;
+  color: #000;
+  font-size: 25px;
+}
+
+.post {
+  background: #ffffff;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 8px;
+}
+
+.post-header {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  strong {
+    font-size: 14px;
+  }
+}
+
+.post-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 6px;
+
+  ion-button {
+    --color: #000000;
+    margin: 0;
+    font-size: 22px;
+  }
+}
+
+.post-content {
+  padding: 0 12px 12px;
+
+  strong {
+    font-size: 14px;
+  }
+
+  p {
+    margin: 7px 0;
+    font-size: 14px;
+  }
+
+  .comments {
+    color: #777;
+    font-size: 13px;
+  }
+}
+
+ion-content {
+  --background: #ffffff;
+}
