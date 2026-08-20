@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="panels">
       <ion-button fill="clear">
-        <ion-label>its.ranaji008</ion-label>
+        <ion-label>{{user?.username}}</ion-label>
       </ion-button>
       <div>
         <ion-button fill="clear">
@@ -37,18 +37,18 @@
         </div>
 
         <div class="profile-content">
-          <h2>{{fullname}}</h2>
+          <h2>{{user?.fullname}}</h2>
           <div class="follow-list">
             <div class="list">
-              <p>{{postNumber}}</p>
+              <p>{{user?.postNumber}}</p>
               <p>posts</p>
             </div>
             <div class="list">
-              <p>{{follower}}</p>
+              <p>{{user?.followerNumber}}</p>
               <p>followers</p>
             </div>
             <div class="list">
-              <p>{{following}}</p>
+              <p>{{user?.followingNumber}}</p>
               <p>following</p>
             </div>
           </div>

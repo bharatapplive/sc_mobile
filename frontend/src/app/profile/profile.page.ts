@@ -3,6 +3,14 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth-service';
 
+export interface UserProfile{
+  fullname: string;
+  username: string;
+  postNumber: number;
+  followerNumber: number;
+  followingNumber: number;
+  avatarUrl?: string;
+}
 
 @Component({
   selector: 'app-profile',
@@ -13,13 +21,8 @@ import { AuthService } from '../auth-service';
 
 export class ProfilePage implements OnInit {
 
+  user: UserProfile | null = null;
   
-  @Input() userId: string ='';
-  fullname: string = '';
-  username: string = '';
-  postNumber: number = 0;
-  follower: number = 0;
-  following: number = 0;
   avatarUrl?: string = '';
 
   isFollowing: boolean = false;
@@ -42,16 +45,9 @@ export class ProfilePage implements OnInit {
   loadUserProfile(event?: any){
     
     this.authServe.loadUserData().subscribe({
-      next: (userData) => {
-        this.fullname = userData.fullname;
-        this.username = userData.username;
-        this.postNumber = userData.postNumber ?? 0;
-        this.follower = userData.followerNumber ?? 0;
-        this.following = userData.followingNumber ?? 0;
-
-        this.avatarUrl = userData.avatarUrl?.trim();
-        
-        
+      next: (userData: any) => {
+        this.user = userData;
+                
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
           event.target.complete();
@@ -74,12 +70,11 @@ export class ProfilePage implements OnInit {
   }
 
   // 1. GET AVATAR...
-  getUserAvatar(){
-         
-    if (this.avatarUrl) {
+  getUserAvatar(){         
+    if (this.user?.avatarUrl) {
       // Return absolute URLs directly
-      if (this.avatarUrl.startsWith('http://') || this.avatarUrl.startsWith('https://')) {
-        return this.avatarUrl;
+      if (this.user?.avatarUrl.startsWith('http://') || this.user?.avatarUrl.startsWith('https://')) {
+        return this.user?.avatarUrl.trim();
       }
     }
     // Default fallback placeholder
@@ -88,7 +83,7 @@ export class ProfilePage implements OnInit {
 
   // 2. UPDATE POST..
   updatePost(){    
-    this.postNumber++;
+    //this.postNumber++;
     // const payload = {userId: this.userId, postNumber: Number(this.postNumber)};
 
     // this.http.patch<{postNumber: number}>(`${this.API_URL}/user/post`,payload).subscribe(
@@ -105,9 +100,9 @@ export class ProfilePage implements OnInit {
   updateFollower(){
     
     // Fallback to 0 if database returns null/undefined, then increment
-    this.follower = (Number(this.follower) || 0) + 1;
+    //this.follower = (Number(this.follower) || 0) + 1;
 
-    const payload = {userId: this.userId, followerNumber: this.follower};
+    //const payload = {userId: this.userId, followerNumber: this.follower};
 
     // this.http.patch<{followerNumber: number}>(`${this.API_URL}/user/follower`, payload).subscribe(
     //   {
@@ -125,7 +120,7 @@ export class ProfilePage implements OnInit {
     // Fallback to 0 if database returns null/undefined, then increment
     //this.following = (Number(this.following) || 0) + 1;
 
-    const payload = {userId: this.userId, followingNumber: this.following};
+    //const payload = {userId: this.userId, followingNumber: this.following};
 
     // this.http.patch<{followingNumber: number}>(`${this.API_URL}/user/following`, payload).subscribe(
     //   {
@@ -146,15 +141,15 @@ export class ProfilePage implements OnInit {
 
   updateFollowingList()
   {
-    if(this.isFollowing){
-      this.following = (Number(this.following) || 0) + 1;
-      this.updateFollowing();
-    }
-    else
-    {      
-      this.following = (Number(this.following) || 0) - 1;
-      this.updateFollowing();
-    }
+    // if(this.isFollowing){
+    //   this.following = (Number(this.following) || 0) + 1;
+    //   this.updateFollowing();
+    // }
+    // else
+    // {      
+    //   this.following = (Number(this.following) || 0) - 1;
+    //   this.updateFollowing();
+    // }
   }
 
   editProfile(){

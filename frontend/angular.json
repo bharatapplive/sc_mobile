@@ -142,6 +142,11 @@
     "analytics": false
   },
   "schematics": {
+    "@schematics/angular:component": {
+      "skipTests": true,            
+      "inlineTemplate": false,      
+      "inlineStyle": false          
+    },
     "@ionic/angular-toolkit:component": {
       "styleext": "scss"
     },
