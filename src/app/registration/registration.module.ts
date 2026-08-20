@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
-import { RegistrationPageRoutingModule } from './registration-routing.module';
+import { RouterModule } from '@angular/router'; // Naya add kiya hai
 import { RegisterComponent } from './registration.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    RegistrationPageRoutingModule,
-    RegisterComponent
-  ]
+    // Yeh line app ko batayegi ki kaunsa page dikhana hai
+    RouterModule.forChild([{ path: '', component: RegisterComponent }]) 
+  ],
+  declarations: [RegisterComponent]
 })
-export class RegistrationModule {}
+export class RegistrationPageModule {}

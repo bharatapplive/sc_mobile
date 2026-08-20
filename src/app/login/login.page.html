@@ -1,65 +1,64 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar> 
-</ion-header>-->
-<ion-content [fullscreen]="true" class="page">
-  <main class="box">
-    <!-- <div class="toggle" role="group" aria-label="Theme switcher">
-      <button type="button" [class.active]="theme === 'light'" (click)="setTheme('light')">Light</button>
-      <button type="button" [class.active]="theme === 'dark'" (click)="setTheme('dark')">Dark</button>
-    </div> -->
-
-    <header class="head">
-      <div class="icon vibrant-gradient">
-        <span class="material-symbols-outlined">group</span>
-      </div>
-      <h1>Social Circle</h1>
-      <p>Connect with creators, share your story, and join the digital circle.</p>
-    </header>
-
-    <div class="card">
-      <form class="form" action="#" method="POST">
-        <div class="field">
-          <label for="identity">Mobile Number or Email</label>
-          <div class="input">
-            <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required type="text" />
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="row flex justify-content-between">
-            <label for="password">Password</label>
-            <a href="#">Forgot Password?</a>
-          </div>
-          <div class="input">
-            <span class="material-symbols-outlined">lock</span>
-            <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <button type="button" aria-label="Show password">
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-          </div>
-        </div>
-
-        <button class="btn vibrant-gradient" type="submit">Log In</button>
-      </form>
-
-
-
+<ion-content class="custom-bg">
+  <div class="main-container">
     
+    <!-- Header Section -->
+    <div class="header-section">
+      <div class="logo-box">
+        <ion-icon name="people"></ion-icon>
+      </div>
+      <h1 class="title">Social Circle</h1>
+      <p class="subtitle">Connect with creators, share your story, and join the digital circle.</p>
     </div>
 
-    <footer class="foot">
-      <p>
-        Don't have an account?
-        <a href="#">Sign Up</a>
-      </p>
-      <div class="links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Help</a>
+    <!-- Form Section -->
+    <div class="form-section">
+      <div class="input-group">
+        <ion-label class="input-label">Username or Email</ion-label>
+        <div class="input-box">
+          <ion-icon name="at-outline" class="icon-left"></ion-icon>
+          <ion-input type="email" placeholder="username@social.com"></ion-input>
+        </div>
       </div>
-    </footer>
-  </main>
+
+      <div class="input-group">
+        <ion-label class="input-label">Password</ion-label>
+        <div class="input-box">
+          <ion-icon name="lock-closed-outline" class="icon-left"></ion-icon>
+          <!-- Yahan change kiya hai: [type]="passwordType" -->
+          <ion-input [type]="passwordType" placeholder="Password"></ion-input>
+          <!-- Yahan change kiya hai: Click function aur dynamic icon -->
+          <ion-icon [name]="passwordIcon" class="icon-right" style="cursor: pointer;" (click)="togglePasswordMode()"></ion-icon>
+        </div>
+      </div>
+
+      <div class="forgot-password">
+        <a style="cursor: pointer;" (click)="forgotPassword()">Forgot Password?</a>
+      </div>
+
+      <ion-button expand="block" class="login-btn" (click)="login()">Log In</ion-button>
+    </div>
+
+    <!-- Divider Section -->
+    <div class="divider">
+      <span>OR CONTINUE WITH</span>
+    </div>
+
+    <!-- Social Login Section -->
+    <div class="social-login-section">
+      <button class="social-btn" (click)="loginWithGoogle()">
+        <ion-icon name="logo-google" class="google-icon"></ion-icon>
+        Google
+      </button>
+      <button class="social-btn" (click)="loginWithApple()">
+        <ion-icon name="logo-apple" class="apple-icon"></ion-icon>
+        Apple
+      </button>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer-section">
+      <p>Don't have an account? <a (click)="goToRegistration()" style="cursor: pointer; color: #4c6baf; font-weight: bold; text-decoration: none;">Sign Up</a></p>
+    </div>
+
+  </div>
 </ion-content>

@@ -1,183 +1,188 @@
-:host {
-  display: block;
+.custom-bg {
+  --background: #ffffff; /* Pakka white background */
 }
 
-.page {
-  background: var(--color-background);
-  color: var(--color-on-surface);
-  font-family: var(--font-family-base);
-  min-height: 100%;
-}
-
-.box {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-md);
-}
-
-.head {
-  text-align: center;
-  margin-bottom: var(--spacing-lg);
-}
-
-.icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto var(--spacing-sm);
-  border-radius: 20px;
+.main-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  color: #fff;
+  height: 100%;
+  padding: 10px 20px;
+  background-color: #ffffff;
 }
 
-.head h1 {
-  margin: 0;
-  font-size: var(--font-size-display-lg-mobile);
-  font-weight: 800;
-  color: var(--color-primary);
+.header-section {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+
+  .logo-box {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 15px;
+    background: linear-gradient(135deg, #ff007f, #6a0dad);
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-icon {
+      color: white;
+      font-size: 35px;
+    }
+  }
+
+  .title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #000000 !important; /* Force black color */
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #666666 !important; /* Force gray color */
+    line-height: 1.4;
+    padding: 0 10px;
+    margin: 0;
+  }
 }
 
-.head p {
-  margin: var(--spacing-sm) 0 0;
-  font-size: var(--font-size-body-md);
-  color: var(--color-on-surface-variant);
-}
+.form-section {
+  .input-group {
+    margin-bottom: 18px;
 
-.card {
-  padding: var(--spacing-md);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-}
+    .input-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333333 !important;
+      margin-bottom: 8px;
+      display: block;
+      padding-left: 5px;
+    }
 
-html.dark .card {
-  box-shadow: 0 8px 30px rgba(138, 43, 226, 0.2);
-}
+    /* Solid Gray Input Box (Fixed) */
+    .input-box {
+      display: flex;
+      align-items: center;
+      background-color: #f4f5f8; /* Light gray box */
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 0 15px;
+      height: 52px;
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
+      ion-icon {
+        font-size: 20px;
+        color: #888888;
+      }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+      .icon-left {
+        margin-right: 10px;
+      }
 
-.field label,
-.row a {
-  font-size: var(--font-size-label-lg);
-  color: var(--color-on-surface-variant);
-}
+      .icon-right {
+        margin-left: 10px;
+      }
 
-.input {
-  display: flex;
-  align-items: center;
-  border: 1px solid rgba(123, 116, 134, 0.3);
-  background: var(--color-surface-variant);
-  border-radius: var(--radius-lg);
-  padding: 0 var(--spacing-sm);
-}
+      ion-input {
+        --padding-start: 0;
+        --padding-end: 0;
+        --background: transparent;
+        color: #000000;
+      }
+    }
+  }
 
-.input input {
-  flex: 1;
-  border: 0;
-  background: transparent;
-  padding: 14px 0;
-  color: var(--color-on-surface);
-}
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 25px;
+    margin-top: 5px;
+    a {
+      font-size: 13px;
+      color: #4c6baf;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  }
 
-.input input:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.btn {
-  border: 0;
-  border-radius: var(--radius-lg);
-  padding: 14px;
-  color: #fff;
-  font-weight: 700;
-  margin-top: 8px;
-}
-
-.toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface-variant);
-  font-size: 12px;
-}
-
-.toggle button {
-  border: 0;
-  border-radius: 999px;
-  padding: 6px 10px;
-  background: transparent;
-  color: inherit;
-}
-
-.toggle button.active {
-  background: var(--color-primary);
-  color: #fff;
+  .login-btn {
+    --background: linear-gradient(90deg, #ff007f, #6a0dad);
+    --border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    height: 50px;
+    margin-bottom: 30px;
+    text-transform: none;
+    --box-shadow: none;
+  }
 }
 
 .divider {
   display: flex;
   align-items: center;
-  margin: var(--spacing-md) 0;
-  color: var(--color-outline);
-}
-
-.divider span:first-child,
-.divider span:last-child {
-  flex: 1;
-  height: 1px;
-  background: var(--color-outline-variant);
-}
-
-.text {
-  padding: 0 var(--spacing-sm);
-  font-size: 12px;
-  text-transform: uppercase;
-}
-
-.socials {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--spacing-sm);
-}
-
-.social {
-  border: 1px solid rgba(123, 116, 134, 0.2);
-  border-radius: var(--radius-lg);
-  padding: 12px;
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface);
-}
-
-.foot {
-  margin-top: var(--spacing-lg);
   text-align: center;
+  margin-bottom: 25px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  span {
+    padding: 0 15px;
+    color: #999999;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
 }
 
-.foot a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.links {
+/* Social Buttons (Fixed) */
+.social-login-section {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
-  opacity: 0.8;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
+
+  .social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    color: #333333;
+    font-weight: bold;
+    font-size: 15px;
+    height: 48px;
+    cursor: pointer;
+
+    ion-icon {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+    
+    .google-icon {
+      color: #db37d83d; /* Google Red */
+    }
+    
+    .apple-icon {
+      color: #000000; /* Apple Black */
+    }
+  }
 }
 
+.footer-section {
+  text-align: center;
+  font-size: 14px;
+  color: #666666;
+
+  a {
+    color: #4c6baf;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
