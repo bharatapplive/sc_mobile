@@ -1,12 +1,126 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>create</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="create-page">
 
-<ion-content [fullscreen]="true">
-  <div class="custom">
-    <h2>Create Page</h2>
+  <!-- Camera Background -->
+  <div class="camera-background">
+    <img
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO5z2YjSk6NuDigdMzCTouPCX5vY7fdOa6HlV14Dx1EsWM1OsQvEOFzBSWENLfd3cDRqzJERrVc27WdxK0-Iqf--ThzJgVZybRoJDxzvGArFrpHcSZKlbjwmS-kEIOZsCZ81SB3JzhEyLR0rof72xUpwiHL7idhHIdBzJNct0B6fJVZ-tBWLUGSVSqjnz9H7rVfU-xWrrnFUCuFx7ZVbXp9dwuM7jIBbmz2oPklUYPJ5KoRes11UVo"
+      alt="Camera background"
+    />
+
+    <div class="camera-gradient"></div>
   </div>
-</ion-content>
 
+  <!-- Main Camera UI -->
+  <div class="camera-ui">
+
+    <!-- Header -->
+    <div class="top-bar">
+
+      <ion-button
+        fill="clear"
+        class="top-button"
+        aria-label="Close"
+      >
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+
+      <div class="live-badge">
+        <ion-icon name="radio-outline"></ion-icon>
+        <span>LIVE</span>
+      </div>
+
+      <ion-button
+        fill="clear"
+        class="top-button"
+        aria-label="Settings"
+      >
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+
+    <!-- Right Tools -->
+    <div class="side-tools">
+
+      <button class="tool-button">
+        <ion-icon name="camera-reverse-outline"></ion-icon>
+        <span>Flip</span>
+      </button>
+
+      <button class="tool-button">
+        <ion-icon name="color-filter-outline"></ion-icon>
+        <span>Filters</span>
+      </button>
+
+      <button class="tool-button">
+        <ion-icon name="musical-notes-outline"></ion-icon>
+        <span>Music</span>
+      </button>
+
+      <button class="tool-button">
+        <ion-icon name="timer-outline"></ion-icon>
+        <span>Timer</span>
+      </button>
+
+      <button class="tool-button">
+        <ion-icon name="speedometer-outline"></ion-icon>
+        <span>Speed</span>
+      </button>
+
+    </div>
+
+    <!-- Bottom Camera Controls -->
+    <div class="camera-controls">
+
+      <!-- Modes -->
+      <div class="mode-selector">
+
+        <button>POST</button>
+
+        <button>STORY</button>
+
+        <button class="active">
+          REEL
+          <span class="active-dot"></span>
+        </button>
+
+        <button>LIVE</button>
+
+      </div>
+
+      <!-- Capture Row -->
+      <div class="capture-row">
+
+        <!-- Gallery -->
+        <button class="gallery-button">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ4j8kcBsddwJ1XZbvazoWREOXZv5xkToYuFW8cYV1p4r_1tzbgyC13fSVoX7INoE2857IW7hjAQ5LPLAsXA7vbaqLszWT55z8geszRgFEDmAxolmQ4sLJm33qU2Zd9K-dE2f9QEM1Zqgw3CYpK_RqpEhxMxl9CBrBA5GIYwI8kGdW1lRozVy7fiTs77Bwt-S_6nEwWe6l-11vjZ2MJFhF5TLbjWlxkovJSx1jVObaS9-TyTo_wu1Q"
+            alt="Gallery"
+          />
+        </button>
+
+        <!-- Capture -->
+        <button class="capture-button">
+
+          <div class="capture-ring">
+
+            <div class="capture-inner">
+              <div class="capture-circle"></div>
+            </div>
+
+          </div>
+
+        </button>
+
+        <!-- Flash -->
+        <button class="flash-button">
+          <ion-icon name="flash-off-outline"></ion-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  

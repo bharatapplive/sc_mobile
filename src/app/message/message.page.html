@@ -1,12 +1,352 @@
-<ion-header [translucent]="true">
+<ion-header class="message-header">
   <ion-toolbar>
-    <ion-title>message</ion-title>
+
+    <div class="header-content">
+
+      <div class="header-left">
+        <ion-button
+          fill="clear"
+          class="back-button"
+          aria-label="Back"
+          (click)="goBack()">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
+
+        <ion-title>Messages</ion-title>
+      </div>
+
+      <ion-button
+        fill="clear"
+        class="new-message-button"
+        aria-label="New Message"
+        (click)="newMessage()">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="custom">
-    <h2>Message Page</h2>
-  </div>
-</ion-content>
 
+<ion-content
+  [fullscreen]="true"
+  class="messages-content">
+
+  <!-- Search -->
+  <section class="search-section">
+
+    <div class="search-box">
+
+      <ion-icon
+        name="search-outline"
+        class="search-icon">
+      </ion-icon>
+
+      <ion-input
+        [(ngModel)]="searchText"
+        placeholder="Search messages..."
+        type="text"
+        clearInput="true">
+      </ion-input>
+
+    </div>
+
+  </section>
+
+
+  <!-- Active Now -->
+  <section class="active-section">
+
+    <div class="section-title">
+      ACTIVE NOW
+    </div>
+
+    <div class="active-scroll">
+
+      <!-- Sarah -->
+      <div class="active-user">
+
+        <div class="avatar-wrapper active-ring">
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyNdpqPinJomx6OJU6yjzRHDrN_OLZXqvbWsv7saE1FJPvsl5FB-v5iL1OpdJQZ77GvIekuF6ST7GUku4pHciZS_QA3QzPqOwPW6XIqowvG6r4SV5Kq-PHqXt8HdEc5mLbKew28_S4ic7wbyRHb5rZzospHMu7Li3B0NknZvoL7lV2NJZjsR6rwbHOG9cNNDynd8h5xekxsXOcomPaNUCSR99SxVj4zm1JEsAw2N86tXVxmhrRjlod"
+            alt="Sarah">
+
+          <span class="online-dot"></span>
+
+        </div>
+
+        <span>Sarah</span>
+
+      </div>
+
+
+      <!-- Mike -->
+      <div class="active-user">
+
+        <div class="avatar-wrapper">
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz_nO2kGLeDj7vJBC6sVdv42_q9yOcnErse-9pnPCPWm2hj6v9W805jFLekVrVjds-Tk2wnXU-Yfus92UmAdTRsr0QR5gyFerLNVOqhmNy9MuPf9sCXXMGFGXIqkDUFcoFd-RYSmKJ8wBoX40--GM7_av92yQ90JbNS_pLQD8mQh7Zvrf4yVL5hMrbms1irmoIlHvwunePE4gely92UMK8Rs0ixE_k4eU1tfA7e8VBAbmmEBERiuct"
+            alt="Mike">
+
+          <span class="online-dot"></span>
+
+        </div>
+
+        <span>Mike_X</span>
+
+      </div>
+
+
+      <!-- Elena -->
+      <div class="active-user">
+
+        <div class="avatar-wrapper active-ring">
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT3JATeDkxw0MeKgVGDyFINvfkEE2CWlNAX5klusk83Qo6zbpteF8aMp4lN6sX4Pjx62MSW1ZpNDs3TD8zHUGPvVb2bot5jtt0gciZykWSzKn1CZfKHsHC-7Dshxy8FgFKZnvqrfk96RDHBgYFtATEXQ5gdtvwI7aoAT2df_v1KdQxkuON0pBhyON2tPhqKyFTOvsBZJ7FK3OhSv9820-3alVW6Ix9u8Xf9bitJIRNj1KXHd2v5Sfz"
+            alt="Elena">
+
+          <span class="online-dot"></span>
+
+        </div>
+
+        <span>Elena</span>
+
+      </div>
+
+
+      <!-- Doggo -->
+      <div class="active-user">
+
+        <div class="avatar-wrapper">
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvzqIS1ale8QE-1DKjFSTJ_B1Q8EC3RBK4Km9d_KQG5-EN8lxbrlMNMbKfFBVSsINb_k5y3LOE7UOX1vISqaiGyn5kCd2ib88sboEGtWSqSXAxccKqMnDDAa1yEDSR2mFCk5k9aHfMeBSq6hoe5ZZlkO5SL7OXbZ6e-J5JSUqtyLjR9BsiXsKY8aYG5xmNatFKL7lAXHLfE757xTlN0vQ9yRQIQ3o1dyh8pHUfvpekZaUB7cTLj_ug"
+            alt="Doggo">
+
+          <span class="online-dot"></span>
+
+        </div>
+
+        <span>Doggo</span>
+
+      </div>
+
+
+      <!-- Beats -->
+      <div class="active-user">
+
+        <div class="avatar-wrapper">
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCge8EyRwfKirm5834G2QWL4_o_wNR-WjfxSySkUyKZYQaqZYuovdlQGOwYjvYCKA1jnluI2fBjzeveGiw-l4xxFlWDPYw25CVNp8hV2EfJ-wh92ORLAjrBH7OJeqfAnJyD3nR-TEvysmkkRSlfuwjYDlsQhARod8Y5YhoKIy9ZWKUUCnUXGrsBYWTogvpVqf68DDE3QFHBoNDn5pGYyu8EYtZSxsP7nVyj9FAN0SpTdctxuYHzJ9Vz"
+            alt="BeatsByJ">
+
+          <span class="online-dot"></span>
+
+        </div>
+
+        <span>BeatsByJ</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Messages -->
+  <section class="message-list">
+
+
+    <!-- Sarah -->
+    <button
+      class="message-item unread"
+      (click)="openChat('Sarah')">
+
+      <div class="message-avatar">
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA54wk2JuETNirIF1xmeF1JaysF8V1Xr87waUtdFbIzTkoNnv-GQa-mxLAvJkd1n8g9M6GVuj-sxwDQpgEXD1E5zegoYbJs-6-JJDxuowfFJnBBAJsRpP4HyM931Wf0P_wWyz_H4pzi_zSf_tu5PBycAuTJhqtlBFJklJFWsTOTcVbumBSNXEpx4gu9skBNWItYD9EvsqSay8wyBqbvRW_iXb9vVetsYMzFimo9t2ghCcR4jwvPFwKP"
+          alt="Sarah">
+
+      </div>
+
+      <div class="message-info">
+
+        <div class="message-top">
+
+          <strong>Sarah</strong>
+
+          <span class="message-time">Now</span>
+
+        </div>
+
+        <div class="message-bottom">
+
+          <span class="message-preview">
+            Are we still on for tonight? 🚀
+          </span>
+
+          <span class="unread-dot"></span>
+
+        </div>
+
+      </div>
+
+    </button>
+
+
+    <!-- Elena -->
+    <button
+      class="message-item unread"
+      (click)="openChat('Elena')">
+
+      <div class="message-avatar">
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVcHthvbFgPXbyEkOehlnQcr4j2bZy1J-OFoHBmPojOsZfQKWq3lbWCbv2WIZbzRjiZPllB6n939YZt0VgfCn6FdV5OYyPTFE_0IRrsdbpCx3lWo1qJNAynIiGWmu9q1h6Xr7Mn5q6ij7GIQ9bXGHyH_o6oU4KW0w0F2f4u5INaI5P1iDuaMRDB9qkFDLBnS5fpLCXWLGNVNcDxCQXBtd0WeKCitiF14bY6Q0k2s0uknDpZ8ZHHKwL"
+          alt="Elena">
+
+      </div>
+
+      <div class="message-info">
+
+        <div class="message-top">
+
+          <strong>Elena</strong>
+
+          <span class="message-time">5m</span>
+
+        </div>
+
+        <div class="message-bottom">
+
+          <span class="message-preview">
+            Sent you a post
+          </span>
+
+          <span class="unread-number">
+            1
+          </span>
+
+        </div>
+
+      </div>
+
+    </button>
+
+
+    <!-- Mike -->
+    <button
+      class="message-item"
+      (click)="openChat('Mike_X')">
+
+      <div class="message-avatar faded">
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-HCndkmk2RPYd2h0TBpx_sHhVT70yJQ13opXqtwFrr_ri4LgzpH4DkEi1UfJaXkzKWePIR5oItMnh8yNQeYbNu1r1CS9natyrANPzb1z1P0BgjXPH2ccT7hsre7UPsQdp29DeANClATnifOOotlTi9I7M5cOrjaPJbWbM7dMqlJXNqDjwx1IiQ7BmNgodUKKJvuicZ4HxSX_VrTl0gybpOISgK21Pcbnc8P0gBQooaNQqhs2x8Jqr"
+          alt="Mike_X">
+
+      </div>
+
+      <div class="message-info">
+
+        <div class="message-top">
+
+          <strong>Mike_X</strong>
+
+          <span class="message-time">2h</span>
+
+        </div>
+
+        <div class="message-bottom">
+
+          <span class="message-preview">
+            Yeah that sounds good to me. See ya.
+          </span>
+
+        </div>
+
+      </div>
+
+    </button>
+
+
+    <!-- Doggo -->
+    <button
+      class="message-item"
+      (click)="openChat('Doggo')">
+
+      <div class="message-avatar faded">
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Ilj3PGcT-SRFuv6PI--Zg4W9ErrIG0pDa7h0RPMQxrQE38icpIi-738NlZAP1usS6iFL-XdC_Lsr5jDlej9LLBWewKcoCMwQxc4jNfIZ4c2cejxdykNVl4u8oKtE39-E5vCB7CpQBo1wrDZv6gjwDtGnsmfsVxVrXJ5TLVzCfN9c_C4tJnsTS0APAlqoTN_rrtTsLWONrT9FwbeVxak4WTel-nm8i9uYl2NO9_JgrtSipqQLmuWc"
+          alt="Doggo">
+
+      </div>
+
+      <div class="message-info">
+
+        <div class="message-top">
+
+          <strong>Doggo</strong>
+
+          <span class="message-time">Yesterday</span>
+
+        </div>
+
+        <div class="message-bottom">
+
+          <span class="message-preview">
+            Woof woof! 🐾
+          </span>
+
+        </div>
+
+      </div>
+
+    </button>
+
+
+    <!-- Beats -->
+    <button
+      class="message-item"
+      (click)="openChat('BeatsByJ')">
+
+      <div class="message-avatar faded">
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnaSQPvGHr6HJPhUXYevS4pU_0tNDfLwL67lFHqQS_BT2TBEgtjDDfF7RUkT1NlU9EWm6EOn3ENcr5CpGecaMhXD80wYEIpA_Cyz8k5LYW-2Zu2iijDPVpgaYfEs5oZlh53aURU8JvgW-JpDwvgfyPcm4hL9IrXyf32_r1nz5k7AK9KD4Y0tJDmNp0MkhlHElT6LY3Tw9FZ-dMoGZ4kUsCv6o6hruEyfhSqheJL1gqD5hl2rdswxWt"
+          alt="BeatsByJ">
+
+      </div>
+
+      <div class="message-info">
+
+        <div class="message-top">
+
+          <strong>BeatsByJ</strong>
+
+          <span class="message-time">Yesterday</span>
+
+        </div>
+
+        <div class="message-bottom">
+
+          <span class="message-preview">
+            Check out this new track I dropped.
+          </span>
+
+        </div>
+
+      </div>
+
+    </button>
+
+  </section>
+
+</ion-content>

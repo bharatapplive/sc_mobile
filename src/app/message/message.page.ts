@@ -1,16 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+
+import {
+  arrowBackOutline,
+  createOutline,
+  searchOutline,
+  homeOutline,
+  addOutline,
+  chatbubblesOutline,
+  personOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.page.html',
   styleUrls: ['./message.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class MessagePage implements OnInit {
+export class MessagePage {
 
-  constructor() { }
+  searchText = '';
 
-  ngOnInit() {
+  constructor() {
+    addIcons({
+      arrowBackOutline,
+      createOutline,
+      searchOutline,
+      homeOutline,
+      addOutline,
+      chatbubblesOutline,
+      personOutline
+    });
   }
 
+  goBack() {
+    window.history.back();
+  }
+
+  newMessage() {
+    console.log('New message clicked');
+  }
+
+  openChat(user: string) {
+    console.log('Opening chat:', user);
+  }
 }

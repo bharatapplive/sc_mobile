@@ -25,7 +25,7 @@ export class TabsComponent {
     { id: 'home', icon: 'home', label: 'Home', route: '/tabs/home' },
     { id: 'trending', icon: 'search', label: 'Trending', route: '/tabs/trending' },
     { id: 'create', icon: 'add', label: 'Create', route: '/tabs/create' },
-    { id: 'messages', icon: 'send', label: 'Messages', route: '/tabs/messages' },
+    { id: 'messages', icon: 'play-circle', label: 'Reels', route: '/tabs/reels' },
     { id: 'profile', icon: 'person', label: 'Profile', route: '/tabs/profile' },
   ];
 

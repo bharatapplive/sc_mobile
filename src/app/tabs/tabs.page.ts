@@ -1,16 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+
+import {
+  homeOutline,
+  flameOutline,
+  add,
+  sendOutline
+} from 'ionicons/icons';
 
 @Component({
-  selector: 'app-tabs-page',
+  selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: false
 })
-export class TabsPage implements OnInit {
+export class TabsPage {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    addIcons({
+     'home-outline': homeOutline,
+    'flame-outline': flameOutline,
+    'add': add,
+    'send-outline': sendOutline
+    });
   }
 
 }
