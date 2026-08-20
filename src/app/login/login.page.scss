@@ -34,7 +34,7 @@
 .head h1 {
   margin: 0px;
   font-size: var(--font-size-bigger);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-primary);
   letter-spacing: -1px;
 }
@@ -71,8 +71,8 @@ html.dark .card {
 
 #rotate{
   rotate: 4deg;
-  height: 4rem;
-  width: 4rem;;
+  height: 5rem;
+  width: 5rem;;
 }
 
 #ss {
@@ -96,12 +96,13 @@ html.dark .card {
 .row a {
   font-size: var(--font-size-label-lg);
   color: var(--color-on-surface-variant);
+  margin-top: 0.7rem;
 }
 
 .field a {
   color: var(--color-primary);
-  font-size: var(--font-size-label-lg);
-  font-weight: 600;
+  font-size: var(--font-size-body-md);
+  font-weight: 200;
 
 }
 
@@ -252,4 +253,10 @@ html.dark .card {
   gap: var(--spacing-sm);
   margin-top: var(--spacing-sm);
   opacity: 0.8;
+}
+
+.user{
+  height: 5rem;
+  width: 3rem;
+  rotate: 1deg;
 }

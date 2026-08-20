@@ -1,148 +1,223 @@
-<div class="register-page">
+<ion-content [fullscreen]="true">
 
-  <!-- Logo -->
-  <div class="logo">
-    <span>♟</span>
+  <!-- Background particles -->
+  <canvas #particleCanvas class="particle-canvas"></canvas>
+
+  <!-- Background decoration -->
+  <div class="background-decoration">
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
   </div>
 
-  <!-- Heading -->
-  <h1>Social Circle</h1>
+  <!-- Top Logo -->
+  <header class="top-header">
 
-  <p class="subtitle">
-    Connect with creators, share your story, and join the digital circle
-  </p>
+    <div class="brand">
+      <span class="brand-circle"></span>
 
-  <!-- Registration Card -->
-  <div class="register-card">
+      <h1>Social Circle</h1>
+    </div>
 
-    <h2>Create Account</h2>
+    <a class="desktop-login" href="#">
+      Login
+    </a>
 
-    <p class="description">
-      Join Social Circle today
-    </p>
+  </header>
 
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
 
-      <!-- Email / Mobile -->
-      <div class="input-group">
+  <!-- Main Content -->
+  <main class="main-container">
 
-        <label>Mobile Number or Email</label>
+    <!-- Welcome Header -->
+    <div class="welcome-section">
 
-        <div class="input-box">
+      <h2>Join the Circle.</h2>
 
-          <span>👤</span>
+      <p>
+        Where creators connect and the digital pulse comes alive.
+      </p>
 
-          <input
-            type="text"
-            formControlName="emailOrMobile"
-            placeholder="Enter mobile number or email"
-          />
+    </div>
+
+
+    <!-- Signup Card -->
+    <section class="signup-card">
+
+      <!-- Card Decoration -->
+      <div class="card-decoration"></div>
+
+
+      <form>
+
+        <!-- Full Name -->
+        <div class="form-group">
+
+          <label>Full Name</label>
+
+          <div class="input-wrapper">
+
+            <ion-icon name="person-outline"></ion-icon>
+
+            <input
+              type="text"
+              placeholder="Alex Rivera"
+            />
+
+          </div>
 
         </div>
 
-        <small
-          *ngIf="
-            registerForm.get('emailOrMobile')?.touched &&
-            registerForm.get('emailOrMobile')?.invalid
-          "
-        >
-          Mobile number or email is required
-        </small>
 
-      </div>
+        <!-- Email -->
+        <div class="form-group">
 
-      <!-- Password -->
-      <div class="input-group">
+          <label>Email</label>
 
-        <label>Password</label>
+          <div class="input-wrapper">
 
-        <div class="input-box">
+            <ion-icon name="mail-outline"></ion-icon>
 
-          <span>🔒</span>
+            <input
+              type="email"
+              placeholder="alex@creators.io"
+            />
 
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            formControlName="password"
-            placeholder="Create password"
-          />
+          </div>
+
+        </div>
+
+
+        <!-- Mobile Number -->
+        <div class="form-group">
+
+          <label>Mobile Number</label>
+
+          <div class="input-wrapper">
+
+            <ion-icon name="phone-portrait-outline"></ion-icon>
+
+            <input
+              type="tel"
+              placeholder="+1 (555) 000-0000"
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="form-group">
+
+          <label>Password</label>
+
+          <div class="input-wrapper">
+
+            <ion-icon name="lock-closed-outline"></ion-icon>
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="••••••••"
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+            >
+
+              <ion-icon
+                [name]="showPassword ? 'eye-off-outline' : 'eye-outline'">
+              </ion-icon>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- Sign Up Button -->
+        <div class="button-container">
 
           <button
             type="button"
-            class="eye-btn"
-            (click)="showPassword = !showPassword"
+            class="signup-button"
+            (click)="signUp()"
           >
-            {{ showPassword ? '🙈' : '👁️' }}
+
+            <span>Sign Up</span>
+
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+
           </button>
 
         </div>
 
-        <small
-          *ngIf="
-            registerForm.get('password')?.touched &&
-            registerForm.get('password')?.invalid
-          "
-        >
-          Password must be at least 6 characters
-        </small>
+      </form>
+
+
+      <!-- Terms -->
+      <div class="terms">
+
+        <p>
+          By signing up, you agree to our
+          <a href="#">Terms</a>
+          &
+          <a href="#">Privacy Policy</a>.
+        </p>
 
       </div>
 
-      <!-- Confirm Password -->
-      <div class="input-group">
+    </section>
 
-        <label>Confirm Password</label>
 
-        <div class="input-box">
+    <!-- Profile Images -->
+    <div class="profile-teasers">
 
-          <span>🔒</span>
+      <img
+        src="https://images.unsplash.com/photo-1784881212868-18702cdc8834?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDIyfHRvd0paRnNrcEdnfHxlbnwwfHx8fHw%3D"
+        alt="Creator"
+      />
 
-          <input
-            [type]="showConfirmPassword ? 'text' : 'password'"
-            formControlName="confirmPassword"
-            placeholder="Confirm password"
-          />
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN31FfUNAbjLsIVpRA0v78Ma38KJSvLEn7Wzh_0jQVIb94iGJtRNHeliVA4_YW5NxtzGfXkfQJoOrDwbSpVyBjilIzqr-Y0k92djnx7b5hWjIT7MTS-GIhnYUBYldyVvgj1SX13teqpjCt9xGDvGxvfMCLm4dUWTAbV7t6MEZH5ouNgimfDnHrTKvNVOzXkRZw4y6McPvt7m-869L6xwZdwmVe7IFzD3P_AqaGgg9KZT6C7BbZtL29avv7010SbAEmbxk2xyPp5qU"
+        alt="Creator"
+      />
 
-          <button
-            type="button"
-            class="eye-btn"
-            (click)="showConfirmPassword = !showConfirmPassword"
-          >
-            {{ showConfirmPassword ? '🙈' : '👁️' }}
-          </button>
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvXTsHkuTdS0tPhJ3leJkzgD3jyYjpApGnDr0GYD50puZF7NSCaqiuLyWCEdX09yY1u9m6ZJGDMDzu8NhOBuGNRsIxQfw8rua31kFdG0M0-OCl2SVuSYbY77XnW7UqGWV8VIXtEoQn_c1yDVMLJ8LzFzaX_aPLrqpdo-uDFujLuJhs-fCXM8qw_Pqk_Bn-E82v6OsdCNxvDnQvUvmmQpFW54BSX4WARrTc8QjKAdUoFwYYk2g76ec8gMqGzqny65_iT1ItLPJc00I"
+        alt="Creator"
+      />
 
-        </div>
-
-        <small
-          *ngIf="
-            registerForm.hasError('passwordMismatch') &&
-            registerForm.get('confirmPassword')?.touched
-          "
-        >
-          Passwords do not match
-        </small>
-
+      <div class="avatar-count">
+        +2k
       </div>
 
-      <!-- Register Button -->
-      <button
-        type="submit"
-        class="register-btn"
-        [disabled]="registerForm.invalid"
-      >
-        Create Account
-      </button>
+    </div>
 
-    </form>
 
     <!-- Login -->
-    <p class="login-text">
-      Already have an account?
+    <div class="login-section">
 
-      <a routerLink="/login">
-        Log In
-      </a>
+      <p>
+        Already have an account?
+        <a href="#">Log In</a>
+      </p>
+
+    </div>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer>
+
+    <p>
+      © 2026 Social Circle. All rights reserved.
     </p>
 
-  </div>
+  </footer>
 
-</div>
+</ion-content>

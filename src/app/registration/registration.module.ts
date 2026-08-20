@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { RegistrationPageRoutingModule } from './registration-routing.module';
-import { RegisterComponent } from './registration.page';
+import { RegistrationPage } from './registration.page';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { RegisterComponent } from './registration.page';
     ReactiveFormsModule,
     IonicModule,
     RegistrationPageRoutingModule,
-    RegisterComponent
+    RegistrationPage
   ]
 })
 export class RegistrationPageModule {}

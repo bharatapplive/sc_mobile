@@ -1,31 +1,20 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 :host {
   display: block;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 }
 
-// ion-toolbar {
-//   --background: rgba(var(--color-surface-rgb, 255, 255, 255), 0.8);
-//   --border-color: rgba(123, 116, 134, 0.18);
-// }
+ion-toolbar {
+  --background: rgba(var(--color-surface-rgb, 255, 255, 255), 0.8);
+  --border-color: rgba(123, 116, 134, 0.18);
+}
 
 .feed-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: 20px;
-  width: 100%;
-  height: 64px;
-  background-color:var(--color-surface);
   padding: 0 var(--spacing-sm);
-  backdrop-filter: var(blur-xl);
-  box-sizing: border-box;
+  height: 64px;
 }
 
 .feed-brand {
@@ -75,7 +64,7 @@
 }
 
 .icon-filled {
-  font-variation-settings: 'FILL' 1;
+  font-variation-settings: "FILL" 1;
 }
 
 .feed-main {
@@ -169,11 +158,9 @@
 }
 
 .story-label {
-  font-size: 13px;
+  font-size: 12px;
   line-height: 16px;
-  font-weight:bold;
-  letter-spacing: 0.5px;
-  font-weight: 550;
+  font-weight: 600;
   color: var(--color-on-surface-variant);
   max-width: 70px;
   text-align: center;
@@ -209,20 +196,18 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-sm);
-}
-
-.post-user {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.avatar-wrap {
-  width: 40px;
-  height: 40px;
-  padding: 1.5px;
-  border-radius: 50%;
-  overflow: hidden;
+  .post-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .avatar-wrap {
+      width: 40px;
+      height: 40px;
+      padding: 1.5px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
 }
 
 .avatar-inner {
@@ -255,64 +240,16 @@
   }
 }
 
-.user-info .username {
+.username{
   margin: 0;
-  font-size: var(--font-size-label-lg);
+  font-size: 17px;
   line-height: 20px;
   font-weight: 900;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.05em;
   color: var(--color-on-surface);
 }
 
-.location {
-  margin: 0;
-  font-size: 11px;
-  line-height: 1.5;
-  text-transform: uppercase;
-  letter-spacing: 0.17em;
-  color: var(--color-on-surface-variant);
-}
-
-// Post Image
-.post-image-wrap {
-  width: 100%;
-  aspect-ratio: 1;
-  background: #eee;
-}
-
-.post-image {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-// Post Content
-.post-content {
-  padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-md);
-}
-
-.post-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.action-group {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-// Post Meta
-.post-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.likes {
+.user-info .username{
   margin: 0;
   font-size: var(--font-size-label-lg);
   line-height: 20px;
@@ -321,34 +258,87 @@
   color: var(--color-on-surface);
 }
 
-.caption {
-  margin: 0;
-  font-size: var(--font-size-body-md);
-  line-height: 24px;
-  color: var(--color-on-surface);
+.red{
+  color: red;
 }
 
-.caption-user {
-  font-weight: 700;
-}
-
-.comment-link {
-  all: unset;
-  color: var(--color-on-surface-variant);
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.time-stamp {
+.location {
   margin: 0;
   font-size: 10px;
   line-height: 1.2;
-  letter-spacing: 0.15em;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--color-on-surface-variant);
 }
+
+// Post Image
+.post-image-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #eee;
+  .post-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+// Post Content
+.post-content {
+  padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-md);
+  .post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+  }
+  .post-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    .likes {
+      margin: 0;
+      font-size: var(--font-size-label-lg);
+      line-height: 20px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--color-on-surface);
+    }
+    .caption {
+      margin: 0;
+      font-size: var(--font-size-body-md);
+      line-height: 24px;
+      color: var(--color-on-surface);
+      font-weight: 100;
+      letter-spacing: 1px;
+    }
+    .comment-link {
+      all: unset;
+      color: var(--color-on-surface-variant);
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+    .time-stamp {
+      margin: 0;
+      font-size: 10px;
+      line-height: 1.2;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-on-surface-variant);
+    }
+  }
+}
+
+// Post Meta
 
 // Shader Card
 .shader-card {
@@ -397,5 +387,3 @@
   color: var(--color-primary);
   font-size: 28px;
 }
-
-

@@ -1,77 +1,189 @@
-import { Component } from '@angular/core';
-
 import {
-  FormBuilder,
-  Validators,
-  AbstractControl,
-  ValidationErrors,
-  ReactiveFormsModule
-} from '@angular/forms';
+  AfterViewInit,
+  Component,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+
+import { IonicModule } from '@ionic/angular';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  selector: 'app-signup',
   templateUrl: './registration.page.html',
-  styleUrls: ['./registration.page.scss']
+  styleUrls: ['./registration.page.scss'],
+  standalone: true,
+  imports: [IonicModule]
 })
-export class RegisterComponent {
+export class RegistrationPage implements AfterViewInit {
+
+  @ViewChild('particleCanvas')
+  particleCanvas!: ElementRef<HTMLCanvasElement>;
 
   showPassword = false;
-  showConfirmPassword = false;
 
-  registerForm = this.fb.group(
-    {
-      emailOrMobile: ['', Validators.required],
+  private ctx!: CanvasRenderingContext2D;
+  private particles: Particle[] = [];
 
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6)
-        ]
-      ],
-
-      confirmPassword: [
-        '',
-        Validators.required
-      ]
-    },
-    {
-      validators: this.passwordMatchValidator
-    }
-  );
-
-  constructor(private fb: FormBuilder) {}
-
-  passwordMatchValidator(
-    control: AbstractControl
-  ): ValidationErrors | null {
-
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password !== confirmPassword) {
-      return { passwordMismatch: true };
-    }
-
-    return null;
+  ngAfterViewInit(): void {
+    this.initializeParticles();
   }
 
-  register() {
 
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
-      return;
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+
+  signUp(): void {
+    console.log('Sign Up clicked');
+  }
+
+
+  private initializeParticles(): void {
+
+    const canvas = this.particleCanvas.nativeElement;
+
+    this.ctx = canvas.getContext('2d')!;
+
+    this.resizeCanvas();
+
+    window.addEventListener(
+      'resize',
+      () => this.resizeCanvas()
+    );
+
+    for (let i = 0; i < 40; i++) {
+      this.particles.push(
+        new Particle(canvas)
+      );
     }
 
-    console.log('Registration Data:', this.registerForm.value);
+    this.animate();
+  }
 
-    alert('Account created successfully!');
+
+  private resizeCanvas(): void {
+
+    const canvas = this.particleCanvas.nativeElement;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+
+  private animate(): void {
+
+    const canvas = this.particleCanvas.nativeElement;
+
+    this.ctx.clearRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    this.particles.forEach((particle) => {
+
+      particle.update();
+
+      particle.draw(this.ctx);
+
+    });
+
+    requestAnimationFrame(
+      () => this.animate()
+    );
+  }
+}
+
+
+class Particle {
+
+  x: number;
+  y: number;
+
+  size: number;
+
+  speedX: number;
+  speedY: number;
+
+  opacity: number;
+
+  color = '#8455ef';
+
+  private canvas: HTMLCanvasElement;
+
+
+  constructor(canvas: HTMLCanvasElement) {
+
+    this.canvas = canvas;
+
+    this.x =
+      Math.random() *
+      canvas.width;
+
+    this.y =
+      Math.random() *
+      canvas.height;
+
+    this.size =
+      Math.random() * 2 + 1;
+
+    this.speedX =
+      Math.random() * 0.5 - 0.25;
+
+    this.speedY =
+      Math.random() * 0.5 - 0.25;
+
+    this.opacity =
+      Math.random() * 0.5;
+  }
+
+
+  update(): void {
+
+    this.x += this.speedX;
+
+    this.y += this.speedY;
+
+
+    if (this.x > this.canvas.width) {
+      this.x = 0;
+    }
+
+    if (this.x < 0) {
+      this.x = this.canvas.width;
+    }
+
+    if (this.y > this.canvas.height) {
+      this.y = 0;
+    }
+
+    if (this.y < 0) {
+      this.y = this.canvas.height;
+    }
+  }
+
+
+  draw(ctx: CanvasRenderingContext2D): void {
+
+    ctx.globalAlpha = this.opacity;
+
+    ctx.fillStyle = this.color;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      this.x,
+      this.y,
+      this.size,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.globalAlpha = 1;
   }
 }

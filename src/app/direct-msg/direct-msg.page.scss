@@ -1,0 +1,724 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+}
+
+.messages-page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+
+  background: var(--color-background);
+  color: var(--color-surface-variant);
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* =========================
+   TOP HEADER
+========================= */
+
+.messages-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 50;
+
+  width: 100%;
+  height: 64px;
+
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  background: rgba(249, 249, 249, 0.8);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-bottom: 1px solid rgba(203, 195, 215, 0.2);
+
+  box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+}
+
+.messages-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-button {
+  border: none;
+  background: transparent;
+
+  padding: 0;
+
+  color: var(--color-primary);
+
+  cursor: pointer;
+
+  transition: transform 200ms ease;
+}
+
+.header-button:active {
+  transform: scale(0.95);
+}
+
+.messages-title {
+  margin: 0;
+
+  font-size: 24px;
+  line-height: 32px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.02em;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.messages-main {
+  width: 100%;
+  max-width: 672px;
+
+  margin: 0 auto;
+
+  padding: 80px 16px 96px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-section {
+  margin-bottom: 32px;
+}
+
+.search-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 48px;
+
+  transition: transform 200ms ease;
+}
+
+.search-wrapper:focus-within {
+  transform: scale(1.02);
+}
+
+.search-icon {
+  position: absolute;
+
+  left: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--color-outline);
+
+  font-size: 20px;
+
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 16px 0 48px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 999px;
+
+  box-sizing: border-box;
+
+  background: var(--color-surface-variant);
+
+  color: var(--color-on-surface);
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 16px;
+  line-height: 24px;
+
+  transition: box-shadow 200ms ease;
+}
+
+.search-input::placeholder {
+  color: rgba(123, 116, 134, 0.6);
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 2px rgba(107, 56, 212, 0.3);
+}
+
+
+/* =========================
+   STORIES
+========================= */
+
+.stories-section {
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.stories-row {
+  display: flex;
+
+  gap: 16px;
+
+  overflow-x: auto;
+
+  padding: 0 8px 16px;
+  margin: 0 0px;
+
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+}
+
+.stories-row::-webkit-scrollbar {
+  display: none;
+}
+
+.story-item {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+
+  scroll-snap-align: start;
+}
+
+.story-avatar {
+  position: relative;
+
+  width: 66px;
+  height: 66px;
+
+  border-radius: 50%;
+}
+
+.story-avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+.your-story {
+  padding: 2px;
+
+  background: var(--color-surface);
+
+  border: 2px dashed var(--color-outline-variant);
+
+  box-sizing: border-box;
+}
+
+.your-story img {
+  padding: 0;
+}
+
+.story-ring {
+  padding: 2px;
+  margin-left:2px;
+  background: linear-gradient(
+    180deg,
+    var(--color-primary),
+    // var(--color-secondary-container)
+  );
+}
+
+.story-ring img {
+  border: 2px solid var(--color-surface);
+
+  box-sizing: border-box;
+}
+
+.story-normal {
+  padding: 2px;
+
+  background: rgba(226, 226, 226, 0.3);
+}
+
+.story-normal img {
+  border: 2px solid var(--color-surface);
+
+  box-sizing: border-box;
+}
+
+.add-story {
+  position: absolute;
+
+  right: 0;
+  bottom: 0;
+
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-primary);
+
+  border: 2px solid var(--color-surface);
+
+  color: white;
+}
+
+.add-story .material-symbols-outlined {
+  font-size: 14px;
+
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 700;
+}
+
+.story-name {
+  color: var(--color-on-surface-variant);
+
+  font-size: 16px;
+  line-height: 16px;
+
+  font-weight: 300;
+}
+
+
+/* =========================
+   MESSAGE SECTION
+========================= */
+
+.message-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.message-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 0;
+}
+
+.message-heading h2 {
+  margin: 0;
+
+  color: var(--color-on-surface);
+
+  font-size: 18px;
+  line-height: 32px;
+
+  font-weight: 100;
+}
+
+.requests-button {
+  border: none;
+  background: transparent;
+
+  padding: 0;
+
+  color: var(--color-primary);
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 16px;
+  line-height: 20px;
+
+  letter-spacing: 0.05em;
+
+  font-weight: 100;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   MESSAGE CARD
+========================= */
+
+.message-card {
+  width: 100%;
+
+  min-height: 88px;
+
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  box-sizing: border-box;
+
+  background: var(--color-surface-container-lowest);
+
+  border: 1px solid rgba(203, 195, 215, 0.1);
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.message-card:hover {
+  border-color: rgba(107, 56, 212, 0.2);
+}
+
+.message-card:active {
+  transform: scale(0.98);
+}
+
+.message-card.unread {
+  background: #ffffff;
+
+  border-color: rgba(107, 56, 212, 0.1);
+
+  box-shadow: 0 4px 20px rgba(109, 59, 215, 0.04);
+}
+
+.message-card.unread:hover {
+  border-color: rgba(107, 56, 212, 0.3);
+}
+
+
+/* =========================
+   AVATAR
+========================= */
+
+.message-avatar-wrapper {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.message-avatar {
+  width: 56px;
+  height: 56px;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+.message-avatar.grayscale {
+  filter: grayscale(0.2);
+}
+
+.online-dot,
+.offline-dot {
+  position: absolute;
+
+  right: 0;
+  bottom: 0;
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  border: 2px solid white;
+
+  box-sizing: border-box;
+}
+
+.online-dot {
+  background: #22c55e;
+
+  box-shadow: 0 0 12px rgba(107, 56, 212, 0.4);
+}
+
+.offline-dot {
+  background: var(--color-outline-variant);
+}
+
+
+/* =========================
+   GROUP AVATAR
+========================= */
+
+.group-avatar {
+  position: relative;
+
+  flex-shrink: 0;
+
+  width: 56px;
+  height: 56px;
+}
+
+.group-avatar-top {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  z-index: 2;
+
+  width: 36px;
+  height: 36px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  border: 2px solid white;
+}
+
+.group-avatar-bottom {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 36px;
+  height: 36px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  border: 2px solid white;
+}
+
+.group-avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =========================
+   MESSAGE CONTENT
+========================= */
+
+.message-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.message-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  margin-bottom: 2px;
+}
+
+.message-name {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: var(--color-on-surface);
+
+  font-size: 16px;
+  line-height: 20px;
+
+  letter-spacing: 0.05em;
+
+  font-weight: 0;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.message-time {
+  flex-shrink: 0;
+
+  color: var(--color-outline);
+
+  font-size: 16px;
+  line-height: 16px;
+
+  font-weight: 200;
+}
+
+.unread-time {
+  color: var(--color-primary);
+}
+
+.message-text {
+  margin: 0;
+
+  overflow: hidden;
+
+  color: var(--color-on-surface-variant);
+
+  font-size: 16px;
+  line-height: 24px;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.unread-text {
+  color: var(--color-on-surface);
+
+  font-weight: 700;
+}
+
+.message-text strong {
+  font-weight: 700;
+}
+
+.unread-dot {
+  flex-shrink: 0;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: var(--color-primary);
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-navigation {
+  position: fixed;
+
+  left: 0;
+  bottom: 0;
+
+  z-index: 50;
+
+  width: 100%;
+  height: 64px;
+
+  padding: 8px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  box-sizing: border-box;
+
+  background: rgba(249, 249, 249, 0.8);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border-top: 1px solid rgba(203, 195, 215, 0.2);
+
+  box-shadow: 0 -4px 20px rgba(109, 59, 215, 0.08);
+
+  border-radius: 12px 12px 0 0;
+}
+
+.bottom-nav-item {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
+  border-radius: 50%;
+
+  color: var(--color-on-surface-variant);
+
+  transition:
+    transform 200ms ease,
+    background 200ms ease;
+}
+
+.bottom-nav-item:hover {
+  background: rgba(217, 181, 255, 0.3);
+}
+
+.bottom-nav-item:active {
+  transform: scale(0.9);
+}
+
+.bottom-nav-item.active {
+  color: var(--color-primary);
+
+  background: rgba(132, 85, 239, 0.2);
+}
+
+.bottom-nav-item .filled {
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 768px) {
+
+  .messages-header {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .messages-main {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+}

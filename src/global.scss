@@ -100,7 +100,7 @@ $font-size-display-lg-mobile: 36px;
   --spacing-xl: #{$spacing-xl};
   --font-family-base: #{$font-family-base};
   --font-size-body-md: #{$font-size-body-md};
-  --font-size-bigger:50px;
+  --font-size-bigger: 50px;
   --font-size-label-lg: #{$font-size-label-lg};
   --font-size-display-lg-mobile: #{$font-size-display-lg-mobile};
 }
@@ -128,14 +128,6 @@ ion-content {
   --overflow: auto;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;
-}
-
 .material-symbols-outlined {
   margin-right: 10px;
   color: gray;
@@ -143,11 +135,11 @@ body {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-.icon vibrant-gradient .material-symbols-outlined{
+.icon vibrant-gradient .material-symbols-outlined {
   rotate: 100deg;
   color: white;
- 
- }
+
+}
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.7);
@@ -180,6 +172,7 @@ body {
 .flex {
   display: flex;
 }
+
 .justify-content-between {
   justify-content: space-between;
 }
@@ -218,6 +211,15 @@ body {
   overflow-x: hidden;
 }
 
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
 ion-content {
   --padding-start: 0;
   --padding-end: 0;
@@ -230,7 +232,8 @@ input {
   font-family: 'Montserrat', sans-serif;
 }
 
-ion-tab-bar,ion-tab-button{
+ion-tab-bar,
+ion-tab-button {
   background-color: var(--color-surface);
   border-radius: none;
   -webkit-border-radius: none;
@@ -238,5 +241,48 @@ ion-tab-bar,ion-tab-button{
   -ms-border-radius: none;
   -o-border-radius: none;
   color: var(--color-on-surface);
- 
+
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+
+.glass-header {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.ambient-glow {
+  box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+}
+
+.active-tab-indicator {
+  height: 2px;
+  background: linear-gradient(90deg, #6b38d4, #8455ef);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.post-gradient-overlay {
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.4));
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }

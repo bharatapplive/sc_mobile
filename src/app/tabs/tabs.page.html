@@ -1,0 +1,34 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>tabs</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+    <ion-tabs>
+  <ion-tab-bar slot="bottom">
+
+  <ion-tab-button tab="profile">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="feed" routerLink="feed" routerDirection="root">
+      <ion-icon name="newspaper-outline"></ion-icon>
+    </ion-tab-button>
+
+   
+    <ion-tab-button tab="profile" routerLink="profile" routerDirection="root">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" routerLink="profile" routerDirection="root">
+      <ion-icon name="heart-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" routerLink="profile" routerDirection="root">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-tab-button>
+
+    
+  </ion-tab-bar>
+</ion-tabs>
+</ion-content>

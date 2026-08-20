@@ -1,18 +1,8 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar> 
-</ion-header>-->
 <ion-content [fullscreen]="true" class="page">
   <main class="box">
-    <!-- <div class="toggle" role="group" aria-label="Theme switcher">
-      <button type="button" [class.active]="theme === 'light'" (click)="setTheme('light')">Light</button>
-      <button type="button" [class.active]="theme === 'dark'" (click)="setTheme('dark')">Dark</button>
-    </div> -->
-
     <header class="head">
       <div class="icon vibrant-gradient" id="rotate">
-        <span class="material-symbols-outlined" id="ss">group</span>
+        <ion-icon class="user" name="people-outline"></ion-icon>
       </div>
       <h1>Social Circle</h1>
       <p>Connect with creators, share your story, and join the digital circle.</p>
@@ -24,8 +14,7 @@
           <label for="identity">Mobile Number or Email</label>
           <div class="input">
             <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required
-              type="text" />
+            <input id="identity" name="identity" placeholder="social@gmail.com" required type="text" />
           </div>
         </div>
 
@@ -35,11 +24,11 @@
             <a href="#">Forgot Password?</a>
           </div>
           <div class="input">
-            <span class="material-symbols-outlined ">lock</span>
+            <span class="material-symbols-outlined">lock</span>
             <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <!-- <button type="button" aria-label="Show password">
+            <div type="button" aria-label="Show password">
               <span class="material-symbols-outlined">visibility</span>
-            </button> -->
+            </div>
           </div>
         </div>
 
@@ -48,8 +37,10 @@
           <div class="Divido">------------ OR CONTINUE WITH ------------</div>
         </div>
         <div class="option">
-          <div class="google" >
-            Google</div>
+          <div class="google">
+            <!-- <ion-icon class="user" name=""></ion-icon> -->
+            Google
+          </div>
           <div class="google">Apple</div>
         </div>
       </form>

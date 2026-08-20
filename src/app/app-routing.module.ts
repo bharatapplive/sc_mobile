@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'feed',
+    redirectTo: 'direct-msg',
     pathMatch: 'full'
   },
   {
@@ -26,7 +26,17 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'direct-msg',
+    loadChildren: () => import('./direct-msg/direct-msg.module').then( m => m.DirectMsgPageModule)
   }
+
+
 
 ];
 
