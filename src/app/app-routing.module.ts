@@ -2,48 +2,64 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then((m) => m.HomePageModule),
-  },
+
+  // Default page
   {
     path: '',
-    redirectTo: 'direct-msg',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
+
+  // Login
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then((m) => m.LoginPageModule),
+    loadChildren: () =>
+      import('./login/login.module').then(m => m.LoginPageModule)
   },
+
+  // Registration
   {
     path: 'registration',
-    loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationPageModule)
+    loadChildren: () =>
+      import('./registration/registration.module').then(m => m.RegistrationPageModule)
   },
+
+  // Feed
   {
     path: 'feed',
-    loadChildren: () => import('./feed/feed.module').then(m => m.FeedPageModule)
+    loadChildren: () =>
+      import('./feed/feed.module').then(m => m.FeedPageModule)
   },
+
+  // Profile
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+    loadChildren: () =>
+      import('./profile/profile.module').then(m => m.ProfilePageModule)
   },
-  {
-    path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
+
+  // Direct Message
   {
     path: 'direct-msg',
-    loadChildren: () => import('./direct-msg/direct-msg.module').then( m => m.DirectMsgPageModule)
+    loadChildren: () =>
+      import('./direct-msg/direct-msg.module').then(m => m.DirectMsgPageModule)
+  },
+
+  // Home
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./home/home.module').then(m => m.HomePageModule)
   }
-
-
 
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules
+    })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

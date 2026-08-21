@@ -1,27 +1,28 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+/* =========================================================
+   GOOGLE FONTS
+   ========================================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
-/* Core CSS required for Ionic components to work properly */
+
+/* =========================================================
+   IONIC CORE CSS
+   ========================================================= */
+
 @import "@ionic/angular/css/core.css";
 
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
@@ -29,38 +30,50 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* =========================================================
+   IONIC DARK MODE
+   ========================================================= */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
+
+/* =========================================================
+   COLORS
+   ========================================================= */
 
 $color-primary: #6b38d4;
 $color-secondary: #6f5092;
+
 $color-background: #f9f9f9;
 $color-surface: #ffffff;
 $color-surface-variant: #f3f3f4;
+
 $color-on-surface: #1a1c1c;
 $color-on-surface-variant: #494454;
+
 $color-outline: #7b7486;
 $color-outline-variant: #cbc3d7;
 
+
+/* Dark colors */
+
 $dark-color-primary: #dcb8ff;
 $dark-color-secondary: #ddb7ff;
+
 $dark-color-background: #1c0c27;
 $dark-color-surface: #291934;
 $dark-color-surface-variant: #3f2e4a;
+
 $dark-color-on-surface: #f3daff;
 $dark-color-on-surface-variant: #cfc2d7;
+
 $dark-color-outline: #988ca0;
 $dark-color-outline-variant: #4c4354;
+
+
+/* =========================================================
+   SIZES
+   ========================================================= */
 
 $radius-sm: 0.25rem;
 $radius-lg: 0.5rem;
@@ -73,101 +86,265 @@ $spacing-md: 24px;
 $spacing-lg: 44px;
 $spacing-xl: 64px;
 
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
 $font-family-base: 'Montserrat', sans-serif;
+
 $font-size-body-md: 16px;
 $font-size-label-lg: 16px;
 $font-size-display-lg-mobile: 36px;
 
+
+/* =========================================================
+   ROOT VARIABLES
+   ========================================================= */
+
 :root {
+
   --color-primary: #{$color-primary};
   --color-secondary: #{$color-secondary};
+
   --color-background: #{$color-background};
+
   --color-surface: #{$color-surface};
   --color-surface-variant: #{$color-surface-variant};
+
   --color-on-surface: #{$color-on-surface};
   --color-on-surface-variant: #{$color-on-surface-variant};
+
   --color-outline: #{$color-outline};
   --color-outline-variant: #{$color-outline-variant};
+
+
   --radius-sm: #{$radius-sm};
   --radius-lg: #{$radius-lg};
   --radius-xl: #{$radius-xl};
   --radius-full: #{$radius-full};
   --radius-xxl: 2rem;
+
+
   --spacing-xs: #{$spacing-xs};
   --spacing-sm: #{$spacing-sm};
   --spacing-md: #{$spacing-md};
   --spacing-lg: #{$spacing-lg};
   --spacing-xl: #{$spacing-xl};
+
+
   --font-family-base: #{$font-family-base};
+
   --font-size-body-md: #{$font-size-body-md};
   --font-size-bigger: 50px;
   --font-size-label-lg: #{$font-size-label-lg};
   --font-size-display-lg-mobile: #{$font-size-display-lg-mobile};
 }
 
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
 html.dark {
+
   --color-primary: #{$dark-color-primary};
   --color-secondary: #{$dark-color-secondary};
+
   --color-background: #{$dark-color-background};
+
   --color-surface: #{$dark-color-surface};
   --color-surface-variant: #{$dark-color-surface-variant};
+
   --color-on-surface: #{$dark-color-on-surface};
   --color-on-surface-variant: #{$dark-color-on-surface-variant};
+
   --color-outline: #{$dark-color-outline};
   --color-outline-variant: #{$dark-color-outline-variant};
 }
 
+
+/* =========================================================
+   BASIC GLOBAL RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
   font-family: var(--font-family-base);
+
   background: var(--color-background);
   color: var(--color-on-surface);
 }
 
+body {
+  overflow-x: hidden;
+}
+
+app-root {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   IONIC CONTENT
+   ========================================================= */
+
 ion-content {
+
   --background: var(--color-background);
+
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+
   --overflow: auto;
 }
 
+
+/* =========================================================
+   TAB BAR
+   ========================================================= */
+
+ion-tab-bar,
+ion-tab-button {
+
+  background: var(--color-surface);
+
+  color: var(--color-on-surface);
+
+}
+
+
+/* =========================================================
+   BUTTONS / INPUTS
+   ========================================================= */
+
+button,
+input {
+  font-family: var(--font-family-base);
+}
+
+
+/* =========================================================
+   MATERIAL SYMBOLS
+   ========================================================= */
+
 .material-symbols-outlined {
-  margin-right: 10px;
-  color: gray;
+
   font-family: 'Material Symbols Outlined';
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+
+  margin-right: 10px;
+
+  color: gray;
 }
 
-.icon vibrant-gradient .material-symbols-outlined {
+
+/* =========================================================
+   MATERIAL ICON HELPERS
+   ========================================================= */
+
+.icon.vibrant-gradient .material-symbols-outlined {
+
   rotate: 100deg;
-  color: white;
 
+  color: white;
 }
+
+
+/* =========================================================
+   GLASS PANEL
+   ========================================================= */
 
 .glass-panel {
+
   background: rgba(255, 255, 255, 0.7);
+
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
+
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+
+/* =========================================================
+   VIBRANT GRADIENT
+   ========================================================= */
+
 .vibrant-gradient {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #8b5cf6 50%, #d946ef 100%);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      #8b5cf6 50%,
+      #d946ef 100%
+    );
 }
+
+
+/* =========================================================
+   SHADOW
+   ========================================================= */
 
 .glow-shadow {
-  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.08);
+
+  box-shadow:
+    0 8px 30px rgba(139, 92, 246, 0.08);
 }
+
+
+/* =========================================================
+   INPUT GLOW
+   ========================================================= */
 
 .input-glow:focus-within {
-  box-shadow: 0 0 0 4px rgba(107, 56, 212, 0.1);
+
+  box-shadow:
+    0 0 0 4px rgba(107, 56, 212, 0.1);
 }
 
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
 .form {
+
   label {
+
     font-size: var(--font-size-label-lg);
+
     font-weight: 800;
+
     line-height: 20px;
+
     letter-spacing: 0.05em;
   }
 }
+
+
+/* =========================================================
+   FLEX UTILITIES
+   ========================================================= */
 
 .flex {
   display: flex;
@@ -177,112 +354,99 @@ ion-content {
   justify-content: space-between;
 }
 
+
+/* =========================================================
+   TRANSITION
+   ========================================================= */
+
 .transition-opacity {
+
   transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  transition-timing-function:
+    cubic-bezier(0.4, 0, 0.2, 1);
+
   transition-duration: 150ms;
 }
 
+
+/* =========================================================
+   TEXT LABEL
+   ========================================================= */
+
 .text-label-sm {
+
   font-size: var(--font-size-body-sm);
+
   line-height: var(--font-size-body-sm);
+
   letter-spacing: var(--spacing-lg);
+
   font-weight: 200;
 }
 
 
-
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-
-  font-family: 'Montserrat', sans-serif;
-
-  background: #f9f9f9;
-}
-
-body {
-  overflow-x: hidden;
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  margin: 0;
-  padding: 0;
-}
-
-ion-content {
-  --padding-start: 0;
-  --padding-end: 0;
-  --padding-top: 0;
-  --padding-bottom: 0;
-}
-
-button,
-input {
-  font-family: 'Montserrat', sans-serif;
-}
-
-ion-tab-bar,
-ion-tab-button {
-  background-color: var(--color-surface);
-  border-radius: none;
-  -webkit-border-radius: none;
-  -moz-border-radius: none;
-  -ms-border-radius: none;
-  -o-border-radius: none;
-  color: var(--color-on-surface);
-
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-app-root {
-  display: block;
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-}
+/* =========================================================
+   GLASS HEADER
+   ========================================================= */
 
 .glass-header {
-  backdrop-filter: blur(20px);
+
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
+
+
+/* =========================================================
+   AMBIENT GLOW
+   ========================================================= */
 
 .ambient-glow {
-  box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+
+  box-shadow:
+    0 4px 20px rgba(109, 59, 215, 0.08);
 }
+
+
+/* =========================================================
+   ACTIVE TAB INDICATOR
+   ========================================================= */
 
 .active-tab-indicator {
+
   height: 2px;
-  background: linear-gradient(90deg, #6b38d4, #8455ef);
+
   width: 100%;
+
   position: absolute;
+
   bottom: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6b38d4,
+      #8455ef
+    );
 }
+
+
+/* =========================================================
+   POST GRADIENT
+   ========================================================= */
 
 .post-gradient-overlay {
-  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.4));
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 60%,
+      rgba(0, 0, 0, 0.4)
+    );
 }
 
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+ion-icon {
+  font-size: 29px;
+  font-weight: 900;
+  color: var(--color-on-surface-variant);
 }

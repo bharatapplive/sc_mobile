@@ -1,738 +1,744 @@
 :host {
-    display: block;
-    width: 100%;
-    min-height: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
+  display: block;
+  width: 100%;
 }
+
+
+/* =========================================
+   ION CONTENT
+========================================= */
+
+ion-content {
+  --background: #f9f9f9;
+}
+
+
+/* =========================================
+   PROFILE PAGE
+========================================= */
 
 .profile-page {
-    min-height: 100vh;
-    width: 100%;
+  width: 100%;
+  min-height: 100%;
 
-    background: #f9f9f9;
-    color: #1a1c1c;
+  background: #f9f9f9;
+  color: #1a1c1c;
 
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 
-    -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 
-    padding-bottom: 80px;
+  padding-bottom: 20px;
 }
 
 
-/* =========================
+/* =========================================
    HEADER
-========================= */
+========================================= */
 
 .profile-header {
-    position: fixed;
-    top: 0;
-    left: 0;
+  position: sticky;
+  top: 0;
 
-    width: 100%;
+  z-index: 20;
 
-    z-index: 50;
+  width: 100%;
 
-    background: rgba(249, 249, 249, 0.8);
+  background: rgba(249, 249, 249, 0.88);
 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-    border-bottom: 1px solid rgba(203, 195, 215, 0.2);
-
-    box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+  border-bottom: 1px solid rgba(203, 195, 215, 0.2);
 }
+
 
 .profile-header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  height: 64px;
 
-    width: 100%;
-    max-width: 896px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    height: 64px;
+  max-width: 896px;
 
-    margin: 0 auto;
+  margin: 0 auto;
 
-    padding: 0 16px;
+  padding: 0 16px;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 
 .profile-brand {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    gap: 8px;
+  gap: 8px;
 }
+
 
 .profile-camera {
-    color: #6b38d4;
+  color: #6b38d4;
 
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
+  font-size: 25px;
 }
+
 
 .profile-title {
-    margin: 0;
+  margin: 0;
 
-    font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  line-height: 32px;
 
-    font-size: 24px;
-    line-height: 42px;
+  font-weight: 700;
 
-    font-weight: 600;
+  background: linear-gradient(
+    90deg,
+    #6b38d4,
+    #8455ef
+  );
 
-    letter-spacing: -0.02em;
+  background-clip: text;
+  -webkit-background-clip: text;
 
-    background: linear-gradient(90deg,
-            #6b38d4,
-            #6f5092);
-
-    background-clip: text;
-    -webkit-background-clip: text;
-
-    color: transparent;
+  color: transparent;
 }
 
-.profile-header-action {
-    display: flex;
-    align-items: center;
-
-    gap: 16px;
-}
 
 .send-button {
-    padding: 0;
+  border: none;
+  background: transparent;
 
-    border: none;
+  color: #1a1c1c;
 
-    background: transparent;
+  padding: 8px;
 
-    color: #1a1c1c;
-
-    cursor: pointer;
-
-    transition: transform 200ms ease;
-}
-
-.send-button:active {
-    transform: scale(0.95);
+  cursor: pointer;
 }
 
 
-/* =========================
+/* =========================================
    MAIN
-========================= */
+========================================= */
 
 .profile-main {
-    width: 100%;
-    max-width: 896px;
+  width: 100%;
+  max-width: 896px;
 
-    margin: 0 auto;
+  margin: 0 auto;
 
-    padding-top: 80px;
-    padding-bottom: 96px;
+  padding: 20px 16px 30px;
 
-    padding-left: 16px;
-    padding-right: 16px;
-
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
-/* =========================
+/* =========================================
    PROFILE INFO
-========================= */
+========================================= */
 
 .profile-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
 
-    gap: 16px;
+  flex-direction: column;
 
-    padding: 16px 0;
+  gap: 16px;
+
+  padding: 10px 0;
 }
 
-.profile-image-wrapper {
-    position: relative;
-
-    flex-shrink: 0;
-}
 
 .profile-image-gradient {
-    width: 96px;
-    height: 96px;
+  width: 96px;
+  height: 96px;
 
-    padding: 4px;
+  padding: 4px;
 
-    border-radius: 50%;
+  border-radius: 50%;
 
-    background: linear-gradient(to top right,
-            #6b38d4,
-            #6f5092);
+  background: linear-gradient(
+    135deg,
+    #6b38d4,
+    #8455ef,
+    #d9b5ff
+  );
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 
 .profile-image-inner {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    border: 4px solid #f9f9f9;
+  border: 4px solid #f9f9f9;
 
-    border-radius: 50%;
+  border-radius: 50%;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 
 .profile-image-inner img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    object-fit: cover;
+  object-fit: cover;
 
-    display: block;
+  display: block;
 }
 
 
-/* =========================
+/* =========================================
    PROFILE META
-========================= */
+========================================= */
 
 .profile-meta {
-    display: flex;
-    flex-direction: column;
+  display: flex;
 
-    gap: 16px;
+  flex-direction: column;
 
-    flex-grow: 1;
+  gap: 14px;
 }
+
 
 .profile-meta-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
 }
+
 
 .profile-username {
-    margin: 0;
+  margin: 0;
 
-    color: #1a1c1c;
+  font-size: 23px;
+  line-height: 30px;
 
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 24px;
-    line-height: 32px;
-
-    font-weight: 700;
+  font-weight: 700;
 }
+
 
 .desktop-actions {
-    display: none;
+  display: none;
 
-    gap: 8px;
-}
-
-.profile-action-button {
-    padding: 8px 16px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    background: #e8e8e8;
-
-    color: #6b38d4;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 14px;
-    line-height: 20px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: background-color 200ms ease;
-}
-
-.profile-action-button:hover {
-    background: rgba(107, 56, 212, 0.1);
+  gap: 8px;
 }
 
 
-/* =========================
+.profile-action-button,
+.mobile-action-button {
+  border: none;
+
+  border-radius: 10px;
+
+  background: #e8e8e8;
+
+  color: #6b38d4;
+
+  padding: 9px 16px;
+
+  font-family: inherit;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
    STATS
-========================= */
+========================================= */
 
 .profile-stats {
-    display: flex;
+  display: flex;
 
-    gap: 24px;
+  gap: 28px;
 
-    padding: 8px 0;
+  padding: 5px 0;
 }
+
 
 .stat-item {
-    display: flex;
-    flex-direction: column;
+  display: flex;
 
-    gap: 0;
+  flex-direction: column;
 }
+
 
 .stat-number {
-    color: #1a1c1c;
+  font-size: 15px;
 
-    font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
 
-    font-size: 14px;
-    line-height: 20px;
-
-    font-weight: 700;
+  color: #1a1c1c;
 }
+
 
 .stat-label {
-    color: #494454;
+  font-size: 13px;
 
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 16px;
-    line-height: 24px;
-
-    font-weight: 400;
+  color: #494454;
 }
 
 
-/* =========================
+/* =========================================
    BIO
-========================= */
+========================================= */
 
 .profile-bio {
-    display: flex;
-    flex-direction: column;
+  display: flex;
 
-    gap: 4px;
+  flex-direction: column;
+
+  gap: 4px;
 }
+
 
 .profile-name {
-    margin: 0;
+  margin: 0;
 
-    color: #1a1c1c;
+  font-size: 14px;
 
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 14px;
-    line-height: 20px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.05em;
+  font-weight: 700;
 }
+
 
 .profile-description {
-    margin: 0;
+  margin: 0;
 
-    color: #494454;
+  font-size: 14px;
 
-    font-family: 'Montserrat', sans-serif;
+  line-height: 22px;
 
-    font-size: 16px;
-    line-height: 24px;
-
-    font-weight: 400;
+  color: #494454;
 }
 
 
-/* =========================
+/* =========================================
    MOBILE ACTIONS
-========================= */
+========================================= */
 
 .mobile-actions {
-    display: flex;
+  display: flex;
 
-    gap: 8px;
+  width: 100%;
 
-    width: 100%;
+  gap: 8px;
 
-    padding: 16px 0;
-
-    box-sizing: border-box;
+  padding: 12px 0;
 }
+
 
 .mobile-action-button {
-    flex: 1;
-
-    padding: 8px 16px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    background: #e8e8e8;
-
-    color: #6b38d4;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 14px;
-    line-height: 20px;
-
-    font-weight: 700;
-
-    text-align: center;
+  flex: 1;
 }
 
 
-/* =========================
+/* =========================================
    STORY HIGHLIGHTS
-========================= */
+========================================= */
 
 .story-highlights {
-    display: flex;
+  display: flex;
 
-    gap: 24px;
+  gap: 22px;
 
-    overflow-x: auto;
+  overflow-x: auto;
 
-    padding: 24px 0;
+  padding: 20px 0;
 
-    scrollbar-width: none;
+  scrollbar-width: none;
 }
+
 
 .story-highlights::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
+
 
 .highlight-item {
-    display: flex;
-    flex-direction: column;
+  flex-shrink: 0;
 
-    align-items: center;
+  display: flex;
 
-    gap: 8px;
+  flex-direction: column;
 
-    flex-shrink: 0;
+  align-items: center;
+
+  gap: 7px;
 }
+
 
 .highlight-image {
-    width: 64px;
-    height: 64px;
+  width: 64px;
+  height: 64px;
 
-    padding: 2px;
+  padding: 3px;
 
-    border: 2px solid #cbc3d7;
+  border: 2px solid #cbc3d7;
 
-    border-radius: 50%;
+  border-radius: 50%;
 
-    background: #f9f9f9;
+  overflow: hidden;
 
-    overflow: hidden;
-
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 
 .highlight-image-inner {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    border: 2px solid #f9f9f9;
+  border-radius: 50%;
 
-    border-radius: 50%;
-
-    overflow: hidden;
-
-    box-sizing: border-box;
+  overflow: hidden;
 }
+
 
 .highlight-image img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    object-fit: cover;
+  border-radius: 50%;
 
-    display: block;
-}
+  object-fit: cover;
 
-.highlight-label {
-    color: #1a1c1c;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 12px;
-    line-height: 16px;
-
-    font-weight: 600;
+  display: block;
 }
 
 
-/* =========================
+.highlight-item span {
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
    POST NAVIGATION
-========================= */
+========================================= */
 
 .post-navigation {
-    display: flex;
+  display: flex;
 
-    width: 100%;
+  width: 100%;
 
-    margin-top: 8px;
+  margin-top: 8px;
 
-    border-top: 1px solid rgba(203, 195, 215, 0.2);
+  border-top: 1px solid rgba(203, 195, 215, 0.4);
+
+  border-bottom: 1px solid rgba(203, 195, 215, 0.4);
 }
+
 
 .post-nav-button {
-    position: relative;
+  position: relative;
 
-    flex: 1;
+  flex: 1;
 
-    display: flex;
-    flex-direction: column;
+  height: 55px;
 
-    align-items: center;
+  border: none;
 
-    padding: 16px;
+  background: transparent;
 
-    border: none;
+  color: #777;
 
-    background: transparent;
+  display: flex;
 
-    color: #494454;
+  align-items: center;
 
-    cursor: pointer;
+  justify-content: center;
+
+  cursor: pointer;
 }
+
 
 .post-nav-button.active {
-    color: #6b38d4;
-}
-
-.active-tab-indicator {
-    position: absolute;
-
-    bottom: 0;
-
-    width: 100%;
-    height: 2px;
-
-    background: linear-gradient(90deg,
-            #6b38d4,
-            #8455ef);
+  color: #6b38d4;
 }
 
 
-/* =========================
+.post-nav-button.active::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 20%;
+  right: 20%;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    #6b38d4,
+    #8455ef
+  );
+}
+
+
+/* =========================================
    POST GRID
-========================= */
+========================================= */
 
 .post-grid {
-    display: grid;
+  display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
-    gap: 4px;
+  gap: 4px;
 
-    padding: 8px 0;
+  padding-top: 8px;
 }
+
 
 .post-grid-item {
-    position: relative;
+  position: relative;
 
-    aspect-ratio: 1 / 1;
+  width: 100%;
 
-    overflow: hidden;
+  aspect-ratio: 1 / 1;
 
-    background: #e2e2e2;
+  overflow: hidden;
 
-    border-radius: 0;
-}
-
-.post-grid-item>img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    transition: transform 500ms ease;
-}
-
-.post-grid-item:hover>img {
-    transform: scale(1.05);
-}
-
-.post-overlay {
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 24px;
-
-    background: rgba(0, 0, 0, 0.2);
-
-    color: #ffffff;
-
-    opacity: 0;
-
-    transition: opacity 300ms ease;
-}
-
-.post-grid-item:hover .post-overlay {
-    opacity: 1;
-}
-
-.post-overlay span {
-    display: flex;
-
-    align-items: center;
-
-    gap: 4px;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 14px;
-    line-height: 20px;
-
-    font-weight: 700;
+  background: #e2e2e2;
 }
 
 
-/* =========================
-   BOTTOM NAVIGATION
-========================= */
+.post-grid-item img {
+  width: 100%;
+  height: 100%;
 
-.bottom-navigation {
-    position: fixed;
+  object-fit: cover;
 
-    bottom: 0;
-    left: 0;
+  display: block;
 
-    width: 100%;
-
-    z-index: 50;
-
-    display: flex;
-
-    justify-content: space-around;
-    align-items: center;
-
-    padding: 8px 16px;
-
-    background: rgba(249, 249, 249, 0.8);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    border-top: 1px solid rgba(203, 195, 215, 0.2);
-
-    box-shadow:
-        0 -4px 20px rgba(109, 59, 215, 0.08);
-
-    border-radius: 12px 12px 0 0;
-
-    box-sizing: border-box;
-}
-
-.bottom-nav-item {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 8px;
-
-    border-radius: 50%;
-
-    color: #494454;
-
-    text-decoration: none;
-
-    transition:
-        background-color 200ms ease,
-        transform 200ms ease;
-}
-
-.bottom-nav-item:hover {
-    background: rgba(217, 181, 255, 0.3);
-}
-
-.bottom-nav-item:active {
-    transform: scale(0.9);
-}
-
-.bottom-nav-item.active-profile {
-    color: #6b38d4;
-
-    background: rgba(132, 85, 239, 0.2);
+  transition: transform 0.3s ease;
 }
 
 
-/* =========================
+.post-grid-item:hover img {
+  transform: scale(1.05);
+}
+
+
+/* =========================================
+   FIXED BOTTOM IONIC FOOTER
+========================================= */
+
+.app-footer {
+  display: block !important;
+
+  position: fixed !important;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  height: 65px;
+
+  z-index: 99999;
+
+  margin: 0;
+
+  padding: 0;
+
+  background: #ffffff;
+
+  box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.08);
+
+  --background: #ffffff;
+}
+
+
+/* =========================================
+   ION TOOLBAR
+========================================= */
+
+.app-footer ion-toolbar {
+  --background: #ffffff;
+
+  --border-width: 0;
+
+  --min-height: 65px;
+
+  height: 65px;
+
+  min-height: 65px;
+
+  padding: 0;
+
+  margin: 0;
+
+  display: flex;
+
+  align-items: center;
+}
+
+
+/* =========================================
+   BOTTOM NAV
+========================================= */
+
+.bottom-nav {
+  width: 100%;
+
+  height: 65px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   NAV BUTTON
+========================================= */
+
+.bottom-nav button {
+  width: 25%;
+
+  height: 65px;
+
+  padding: 0;
+
+  margin: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #777;
+
+  font-size: 11px;
+
+  font-family: 'Montserrat', sans-serif;
+
+  cursor: pointer;
+}
+
+
+.bottom-nav ion-icon {
+  font-size: 26px;
+
+  color: #777;
+}
+
+
+.bottom-nav button:hover,
+.bottom-nav button:hover ion-icon {
+  color: #8e00ff;
+}
+
+
+.bottom-nav button:active {
+  transform: scale(0.95);
+}
+
+
+/* =========================================
+   MOBILE SAFE AREA
+========================================= */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+
+  .app-footer {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(65px + env(safe-area-inset-bottom));
+  }
+
+  .app-footer ion-toolbar {
+    height: 65px;
+  }
+
+  .bottom-nav {
+    height: 65px;
+  }
+
+}
+
+
+/* =========================================
    DESKTOP
-========================= */
+========================================= */
 
 @media (min-width: 768px) {
 
-    .profile-header-inner {
-        padding-left: 48px;
-        padding-right: 48px;
-    }
+  .profile-header-inner {
+    padding-left: 48px;
 
-    .profile-main {
-        padding-left: 48px;
-        padding-right: 48px;
-    }
+    padding-right: 48px;
+  }
 
-    .profile-title {
-        font-size: 24px;
-        line-height: 32px;
-    }
 
-    .profile-info {
-        flex-direction: row;
+  .profile-main {
+    padding-left: 48px;
 
-        align-items: center;
+    padding-right: 48px;
+  }
 
-        gap: 40px;
-    }
 
-    .profile-image-gradient {
-        width: 128px;
-        height: 128px;
-    }
+  .profile-info {
+    flex-direction: row;
 
-    .desktop-actions {
-        display: flex;
-    }
+    align-items: center;
 
-    .mobile-actions {
-        display: none;
-    }
+    gap: 40px;
+  }
 
-    .stat-item {
-        flex-direction: row;
 
-        gap: 8px;
-    }
+  .profile-image-gradient {
+    width: 128px;
 
-    .post-grid {
-        gap: 20px;
-    }
+    height: 128px;
+  }
 
-    .post-grid-item {
-        border-radius: 12px;
-    }
+
+  .desktop-actions {
+    display: flex;
+  }
+
+
+  .mobile-actions {
+    display: none;
+  }
+
+
+  .stat-item {
+    flex-direction: row;
+
+    gap: 8px;
+  }
+
+
+  .post-grid {
+    gap: 8px;
+  }
+
 }

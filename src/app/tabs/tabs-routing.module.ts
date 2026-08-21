@@ -1,35 +1,49 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+// import { NgModule } from '@angular/core';
+// import { Routes, RouterModule } from '@angular/router';
+// import { TabsPage } from './tabs.page';
 
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: TabsPage,
+//     children: [
 
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'feed',
-    pathMatch: 'full'
-  },
+//       {
+//         path: 'home',
+//         loadChildren: () =>
+//           import('../home/home.module').then(m => m.HomePageModule)
+//       },
 
-  {
-    path: 'home',
-    loadComponent: () =>
-      import('../home/home.page').then(m => m.HomePage)
-  },
+//       {
+//         path: 'feed',
+//         loadChildren: () =>
+//           import('../feed/feed.module').then(m => m.FeedPageModule)
+//       },
 
-  {
-    path: 'feed',
-    loadComponent: () =>
-      import('../feed/feed.page').then(m => m.FeedPage)
-  },
+//       {
+//         path: 'direct-msg',
+//         loadChildren: () =>
+//           import('../direct-msg/direct-msg.module').then(m => m.DirectMsgPageModule)
+//       },
 
-  {
-    path: 'profile',
-    loadComponent: () =>
-      import('../profile/profile.page').then(m => m.ProfilePage)
-  }
-];
+//       {
+//         path: 'profile',
+//         loadChildren: () =>
+//           import('../profile/profile.module').then(m => m.ProfilePageModule)
+//       },
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class TabsPageRoutingModule { }
+//       {
+//         path: '',
+//         redirectTo: 'home',
+//         pathMatch: 'full'
+//       }
+
+//     ]
+//   }
+// ];
+
+// @NgModule({
+//   imports: [RouterModule.forChild(routes)],
+//   exports: [RouterModule],
+// })
+// export class TabsPageRoutingModule {}
