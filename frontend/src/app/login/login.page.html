@@ -8,7 +8,7 @@
     <form #loginForm="ngForm" (ngSubmit)="OnLoginHandler(loginForm)" [style.display]="isLogin ? 'flex' : 'none'">
       <div class="form-card">
         <ion-label>Email or Phone number</ion-label>
-        <ion-item lines="none">
+        <ion-item lines="none" class="place-holder">
           <ion-icon slot="start" name="person"></ion-icon>
           <ion-input name="identity" #identity="ngModel" [(ngModel)]="loginPortal.identity" placeholder="Abc@gmail.com or +917823456789" required minlength="5"></ion-input>
         </ion-item>
@@ -27,7 +27,7 @@
           <ion-label>Password</ion-label>
           <a class="forgot-link">Forget?</a>
         </div>
-        <ion-item lines="none">
+        <ion-item lines="none" class="place-holder">
           <ion-icon slot="start" name="lock-closed"></ion-icon>
           <ion-input [type]="showPassword ? 'text' : 'password'" name="password" #password="ngModel" [(ngModel)]="loginPortal.password" placeholder="••••••••" required minlength="5"></ion-input>
           <i [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="showPassword = !showPassword" style="cursor: pointer;" class="password-toggle">
@@ -51,8 +51,8 @@
       
       <div class="other-Login">
         <div class="extraBtn">
-          <ion-button class="fb-login" type="submit" shape="round" size="medium" fill="clear">FB Login</ion-button>
-          <ion-button class="guset-login" type="submit" shape="round" size="medium" fill="clear">Guest</ion-button>
+          <ion-button class="fb-login" type="submit" shape="round" size="small" fill="clear">FB Login</ion-button>
+          <ion-button class="guset-login" type="submit" shape="round" size="small" fill="clear">Guest</ion-button>
         </div>
       </div>
 
@@ -65,7 +65,7 @@
       <form #registerForm="ngForm" (ngSubmit)="onRegisterHandler(registerForm)" [style.display]="!isLogin ? 'flex' : 'none'">
         <div class="form-card">
           <ion-label>Full Name</ion-label>
-          <ion-item lines="none">
+          <ion-item lines="none" class="place-holder">
             <ion-icon slot="start" name="person"></ion-icon>
             <ion-input name="fullname" #fullname="ngModel" [(ngModel)]="registerPortal.fullname" placeholder="Alan Ritchson" required minlength="5"></ion-input>
           </ion-item>
@@ -81,7 +81,7 @@
 
         <div class="form-card">
           <ion-label>Email Address</ion-label>
-          <ion-item lines="none">
+          <ion-item lines="none" class="place-holder">
             <ion-icon slot="start" name="mail"></ion-icon>
             <ion-input name="email" #email="ngModel" [(ngModel)]="registerPortal.email" placeholder="abc@gmail.com" required></ion-input>
           </ion-item>
@@ -97,7 +97,7 @@
 
         <div class="form-card">
           <ion-label>Phone Number</ion-label>
-          <ion-item lines="none">
+          <ion-item lines="none" class="place-holder">
             <ion-icon slot="start" name="call"></ion-icon>
             <ion-input name="phone" #phone="ngModel" [(ngModel)]="registerPortal.phone" placeholder="+917823456789" required minlength="10"></ion-input>
           </ion-item>
@@ -113,7 +113,7 @@
 
         <div class="form-card">
           <ion-label>Password</ion-label>
-          <ion-item lines="none">
+          <ion-item lines="none" class="place-holder">
             <ion-icon slot="start" name="person"></ion-icon>
             <ion-input [type]="showPassword ? 'text' : 'password'" name="password" #password="ngModel" [(ngModel)]="registerPortal.password" placeholder="••••••••••" required minlength="8"></ion-input>
             <i [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="showPassword = !showPassword" style="cursor: pointer;"></i>
@@ -140,7 +140,7 @@
       <form #verifyForm="ngForm" (ngSubmit)="onVerifyHandler(verifyForm)" [style.display]="!isLogin ? 'flex' : 'none'">
         <div class="form-card">
           <ion-label>Enter Code</ion-label>
-          <ion-item lines="none">
+          <ion-item lines="none" class="place-holder">
             <ion-input type="number" name="otp" #otp="ngModel" [(ngModel)]="verifyPortal.otp" placeholder="123456"></ion-input>
           </ion-item>
           <div class="msg">
@@ -159,9 +159,7 @@
       </form>
     </div>
   </div>
-</ion-content>
-<ion-footer class="footer-class">
-  <ion-toolbar>
+  <div class="footer-class">
     <p>@ 2024 Social Circle. All rights reserved.</p>
-  </ion-toolbar>
-</ion-footer>
+  </div>
+</ion-content>

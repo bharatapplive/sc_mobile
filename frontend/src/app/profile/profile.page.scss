@@ -1,7 +1,3 @@
-ion-content{
-    --background: #fbd3ffbb;
-}
-
 .container{
   display: flex;
   flex-direction: column;
@@ -13,23 +9,13 @@ ion-content{
   .profile-panel{
     display: flex;
     flex-direction: column;
-    background: white;
-    border-radius: 10px;
     padding: 10px;
     width: 95%;
 
     .profileDetails{
       display: flex;
-      gap: 25px;
+      gap: 20px;
       margin: 0;
-
-      .profile-avatar{
-        width: 68px;
-        height: 68px;
-        border: 2px solid #7c3aed;
-        border-radius: 50%;
-        margin-bottom: 10px;
-      }
 
       .profile-content{
         display: flex;
@@ -41,22 +27,19 @@ ion-content{
         h2{
           margin: 0;
           margin-bottom: 2px;
-          font-size: 20px;
-        }
-        p{
-          font-size: 13px;
-          font-weight: 500;
-          margin: 0 0 10px 0;
+          font-size: 18px;
         }
 
         .follow-list{
           display: flex;
           align-items: center;
-          gap: 25px;
+          gap: 45px;
           width: 100%;
 
           .list {
             p{
+              font-size: 13px;
+              font-weight: 500;
               margin: 0;
             }
           }
@@ -67,17 +50,18 @@ ion-content{
     .creator{
 
       h2{
-        font-size: 14px;
+        font-size: 13px;
         margin: 0;
       }
     }
     
     .profileBio{
-      height: 85px;
+      height: 70px;
       overflow: auto;
       margin: 10px 0;
 
       p{
+        font-size: 13px;
         padding: 0;
         margin:0;
       }
@@ -85,7 +69,6 @@ ion-content{
 
     .add-links{
       height: auto;
-      margin: 5px 0;
 
       ion-button{
         background: rgb(197, 197, 197);
@@ -96,8 +79,8 @@ ion-content{
 
         span{
           margin-left: 8px;
-          font-size: 12px;
-          font-weight: 500;
+          font-weight: 600;
+          font-size: 0.9rem;
         }
       }
     }
@@ -110,13 +93,29 @@ ion-content{
       ion-button{
         border-radius: 14px;
         letter-spacing: 0.5px;
-        width: 40%;
+        width: 50%;
         cursor: pointer;
 
-        &.edit-btn{
-          background: linear-gradient(90deg, #7c3aed 0%, #c084fc 100%);
-          color: white;
-          
+        
+        &.edit-btn{          
+           &-primary {
+            background: linear-gradient(135deg, #0091ff, #62b6ff);
+            color: #ffffff;
+
+            &:hover {
+              opacity: 0.9;
+            }
+          }
+
+          &-secondary {
+            background-color: #f0f7ff;
+            color: #102a43;
+            border: 1px solid lighten(#d9e2ec, 5%);
+
+            &:hover {
+              background-color: darken(#f0f7ff, 3%);
+            }
+          }
           ion-icon{
             font-size: 14px;
             margin-right: 8px;
@@ -144,10 +143,11 @@ ion-content{
         }
 
         span{
-          font-size: 14px;
+          font-size: 10px;
         }        
       }
     }
+
   }
 
   .highlight-panel{
@@ -166,13 +166,31 @@ ion-content{
       align-items: center;
       width: 68px;
       height: 90px;
-      margin: 8px 8px;
+      margin: 8px 4px;
 
       .story{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 68px;
         height: 68px;
-        border: 2px solid #7c3aed;
-        border-radius: 50%;
+        border: 2px solid transparent;
+        box-sizing: border-box;
+        border-radius: 50%; /* or 12px for rounded cards */
+        
+        /* Layer 1: Solid background color inside | Layer 2: Gradient for border */
+        background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #e3f2fd, #102a43) border-box;
+
+        ion-img{          
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 58px !important;    /* Overrides Ionic's default 64px avatar width */
+          height: 58px !important;
+          margin: 0 auto;
+          border-radius: 50%;
+          overflow: hidden;
+        }
       }
 
       .add-btn{
@@ -194,8 +212,6 @@ ion-content{
     justify-content: center;
     width: 95%;
     margin-top: 5px;
-    background: white;
-    border-radius: 10px;
  
     .header-bar{
       display: flex;
@@ -223,12 +239,11 @@ ion-content{
         .grid-box{
           display: flex;
           align-items: center;
-          width: 130px;
-          height: 150px;
           position: relative;
-          aspect-ratio: 9 / 16; // Tall reel-style portrait ratio
+          aspect-ratio: 1 / 1; // Tall reel-style portrait ratio
           overflow: hidden;
           border: 1px solid rgba(214, 214, 214, 0.5);
+          border-radius: 10px;
 
           ion-img{
             width: 100%;
@@ -237,7 +252,7 @@ ion-content{
 
           span{
             background: none;
-            color: #7c3aed;
+            color: #102a43;
           }
         }
       }

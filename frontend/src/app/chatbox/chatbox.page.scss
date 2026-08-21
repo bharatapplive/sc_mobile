@@ -1,8 +1,4 @@
-ion-content{
-    --background: #fbd3ffbb;
-}
-
-// 2. Conatiner.....
+// 1. Conatiner.....
 .container{
     display: flex;
     flex-direction: column;
@@ -12,26 +8,6 @@ ion-content{
     .search-Bar-container{
         width: 90%;
         margin-bottom: 10px;
-        
-        ion-item{
-            border-radius: 16px;
-            background: #f1f5f9;
-            --min-height: 48px;
-
-            ion-icon{
-                color: #64748b;
-                font-size: 21px;
-                font-weight: bold;
-                margin-right: 8px;
-            }
-
-            ion-input {
-                --color: #0f172a;
-                --placeholder-color: #94a3b8;
-                --placeholder-opacity: 1;
-                font-weight: 500;
-            }
-        }
     }
 
     // 2.1 Story Panel...
@@ -51,6 +27,10 @@ ion-content{
             width: 68px;
             height: 90px;
 
+            ion-avatar{
+                width: 68px;
+                height: 68px;
+            }
             span{
                 font-size: 14px;
                 margin-top: 2px;
@@ -73,7 +53,6 @@ ion-content{
                 text-transform: none;
                 background: white;
                 border-radius: 14px;
-                padding: 0 8px;
 
                 &:hover:not(.active) {
                     background: #ddd6fe;
@@ -82,7 +61,7 @@ ion-content{
                 /* Active State */
                 &.active {
                     color: #ffffff;
-                    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+                    background: linear-gradient(135deg, #102a43, #486581);
                     
                     &::part(native) {
                         box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35);
@@ -95,21 +74,20 @@ ion-content{
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 5px;
             overflow: auto;
-            gap: 15px;
+            gap: 10px;
 
-            .list-card{
+            .card-board{
                 display: flex;
                 width: 100%;
-                background: white;
-                border-radius: 14px;
-                padding: 10px;
-                gap: 25px;
+                padding: 5px;
+                gap: 20px;
 
                 .card-title-msg{
                     display: flex;
                     flex-direction: column;
+                    justify-content: center;
                     width: 80%;
 
                     .person-name-time{
@@ -117,20 +95,20 @@ ion-content{
                         justify-content: space-between;
 
                         span{
-                            font-size: 17px;
+                            font-size: 15px;
                             font-weight: 400;
                         }
 
                         h6{
                             margin: 0px;
-                            font-size: 13px;
+                            font-size: 10px;
                             font-weight: 400;
                         }
                     }
                     
                     p {
                         width: 95%;
-                        font-size: 16px;
+                        font-size: 13px;
                         font-weight: 350;
                         margin: 0;
                         margin-top: 2px;
@@ -151,8 +129,6 @@ ion-content{
     .follow-list{
         display: flex;
         flex-direction: column;
-        background: white;
-        border-radius: 14px;
         margin-top: 15px;
         width: 95%;
         padding: 0 10px;
@@ -161,6 +137,11 @@ ion-content{
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            ion-button{
+                font-size: 13px;
+                text-transform: none;
+            }
         }
 
         .person-list{
@@ -176,6 +157,16 @@ ion-content{
                 .title{
                     display: flex;
                     flex-direction: column;
+                    justify-content: center;
+                    gap: 2px;
+
+                    h2{
+                        font-size: 16px;
+                        margin: 0;
+                    }
+                    span{
+                        font-size: 12px;
+                    }
                 }
 
                 ion-avatar{
@@ -190,7 +181,7 @@ ion-content{
                 align-items: center;
 
                 ion-button{
-                    background: #3a8eed;
+                    background: linear-gradient(135deg, #0091ff, #8fbff5);
                     color: white;
                     border-radius: 10px;
                     margin-right: 5px;

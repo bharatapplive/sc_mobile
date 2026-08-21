@@ -28,10 +28,10 @@
   </ion-refresher>
 
   <div class="container">
-    <section class="profile-panel">
+    <section class="profile-panel card-board">
       <div class="profileDetails">
-        <div class="profile-avatar">
-          <ion-avatar>
+        <div class="height-light">
+          <ion-avatar class="person">
             <ion-img [src]="getUserAvatar()" alt="User"></ion-img>
           </ion-avatar>
         </div>
@@ -86,7 +86,7 @@
       </div>
 
       <div class="profile-buttons">
-        <ion-button class="edit-btn" shape="round" fill="clear" size="small" (click)="editProfile()">
+        <ion-button class="edit-btn-primary" shape="round" fill="clear" size="small" (click)="editProfile()">
           <ion-icon slot="icon-only" name="pencil"></ion-icon>
           <span>Edit Profile</span>
         </ion-button>
@@ -94,9 +94,9 @@
           <ion-icon lot="icon-only" name="share-social-outline"></ion-icon>
           <span>Share Profile</span>
         </ion-button>
-        <ion-button class="follow-btn" shape="round" fill="clear" size="small">
+        <!-- <ion-button class="follow-btn" shape="round" fill="clear" size="small">
           <ion-icon lot="icon-only" name="add-outline"></ion-icon>
-        </ion-button>
+        </ion-button> -->
       </div>
     </section>
 
@@ -133,7 +133,7 @@
       </div>
     </section>
 
-    <section class="user-content">
+    <section class="user-content card-board">
       <div class="header-bar">
         <ion-segment [(ngModel)]="activeTab" mode="md" class="profile-tabs">
           <ion-segment-button value="posts">

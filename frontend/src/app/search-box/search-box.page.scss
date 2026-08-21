@@ -1,37 +1,12 @@
-ion-content{
-    --background: #fbd3ffbb;
-}
 
-// 2. Conatiner.....
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
 
     .search-Bar-container{
         width: 90%;
         margin-bottom: 10px;
-        
-        ion-item{
-            border-radius: 16px;
-            background: #f1f5f9;
-            --min-height: 48px;
-
-            ion-icon{
-                color: #64748b;
-                font-size: 21px;
-                font-weight: bold;
-                margin-right: 8px;
-            }
-
-            ion-input {
-                --color: #0f172a;
-                --placeholder-color: #94a3b8;
-                --placeholder-opacity: 1;
-                font-weight: 500;
-            }
-        }
     }
 
     .tab-bar{
@@ -58,8 +33,16 @@ ion-content{
                 
                 /* Active State */
                 &.active {
-                    color: #ffffff;
-                    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+                    // Background for the tab container
+                    --background: linear-gradient(135deg, #102a43, #e3f2fd);
+
+                    // Text/Icon Gradient technique for Shadow DOM elements
+                    span{
+                        background: linear-gradient(135deg, White 60%, black 40%);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                    }
                 }
             }           
         }
@@ -67,9 +50,7 @@ ion-content{
 
     .file-container{
         width: 95%;
-        background: white;
         padding: 8px;
-        border-radius: 14px;
 
         // Theme Variables
         $primary-color: #8b5cf6; // Purple accent

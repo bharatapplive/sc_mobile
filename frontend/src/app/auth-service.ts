@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface User{
   _id?: string;
@@ -27,8 +28,6 @@ export class AuthService {
   
   isAuthenticated = signal<boolean>(false);
 
-  private apiUrl = 'http://localhost:3000';
-
   // Signals for managing global user state
   currentUser = signal<User | null>(null);
 
@@ -39,7 +38,7 @@ export class AuthService {
 
   //1. REGISTER
   register(userData: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/user/register`, userData).pipe(
+    return this.http.post<User>(`${environment.apiUrl}/user/register`, userData).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Server side error during registration:', error);
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
@@ -49,7 +48,7 @@ export class AuthService {
 
   // 2.LOGIN
   login(identity: string, password: string): Observable<User>{
-    return this.http.post<User>(`${this.apiUrl}/user/login`,{identity, password}).pipe(
+    return this.http.post<User>(`${environment.apiUrl}/user/login`,{identity, password}).pipe(
       tap((user)=>
       {
         this.currentUser.set(user);
@@ -68,7 +67,7 @@ export class AuthService {
 
   // 4. VerifyOtp..
   verifyOtp(payload: { userId: string; otp: string }): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/user/verify-otp`, payload);
+    return this.http.post<User>(`${environment.apiUrl}/user/verify-otp`, payload);
   }
 
   // 5. Get User Profile..
@@ -76,6 +75,6 @@ export class AuthService {
     const rawId = localStorage.getItem('userID');
     const userId = rawId ? JSON.parse(rawId) : null;
 
-    return this.http.get<User>(`${this.apiUrl}/user/${userId}`);
+    return this.http.get<User>(`${environment.apiUrl}/user/${userId}`);
   }
 }

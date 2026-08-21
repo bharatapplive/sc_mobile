@@ -34,18 +34,56 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
+// ==========================================
+// 1. Variables & Design Tokens
+// ==========================================
+$bg-primary: #e3f2fd;        // Soft light blue page background
+$bg-card: #ffffff;           // Crisp white for card containers
+$bg-subtle: #f0f7ff;         // Light tint for tags/inputs
+
+$text-primary: #102a43;      // Deep navy/charcoal for strong readability
+$text-secondary: #486581;    // Muted blue-gray for secondary details
+$text-muted: #829ab1;        // Light gray-blue for minor meta text
+
+$accent-primary: #0091ff;    // Crisp electric blue accent
+$accent-hover: #0077e6;      // Hover state
+$border-light: #d9e2ec;      // Border color
+
+$radius-lg: 20px;
+$radius-md: 12px;
+$radius-sm: 8px;
+
+$shadow-soft: 0 8px 24px rgba(16, 42, 67, 0.06);
+
+// ==========================================
+// 2. Mixins
+// ==========================================
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 html, body {
   /* Disables elastic bouncing on mobile web/webview browsers */
   overscroll-behavior: none;
   overscroll-behavior-y: none;
+  
 }
 
 ion-content{
     width: 100%;
     padding: 0;
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    --background: #{$bg-primary};
+    --color: #{$text-primary};
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 // 1. Header Panel......
@@ -55,22 +93,141 @@ ion-content{
     justify-content: space-between;
 
     ion-icon{
-        font-size: 20px;
-        color: #7c3aed;
+        font-size: 24px;
+        color: #{$text-primary};
     }
 
     ion-label{
         font-size: 20px;
-        color: #4c1d95;
+        color: #{$text-primary};
         text-transform: none;
     }
 }
 
-.person {
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid  #7c3aed;
+.story-panel{
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    width: 95%;
+    padding-left: 5px;
+    gap: 10px;
+    
+    .story-context{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 88px;
+        height: 110px;
+
+        span{
+            font-size: 12px;
+        }
+    }
+
+    .story-relative {
+        position: relative;
+        display: inline-block;
+
+        .story-add-absolute {
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            width: 26px;          /* 👈 Equal width and height for a perfect circle */
+            height: 13px;
+            border-radius: 50%;
+            border: 2px solid #FFF4F4;  /* Clean white border separation */
+            background-color: #bebebe;
+            display: flex;       /* 👈 Flexbox centers the icon perfectly */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .add-btn {
+            font-size: 14px;     /* 👈 Fits neatly inside the 24px circle */
+            font-weight: bold;
+            color: black;      /* White plus icon against dark background */
+        }
+    }
+
 }
 
+.height-light{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border: 4px solid transparent;
+    box-sizing: border-box;
+    border-radius: 50%; /* or 12px for rounded cards */
+
+    &:active{
+        /* Layer 1: Solid background color inside | Layer 2: Gradient for border */
+        background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #ff7e5f, #9b51e0) border-box;
+    }
+
+    .person {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 78px !important;    /* Overrides Ionic's default 64px avatar width */
+        height: 78px !important;
+        margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}
+
+.avatar-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px !important;    /* Overrides Ionic's default 64px avatar width */
+    height: 34px !important;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.place-holder{
+    border-radius: 16px;
+    --background: #dadbdb;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --min-height: 60px;
+    margin-top: 10px;
+
+    ion-icon{
+        color: #49525f;
+        font-size: 21px;
+        margin-right: 8px;
+    }
+
+    ion-input {
+        --color: #0f172a;
+        --placeholder-color: #5c646e;
+        --placeholder-opacity: 1;
+        font-weight: 500;
+    }
+}
+
+.card-board {
+    background: #{$bg-card} !important;
+    color: #000000 !important;
+    border-radius: 10px;
+}
+
+.toggle{
+    ion-button{
+        padding: 0 8px;
+    }
+}
+
+ion-header{
+    ion-toolbar {
+        --background: #{$bg-primary};
+        --color: #{$text-primary};
+    }
+}
