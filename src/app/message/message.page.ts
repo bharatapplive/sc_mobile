@@ -1,21 +1,42 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import {
+  IonHeader,
+  IonToolbar,
+  IonButton,
+  IonIcon,
+  IonTitle,
+  IonContent,
+  IonInput
+} from '@ionic/angular/standalone';
+
 import { addIcons } from 'ionicons';
 
 import {
   arrowBackOutline,
   createOutline,
-  searchOutline,
-  homeOutline,
-  addOutline,
-  chatbubblesOutline,
-  personOutline
+  searchOutline
 } from 'ionicons/icons';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.page.html',
   styleUrls: ['./message.page.scss'],
-  standalone: false,
+  standalone: true,
+
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonHeader,
+    IonToolbar,
+    IonButton,
+    IonIcon,
+    IonTitle,
+    IonContent,
+    IonInput
+  ]
 })
 export class MessagePage {
 
@@ -25,11 +46,7 @@ export class MessagePage {
     addIcons({
       arrowBackOutline,
       createOutline,
-      searchOutline,
-      homeOutline,
-      addOutline,
-      chatbubblesOutline,
-      personOutline
+      searchOutline
     });
   }
 
@@ -38,10 +55,14 @@ export class MessagePage {
   }
 
   newMessage() {
-    console.log('New message clicked');
+    console.log('New message');
   }
 
-  openChat(user: string) {
-    console.log('Opening chat:', user);
+  openChat(username: string) {
+    console.log('Opening chat with:', username);
+
+    // Later you can navigate to your chat page:
+    // this.router.navigate(['/chat', username]);
   }
+
 }

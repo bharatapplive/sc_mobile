@@ -17,7 +17,17 @@ const routes: Routes = [
     path: '',
     redirectTo: 'tabs',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'reel',
+    loadChildren: () => import('./reel/reel.module').then( m => m.ReelPageModule)
+  },
+  {
+  path: 'home',
+  loadComponent: () =>
+    import('./home/home.page').then(m => m.HomePage)
+},
+ 
 ];
   
   

@@ -55,30 +55,11 @@ export class ProfilePage {
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBzB4uW2I5U9-BJxL-RkR1ivANSy0T4Gt4sfDkTd4BFwuCDhEvH2xLH1qid3NPM5tsNHXOzgJ-s-F1YYsZZG4Lly0MkWaQqcqhmjNYJL87fTyzJz2-lDeFwwnB7iRXHvIZsNI8G_1sm0oLM_yp-QSf2JmbNHJ0zRg-L1KEtt3s_OyTpoJMJV8FGIMqNcSSeiKk5lnRvTUpKFkanfzcdV_D6x0nORK1ObJS8Vdp-U3LyZoEhbDZLH3Nn',
       likes: '1.5K',
       type: 'reel'
-    },
-    {
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAt76Ebf09s0j0dBMDZ4iGvPTLxTN6mADTmk7KS2kWQJylIHJEdBBsWe1yl3CO2j1PDCoTbqcwHjpaMWgWIL-H3n614giGGPpQAjc6tb7JQr2zpw2Db3UmX0EHua88rA1vu_vsEViUuJFb-1ZpwH9jGUIApXsd7OewCbeqxBiFbyxWeeQTQ7N6LJo62mD-UEs7Ul4Rh-b3X_EwIvVOpmCMcbgf0AYQXwCmuKw0KVHjSjAz5cE7JdF--',
-      likes: '935',
-      type: 'post'
-    },
-    {
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBl1LcSm69_nRHd8pQTXdQn0znGudFZKOXewkYujWZafls19o8YBOnkqo4nbUwCKbqmbYnDTKKajJOe4_mC2boUYhERVGo14FVvXrf1OaymNFx3DFPxVu5dAHjy3nJU6si-sIetak1vzTHyeDUhF3KrVu-7R21iod_p4pVgfPZ44Jd0fiOrhyxnQvoqt-0Cu_hagLT67bsPV7XAzOavS2iGOcsQU-bh8-jS0P8D4gqkj4l90a7NG-RH',
-      likes: '420',
-      type: 'post'
-    },
-    {
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAY5T6m50Gy9iFqL1B9ht74YEW-37g7wZYGiXfu2wgX_Sgjk7mKxPMzAB60RMFaaXjVD9HUQk1R_QSGIUPMFHoyw4M-mvud5zLiRyo2LgLhYHAnOJOtz9jQo2ht_6PKMl9WPT4GfZomzUHXEhUsAI6AmW4PzwdCeUrSFKCpT2FWzbX6ygzH6994RevEW5euwxhHA3WQkh_9CgM7jh8aAelEDPdCrToG90RYnmw4tVnrJHLbjwgHSGej',
-      likes: '1.1K',
-      type: 'multiple'
-    },
-    {
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDuisqNNTNr4uPXDMavMAecBy0dTE2eM7lnST3Z9Ql5JtdXBeoswYIsMILMQKVzyXYSSbl5qFXzeRLfhxNWUCJIM4t7cUWfHrnFEFWGOfPGQ0vTxeXPcuNEN22UF5thboWFxOf8lugoPjGRWljLTCR0E3blm-n6znzf5gFjwKRNS1y6l8nWboIPcGfhwNInIy2I2ZkI2l-2F2HBZG_6mqBsl8NRmqXv_qqjWu_rGhUyFGioFJRFu3gX',
-      likes: '755',
-      type: 'post'
     }
   ];
 
   constructor() {
+
     addIcons({
       cameraOutline,
       heartOutline,
@@ -96,6 +77,7 @@ export class ProfilePage {
       addCircleOutline,
       person
     });
+
   }
 
   changeTab(tab: 'posts' | 'reels' | 'tagged') {
@@ -109,4 +91,5 @@ export class ProfilePage {
   openMenu() {
     console.log('Menu');
   }
+
 }

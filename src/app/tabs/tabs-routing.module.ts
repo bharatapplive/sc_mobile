@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: () => import('../create/create.module').then(m => m.CreatePageModule)
       },
       {
-        path: 'messages',
-        loadChildren: () => import('../message/message.module').then(m => m.MessagePageModule)
+        path: 'reels',
+        loadChildren: () => import('../reel/reel.module').then(m => m.ReelPageModule)
       },
       {
         path: 'profile',

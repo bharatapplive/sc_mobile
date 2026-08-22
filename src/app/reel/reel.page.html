@@ -1,0 +1,217 @@
+<ion-content [fullscreen]="true" class="reels-content">
+
+  <!-- Reels Feed -->
+  <div class="reels-feed">
+
+    <!-- Reel -->
+    <section class="reel">
+
+      <!-- Background -->
+      <img
+        class="reel-bg"
+        src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=1200&auto=format&fit=crop"
+        alt="Neon city"
+      />
+
+      <!-- Gradients -->
+      <div class="top-gradient"></div>
+      <div class="bottom-gradient"></div>
+
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <h2>Reels</h2>
+
+        <ion-icon name="camera-outline"></ion-icon>
+      </div>
+
+      <!-- Reel Content -->
+      <div class="reel-content">
+
+        <!-- Left -->
+        <div class="creator-content">
+
+          <div class="creator">
+
+            <div class="avatar-border">
+              <img
+                src="https://i.pravatar.cc/150?img=12"
+                alt="Creator"
+              />
+            </div>
+
+            <div class="creator-info">
+              <div class="creator-name">
+                <span>@neon_dancer</span>
+
+                <button class="follow-btn">
+                  Follow
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="caption">
+            Midnight vibes in the city that never sleeps. 🌃✨
+            #neon #citylife #dance #vaporwave
+          </p>
+
+          <div class="audio">
+            <ion-icon name="musical-note-outline"></ion-icon>
+
+            <span>Original Audio - neon_dancer</span>
+          </div>
+
+        </div>
+
+        <!-- Right Actions -->
+        <div class="actions">
+
+          <!-- Like -->
+          <button class="action" (click)="toggleLike()">
+
+            <div class="action-circle">
+              <ion-icon
+                [name]="liked ? 'heart' : 'heart-outline'"
+                [class.liked]="liked">
+              </ion-icon>
+            </div>
+
+            <span>{{ likes }}</span>
+
+          </button>
+
+          <!-- Comment -->
+          <button class="action">
+
+            <div class="action-circle">
+              <ion-icon name="chatbubble-outline"></ion-icon>
+            </div>
+
+            <span>4,231</span>
+
+          </button>
+
+          <!-- Share -->
+          <button class="action">
+
+            <div class="action-circle">
+              <ion-icon name="send-outline"></ion-icon>
+            </div>
+
+            <span>Share</span>
+
+          </button>
+
+          <!-- More -->
+          <button class="more-btn">
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
+          </button>
+
+          <!-- Music -->
+          <div class="music-cover">
+            <img
+              src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=200&auto=format&fit=crop"
+              alt="Music"
+            />
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Second Reel -->
+    <section class="reel">
+
+      <img
+        class="reel-bg"
+        src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop"
+        alt="Concert"
+      />
+
+      <div class="top-gradient"></div>
+      <div class="bottom-gradient"></div>
+
+      <div class="reel-content">
+
+        <div class="creator-content">
+
+          <div class="creator">
+
+            <div class="avatar-border">
+              <img
+                src="https://i.pravatar.cc/150?img=32"
+                alt="Creator"
+              />
+            </div>
+
+            <div class="creator-info">
+              <div class="creator-name">
+                <span>@music_vibes</span>
+
+                <button class="follow-btn">
+                  Follow
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="caption">
+            Feel the music. Live the moment. 🎵🔥
+            #music #concert #vibes
+          </p>
+
+          <div class="audio">
+            <ion-icon name="musical-note-outline"></ion-icon>
+            <span>Original Audio - music_vibes</span>
+          </div>
+
+        </div>
+
+        <div class="actions">
+
+          <button class="action">
+            <div class="action-circle">
+              <ion-icon name="heart-outline"></ion-icon>
+            </div>
+            <span>89K</span>
+          </button>
+
+          <button class="action">
+            <div class="action-circle">
+              <ion-icon name="chatbubble-outline"></ion-icon>
+            </div>
+            <span>2,821</span>
+          </button>
+
+          <button class="action">
+            <div class="action-circle">
+              <ion-icon name="send-outline"></ion-icon>
+            </div>
+            <span>Share</span>
+          </button>
+
+          <button class="more-btn">
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
+          </button>
+
+          <div class="music-cover">
+            <img
+              src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=200&auto=format&fit=crop"
+              alt="Music"
+            />
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</ion-content>

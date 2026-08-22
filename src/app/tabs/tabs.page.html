@@ -1,0 +1,66 @@
+<ion-tabs>
+
+  <ion-router-outlet></ion-router-outlet>
+
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
+
+    <!-- Home -->
+    <ion-tab-button
+      tab="home"
+      [routerLink]="['/tabs/home']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+
+      <ion-icon name="home-outline"></ion-icon>
+
+    </ion-tab-button>
+
+
+    <!-- Search -->
+    <ion-tab-button
+      tab="trending"
+      [routerLink]="['/tabs/trending']"
+      routerLinkActive="active">
+
+      <ion-icon name="search-outline"></ion-icon>
+
+    </ion-tab-button>
+
+
+    <!-- Create -->
+    <ion-tab-button
+      tab="create"
+      [routerLink]="['/tabs/create']"
+      class="create-tab">
+
+      <div class="create-icon">
+        <ion-icon name="add"></ion-icon>
+      </div>
+
+    </ion-tab-button>
+
+
+    <!-- Reels -->
+    <ion-tab-button
+      tab="reels"
+      [routerLink]="['/tabs/reels']"
+      routerLinkActive="active">
+
+      <ion-icon name="play-outline"></ion-icon>
+
+    </ion-tab-button>
+
+
+    <!-- Profile -->
+    <ion-tab-button
+      tab="profile"
+      [routerLink]="['/tabs/profile']"
+      routerLinkActive="active">
+
+      <ion-icon name="person-outline"></ion-icon>
+
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>

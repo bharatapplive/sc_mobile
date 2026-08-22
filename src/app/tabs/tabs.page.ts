@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { addIcons } from 'ionicons';
-
 import {
   homeOutline,
-  flameOutline,
+  searchOutline,
   add,
-  sendOutline
+  playOutline,
+  personOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -18,10 +18,11 @@ export class TabsPage {
 
   constructor() {
     addIcons({
-     'home-outline': homeOutline,
-    'flame-outline': flameOutline,
-    'add': add,
-    'send-outline': sendOutline
+      homeOutline,
+      searchOutline,
+      add,
+      playOutline,
+      personOutline
     });
   }
 

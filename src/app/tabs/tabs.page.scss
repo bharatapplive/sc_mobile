@@ -1,101 +1,62 @@
 ion-tab-bar.custom-tab-bar {
-  height: 72px;
+  height: 75px;
   --background: #ffffff;
-
-  border-top: none;
+  border: none;
   box-shadow: none;
-
-  padding: 6px 28px 8px;
+  padding: 8px 35px 10px;
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.custom-tab-bar ion-tab-button {
+ion-tab-button {
   --background: transparent;
-  --color: #111111;
-  --color-selected: #111111;
+  --color: #5b4b4f;
+  --color-selected: #b51f61;
 
-  flex: 1;
-  max-width: 70px;
-
+  min-width: 45px;
+  max-width: 55px;
+  height: 55px;
+  margin: 0;
   padding: 0;
+
+  --ripple-color: transparent;
 }
 
-.custom-tab-bar ion-icon {
+/* Normal icons */
+ion-tab-button > ion-icon {
   font-size: 34px;
-  color: #111111;
 }
 
-/* Message icon */
-.reels-wrapper {
-  position: relative;
+/* CREATE BUTTON */
+ion-tab-button.create-tab {
+  --color: #ffffff;
+  --color-selected: #ffffff;
+}
+
+/* Purple circle */
+ion-tab-button.create-tab .create-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #6842d8;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.reels-wrapper ion-icon {
-  font-size: 34px;
-}
-
-/* Red notification */
-.notification-badge {
-  position: absolute;
-
-  top: -10px;
-  right: -14px;
-
-  width: 28px;
-  height: 28px;
-
-  background: #ef4444;
-  color: #ffffff;
-
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  border: 2px solid #ffffff;
-}
-
-/* Profile */
-.profile-wrapper {
-  position: relative;
-
-  width: 42px;
-  height: 42px;
-}
-
-.profile-image {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-
-  object-fit: cover;
-
+/* Plus icon */
+ion-tab-button.create-tab .create-icon ion-icon {
   display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  color: #ffffff;
 }
 
-/* Small red dot */
-.online-dot {
-  position: absolute;
-
-  right: 0;
-  bottom: -2px;
-
-  width: 9px;
-  height: 9px;
-
-  background: #ef4444;
-
-  border-radius: 50%;
-
-  border: 2px solid #ffffff;
+/* Hide labels */
+ion-tab-button ion-label {
+  display: none;
 }
