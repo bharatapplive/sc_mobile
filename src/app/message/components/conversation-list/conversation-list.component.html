@@ -1,0 +1,21 @@
+<section class="conversations-section">
+  <div class="section-header">
+    <h2 class="section-title">Messages</h2>
+    <button class="requests-btn" (click)="onRequestsClick()">
+      Requests ({{ requestsCount }})
+    </button>
+  </div>
+
+  <div class="conversations-list">
+    @for (conversation of conversations; track conversation.id) {
+      <app-conversation-item
+        [conversation]="conversation"
+        (selectConversation)="onConversationSelect($event)"
+      />
+    } @empty {
+      <div class="empty-state">
+        <p>No conversations found</p>
+      </div>
+    }
+  </div>
+</section>

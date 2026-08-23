@@ -1,0 +1,16 @@
+<section class="search-section">
+  <div class="search-wrapper" [class.scale-active]="isFocused">
+    <div class="search-icon-container">
+      <span class="material-symbols-outlined search-icon">search</span>
+    </div>
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search conversations..."
+      [value]="searchQuery"
+      (input)="onInputChange($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    />
+  </div>
+</section>

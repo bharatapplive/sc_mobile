@@ -1,0 +1,10 @@
+<section class="notes-section">
+  <div class="notes-scroll-container hide-scrollbar">
+    @for (note of notes; track note.id) {
+      <app-note-item
+        [note]="note"
+        (noteClick)="onNoteSelected($event)"
+      />
+    }
+  </div>
+</section>

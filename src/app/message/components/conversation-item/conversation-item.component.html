@@ -1,0 +1,48 @@
+<div
+  class="conversation-card"
+  [class.unread-card]="conversation.unread"
+  [class.read-card]="!conversation.unread"
+  (click)="onCardClick()"
+>
+  @if (conversation.isGroup && conversation.avatars && conversation.avatars.length >= 2) {
+    <div class="group-avatar-container">
+      <div class="group-avatar top-right">
+        <img [src]="conversation.avatars[0]" [alt]="conversation.name" class="avatar-img" />
+      </div>
+      <div class="group-avatar bottom-left">
+        <img [src]="conversation.avatars[1]" [alt]="conversation.name" class="avatar-img" />
+      </div>
+    </div>
+  } @else {
+    <div class="avatar-wrapper">
+      <img
+        [src]="conversation.avatar"
+        [alt]="conversation.altText || conversation.name"
+        class="avatar-img"
+        [class.read-grayscale]="!conversation.unread && !conversation.isOnline"
+      />
+      @if (conversation.isOnline) {
+        <div class="online-badge active-glow"></div>
+      } @else {
+        <div class="offline-badge"></div>
+      }
+    </div>
+  }
+
+  <div class="info-container">
+    <div class="header-row">
+      <span class="username">{{ conversation.name }}</span>
+      <span class="timestamp" [class.highlight-time]="conversation.unread">{{ conversation.time }}</span>
+    </div>
+    <p class="last-message" [class.unread-text]="conversation.unread">
+      @if (conversation.senderName) {
+        <span class="sender-name">{{ conversation.senderName }}: </span>
+      }
+      {{ conversation.lastMessage }}
+    </p>
+  </div>
+
+  @if (conversation.unread) {
+    <div class="unread-dot"></div>
+  }
+</div>

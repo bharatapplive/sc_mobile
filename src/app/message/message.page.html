@@ -1,12 +1,11 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>message</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<ion-header>
+  <app-header></app-header>
+</ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="custom">
-    <h2>Message Page</h2>
+<ion-content [fullscreen]="true" class="page-content">
+  <div class="messages-page-wrapper">
+    <app-conversation-search />
+    <app-notes-list />
+    <app-conversation-list />
   </div>
 </ion-content>
-

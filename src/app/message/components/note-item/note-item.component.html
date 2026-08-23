@@ -1,0 +1,27 @@
+<div class="note-item-wrapper" (click)="onNoteClick()">
+  @if (note.isOwnNote) {
+    <div class="avatar-container own-note">
+      <img
+        [src]="note.avatar"
+        [alt]="note.altText || note.username"
+        class="avatar-img own-avatar"
+      />
+      <div class="add-badge">
+        <span class="material-symbols-outlined add-icon">add</span>
+      </div>
+    </div>
+  } @else {
+    <div
+      class="avatar-container"
+      [class.story-ring]="note.hasStoryRing"
+      [class.viewed-ring]="!note.hasStoryRing"
+    >
+      <img
+        [src]="note.avatar"
+        [alt]="note.altText || note.username"
+        class="avatar-img"
+      />
+    </div>
+  }
+  <span class="username">{{ note.username }}</span>
+</div>
