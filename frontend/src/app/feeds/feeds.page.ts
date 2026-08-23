@@ -28,9 +28,19 @@ interface HighLight{
 
 export class FeedsPage implements OnInit {
 
+  // User content...
   avatarUrl?: string = '';
   username: string = '';
 
+  // Modals...
+  isCreateModal: boolean = false;
+  isNotificationModal: boolean = false;
+
+  // Post content...
+  selectPost: string = '';
+  postUrl: string = 'assets/images/Magal.avif';
+
+  // List / Array / Collection....
   feeds: FeedItem[] = [
     {
       avatar:'assets/images/rock.avif',
@@ -81,6 +91,24 @@ export class FeedsPage implements OnInit {
     {imgUrl:'assets/images/rock.avif', username:'@aman.rock'}
   ]
 
+  posts = [
+    {id:'1', url:'assets/images/Magal.avif'},
+    {id:'2', url:'assets/images/barbidoll.jpg'},
+    {id:'3', url:'assets/images/rock.avif'},
+    {id:'4', url:'assets/images/luna_art.jpg'},
+    {id:'5', url:'assets/images/Cutipie.jpg'},
+    {id:'6', url:'assets/images/Slex.jpg'},
+    {id:'7', url:'assets/images/neo_pixel.jpg'},
+    {id:'8', url:'assets/images/travel_joy.jpg'},
+    {id:'9', url:'assets/images/Post1.jpg'},
+    {id:'10', url:'assets/images/Post2.jpg'},
+    {id:'11', url:'assets/images/Slex.jpg'},
+    {id:'12', url:'assets/images/neo_pixel.jpg'},
+    {id:'13', url:'assets/images/travel_joy.jpg'},
+    {id:'14', url:'assets/images/Post1.jpg'},
+    {id:'15', url:'assets/images/Post2.jpg'}
+  ]
+
   constructor(
     private readonly authServe: AuthService
   ) { }
@@ -110,7 +138,21 @@ export class FeedsPage implements OnInit {
     return 'assets/images/default-avatar.png';
   }
 
-  openModel(){
+  openCreateModel(){
+    this.isCreateModal = !this.isCreateModal;
+  }
 
+  openNotificationModal(){
+    this.isNotificationModal = !this.isNotificationModal;
+  }
+
+  onChangePost(id: string){
+    this.selectPost = id;
+    
+    this.posts.filter(item => {
+      if(item.id === this.selectPost){
+        this.postUrl = item.url
+      }
+    });
   }
 }

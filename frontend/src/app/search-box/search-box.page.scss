@@ -6,12 +6,15 @@
 
     .search-Bar-container{
         width: 90%;
-        margin-bottom: 10px;
+
+        .place-holder{
+            --min-height: 40px;
+        }
     }
 
     .tab-bar{
         width: 95%;
-        margin: 15px 0;
+        margin: 10px 0;
 
         .tags-scroll-container{
             display: flex;

@@ -35,6 +35,7 @@ export class ChatboxPage implements OnInit {
     {_id:'1', fullname:'Neo Pixel', imgUrl:'assets/images/neo_pixel.jpg', status:'false'},
     {_id:'1', fullname:'Travel Joy', imgUrl:'assets/images/travel_joy.jpg', status:'false'},
   ]
+  
   constructor(
     private readonly authServe: AuthService
   ) { }

@@ -5,10 +5,10 @@
         <ion-label>{{username}}</ion-label>
       </ion-button>
       <div>
-        <ion-button fill="clear">
+        <ion-button fill="clear" (click)="openCreateModel()">
           <ion-icon name="add"></ion-icon>
         </ion-button>
-        <ion-button fill="clear">
+        <ion-button fill="clear" (click)="openNotificationModal()">
           <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
         </ion-button>
       </div>
@@ -96,5 +96,53 @@
         </div>
       </article>
     </div>
+
+    <!-- Create Modal... -->
+    <ion-modal [isOpen]="isCreateModal">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-button shape="round" size="small" (click)="openCreateModel()" slot="start">
+              <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+            <ion-title>New Post</ion-title>            
+            <ion-button shape="round" size="small" slot="end">Next</ion-button>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <div class="post-view">
+            <div class="image-hold">
+                  <ion-img [src]="postUrl"></ion-img></div>
+            <div class="fetch-file">
+              <div class="btn-header">
+                <ion-button shape="round" size="small">Recents</ion-button>
+                <ion-button shape="round" size="small">Drafts</ion-button>
+                <ion-button shape="round" size="small" slot="end">Select</ion-button>
+              </div>
+              <div class="grid">
+                <ion-icon name="camera"></ion-icon>
+                <div *ngFor="let post of posts">
+                  <ion-img [src]="post.url" (click)="onChangePost(post.id)"></ion-img>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+     <!-- Notification.... -->
+    <ion-modal [isOpen]="isNotificationModal">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Notifications</ion-title>
+            <ion-button (click)="openNotificationModal()" slot="start">
+              <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-toolbar>
+        </ion-header>
+      </ng-template>
+    </ion-modal>
   </div>
 </ion-content>
