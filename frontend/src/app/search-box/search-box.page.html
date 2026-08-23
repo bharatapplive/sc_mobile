@@ -3,7 +3,7 @@
     <section class="search-Bar-container">
       <ion-item lines="none" class="place-holder">
           <ion-icon slot="start" name="search-outline"></ion-icon>
-          <ion-input type="text" name="searchbar" placeholder="Search trends, creators, or tags.." required minlength="5"></ion-input>
+          <ion-input type="text" name="searchbar" placeholder="Search trends, creators, or tags.." required minlength="5" (ionInput)="onSearchChange($event)"></ion-input>
       </ion-item>
     </section>
 
@@ -23,119 +23,20 @@
     </section>
 
     <section class="file-container card-board">
-      <div class="masonry-grid">
-        
-        <!-- Card 1 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHHFkEQuVNlQ_VYaxzwCQQuVi7kaVT2msM9Li4Hr_kjhxQ_ImdrkmJSk02JL3645tEdM-gXyDtKZiSlfci3hMwmaZFz9gK6MuK3z--1YkhoAvv6uRxADIvKXyfoPyjj5OixGbDp9iCvdL00PPFJQOkQ2tYUCtioFNXP6MR3KY5YCdCfEwleuYGgTgH0zRtKGBhANYdGG-l6hl8--2-e6eT7i5SmHd6MX2bJmViyKT8j1RjJPfbeza_E7KkFIMiM_Jv-9xCp8vNeg0" 
-            alt="Creator jumping in streetwear">
-          </ion-img>
-
+      <ion-grid class="masonry-grid">
+        <div class="masonry-item" *ngFor="let item of allItems" >
+          <ion-img class="card-img" [src]="item.url"></ion-img>
           <ion-icon name="heart" class="favorite-icon"></ion-icon>
-
           <div class="card-overlay bottom">
             <div class="user-info">
               <ion-avatar class="avatar">
-                <ion-img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoogjfoyjwlfp0PTUaTGzO9S82fMTknjkFgFu3hSUU4Y8t-Z6ndiYyg9N0NawD4V-Fc1BwGQDHGL8ddqK0qA9g2_Ji_b4sQSGRqv38aGL6CDpDhMvjQkk_3WKC-9KXBvO0rIvGLWscPczwFtK92a5_1GHDhM9C1W6xuHLuCAu6-W34L4iAE--3KzeA8ZRi3-qDslTNB1JOnTaUj2JSQHkHmLDQzS7zZMlyLmXhct6JHzrGqmUnizx_ROI1Yqyo-J8sw_TJDPP_yv8"></ion-img>
+                <ion-img [src]="item.url"></ion-img>
               </ion-avatar>
-              <span class="username">alex_vibes</span>
+              <span class="username">{{item?.title}}</span>
             </div>
           </div>
         </div>
-
-        <!-- Card 2 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCBLQH3bixXrdKXyFDqHnbf0PnWdwJaSRvAaC2y0KaT8tfVxiS21m7MfKFn66lGT2AJTaPwNcJeTzu0CwMhBIyks_ElUb5LeZ2Bke4hwJXCdR8rohYrkGG88RDiytBtSJvOtYZtCIyY5PRJzqVpgFgxOXvdXH-m_SVCRvJ5iN-QSairZed6oHTXQ1JbcDNwV2orOHv6H33oiZR83sNIUB9CuqMEsTSt9vbAw-KQn43L-7Z07p7s7CrsGf9kkM_Y26uyd1Hj3dyeqk" 
-            alt="Workspace setup">
-          </ion-img>
-          
-          <div class="card-overlay bottom">
-            <div class="user-info">
-              <ion-avatar class="avatar">
-                <ion-img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_35yVxsU60yVA_lV64v4MZFfi1toL5QmpovPmZLiO6SOtQKotIE16uDb36Cqrroq2e4C234QsWVYuhjyuCIiiP3YApWMeKK5bOxxPSfcNw-RPSfdxzIoX7bw1yq3u0IIArHNfDf-IEILkG_u8nLLm9Gmv2hflFdhV-GkIWzgGNNdBeqJKq0w3MBw_5oje_XWLawcN8BXlmrf5TBSeiLJujn5-Zpw24Rf3h_ncXGGAd9NoGjLLhcB1U3reOyeXtP-iZttEIFomps"></ion-img>
-              </ion-avatar>
-              <span class="username">tech_minimalist</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCMG7OTF-hz0ZCHSnk1I15XEprQ6fmoduxCWZb_RQVl-oYhXGyg9_xez0FVGlUFkyAV_98UEcXwlT-Zy3n-P3RLWVkWfCyDVOFXEZT5IQTjSIJxwao5NMW-jNPqs5IjnuX1zDlHel7N-TBrdOnErk2AEoOEt_kxbJCnJ4mYyYKWkoZBTZuhEeDENF8IffaR1a2NhJYNXP4yfXObxq124cTBv0Z5Lrmeo8FNPCVRDn_T4zWWTW_vUpoJ_cuV8mu2TZm7j_XtURIFiY" 
-            alt="Friends laughing">
-          </ion-img>
-
-          <div class="card-overlay bottom">
-            <p class="caption">Weekend vibes only ✨</p>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_rSZQrVnuJYD-Rid-uIV6SKeMNcFuEwIYnzVZdLjzHZrNhbhzXqdrkOmJ4FybBHM3fjbo_Fdn7jitvtZyBxT5hlA8uvi8xkNK_zOmSOj_63Oee12z4H5eAEZzTR14ntO2wsMIzTLZrLRp8gbhyIePGAjNIF9FpmigO12Z-nImHEiQMZXL6GVqEApjT_sWq0M0xxmbm-dJUAizLVXnKIq58E02GDxpHR6qOMQG8JhaULy4oWK6iDturnvtJgHpZG4KxF-dR9ARlJo" 
-            alt="Abstract 3D ribbons">
-          </ion-img>
-
-          <div class="badge top-left">
-            <span>Trending Now</span>
-          </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO7fOWxcQ0IMXnXlx8VGyC5jjips16FvRLYCUOvckRgxIgJt1tcpPXxdKikF_t4k-xqU2Rw6I9pmIbpcelrA1eZL-CAt72k7w1_PtawFxloLs-wsmcBG23PXBjtGiCz5IDugdYrU7o-uzhzlWgBti4w7JN0iqB6fkBCZYDCoREpt2uXgGWy-p_xQ9rWrch_LxrhBEEX815kbdfFIYCSRoaDm6FCaSKKGqsQoKJVlf24JvRAM5EypBm-8fex8AaMeqQvjkGhVMpFhg" 
-            alt="Purple sneaker">
-          </ion-img>
-
-          <div class="card-overlay bottom space-between">
-            <span class="username">SneakerHead_24</span>
-            <ion-icon name="bookmark-outline" class="action-icon"></ion-icon>
-          </div>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy-vkV55qBc16VR-40yZGQKOlt6w5fBRxhKGeVXJrtPJu68NvbEjULgxJ-B9WbB-rBJLEJtB7agosP-mtRWNLDS7JSkngC4B2meM9i1ZesCgl4oPQgCJtrwwLM46D_TaMlp-OGJOOdn1xipL-xsXct0-zRkt-SOe7CQoHBr0fIsSWzhQc4-fRA_x-LgTs44OrQHA0hirpK6WjzhMOr1M52bu2Zj5ssULf7_VmojIL4fG6mjEVQshMA1yMizLQRZKX-qud_2nfEVAI" 
-            alt="Living room plants">
-          </ion-img>
-        </div>
-
-        <!-- Card 7 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCujiQoNll1FyRj-Rl1VMzcIHhVRp7VaWFjZK3inqz93bcMgEbEZ3nFEgt8vU_QwxEwTkH_Zl5H_eZfAXXlW4Om2Z9tjwEHngjh2DZG7fxm-krCMxuILG9F-0_9uV9UTmWb-u37zlcN4mDBC3JQafaZw03OvtrW6lGrDtOejpQwSyc54vjHpHF7pxrQeCXxnFux7I_t2MCLTPGglYmTUGXJnAD7DLfxdm6ilJilCVlBck8Tq3Vp7V2XZIMzxgiJMgj3PRQiaGHTZwI" 
-            alt="Concert crowd">
-          </ion-img>
-        </div>
-
-        <!-- Card 8 -->
-        <div class="masonry-item glass-card">
-          <ion-img 
-            class="card-img" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP4YMgmTzfApJmJwlIGYKkzwFJ4hy4u-DxbWeyc3lRnDE05cLpxpaIesdLhBn5ArMqLg1-czttn97tIIqu8dsl1IGLwn_l1bJE0472p2JGZ6de-xqvRZwaXokhWiUFNA0u9L-y2SK9Ucaz2vW860cu4TAhqAFer6BJPEko-DphB3WXzZq4UvBdxklh2-DtJSLrV1fQQNlyBlzPW29-kTYje8AJTdssv8v-UAoGGLH4DaHgM5I0j-qQqNa8SdPMniQ5yt5UScyP7kk" 
-            alt="Digital setup flat lay">
-          </ion-img>
-
-          <div class="tag-chip bottom-left">
-            #CreativeProcess
-          </div>
-        </div>
-        
-
-      </div>
+      </ion-grid>
     </section>
   </div>
 </ion-content>

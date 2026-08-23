@@ -50,7 +50,6 @@
 
     .file-container{
         width: 95%;
-        padding: 8px;
 
         // Theme Variables
         $primary-color: #8b5cf6; // Purple accent
@@ -61,18 +60,13 @@
         // Masonry Grid Wrapper
         .masonry-grid {
             column-count: 2; // Default 2 columns for mobile
-            column-gap: 12px;
-            width: 100%;
-            margin-top: 15px;
 
             @media (min-width: 640px) {
                 column-count: 3;
-                column-gap: 16px;
             }
 
             @media (min-width: 1024px) {
                 column-count: 4;
-                column-gap: 20px;
             }
         }
 
@@ -81,23 +75,9 @@
             position: relative;
             display: inline-block; // Essential for CSS Column masonry flow
             width: 100%;
-            margin-bottom: 12px;
-            border-radius: 16px;
+            border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
-
-            @media (min-width: 640px) {
-                margin-bottom: 16px;
-            }
-
-            // Glassmorphism & Ambient Glow
-            &.glass-card {
-                background: $glass-bg;
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border: 1px solid $glass-border;
-                box-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.1);
-            }
 
             // Image Zoom on Hover
             .card-img {
@@ -167,48 +147,6 @@
                 .action-icon {
                     font-size: 18px;
                 }
-            }
-
-            // Floating Badges & Tags
-            .badge {
-                position: absolute;
-                z-index: 2;
-
-                &.top-left {
-                    top: 10px;
-                    left: 10px;
-                }
-
-                span {
-                    display: inline-block;
-                    padding: 4px 10px;
-                    border-radius: 20px;
-                    background: rgba($primary-color, 0.25);
-                    backdrop-filter: blur(8px);
-                    border: 1px solid rgba($primary-color, 0.4);
-                    color: #ddd6fe;
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                }
-            }
-
-            .tag-chip {
-                position: absolute;
-                z-index: 2;
-
-                &.bottom-left {
-                    bottom: 12px;
-                    left: 12px;
-                }
-
-                padding: 4px 12px;
-                border-radius: 20px;
-                background: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(8px);
-                color: $primary-color;
-                font-size: 0.75rem;
-                font-weight: 600;
-                border: 1px solid rgba($primary-color, 0.2);
             }
         }
     }

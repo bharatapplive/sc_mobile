@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="panels">
       <ion-button fill="clear">
-        <ion-label>its.ranaji008</ion-label>
+        <ion-label>{{username}}</ion-label>
       </ion-button>
       <div>
         <ion-button fill="clear">
@@ -21,7 +21,7 @@
 
     <section class="story-panel">
       <div class="story-context">
-        <div class="height-light">
+        <div class="height-light" [class.active]="false">
           <div class="story-relative">
             <ion-avatar class="person">
               <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
@@ -33,58 +33,28 @@
         </div>
         <span>Your story</span>
       </div>
-      <div class="story-context">
-        <div class="height-light">
+      
+      <div class="story-context" *ngFor="let item of highlights">
+        <div class="height-light" [class.active]="true">
           <ion-avatar class="person">
-              <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>
+              <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
         </div>
-        <span>slex_vibe</span>
+        <span>{{item?.username}}</span>
       </div>
-      <div class="story-context">
-        <div class="height-light">
-          <ion-avatar class="person">
-              <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-        </div>
-        <span>neo_pixel</span>
-      </div>
-      <div class="story-context">
-        <div class="height-light">
-          <ion-avatar class="person">
-              <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-        </div>
-        <span>luna.art</span>
-      </div>
-      <div class="story-context">
-        <div class="height-light">
-          <ion-avatar class="person">
-              <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-        </div>
-        <span>travel_joy</span>
-      </div>
-      <div class="story-context">
-        <div class="height-light">
-          <ion-avatar class="person">
-              <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-        </div>
-        <span>rok.joyi</span>
-      </div>
+      
     </section>
 
     <div class="post-panel">
-      <article class="card-board">
+      <article class="card-board" *ngFor="let feed of feeds" >
         <div class="post-header">
           <div class="divided">
             <ion-avatar class="avatar-img">
-              <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>  
+              <ion-img [src]="feed.avatar" alt="User Avatar"></ion-img>  
             </ion-avatar>
             <div class="avatar-title">
-              <a><span>its.ranaji008</span></a>
-              <span>Roorkee, Uk</span>
+              <a><span>{{feed?.username}}</span></a>
+              <span>{{feed?.location}}</span>
             </div>
           </div>
           <ion-button shape="round" fill="clear" size="small">
@@ -93,7 +63,7 @@
         </div>
 
         <div class="post-content">
-            <ion-img [src]="'assets/images/Post2.jpg'"></ion-img>
+            <ion-img [src]="feed.postUrl"></ion-img>
         </div>
 
         <div class="post-bottom">
@@ -101,12 +71,15 @@
             <div class="left-toggle">
               <ion-button shape="round" fill="clear" size="small">
                 <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+                <span>{{feed?.likes}}</span>
               </ion-button>
               <ion-button shape="round" fill="clear" size="small">
                 <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
+                <span>{{feed?.comments}}</span>
               </ion-button>
               <ion-button shape="round" fill="clear" size="small">
                 <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+                <span>{{feed?.shares}}</span>
               </ion-button>
             </div>
             <ion-button shape="round" fill="clear" size="small">
@@ -115,111 +88,13 @@
           </div>
 
           <div class="subtitle-panel">
-            <p>1,284 likes</p>
-            <p><span>its.ranaji008</span> Exploring the boundaries of digital reality today. 
-              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
-            <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
-            <p class="para">2 HOURS AGO</p>
+            <p>{{feed?.likes}} likes</p>
+            <p><span>{{feed?.username}}</span> {{feed?.paragraph}}</p>
+            <a class="view-btn">View all {{feed?.comments}} comments</a>
+            <p class="para">{{feed?.postTime}}</p>
           </div>
         </div>
       </article>
-
-      <article class="card-board">
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="avatar-img">
-                <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>  
-            </ion-avatar>
-            <div class="avatar-title">
-              <a><span>slex_vibe</span></a>
-              <span>New York, Uk</span>
-            </div>
-          </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-          </ion-button>
-        </div>
-
-        <div class="post-content">
-            <ion-img [src]="'assets/images/Post1.jpg'"></ion-img>
-        </div>
-
-        <div class="post-bottom">
-          <div class="toggle-icon">
-            <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-              </ion-button>
-            </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
-          </div>
-
-          <div class="subtitle-panel">
-            <p>5,284 likes</p>
-            <p><span>slex_vibe</span> Exploring the boundaries of digital reality today. 
-              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
-            <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
-            <p class="para">2 HOURS AGO</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="card-board">
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="avatar-img">
-                <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>  
-            </ion-avatar>
-            <div class="avatar-title">
-              <a><span>luna_art</span></a>
-              <span>Germany</span>
-            </div>
-          </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-          </ion-button>
-        </div>
-
-        <div class="post-content">
-            <ion-img [src]="'assets/images/Magal.avif'"></ion-img>
-        </div>
-
-        <div class="post-bottom">
-          <div class="toggle-icon">
-            <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-              </ion-button>
-            </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
-          </div>
-
-          <div class="subtitle-panel">
-            <p>10,284 likes</p>
-            <p><span>luna_art</span> Exploring the boundaries of digital reality today. 
-              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes</p>
-            <ion-button class="view-btn" fill="clear" size="small">View all 42 comments</ion-button>
-            <p class="para">2 HOURS AGO</p>
-          </div>
-        </div>
-      </article>
-
     </div>
   </div>
 </ion-content>

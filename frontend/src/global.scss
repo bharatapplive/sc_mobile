@@ -163,7 +163,7 @@ ion-content{
     box-sizing: border-box;
     border-radius: 50%; /* or 12px for rounded cards */
 
-    &:active{
+    &.active{
         /* Layer 1: Solid background color inside | Layer 2: Gradient for border */
         background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #ff7e5f, #9b51e0) border-box;
     }

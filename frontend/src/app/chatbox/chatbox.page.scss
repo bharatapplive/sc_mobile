@@ -90,26 +90,39 @@
                     justify-content: center;
                     width: 80%;
 
+                    &.seen{
+                        font-weight: 400;
+                    }
+
+                    &.unseen{
+                        font-weight: bold;
+                    }
+
                     .person-name-time{
                         display: flex;
                         justify-content: space-between;
 
+                        &.seen{
+                            font-weight: 400;
+                        }
+
+                        &.unseen{
+                            font-weight: bold;
+                        }
+
                         span{
                             font-size: 15px;
-                            font-weight: 400;
                         }
 
                         h6{
                             margin: 0px;
                             font-size: 10px;
-                            font-weight: 400;
                         }
                     }
                     
                     p {
                         width: 95%;
                         font-size: 13px;
-                        font-weight: 350;
                         margin: 0;
                         margin-top: 2px;
 
@@ -185,6 +198,8 @@
                     color: white;
                     border-radius: 10px;
                     margin-right: 5px;
+                    width: 78px;
+                    height: auto;
                 }
             }
         }

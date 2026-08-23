@@ -33,50 +33,14 @@
         <span>Your note</span>
       </div>
       
-      <div class="story-context">
+      <div class="story-context" *ngFor="let item of onlineFriend">
         <div class="online-relative">
           <ion-avatar class="person">
-            <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
+            <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
           <ion-icon class="story-add-absolute" name="online"></ion-icon>
         </div>
-        <span>luna.art</span>
-      </div>
-      <div class="story-context">
-        <div class="online-relative">
-          <ion-avatar class="person">
-            <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-          <ion-icon class="story-add-absolute" name="online"></ion-icon>
-        </div>
-        <span>neo_pixel</span>
-      </div>
-      <div class="story-context">
-        <div class="online-relative">
-          <ion-avatar class="person">
-            <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-          <ion-icon class="story-add-absolute" name="online"></ion-icon>
-        </div>
-        <span>travel_joy</span>
-      </div>
-      <div class="story-context">
-        <div class="online-relative">
-          <ion-avatar class="person">
-            <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-          <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
-        </div>
-        <span>rok.joyi</span>
-      </div>
-      <div class="story-context">
-        <div class="online-relative">
-          <ion-avatar class="person">
-            <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-          <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
-        </div>
-        <span>slex_vibe</span>
+        <span>{{item?.fullname}}</span>
       </div>
     </section>
 
@@ -92,15 +56,15 @@
       </div>
 
       <div class="list-msg">
-        <div class="card-board">
+        <div class="card-board" >
           <div class="online-relative">
             <ion-avatar class="msg-person">
               <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
             </ion-avatar>
             <ion-icon class="story-add-absolute" name="online"></ion-icon>
           </div>
-          <div class="card-title-msg">
-            <div class="person-name-time">
+          <div class="card-title-msg" [class.seen]="isSeen" [class.unseen]="!isSeen">
+            <div class="person-name-time" [class.seen]="isSeen" [class.unseen]="!isSeen">
               <span>Luna Art</span>
               <h6>Now</h6>
             </div>
@@ -181,63 +145,18 @@
         <ion-button shape="round" size="small" fill="clear">See all</ion-button>
       </div>
 
-      <div class="person-list">
+      <div class="person-list" *ngFor="let item of follows">
         <div class="avatar">
           <ion-avatar>           
-            <ion-img [src]="'assets/images/rock.avif'" alt="User Avatar"></ion-img>
+            <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
           <div class="title">
-            <h2>aman.rock</h2>
-            <span>Aman Aman</span>
+            <h2>{{item?.username}}</h2>
+            <span>{{item?.fullname}}</span>
           </div>
         </div>
         <div class="tabs">
-          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
-          <ion-icon name="close-outline"></ion-icon>
-        </div>
-      </div>
-      <div class="person-list">
-        <div class="avatar">
-          <ion-avatar>           
-            <ion-img [src]="'assets/images/barbidoll.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-          <div class="title">
-            <h2>ayushi.cuteii</h2>
-            <span>Ayushi Singh</span>
-          </div>
-        </div>
-        <div class="tabs">
-          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
-          <ion-icon name="close-outline"></ion-icon>
-        </div>
-      </div>
-      <div class="person-list">
-        <div class="avatar">
-          <ion-avatar>           
-            <ion-img [src]="'assets/images/Cutipie.jpg'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-          <div class="title">
-            <h2>rishu.raj</h2>
-            <span>Rishav Raj</span>
-          </div>
-        </div>
-        <div class="tabs">
-          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
-          <ion-icon name="close-outline"></ion-icon>
-        </div>
-      </div>
-      <div class="person-list">
-        <div class="avatar">
-          <ion-avatar>           
-            <ion-img [src]="'assets/images/Magal.avif'" alt="User Avatar"></ion-img>
-          </ion-avatar>
-          <div class="title">
-            <h2>bhim.kumar</h2>
-            <span>Bhim Kumar</span>
-          </div>
-        </div>
-        <div class="tabs">
-          <ion-button shape="round" size="small" fill="clear">Follow</ion-button>
+          <ion-button shape="round" size="small" fill="clear">{{item?.status}}</ion-button>
           <ion-icon name="close-outline"></ion-icon>
         </div>
       </div>
