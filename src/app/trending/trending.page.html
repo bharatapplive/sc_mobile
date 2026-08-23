@@ -1,12 +1,12 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>trending</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<ion-header>
+  <app-header></app-header>
+</ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="custom">
-    <h2>Tending Page</h2>
+<ion-content [fullscreen]="true" class="page-content">
+  <div class="page-layout">
+    <app-search-bar class="search-section"></app-search-bar>
+    <app-category-chips class="chips-section"></app-category-chips>
+    <app-trending-grid class="grid-section"></app-trending-grid>
   </div>
 </ion-content>
 

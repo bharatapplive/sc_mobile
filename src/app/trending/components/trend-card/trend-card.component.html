@@ -1,0 +1,45 @@
+<ion-card class="trend-card ion-activatable" [class.pressed]="isPressed" (mousedown)="onPress()"
+  (touchstart)="onPress()" (mouseup)="onRelease()" (mouseleave)="onRelease()" (touchend)="onRelease()">
+  <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+
+  <!-- Card image -->
+  <div class="card-image-wrapper">
+    <ion-img class="card-image" [src]="post.imageUrl" [alt]="post.imageAlt" loading="lazy" />
+  </div>
+
+  <!-- Bottom overlay: username / caption / bookmark -->
+  @if (post.username || post.caption || post.isBookmarked) {
+  <div class="card-overlay bottom">
+    @if (post.username) {
+    <div class="user-row">
+      @if (post.avatarUrl) {
+      <div class="avatar-ring">
+        <img class="avatar" [src]="post.avatarUrl" [alt]="post.username" loading="lazy" />
+      </div>
+      }
+      <span class="username">{{ post.username }}</span>
+    </div>
+    }
+    @if (post.caption) {
+    <p class="caption">{{ post.caption }}</p>
+    }
+    @if (post.isBookmarked) {
+    <span class="material-symbols-outlined bookmark-icon">bookmark</span>
+    }
+  </div>
+  }
+
+  <!-- Like icon top-right -->
+  @if (post.isLiked) {
+  <div class="card-overlay top-right">
+    <span class="material-symbols-outlined like-icon filled">favorite</span>
+  </div>
+  }
+
+  <!-- Hashtag badge bottom-left -->
+  @if (post.tag) {
+  <div class="card-overlay bottom-tag">
+    <span class="tag-badge">{{ post.tag }}</span>
+  </div>
+  }
+</ion-card>

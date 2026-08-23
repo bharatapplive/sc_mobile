@@ -1,0 +1,60 @@
+.chips-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 8px 0;
+  // Extend past page padding for edge-to-edge scroll feel
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @media (min-width: 768px) {
+    margin: 0 -48px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+.category-chip {
+  --background: #e2e2e2;
+  --color: #494454;
+  --border-radius: 9999px;
+
+  flex-shrink: 0;
+  height: 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(203, 195, 215, 0.3);
+  transition: transform 0.2s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  margin: 0;
+
+  ion-label {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+
+  &:active {
+    transform: scale(0.93);
+  }
+
+  &.active {
+    --background: linear-gradient(to right, #6b38d4, #6f5092);
+    --color: #ffffff;
+    background: linear-gradient(to right, #6b38d4, #6f5092);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(107, 56, 212, 0.35);
+
+    ion-label {
+      color: #ffffff;
+    }
+  }
+
+  &:not(.active):hover {
+    --background: rgba(217, 181, 255, 0.3);
+  }
+}

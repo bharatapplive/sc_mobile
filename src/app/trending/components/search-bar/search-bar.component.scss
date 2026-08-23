@@ -1,0 +1,17 @@
+.trending-searchbar {
+  --background: #f3f3f4;
+  --border-radius: 9999px;
+  --box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+  --placeholder-color: #7b7486;
+  --icon-color: #7b7486;
+  --color: #1a1c1c;
+  --cancel-button-color: #6b38d4;
+
+  padding: 0;
+  height: 56px;
+
+  &:focus-within {
+    --background: #ffffff;
+    --box-shadow: 0 4px 20px rgba(109, 59, 215, 0.15), 0 0 0 2px rgba(107, 56, 212, 0.2);
+  }
+}

@@ -1,0 +1,11 @@
+<div class="chips-scroll hide-scrollbar">
+  @for (category of categories; track category.id) {
+    <ion-chip
+      class="category-chip"
+      [class.active]="category.active"
+      (click)="selectCategory(category.id)"
+    >
+      <ion-label>{{ category.label }}</ion-label>
+    </ion-chip>
+  }
+</div>

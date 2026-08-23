@@ -1,0 +1,16 @@
+<div class="masonry-grid">
+  @for (post of posts; track post.id) {
+    @if (post.cardType === 'featured') {
+      <app-featured-card [post]="post" class="masonry-item"></app-featured-card>
+    } @else {
+      <app-trend-card [post]="post" class="masonry-item"></app-trend-card>
+    }
+  }
+</div>
+
+<ion-infinite-scroll (ionInfinite)="loadMore($any($event))">
+  <ion-infinite-scroll-content
+    loadingSpinner="crescent"
+    loadingText="Loading more..."
+  ></ion-infinite-scroll-content>
+</ion-infinite-scroll>

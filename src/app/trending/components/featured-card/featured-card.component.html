@@ -1,0 +1,28 @@
+<ion-card
+  class="featured-card ion-activatable"
+  [class.pressed]="isPressed"
+  (mousedown)="onPress()"
+  (touchstart)="onPress()"
+  (mouseup)="onRelease()"
+  (mouseleave)="onRelease()"
+  (touchend)="onRelease()"
+>
+  <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+
+  <div class="card-image-wrapper">
+    <img
+      class="card-image"
+      [src]="post.imageUrl"
+      [alt]="post.imageAlt"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Gradient overlay for featured banner -->
+  <div class="gradient-overlay"></div>
+
+  <!-- Trending Now badge -->
+  <div class="trending-badge">
+    <span class="badge-text">Trending Now</span>
+  </div>
+</ion-card>

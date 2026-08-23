@@ -1,0 +1,17 @@
+.masonry-grid {
+  column-count: 2;
+  column-gap: 16px;
+
+  @media (min-width: 768px) {
+    column-count: 3;
+    column-gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    column-count: 4;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+}

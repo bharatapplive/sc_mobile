@@ -1,7 +1,23 @@
-.custom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    color: black;
+.page-layout {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 16px 96px;
+
+  @media (min-width: 768px) {
+    padding: 24px 48px 32px;
+  }
+}
+
+.search-section {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.chips-section {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.grid-section {
+  display: block;
 }
