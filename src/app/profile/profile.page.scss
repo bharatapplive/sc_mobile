@@ -1,0 +1,310 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+ion-toolbar {
+  --background: rgba(var(--color-surface-rgb, 255, 255, 255), 0.8);
+  --border-color: rgba(123, 116, 134, 0.18);
+}
+
+.profile-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-sm);
+  height: 64px;
+}
+
+.profile-brand {
+  display: flex;
+  align-items: center;
+  gap: 58px;
+}
+
+.profile-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background-clip: text;
+  color: transparent;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  &--small {
+    width: 28px;
+    height: 28px;
+    color: var(--color-on-surface-variant);
+  }
+
+  &--action {
+    width: 32px;
+    height: 32px;
+    color: var(--color-on-surface-variant);
+  }
+}
+
+.icon-filled {
+  font-variation-settings: "FILL" 1;
+}
+
+.profile-main {
+    box-sizing: border-box;
+    max-width: 960px;
+    margin: auto;
+    padding: 16px 16px 96px;
+    color: var(--color-on-surface);
+
+    * {
+        box-sizing: border-box;
+    }
+  }
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.profile-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  .profile-stats{
+        display: flex;
+        gap: 18px;
+        padding-top:24px;
+    }
+
+    .profile-status{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .stat-count{
+            font-weight: 600;
+            padding-left: 8px;
+        }
+    }
+}
+
+.profile-photo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 8px;
+  flex-shrink: 0 0 auto;
+
+}
+
+.profile-photo-gradient {
+  width: 100px;
+  height: 100px;
+  padding: 2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #6b38d4, #8455ef, #dbb8ff);
+  flex-shrink: 0;
+}
+
+.profile-photo-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid var(--color-surface);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.profile-info-details{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-grow: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #1A1C1C;
+    font-size: 16px;
+
+    h2{
+        font-size: 20px;
+    }
+
+}
+
+.profile-button{
+    display: flex;
+    gap: var(--spacing-xs);
+    width: 100%;
+    padding-block: var(--spacing-sm);
+
+    button{
+        flex: 1px;
+        padding-inline: var(--spacing-sm);
+        padding-block: 8px;
+        border-radius: 50px;
+        background: #e8e8e8;
+        color: var(--color-primary);
+        font: 700 14px/20px var(--font-family-base);
+        cursor: pointer;
+        transition: 150ms ease;
+        &:hover {
+            background: rgba(107, 56, 212, 0.1);
+        }
+        &:active {
+            transform: scale(0.96);
+        }
+    }
+}
+
+.mobile-actions {
+        display: none;
+    }
+.story-highlights {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 24px 0;
+  align-items: center;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+    .story-item {
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 600;
+    }
+    .story-image {
+        width: 64px;
+        height: 64px;
+        padding: 2px;
+        overflow: hidden;
+        border: 2px solid var(--color-outline-variant);
+        border-radius: 50%;
+        background: var(--color-surface);
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid var(--color-surface);
+            border-radius: 50%;
+        }
+    }
+    .profile-tabs {
+        display: flex;
+        margin-top: 16px;
+        border-top: 1px solid var(--profile-border);
+        button {
+            position: relative;
+            flex: 1;
+            padding: 16px;
+            border: 0;
+            background: transparent;
+            color: var(--color-on-surface-variant);
+            cursor: pointer;
+            &.active {
+                color: var(--color-primary);
+            }
+        }
+    }
+    .active-tab-indicator {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--color-primary), #8455ef);
+    }
+    .post-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        padding-top: 8px;
+    }
+    .post-tile {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: var(--color-surface-variant);
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 500ms ease;
+        }
+        &:hover img {
+            transform: scale(1.05);
+        }
+        .post-likes {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            font-size: 14px;
+            font-weight: 700;
+            transition: opacity 150ms ease;
+        }
+        &:hover .post-likes {
+            opacity: 1;
+        }
+    }
+    .post-likes .material-symbols-outlined {
+        font-size: 18px;
+        font-variation-settings:
+            "FILL" 1,
+            "wght" 400,
+            "GRAD" 0,
+            "opsz" 24;
+    }
+    .desktop-actions {
+        display: none;
+    }
+    .mobile-actions {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+        padding: 16px 0;
+        button {
+            flex: 1;
+        }
+    }
