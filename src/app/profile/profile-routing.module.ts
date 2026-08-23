@@ -6,19 +6,28 @@ import { ProfilePage } from './profile.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
-  },  {
-    path: 'posts',
-    loadChildren: () => import('./Profile-Tabs/posts/posts.module').then( m => m.PostsPageModule)
+    component: ProfilePage,
+    children: [
+      {
+        path: 'posts',
+        loadChildren: () => import('./Profile-Tabs/posts/posts.module').then(m => m.PostsPageModule)
+      },
+      {
+        path: 'reels',
+        loadChildren: () => import('./Profile-Tabs/reels/reels.module').then(m => m.ReelsPageModule)
+      },
+      {
+        path: 'tagged',
+        loadChildren: () => import('./Profile-Tabs/tagged/tagged.module').then(m => m.TaggedPageModule)
+      },
+      {
+        path: '',
+        redirectTo: 'posts',
+        pathMatch: 'full'
+      }
+    ]
   },
-  {
-    path: 'reels',
-    loadChildren: () => import('./Profile-Tabs/reels/reels.module').then( m => m.ReelsPageModule)
-  },
-  {
-    path: 'tagged',
-    loadChildren: () => import('./Profile-Tabs/tagged/tagged.module').then( m => m.TaggedPageModule)
-  }
+
 
 ];
 
@@ -26,4 +35,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProfilePageRoutingModule {}
+export class ProfilePageRoutingModule { }

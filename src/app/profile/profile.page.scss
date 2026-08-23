@@ -1,0 +1,38 @@
+.profile-tab-content {
+  width: 100%;
+  max-width: 672px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  overflow: visible;
+}
+
+.profile-tab-content router-outlet {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+:host ::ng-deep .profile-tab-content > app-posts,
+:host ::ng-deep .profile-tab-content > app-reels,
+:host ::ng-deep .profile-tab-content > app-tagged {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+@media (max-width: 767px) {
+  .profile-tab-content {
+    padding-inline: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-tab-content {
+    padding-inline: 16px;
+  }
+}

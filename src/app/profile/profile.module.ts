@@ -7,7 +7,6 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
-import { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 import { HighlightsComponent } from './components/highlights/highlights.component';
 import { ProfileTabsComponent } from './components/profile-tabs/profile-tabs.component';
 
@@ -19,7 +18,6 @@ import { ProfileTabsComponent } from './components/profile-tabs/profile-tabs.com
     ProfilePageRoutingModule,
     HeaderComponent,
     ProfileInfoComponent,
-    ProfileHeaderComponent,
     HighlightsComponent,
     ProfileTabsComponent
   ],

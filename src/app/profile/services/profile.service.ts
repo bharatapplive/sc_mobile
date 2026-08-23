@@ -44,8 +44,8 @@ export class ProfileService {
     },
     {
       id: 4,
-      label: 'Tech',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCUdXj0-bWi1xej4Q7VBTuOmNfNME4SfzzT-GYZaHzWDGrjpUgm1qRCC7BzwiKQWCYY6tDduSXiJJqpXgRDBNHr2uGm_Py_qfnvMJbsN61RO4t2CojmOBcpV3Mw5C9Dbk1h4Rzfz6Ngsyr6LrNI7A1onClqSpJPJ2iDpfap01QhO4ZJl-XqNtek_w07YMdo7KIB7n4XJxvQtJyisDm-b3o_TVZosTgn_ZTL37793alALECZ5p7Vv_WO5pBGN2u9SJPo6ofRC-tu75ee74LjhbprGRdRZE',
+      label: 'Nature',
+      imageUrl: 'https://images.unsplash.com/photo-1538998073820-4dfa76300194?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       imageAlt: 'Prismatic light reflections on glass surface'
     }
   ];
@@ -68,6 +68,24 @@ export class ProfileService {
       imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBponTriIXq9-o5gyOpcu-LmkltLM2EjT6VlT7Cp9Sa9vqj3S3kR86_TGR1xsyPnb9e3b-YUonNRba_WHKFcCdTqm87ZJKWJvvDc82hixdTuCPXTG1Hqxz-ACXsnBTz07V_zCO4iJ9KKfkdrryat88HtovIRYrALwaP2gIB2rYL9wG2tZDWDZJRcywYXziyvvRlH6tO9SUl0BqQxC4AebRubDF2i19oVJuqnsrqIhz9H75Q19nBGUo-u9BqU6AkAL2p46QcNBoFkjk',
       imageAlt: 'Abstract electric purple and magenta gradient',
       likeCount: '2.3k'
+    },
+    {
+      id: 4,
+      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBdC4qbX34HPukOV-T5zRgm9USiE4BouYyup3QL0WS1591pfk5EVk45jYB2HNhVL9jlHhT94CxEQdDFcet50-WFFQ8Gr-fU6kKz0FAOHrDdRV9I7ch4CzPj5Eg2grVNH9XTaYRs2fTdvkL9MZjcS9fk6M2cBSIn4LMbgyaFVheEa_WXuc7tXleB6eLp4YWDNJtXmVeiMv7j7vXr9XvY2l1ycEobQ8ShX8ukczZ50cv-9aPOxK9_RF53vxd1HFXYLLvC-0j3o08FIfU',
+      imageAlt: 'Person in front of neon lights at night',
+      likeCount: '1.5k'
+    },
+    {
+      id: 5,
+      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6E3bkA_J2XtMcPunO8pZ9KiOcddhMuTcb-EXhS-xPDnuo_qy9jF2-6q48RfV2eqEboDYq0hsUIWSVnA8HuweL6Refqm0HATkNfxfWYid7-K2Z49N8UAMmtrpxQ0L1ewzKAQbXtlr1buvBW-FQL-5ScfqVoKJK7xOtpVACgGzTtKJipJkbskVLB5s74dXVxp2uNQNKeEP2osdX19hMMv2qnkMnNdmtKEvaeFKAxK0GRhmP02NH5Txk2wxQNcaZvoPSDdKXdReEb-E',
+      imageAlt: 'Macro shot of mechanical keyboard with purple backlight',
+      likeCount: '672'
+    },
+    {
+      id: 6,
+      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCttN0ejraGDkQvPRsvVrCrld9tBzE3z_Y7wMZxdjfT6ZQV3BhUZYmJEqH4qti-knPGnYKlknJ7zTe-BN5RHtXjfpUThGZ1v2bXZ8UPxHmPfc6S0exO9TtY0ZkY-eyTlPUmith-I_wC8Lb8FVK0IsEbIHK1viQXoYoXuWvPcZwhkBT8z9ZbmS5acMxkgPIl0AQnRnEv4ooDgbs8yfof7AKhLMShNnSOq8AqT2alTlWRy8KnV-LpFDp8DeMPkf_VAmu3UYbVIVZVk6E',
+      imageAlt: 'Minimalist white building against clear blue sky',
+      likeCount: '930'
     },
     {
       id: 4,

@@ -39,4 +39,9 @@
   height: 2px;
   background: linear-gradient(90deg, #6b38d4, #8455ef);
   border-radius: 2px 2px 0 0;
+  opacity: 0;
+}
+
+.nav-tab-btn.is-active .active-indicator {
+  opacity: 1;
 }

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ProfileService } from './services/profile.service';
-import { Profile } from './models/profile.model';
+import { Component, signal } from '@angular/core';
+type profileTabs = 'posts' | 'reels' | 'tagged';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +9,10 @@ import { Profile } from './models/profile.model';
 })
 export class ProfilePage{
   constructor() { }
-  onTabChange(change: any) {
-    console.log(change)
+  
+  activeTab = signal<profileTabs>('posts')
+
+  onTabChange(change: profileTabs) {
+    this.activeTab.set(change)
   }
 }

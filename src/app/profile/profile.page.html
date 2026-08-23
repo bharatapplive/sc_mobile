@@ -21,10 +21,13 @@
 
     <app-highlights></app-highlights>
 
-    <!-- <app-profile-tabs
+    <app-profile-tabs
       [activeTab]="activeTab()"
       (tabChange)="onTabChange($event)">
-    </app-profile-tabs> -->
+    </app-profile-tabs>
+    <div class="profile-tab-content">
+      <router-outlet></router-outlet>
+    </div>
 <!-- 
     @switch (activeTab()) {
       @case ('posts') {
