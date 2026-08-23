@@ -3,43 +3,22 @@ ion-content.reels-content {
 }
 
 .reels-feed {
-  width: 100%;
-  height: 100dvh;
-
+  height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .reel {
   position: relative;
-
-  width: 100%;
-  height: 100dvh;
-
-  overflow: hidden;
-
+  height: 100vh;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
-
-  background: #000;
 }
 
 .reel-bg {
   position: absolute;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-  object-position: center;
-
-  inset: 0;
 }
 
 /* Top Gradient */
@@ -117,21 +96,13 @@ ion-content.reels-content {
 
 /* Content */
 
-.reel-content {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 5;
-
-  display: flex;
-
-  align-items: flex-end;
-  justify-content: space-between;
-
-  padding: 20px;
-
-  padding-bottom: 85px;
+.reel-content,
+.top-bar,
+.top-gradient,
+.bottom-gradient {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Creator */
@@ -381,4 +352,10 @@ ion-icon.liked {
     display: none;
   }
 
+}
+.actions,
+.follow-btn,
+.action,
+.more-btn {
+  pointer-events: auto;
 }

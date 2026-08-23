@@ -16,5 +16,6 @@ import { ReelPage } from './reel.page';
     ReelPageRoutingModule
   ],
   declarations: [ReelPage]
+  
 })
 export class ReelPageModule {}

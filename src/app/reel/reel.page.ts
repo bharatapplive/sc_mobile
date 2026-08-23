@@ -52,5 +52,12 @@ export class ReelPage {
     this.likes = this.liked ? '142.1K' : '142K';
 
   }
+toggleVideo(video: HTMLVideoElement) {
+  if (video.paused) {
+    video.play().catch(err => console.log(err));
+  } else {
+    video.pause();
+  }
+}
 
 }
