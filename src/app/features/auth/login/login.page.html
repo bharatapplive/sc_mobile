@@ -12,15 +12,10 @@
     <div class="card">
       <form class="form" (ngSubmit)="login()">
         <div class="field">
-          <label for="identity">Mobile Number or Email</label>
+          <label for="identity">Username, Mobile or Email</label>
           <div class="input">
             <span class="material-symbols-outlined">phone</span>
-            <input 
-              id="identity" 
-              name="identity" 
-              placeholder="+91 9876543210 or EMAIL_ADDRESS" 
-              required 
-              type="text" 
+            <input id="identity" name="identity" placeholder="+91 9876543210 or EMAIL_ADDRESS" required type="text"
               [(ngModel)]="identity" />
           </div>
         </div>
@@ -32,13 +27,8 @@
           </div>
           <div class="input">
             <span class="material-symbols-outlined">lock</span>
-            <input 
-              id="password" 
-              name="password" 
-              placeholder="••••••••" 
-              required 
-              [type]="showPassword ? 'text' : 'password'" 
-              [(ngModel)]="password" />
+            <input id="password" name="password" placeholder="••••••••" required
+              [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" />
             <button type="button" aria-label="Toggle password" (click)="togglePassword()">
               <span class="material-symbols-outlined">{{ showPassword ? 'visibility_off' : 'visibility' }}</span>
             </button>

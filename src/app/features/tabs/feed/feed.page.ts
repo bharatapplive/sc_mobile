@@ -55,19 +55,19 @@ export class FeedPage {
     {
       id: '1',
       username: 'Ajay_Sir',
-      avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://bharatapp.info/assets/images/team/ajay_shankar.png',
       hasUnseen: true,
     },
     {
       id: '2',
       username: 'Himanshu_Rana',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://bharatapp.info/assets/images/team/himanshu_rana.png',
       hasUnseen: true,
     },
     {
       id: '3',
       username: 'Ayushi_Singh',
-      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://bharatapp.info/assets/images/team/ayushi_singh.png',
       hasUnseen: false,
     },
     {
@@ -79,14 +79,8 @@ export class FeedPage {
     {
       id: '5',
       username: 'Deepa_mam',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
+      avatar: 'https://bharatapp.info/assets/images/team/deepa.jpg',
       hasUnseen: true,
-    },
-    {
-      id: '6',
-      username: 'rok.joyi',
-      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
-      hasUnseen: false,
     }
   ];
 
@@ -119,7 +113,7 @@ export class FeedPage {
       id: 'p2',
       author: {
         username: 'Himanshu_rana',
-        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+        avatar: 'https://bharatapp.info/assets/images/team/himanshu_rana.png',
         location: 'Rorkee, Uttarkhand',
         isVerified: true,
       },
@@ -143,7 +137,7 @@ export class FeedPage {
       id: 'p3',
       author: {
         username: 'Ayushi_Singh',
-        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+        avatar: 'https://bharatapp.info/assets/images/team/ayushi_singh.png',
         location: 'Uttrakhand,India',
         isVerified: false,
       },

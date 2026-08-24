@@ -5,7 +5,7 @@
         <ion-icon name="add-outline"></ion-icon>
       </button>
 
-      <h1 class="top-username">itz_liveXlife221</h1>
+      <h1 class="top-username">Social Circle</h1>
 
       <button class="top-btn" aria-label="Open menu">
         <ion-icon name="menu-outline"></ion-icon>
@@ -29,7 +29,7 @@
           <!-- Story Avatar with Purple Ring -->
           <div class="story-ring" [class.user-ring]="story.isUser">
             <img [src]="story.avatar || defaultAvatar" [alt]="story.username" class="story-avatar-img" />
-            
+
             <!-- User + Badge -->
             <div *ngIf="story.isUser" class="story-add-badge">
               <ion-icon name="add"></ion-icon>
@@ -65,7 +65,7 @@
         <!-- Post Image -->
         <div class="card-media" (dblclick)="onDoubleTap(post)">
           <img [src]="post.image" [alt]="post.caption" class="media-img" />
-          
+
           <div *ngIf="post.animatingHeart" class="heart-pulse-wrap">
             <ion-icon name="heart" class="heart-pulse-icon"></ion-icon>
           </div>
@@ -76,32 +76,21 @@
           <!-- Action Icons Row -->
           <div class="actions-row">
             <div class="left-actions">
-              <button 
-                class="action-icon-btn" 
-                [class.is-liked]="post.isLiked" 
-                (click)="toggleLike(post)" 
+              <button class="action-icon-btn" [class.is-liked]="post.isLiked" (click)="toggleLike(post)"
                 aria-label="Like post">
                 <ion-icon [name]="post.isLiked ? 'heart' : 'heart-outline'"></ion-icon>
               </button>
 
-              <button 
-                class="action-icon-btn" 
-                (click)="toggleComments(post)" 
-                aria-label="Comment on post">
+              <button class="action-icon-btn" (click)="toggleComments(post)" aria-label="Comment on post">
                 <ion-icon name="chatbubble-outline"></ion-icon>
               </button>
 
-              <button 
-                class="action-icon-btn" 
-                aria-label="Share post">
+              <button class="action-icon-btn" aria-label="Share post">
                 <ion-icon name="paper-plane-outline"></ion-icon>
               </button>
             </div>
 
-            <button 
-              class="action-icon-btn" 
-              [class.is-saved]="post.isSaved" 
-              (click)="toggleSave(post)" 
+            <button class="action-icon-btn" [class.is-saved]="post.isSaved" (click)="toggleSave(post)"
               aria-label="Save post">
               <ion-icon [name]="post.isSaved ? 'bookmark' : 'bookmark-outline'"></ion-icon>
             </button>
@@ -116,10 +105,7 @@
               <span class="caption-text">{{ post.caption }}</span>
             </p>
 
-            <button 
-              *ngIf="post.commentsCount > 0" 
-              class="view-comments-btn" 
-              (click)="toggleComments(post)">
+            <button *ngIf="post.commentsCount > 0" class="view-comments-btn" (click)="toggleComments(post)">
               View all {{ post.commentsCount }} comments
             </button>
 

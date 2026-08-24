@@ -1,0 +1,753 @@
+// ==========================================
+// DIRECT CHAT PAGE STYLING
+// ==========================================
+
+:host {
+  display: block;
+  --header-bg: #ffffff;
+  --bg-color: #f9f9fb;
+  --surface-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --accent-purple: #7c3aed;
+  --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  --online-green: #22c55e;
+}
+
+:host-context(html.dark) {
+  --header-bg: #0f172a;
+  --bg-color: #0b1120;
+  --surface-card: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-color: #334155;
+}
+
+// ------------------------------------------
+// HEADER
+// ------------------------------------------
+.chat-header {
+  ion-toolbar {
+    --background: var(--header-bg);
+    --border-color: transparent;
+    padding: 4px 16px;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .brand-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .dropdown-icon {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: background-color 0.2s ease, transform 0.15s ease;
+
+      ion-icon {
+        font-size: 22px;
+      }
+
+      &:active {
+        transform: scale(0.92);
+        background: rgba(124, 58, 237, 0.08);
+      }
+    }
+  }
+}
+
+// ------------------------------------------
+// CONTENT CONTAINER
+// ------------------------------------------
+.chat-content {
+  --background: var(--bg-color);
+
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px 80px;
+    gap: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+// ------------------------------------------
+// 1. SEARCH BAR
+// ------------------------------------------
+.search-section {
+  width: 100%;
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: var(--surface-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 10px 14px;
+    gap: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+
+    &:focus-within {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+    }
+
+    .search-icon {
+      font-size: 18px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      color: var(--text-primary);
+      font-family: inherit;
+
+      &::placeholder {
+        color: var(--text-muted);
+      }
+    }
+
+    .clear-btn {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+// ------------------------------------------
+// 2. STORY NOTES CAROUSEL
+// ------------------------------------------
+.notes-section {
+  width: 100%;
+  overflow: hidden;
+
+  .notes-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 8px 4px 12px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .note-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 72px;
+    position: relative;
+    cursor: pointer;
+
+    // Thought Bubble
+    .note-bubble {
+      position: relative;
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 4px 8px;
+      margin-bottom: 6px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+      max-width: 86px;
+      text-align: center;
+      z-index: 2;
+
+      span {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
+
+      .bubble-tail {
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: var(--surface-card);
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        transform: rotate(45deg);
+      }
+    }
+
+    // Avatar Wrapper
+    .avatar-wrapper {
+      position: relative;
+      width: 62px;
+      height: 62px;
+
+      .avatar-ring {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        padding: 2px;
+        background: var(--border-color);
+        transition: transform 0.2s ease;
+
+        &.user-ring {
+          background: #e2e8f0;
+        }
+
+        .note-avatar {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+          display: block;
+          background: #e2e8f0;
+        }
+      }
+
+      &:active .avatar-ring {
+        transform: scale(0.95);
+      }
+
+      .add-note-badge {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--accent-gradient);
+        color: #ffffff;
+        border: 2px solid var(--surface-card);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+        ion-icon {
+          font-size: 14px;
+          font-weight: 700;
+        }
+      }
+
+      .online-dot {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--online-green);
+        border: 2.5px solid var(--surface-card);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    .note-name {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+  }
+}
+
+// ------------------------------------------
+// 3. CATEGORY TAGS FILTER
+// ------------------------------------------
+.tags-section {
+  width: 100%;
+
+  .tags-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .tag-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-card);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &.active {
+      background: var(--accent-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 3px 10px rgba(124, 58, 237, 0.28);
+
+      .tag-badge {
+        background: rgba(255, 255, 255, 0.25);
+        color: #ffffff;
+      }
+    }
+
+    .tag-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #fee2e2;
+      color: #ef4444;
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+  }
+}
+
+// ------------------------------------------
+// 4. MESSAGES LIST
+// ------------------------------------------
+.messages-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .section-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .active-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+  }
+
+  .chats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chat-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: var(--surface-card);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:active {
+      transform: scale(0.985);
+      background: rgba(124, 58, 237, 0.04);
+    }
+
+    &.unread {
+      border-left: 3px solid var(--accent-purple);
+    }
+
+    // Avatar Col
+    .avatar-col {
+      position: relative;
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+
+      .chat-avatar-ring {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        padding: 2px;
+        background: transparent;
+
+        &.has-story {
+          background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .chat-avatar-img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+          display: block;
+          background: #e2e8f0;
+        }
+      }
+
+      .chat-online-dot {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--online-green);
+        border: 2px solid var(--surface-card);
+      }
+    }
+
+    // Info Col
+    .info-col {
+      flex: 1;
+      min-width: 0; // Enables text-overflow ellipsis
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      .name-time-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .name-wrap {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          min-width: 0;
+
+          .user-fullname {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .verified-icon {
+            font-size: 14px;
+            color: #3b82f6;
+            flex-shrink: 0;
+          }
+        }
+
+        .message-time {
+          font-size: 11px;
+          color: var(--text-muted);
+          white-space: nowrap;
+          margin-left: 8px;
+        }
+      }
+
+      .preview-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+
+        .last-message {
+          margin: 0;
+          font-size: 13px;
+          color: var(--text-secondary);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &.bold-unread {
+            font-weight: 600;
+            color: var(--text-primary);
+          }
+        }
+
+        .unread-pill {
+          flex-shrink: 0;
+          min-width: 18px;
+          height: 18px;
+          padding: 0 5px;
+          border-radius: 9px;
+          background: var(--accent-gradient);
+          color: #ffffff;
+          font-size: 10px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    // Camera Action
+    .action-col {
+      flex-shrink: 0;
+
+      .camera-btn {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text-muted);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        ion-icon {
+          font-size: 20px;
+        }
+
+        &:hover {
+          color: var(--accent-purple);
+        }
+      }
+    }
+  }
+
+  // Empty State
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    background: var(--surface-card);
+    border-radius: 16px;
+    border: 1px dashed var(--border-color);
+
+    .empty-icon {
+      font-size: 48px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0 0 6px;
+    }
+
+    p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+  }
+}
+
+// ------------------------------------------
+// 5. SUGGESTIONS SECTION
+// ------------------------------------------
+.suggestions-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+
+  .suggestions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .see-all-btn {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-purple);
+      cursor: pointer;
+    }
+  }
+
+  .suggestions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .suggestion-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--surface-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    .person-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+
+      .suggestion-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        background: #e2e8f0;
+      }
+
+      .person-details {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+
+        .suggestion-name {
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--text-primary);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .suggestion-username {
+          font-size: 11px;
+          color: var(--text-secondary);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .suggestion-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+
+      .follow-btn {
+        padding: 6px 14px;
+        border-radius: 18px;
+        border: none;
+        background: var(--accent-gradient);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+
+        &.following {
+          background: transparent;
+          border: 1px solid var(--border-color);
+          color: var(--text-secondary);
+        }
+
+        &:active {
+          transform: scale(0.94);
+        }
+      }
+
+      .dismiss-btn {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        ion-icon {
+          font-size: 18px;
+        }
+
+        &:hover {
+          color: var(--text-secondary);
+        }
+      }
+    }
+  }
+}

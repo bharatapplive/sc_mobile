@@ -82,6 +82,11 @@ export class RegisterPage {
       password: this.password
     };
 
+    // suggestedUsername(fullName: string) {
+    //   const name = fullName.toLowerCase().trim();
+    //   return name.replace(/[^a-z0-9]+/g, '_');
+    // };
+
 
 
     existingUsers.push(newUser);
@@ -101,7 +106,20 @@ export class RegisterPage {
 
     await alert.present();
 
-
     this.router.navigate(['/login']);
+  }
+
+  suggestUsername() {
+    // 1. Clean full name: remove spaces, convert to lowercase
+    const cleanName = this.fullName ? this.fullName.trim().toLowerCase().replace(/\s+/g, '') : '';
+
+    // 2. Extract digits only from mobile (handles '+91', spaces, dashes, etc.)
+    const digitsOnly = this.mobile ? this.mobile.replace(/\D/g, '') : '';
+
+    // 3. Generate username if we have a name and at least 4 digits
+    if (cleanName && digitsOnly.length >= 4) {
+      const lastFour = digitsOnly.slice(-4);
+      this.UserName = `${cleanName}.${lastFour}`;
+    }
   }
 }
