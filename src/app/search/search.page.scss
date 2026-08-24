@@ -1,3 +1,174 @@
+ion-content {
+  --background: #f7f8fa;
+}
+
+ion-header,
+ion-toolbar {
+  --background: #fff;
+  --border-width: 0;
+  --box-shadow: none;
+}
+
+.search-logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: 12px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #222;
+}
+
+.search-logo ion-icon {
+  color: #7c3aed;
+}
+
+.search-page {
+  padding: 12px 15px 100px;
+}
+
 ion-searchbar {
-  margin-bottom: 20px;
+  --background: #fff;
+  --border-radius: 14px;
+  --box-shadow: none;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.categories,
+.people {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar,
+.people::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  flex-shrink: 0;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  padding: 8px 16px;
+  background: #fff;
+  color: #555;
+}
+
+.category.active {
+  background:
+  linear-gradient(135deg, #8e2de2, #c43cff, #ff4b91) ;
+  border: none;
+  color: #fff;
+}
+
+section {
+  margin: 24px 0;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 13px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #222;
+}
+
+.section-heading span {
+  font-size: 12px;
+  color: #777;
+}
+
+.person-card {
+  flex: 0 0 145px;
+  padding: 12px;
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+}
+
+.person-card img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #c43cff;
+}
+
+.person-card strong {
+  display: block;
+  margin-top: 7px;
+  font-size: 13px;
+}
+
+.person-card p {
+  margin: 4px 0 8px;
+  font-size: 11px;
+  color: #888;
+}
+
+.person-card button {
+  border: 0;
+  border-radius: 9px;
+  padding: 7px 18px;
+  background: linear-gradient(135deg, #8e2de2, #c43cff, #ff4b91) ;
+  color: #fff;
+  font-size: 12px;
+}
+
+.trending {
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.trend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.trend:last-child {
+  border-bottom: 0;
+}
+
+.trend strong {
+  font-size: 14px;
+}
+
+.trend p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #888;
+}
+
+.trend ion-icon {
+  color: #8b32ed;
+  font-size: 21px;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+}
+
+.explore-grid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.more-section {
+  padding-bottom: 80px;
 }

@@ -107,8 +107,17 @@
         <span>Share</span>
       </button>
 
-      <button class="add-person-btn">
-        <ion-icon name="person-add-outline"></ion-icon>
+      <!-- <ion-button
+      class=""add-person-btn
+      type="button"
+      (click)="testChatClick()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button> -->
+      <button
+        type="button"
+        class="add-person-btn"
+        routerLink="/tabs/chat">
+        <ion-icon name="add-outline"></ion-icon>
       </button>
 
     </div>

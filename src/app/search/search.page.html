@@ -1,17 +1,204 @@
-<ion-header>
+<ion-header class="search-header">
   <ion-toolbar>
-    <ion-title>Search</ion-title>
+
+    <div class="search-logo" slot="start">
+      <ion-icon name="search-outline"></ion-icon>
+      <span>Discover</span>
+    </div>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true">
 
-  <ion-searchbar
-    placeholder="Search">
-  </ion-searchbar>
+  <div class="search-page">
 
-  <h2>Search</h2>
+    <!-- Search bar -->
+    <ion-searchbar
+      placeholder="Search people, posts, hashtags..."
+      mode="ios">
+    </ion-searchbar>
 
-  <p>Search for something here.</p>
+
+    <!-- Categories -->
+    <div class="categories">
+
+      <button class="category active">
+        All
+      </button>
+
+      <button class="category">
+        People
+      </button>
+
+      <button class="category">
+        Posts
+      </button>
+
+      <button class="category">
+        Hashtags
+      </button>
+
+    </div>
+
+
+    <!-- PEOPLE -->
+    <section>
+
+      <div class="section-heading">
+        <h2>People you may know</h2>
+        <span>See all</span>
+      </div>
+
+      <div class="people">
+
+        <div class="person-card">
+
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200">
+
+          <strong>creative_soul</strong>
+          <p>Digital creator</p>
+
+          <button>Follow</button>
+
+        </div>
+
+
+        <div class="person-card">
+
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200">
+
+          <strong>apex_editor</strong>
+          <p>Photographer</p>
+
+          <button>Follow</button>
+
+        </div>
+
+
+        <div class="person-card">
+
+          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200">
+
+          <strong>travel_joy</strong>
+          <p>Traveller</p>
+
+          <button>Follow</button>
+
+        </div>
+
+
+        <div class="person-card">
+
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200">
+
+          <strong>luna.art</strong>
+          <p>Artist</p>
+
+          <button>Follow</button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRENDING -->
+    <section>
+
+      <div class="section-heading">
+        <h2>Trending</h2>
+        <span>See all</span>
+      </div>
+
+      <div class="trending">
+
+        <div class="trend">
+          <div>
+            <strong>#DigitalArt</strong>
+            <p>24.6K posts</p>
+          </div>
+          <ion-icon name="trending-up-outline"></ion-icon>
+        </div>
+
+        <div class="trend">
+          <div>
+            <strong>#TravelVibes</strong>
+            <p>18.2K posts</p>
+          </div>
+          <ion-icon name="trending-up-outline"></ion-icon>
+        </div>
+
+        <div class="trend">
+          <div>
+            <strong>#Photography</strong>
+            <p>15.8K posts</p>
+          </div>
+          <ion-icon name="trending-up-outline"></ion-icon>
+        </div>
+
+        <div class="trend">
+          <div>
+            <strong>#CollegeLife</strong>
+            <p>12.4K posts</p>
+          </div>
+          <ion-icon name="trending-up-outline"></ion-icon>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- EXPLORE -->
+    <section>
+
+      <div class="section-heading">
+        <h2>Explore</h2>
+        <span>See more</span>
+      </div>
+
+      <div class="explore-grid">
+
+        <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600">
+
+        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600">
+
+        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600">
+
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600">
+
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600">
+
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600">
+
+      </div>
+
+    </section>
+
+
+    <!-- MORE POSTS -->
+    <section class="more-section">
+
+      <div class="section-heading">
+        <h2>More to discover</h2>
+      </div>
+
+      <div class="explore-grid">
+
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600">
+
+        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=600">
+
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600">
+
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600">
+
+      </div>
+
+    </section>
+
+  </div>
 
 </ion-content>

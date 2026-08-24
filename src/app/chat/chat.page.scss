@@ -1,0 +1,139 @@
+ion-content { --background:#f5f6f8; }
+
+ion-toolbar {
+  --background:#fff;
+  --border-width:0;
+}
+
+ion-title {
+  text-align:center;
+  font-weight:700;
+}
+
+.chat-page {
+  padding:12px;
+  max-width:600px;
+  margin:auto;
+}
+
+.chat-search {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:11px;
+  background:#fff;
+  border-radius:12px;
+}
+
+.chat-search input {
+  flex:1;
+  border:0;
+  outline:0;
+  background:none;
+}
+
+.online-section,
+.messages-header {
+  margin-top:20px;
+}
+
+.online-section h2,
+.messages-header h2 {
+  margin:0 0 10px;
+  font-size:16px;
+}
+
+.online-list {
+  display:flex;
+  gap:18px;
+}
+
+.online-person {
+  text-align:center;
+}
+
+.avatar {
+  position:relative;
+}
+
+.avatar img {
+  width:52px;
+  height:52px;
+  object-fit:cover;
+  border-radius:50%;
+}
+
+.online,
+.avatar span {
+  position:absolute;
+  right:0;
+  bottom:2px;
+  width:10px;
+  height:10px;
+  background:#18c777;
+  border:2px solid #fff;
+  border-radius:50%;
+}
+
+.online-person small {
+  font-size:10px;
+}
+
+.chat-item {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 3px;
+  border-bottom:1px solid #e5e5e5;
+}
+
+.chat-info {
+  flex:1;
+}
+
+.chat-info h3 {
+  margin:0;
+  font-size:14px;
+}
+
+.chat-info p {
+  margin:4px 0 0;
+  font-size:11px;
+  color:#888;
+}
+
+.chat-meta {
+  text-align:right;
+  font-size:9px;
+  color:#999;
+}
+
+.chat-meta b {
+  display:block;
+  margin-top:5px;
+  padding:3px 6px;
+  border-radius:10px;
+  background:#8834e8;
+  color:#fff;
+}
+
+.chat-end {
+  padding:30px 20px;
+  text-align:center;
+  color:#999;
+}
+
+.chat-end ion-icon {
+  font-size:30px;
+  color:#8834e8;
+}
+
+.chat-end strong {
+  display:block;
+  margin-top:6px;
+  color:#555;
+}
+
+.chat-end p {
+  font-size:11px;
+}

@@ -4,14 +4,253 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="page-content">
-    <ion-icon name="people-outline"></ion-icon>
+<ion-content>
 
-    <h1>Connect with people</h1>
+  <div class="connect-page">
 
-    <p>
-      Find creators, follow people, and grow your Social Circle.
-    </p>
+    <!-- INTRO -->
+    <div class="intro">
+      <ion-icon name="people-outline"></ion-icon>
+
+      <div>
+        <h2>Grow your Social Circle</h2>
+        <p>Connect, chat and stay in touch.</p>
+      </div>
+    </div>
+
+
+    <!-- CONNECTION REQUESTS -->
+
+    <div class="section">
+
+      <div class="section-header">
+        <h2>Connection Requests</h2>
+        <button>See All</button>
+      </div>
+
+      <div class="request">
+
+        <img
+           src="https://randomuser.me/api/portraits/women/68.jpg"
+            >
+        <div class="person-info">
+          <strong>Rinicutie</strong>
+          <span>@rini_complex</span>
+          <small>3 mutual connections</small>
+        </div>
+
+        <div class="request-buttons">
+          <button class="accept">Accept</button>
+          <button class="remove">×</button>
+        </div>
+
+      </div>
+
+
+      <div class="request">
+
+        <img
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200"
+        >
+
+        <div class="person-info">
+          <strong>DMT</strong>
+          <span>@TheDMT</span>
+          <small>5 mutual connections</small>
+        </div>
+
+        <div class="request-buttons">
+          <button class="accept">Accept</button>
+          <button class="remove">×</button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PEOPLE YOU KNOW -->
+
+    <div class="section">
+
+      <div class="section-header">
+        <h2>People You Know</h2>
+        <button>See All</button>
+      </div>
+
+      <div class="known-person">
+
+        <div class="avatar">
+          <img
+             src="https://randomuser.me/api/portraits/men/32.jpg"
+>
+          <i></i>
+        </div>
+
+        <div class="person-info">
+          <strong>Aashif_Cool</strong>
+          <span>@aashif</span>
+          <small>2 mutual connections</small>
+        </div>
+
+        <span class="connected">Connected</span>
+
+      </div>
+
+
+      <div class="known-person">
+
+        <div class="avatar">
+          <img
+            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200"
+          >
+        </div>
+
+        <div class="person-info">
+          <strong>Raizzz</strong>
+          <span>@raizz_kumar</span>
+          <small>8 mutual connections</small>
+        </div>
+
+        <span class="connected">Connected</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- RECENT CHATS -->
+
+    <div class="section">
+
+      <div class="section-header">
+        <h2>Recent Chats</h2>
+        <button>See All</button>
+      </div>
+
+
+      <div class="chat-person">
+
+        <div class="avatar">
+          <img
+            src="https://randomuser.me/api/portraits/women/68.jpg"
+>
+          <i></i>
+        </div>
+
+        <div class="chat-info">
+          <strong>Rinicutie</strong>
+          <p>Hey! Are you coming tomorrow?</p>
+        </div>
+
+        <div class="chat-time">
+          <span>10:42 AM</span>
+          <b>2</b>
+        </div>
+
+      </div>
+
+
+      <div class="chat-person">
+
+        <div class="avatar">
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200"
+          >
+        </div>
+
+        <div class="chat-info">
+          <strong>Neha Singh</strong>
+          <p>That photo looks amazing ✨</p>
+        </div>
+
+        <div class="chat-time">
+          <span>Yesterday</span>
+        </div>
+
+      </div>
+
+
+      <div class="chat-person">
+
+        <div class="avatar">
+          <img
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200"
+          >
+        </div>
+
+        <div class="chat-info">
+          <strong>Aman Verma</strong>
+          <p>Let's catch up soon!</p>
+        </div>
+
+        <div class="chat-time">
+          <span>Mon</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PEOPLE YOU MAY KNOW -->
+
+    <div class="section">
+
+      <div class="section-header">
+        <h2>People You May Know</h2>
+        <button>See All</button>
+      </div>
+
+
+      <div class="suggestion">
+
+        <img
+          src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200"
+        >
+
+        <div class="person-info">
+          <strong>Simran Kapoor</strong>
+          <span>@simran_kapoor</span>
+          <small>4 mutual connections</small>
+        </div>
+
+        <button class="connect">Connect</button>
+
+      </div>
+
+
+      <div class="suggestion">
+
+        <img
+          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200"
+        >
+
+        <div class="person-info">
+          <strong>Arjun Mehta</strong>
+          <span>@arjun_mehta</span>
+          <small>6 mutual connections</small>
+        </div>
+
+        <button class="connect">Connect</button>
+
+      </div>
+
+    </div>
+
+
+    <!-- END MESSAGE -->
+
+    <div class="end-message">
+
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+
+      <strong>You're all caught up</strong>
+
+      <span>New people and requests will appear here.</span>
+
+    </div>
+
   </div>
+
 </ion-content>

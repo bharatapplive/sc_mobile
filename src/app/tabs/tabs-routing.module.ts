@@ -35,6 +35,11 @@ const routes: Routes = [
           import('../profile/profile.module').then(m => m.ProfilePageModule),
       },
       {
+      path: 'chat',
+        loadComponent: () =>
+          import('../chat/chat.page').then(m => m.ChatPage),
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full',

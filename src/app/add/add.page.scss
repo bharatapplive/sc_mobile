@@ -1,24 +1,175 @@
-.page-content {
-  padding-top: 45px;
+ion-content {
+  --background: #f5f6f8;
+}
+
+ion-toolbar {
+  --background: #fff;
+  --border-width: 0;
+}
+
+ion-title {
   text-align: center;
-}
-
-.page-content ion-icon {
-  color: #6424d8;
-  font-size: 64px;
-}
-
-.page-content h1 {
-  margin: 18px 0 10px;
-  color: #111111;
-  font-size: 25px;
   font-weight: 700;
 }
 
-.page-content p {
-  margin: 0 auto;
-  max-width: 280px;
-  color: #666666;
-  font-size: 15px;
-  line-height: 1.5;
+.connect-page {
+  padding: 12px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.intro,
+.request {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #fff;
+  border-radius: 14px;
+}
+
+.intro ion-icon {
+  font-size: 28px;
+  color: #8834e8;
+}
+
+.intro h2,
+.intro p,
+.section-header h2 {
+  margin: 0;
+}
+
+.intro h2 {
+  font-size: 16px;
+}
+
+.intro p {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #888;
+}
+
+.section {
+  margin-bottom: 22px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.section-header h2 {
+  font-size: 16px;
+}
+
+.section-header button {
+  border: 0;
+  background: none;
+  color: #8834e8;
+  font-size: 11px;
+}
+
+.request img,
+.suggestion > img,
+.avatar img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.person-info,
+.chat-info {
+  flex: 1;
+}
+
+.person-info strong,
+.chat-info strong {
+  display: block;
+  font-size: 14px;
+}
+
+.person-info span,
+.person-info small,
+.chat-info p {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+  color: #888;
+}
+
+.request-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.accept,
+.connect {
+  border: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #8834e8;
+  color: white;
+  font-size: 10px;
+}
+
+.remove {
+  border: 0;
+  border-radius: 8px;
+  background: #eee;
+}
+
+.known-person,
+.chat-person,
+.suggestion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 3px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.connected {
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: #eee;
+  font-size: 10px;
+}
+
+.avatar {
+  position: relative;
+}
+
+.avatar i {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  width: 10px;
+  height: 10px;
+  background: #18c777;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.chat-info p {
+  margin-bottom: 0;
+}
+
+.chat-time {
+  font-size: 9px;
+  color: #999;
+}
+
+.end-message {
+  text-align: center;
+  margin: 25px;
+  color: #999;
+  font-size: 11px;
+}
+
+.end-message ion-icon {
+  font-size: 28px;
+  color: #18c777;
 }

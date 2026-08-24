@@ -154,7 +154,13 @@ ion-title {
 
 .add-person-btn {
   width: 48px;
+  height: 47px;
   background: #f0f1f3;
+  color:#333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 // Highlights
