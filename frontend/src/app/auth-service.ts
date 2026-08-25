@@ -20,6 +20,26 @@ export interface User{
   profileBio?: string;
 }
 
+export interface CreatePostPayload {
+  userId: string;
+  author: string;
+  caption?: string;
+  mediaUrl: string;
+  mediaType: 'image' | 'video'; // Use strict union types instead of plain string
+  hashtags?: string[];          // Changed to array of strings
+  likesCount?: number;          // Optional for creation payload
+  commentsCount?: number;       // Optional for creation payload
+}
+
+export interface PostResponse extends CreatePostPayload {
+  _id: string;
+  likes: string[];              // User IDs who liked the post
+  likesCount: number;           // Guaranteed number from DB
+  commentsCount: number;        // Guaranteed number from DB
+  createdDate: string;
+  updatedAt: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -76,5 +96,24 @@ export class AuthService {
     const userId = rawId ? JSON.parse(rawId) : null;
 
     return this.http.get<User>(`${environment.apiUrl}/user/${userId}`);
+  }
+
+  // 6. Create the post...
+  createNewPost(postData: CreatePostPayload): Observable<PostResponse>{
+    return this.http.post<PostResponse>(`${environment.apiUrl}/post`, postData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Server side error during registration:', error);
+        return throwError(() => new Error(error.error?.message || 'Server error occurred'));
+      })
+    );
+  }
+
+  // 7. Load the post...
+  loadPostData(){
+    
+    const rawId = localStorage.getItem('userID');
+    const userId = rawId ? JSON.parse(rawId) : null;
+
+    return this.http.get<PostResponse>(`${environment.apiUrl}/post?userId=${encodeURIComponent(userId)}`);
   }
 }

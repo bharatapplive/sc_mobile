@@ -227,34 +227,39 @@
       }
     }
 
+    
+    
     .files{
       display: flex;
       align-items: center;
-
-      .grid-main{
+      
+      .grid{  
+        position: relative;
         display: grid;
-        place-items: center;
         grid-template-columns: repeat(3, 1fr);
-        
+
+        ion-img{
+            aspect-ratio: 1 / 1;
+        }
+
+        span{
+          font-size: 10px;
+          background: none;
+          color: white;
+        }
+
         .grid-box{
-          display: flex;
-          align-items: center;
-          position: relative;
-          aspect-ratio: 1 / 1; // Tall reel-style portrait ratio
-          overflow: hidden;
+          background: black;
           border: 1px solid rgba(214, 214, 214, 0.5);
-          border-radius: 10px;
-
-          ion-img{
-            width: 100%;
-            height: 100%;
-          }
-
-          span{
-            background: none;
-            color: #102a43;
+          border-radius: 8px;
+          
+          .view-port{
+            display: flex;
+            color: white;
+            margin-left: 10px;
           }
         }
+        
       }
     }
   }

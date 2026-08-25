@@ -1,0 +1,101 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button fill="clear" slot="start" (click)="goBack()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>    
+    <ion-title>New post</ion-title>
+    <ion-button fill="clear" slot="end" (click)="openModal()">
+      <span>Next</span>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="upper-conatiner">
+      <ion-img [src]="postUrl"></ion-img>
+    </div>
+    <div class="lower-conatiner">
+      <div class="btn-header">
+        <ion-button shape="round" size="small">Recents</ion-button>
+        <ion-button shape="round" size="small">Drafts</ion-button>
+        <ion-button shape="round" size="small" slot="end">Select</ion-button>
+      </div>
+      <div class="grid">
+        <ion-icon name="camera"></ion-icon>
+        <div *ngFor="let post of posts">
+          <ion-img [src]="post.url" (click)="onChangePost(post.id)"></ion-img>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Modal... -->
+  <ion-modal [isOpen]="isCreateModel">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-button fill="clear" slot="start" (click)="openModal()">
+            <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+          </ion-button> 
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="post-selected">
+          <div class="selected-image">
+            <ion-img [src]="postUrl"></ion-img>
+          </div>
+          <div class="tab-container">
+            <div class="tabs">
+              <ion-button fill="clear" size="small">
+                <div class="tab-btn">
+                  <ion-icon name="musical-notes-outline"></ion-icon>
+                  <span>Audio</span>
+                </div>
+              </ion-button>
+              <ion-button fill="clear" size="small">
+                <div class="tab-btn">
+                  <ion-icon name="text-outline"></ion-icon>
+                  <span>Text</span>
+                </div>
+              </ion-button>
+              <ion-button fill="clear" size="small">
+                <div class="tab-btn">
+                  <ion-icon name="image-outline"></ion-icon>
+                  <span>Overlay</span>
+                </div>
+              </ion-button>
+              <ion-button fill="clear" size="small">
+                <div class="tab-btn">
+                  <ion-icon name="color-filter-outline"></ion-icon>
+                  <span>Filter</span>
+                </div>
+              </ion-button>
+              <ion-button fill="clear" size="small">
+                <div class="tab-btn">
+                  <ion-icon name="options-outline"></ion-icon>
+                  <span>Edit</span>
+                </div>
+              </ion-button>
+              <ion-button fill="clear" size="small">
+                <div class="tab-btn">
+                  <ion-icon name="scan-outline"></ion-icon>
+                  <span>Ratio</span>
+                </div>
+              </ion-button>
+            </div>
+            <div class="tab-bottom">
+              <div class="add-image">
+                <ion-img [src]="postUrl"></ion-img>
+                <ion-button fill="clear" size="small">
+                  <ion-icon slot="icon-only" name="add"></ion-icon>
+                </ion-button>
+              </div>
+              <ion-button shape="round" size="small" (click)="onCreatePost()">Next</ion-button>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -32,6 +32,7 @@ export class ProfilePage implements OnInit {
 
   activeTab: string = 'posts';
 
+  posts: any[] = [];
 
   constructor(
     private router: Router,
@@ -40,10 +41,11 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.loadUserProfile();
+    this.updatePost();
+    console.log(this.posts);
   }
   
   loadUserProfile(event?: any){
-    
     this.authServe.loadUserData().subscribe({
       next: (userData: any) => {
         this.user = userData;
@@ -62,7 +64,6 @@ export class ProfilePage implements OnInit {
         }
       },
     });
-      
   }
   
   handleRefresh(event: any){
@@ -82,18 +83,23 @@ export class ProfilePage implements OnInit {
   }
 
   // 2. UPDATE POST..
-  updatePost(){    
-    //this.postNumber++;
-    // const payload = {userId: this.userId, postNumber: Number(this.postNumber)};
+  updatePost(){
+    this.authServe.loadPostData().subscribe({
+      next: (userData: any) => {
+        if (Array.isArray(userData)) {
+          this.posts.push(...userData);
+        }else {
+          this.posts.push(userData);
+        }
 
-    // this.http.patch<{postNumber: number}>(`${this.API_URL}/user/post`,payload).subscribe(
-    //   {
-    //     next:(response) => {
-    //       console.log('Successfully updated on server:', response);
-    //     },
-    //     error: (err) => console.error('Upload failed:', err)
-    //   }
-    // )
+        if (this.user) {
+          this.user.postNumber = this.posts.length;
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load user profile:', err);
+      }
+    })
   }
 
   // 3. UPDATE FOLLOWER..
@@ -156,6 +162,9 @@ export class ProfilePage implements OnInit {
 
   } 
 
+  openPostPanel(){
+    this.router.navigate(['./post']);
+  }
   onLogout(){
     this.authServe.logout();
   }

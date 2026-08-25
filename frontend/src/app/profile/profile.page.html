@@ -5,7 +5,7 @@
         <ion-label>{{user?.username}}</ion-label>
       </ion-button>
       <div>
-        <ion-button fill="clear">
+        <ion-button fill="clear" routerLink="/home/post">
           <ion-icon name="add"></ion-icon>
         </ion-button>
         <ion-button fill="clear" (click)="onLogout()">
@@ -151,47 +151,15 @@
       </div>
 
       <div [ngSwitch]="activeTab" class="files">
-
-        <div *ngSwitchCase="'posts'" class="grid-main">
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 120</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 12</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 10</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 150</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 250</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 1,290</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 190</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 8</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 80</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="view-count"><ion-icon name="play-outline"></ion-icon> 10</span>
+        <div *ngSwitchCase="'posts'">
+          <div class="grid">
+            <div class="grid-box" *ngFor="let post of posts">
+              <ion-img [src]="post.mediaUrl"></ion-img>
+              <div class="view-port">
+                <ion-icon slot="icon-only" name="play-outline"></ion-icon>
+                <span>{{post.likesCount}}</span>
+              </div>
+            </div>
           </div>
         </div>
 
