@@ -1,0 +1,274 @@
+<ion-content [fullscreen]="true" class="page">
+
+  <main class="profile-page">
+
+    <!-- ================= HEADER ================= -->
+    <header class="profile-header">
+
+      <div class="header-left">
+        <div class="profile-mini-icon vibrant-gradient">
+          <span class="material-symbols-outlined">
+            group
+          </span>
+        </div>
+
+      </div>
+
+      <button class="icon-btn" type="button">
+        <span class="material-symbols-outlined">
+          settings
+        </span>
+      </button>
+
+    </header>
+
+
+    <!-- ================= PROFILE INFO ================= -->
+    <section class="profile-card">
+
+      <div class="profile-top">
+
+        <!-- PROFILE IMAGE -->
+        <div class="profile-image-wrapper vibrant-gradient">
+
+          <div class="profile-image">
+            <img
+              src="assets/profile.jpg"
+              alt="nature.xvision profile"
+            />
+          </div>
+
+          <div class="verified-badge">
+            <span class="material-symbols-outlined">
+              check
+            </span>
+          </div>
+
+        </div>
+
+
+        <!-- STATS -->
+        <div class="stats">
+
+          <div class="stat">
+            <strong>32</strong>
+            <span>Posts</span>
+          </div>
+
+          <div
+            class="stat clickable"
+            routerLink="/followers"
+          >
+            <strong>553</strong>
+            <span>Followers</span>
+          </div>
+
+          <div
+            class="stat clickable"
+            routerLink="/following"
+          >
+            <strong>184</strong>
+            <span>Following</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- USER INFORMATION -->
+      <div class="user-info">
+
+        <h2>nature.xvision</h2>
+
+        <span class="role">
+          Content Creator • Editor
+        </span>
+
+        <p>
+          Cricket reels that hit harder than sixes 💥🏏
+          <br>
+          IPL • Edits • Trending Clips
+          <br>
+          Follow for your daily cricket dose 🔥
+        </p>
+
+      </div>
+
+
+      <!-- ACTION BUTTONS -->
+      <div class="profile-actions">
+
+        <button class="primary-action">
+          <span class="material-symbols-outlined">
+            edit
+          </span>
+          Edit Profile
+        </button>
+
+        <button class="secondary-action">
+          <span class="material-symbols-outlined">
+            share
+          </span>
+          Share
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= HIGHLIGHTS ================= -->
+    <section class="highlights-section">
+
+      <div class="section-title">
+        <h3>Highlights</h3>
+
+        <button>
+          <span class="material-symbols-outlined">
+            add
+          </span>
+        </button>
+      </div>
+
+
+      <div class="highlights">
+
+        <!-- NEW -->
+        <div class="highlight">
+          <div class="highlight-circle new-highlight">
+            <span class="material-symbols-outlined">
+              add
+            </span>
+          </div>
+          <span>New</span>
+        </div>
+
+
+        <!-- IPL -->
+        <div class="highlight">
+          <div class="highlight-circle">
+            <img src="assets/virat-kohli.jpg" alt="IPL">
+          </div>
+          <span>IPL</span>
+        </div>
+
+
+        <!-- REELS -->
+        <div class="highlight">
+          <div class="highlight-circle">
+            <img src="assets/worldcup.jpg" alt="Reels">
+          </div>
+          <span>Reels</span>
+        </div>
+
+
+        <!-- CRICKET -->
+        <div class="highlight">
+          <div class="highlight-circle">
+            <img src="assets/bat.jpg" alt="Cricket">
+          </div>
+          <span>Cricket</span>
+        </div>
+
+
+        <!-- EDITS -->
+        <div class="highlight">
+          <div class="highlight-circle">
+            <img src="assets/edits.jpg" alt="Edits">
+          </div>
+          <span>Edits</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CONTENT TABS ================= -->
+    <section class="content-section">
+
+      <div class="tabs">
+
+        <button class="tab active">
+          <span class="material-symbols-outlined">
+            grid_view
+          </span>
+        </button>
+
+        <button class="tab">
+          <span class="material-symbols-outlined">
+            play_circle
+          </span>
+        </button>
+
+        <button class="tab">
+          <span class="material-symbols-outlined">
+            bookmark
+          </span>
+        </button>
+
+        <button class="tab">
+          <span class="material-symbols-outlined">
+            person
+          </span>
+        </button>
+
+      </div>
+
+
+      <!-- ================= POSTS ================= -->
+      <div class="posts-grid">
+
+        <div class="post">
+          <img src="assets/virat1.jpg" alt="Post">
+        </div>
+
+        <div class="post">
+          <img src="assets/images2.jpg" alt="Post">
+          <span class="post-type material-symbols-outlined">
+            play_arrow
+          </span>
+        </div>
+
+        <div class="post">
+          <img src="assets/images3.jpg" alt="Post">
+        </div>
+
+        <div class="post">
+          <img src="assets/images4.jpg" alt="Post">
+        </div>
+
+        <div class="post">
+          <img src="assets/images5.jpg" alt="Post">
+          <span class="post-type material-symbols-outlined">
+            play_arrow
+          </span>
+        </div>
+
+        <div class="post">
+          <img src="assets/images6.jpg" alt="Post">
+        </div>
+
+        <div class="post">
+          <img src="assets/images7.jpg" alt="Post">
+        </div>
+
+        <div class="post">
+          <img src="assets/images8.jpg" alt="Post">
+          <span class="post-type material-symbols-outlined">
+            play_arrow
+          </span>
+        </div>
+
+        <div class="post">
+          <img src="assets/images9.jpg" alt="Post">
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</ion-content>

@@ -1,0 +1,796 @@
+:host {
+  display: block;
+}
+
+
+/* =====================================
+   PAGE
+===================================== */
+
+.page {
+  --background: var(--color-background);
+
+  background: var(--color-background);
+  color: var(--color-on-surface);
+
+  font-family: var(--font-family-base);
+}
+
+
+.profile-page {
+  width: 100%;
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  padding-bottom: 30px;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.profile-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px var(--spacing-sm) 14px;
+
+  border-bottom: 1px solid
+    var(--color-outline-variant);
+}
+
+
+.header-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+.profile-mini-icon {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+
+  flex-shrink: 0;
+}
+
+
+.profile-mini-icon span {
+  font-size: 22px;
+}
+
+
+.profile-header h1 {
+  margin: 0;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  color: var(--color-on-surface);
+}
+
+
+.online-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  margin-top: 2px;
+
+  font-size: 11px;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #35c759;
+}
+
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+
+  border-radius: 13px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-surface-variant);
+
+  color: var(--color-on-surface);
+
+  cursor: pointer;
+}
+
+
+.icon-btn span {
+  font-size: 22px;
+}
+
+
+/* =====================================
+   PROFILE CARD
+===================================== */
+
+.profile-card {
+  margin: var(--spacing-md) var(--spacing-sm) 0;
+
+  padding: var(--spacing-md);
+
+  border-radius: var(--radius-xl);
+
+  background: var(--color-surface);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+html.dark .profile-card {
+  box-shadow:
+    0 8px 30px rgba(138, 43, 226, 0.16);
+}
+
+
+/* =====================================
+   PROFILE TOP
+===================================== */
+
+.profile-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+}
+
+
+/* =====================================
+   PROFILE IMAGE
+===================================== */
+
+.profile-image-wrapper {
+  position: relative;
+
+  width: 96px;
+  height: 96px;
+
+  padding: 3px;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
+}
+
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  border: 3px solid var(--color-surface);
+
+  background: var(--color-surface-variant);
+}
+
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =====================================
+   VERIFIED
+===================================== */
+
+.verified-badge {
+  position: absolute;
+
+  right: -2px;
+  bottom: 2px;
+
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-primary);
+
+  color: #fff;
+
+  border: 3px solid var(--color-surface);
+}
+
+
+.verified-badge span {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+
+/* =====================================
+   STATS
+===================================== */
+
+.stats {
+  flex: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+}
+
+
+.stat {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 8px 3px;
+
+  border-radius: var(--radius-lg);
+
+  background: var(--color-surface-variant);
+}
+
+
+.stat strong {
+  font-size: 17px;
+
+  font-weight: 800;
+
+  color: var(--color-on-surface);
+}
+
+
+.stat span {
+  font-size: 11px;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+.stat.clickable {
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+
+.stat.clickable:active {
+  transform: scale(0.96);
+}
+
+
+/* =====================================
+   USER INFO
+===================================== */
+
+.user-info {
+  margin-top: var(--spacing-md);
+}
+
+
+.user-info h2 {
+  margin: 0;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  color: var(--color-on-surface);
+}
+
+
+.role {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: var(--color-primary);
+}
+
+
+.user-info p {
+  margin: 8px 0 0;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+/* =====================================
+   ACTION BUTTONS
+===================================== */
+
+.profile-actions {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: var(--spacing-sm);
+
+  margin-top: var(--spacing-md);
+}
+
+
+.profile-actions button {
+  height: 42px;
+
+  border: 0;
+
+  border-radius: var(--radius-lg);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.profile-actions button:active {
+  transform: scale(0.97);
+}
+
+
+.primary-action {
+  background: var(--color-primary);
+
+  color: #fff;
+}
+
+
+.secondary-action {
+  background: var(--color-surface-variant);
+
+  color: var(--color-on-surface);
+}
+
+
+.profile-actions span {
+  font-size: 18px;
+}
+
+
+/* =====================================
+   HIGHLIGHTS
+===================================== */
+
+.highlights-section {
+  margin-top: var(--spacing-md);
+
+  padding: 0 var(--spacing-sm);
+}
+
+
+.section-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+
+.section-title h3 {
+  margin: 0;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+
+.section-title button {
+  width: 28px;
+  height: 28px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-surface-variant);
+
+  color: var(--color-on-surface);
+}
+
+
+.section-title button span {
+  font-size: 18px;
+}
+
+
+/* =====================================
+   HIGHLIGHTS LIST
+===================================== */
+
+.highlights {
+  display: flex;
+
+  gap: 16px;
+
+  overflow-x: auto;
+
+  padding-bottom: 4px;
+
+  scrollbar-width: none;
+}
+
+
+.highlights::-webkit-scrollbar {
+  display: none;
+}
+
+
+.highlight {
+  min-width: 62px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+
+.highlight-circle {
+  width: 62px;
+  height: 62px;
+
+  padding: 2px;
+
+  border-radius: 50%;
+
+  border: 2px solid
+    var(--color-outline-variant);
+
+  overflow: hidden;
+
+  background: var(--color-surface-variant);
+}
+
+
+.highlight-circle img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+
+.new-highlight {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-primary);
+}
+
+
+.new-highlight span {
+  font-size: 25px;
+}
+
+
+.highlight > span {
+  max-width: 62px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 11px;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+/* =====================================
+   CONTENT SECTION
+===================================== */
+
+.content-section {
+  margin-top: var(--spacing-md);
+}
+
+
+/* =====================================
+   TABS
+===================================== */
+
+.tabs {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  height: 52px;
+
+  border-top: 1px solid
+    var(--color-outline-variant);
+
+  border-bottom: 1px solid
+    var(--color-outline-variant);
+}
+
+
+.tab {
+  position: relative;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--color-on-surface-variant);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+
+.tab span {
+  font-size: 22px;
+}
+
+
+.tab.active {
+  color: var(--color-primary);
+}
+
+
+.tab.active::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 25%;
+
+  width: 50%;
+
+  height: 2px;
+
+  border-radius: 10px;
+
+  background: var(--color-primary);
+}
+
+
+/* =====================================
+   POSTS
+===================================== */
+
+.posts-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 2px;
+
+  margin-top: 2px;
+}
+
+
+.post {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background: var(--color-surface-variant);
+}
+
+
+.post img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.3s ease;
+}
+
+
+.post:active img {
+  transform: scale(0.96);
+}
+
+
+/* =====================================
+   REEL ICON
+===================================== */
+
+.post-type {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  padding: 4px;
+
+  border-radius: 7px;
+
+  color: #fff;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  font-size: 15px !important;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 380px) {
+
+  .profile-card {
+    padding: 14px;
+  }
+
+
+  .profile-top {
+    gap: 15px;
+  }
+
+
+  .profile-image-wrapper {
+    width: 82px;
+    height: 82px;
+  }
+
+
+  .stat strong {
+    font-size: 15px;
+  }
+
+
+  .stat span {
+    font-size: 10px;
+  }
+
+
+  .highlights {
+    gap: 13px;
+  }
+
+
+  .highlight-circle {
+    width: 57px;
+    height: 57px;
+  }
+
+
+  .highlight {
+    min-width: 57px;
+  }
+
+}
+
+
+/* =====================================
+   TABLET / DESKTOP
+===================================== */
+
+@media (min-width: 768px) {
+
+  .profile-page {
+    padding-top: 10px;
+  }
+
+
+  .profile-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+
+  .profile-card {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+
+  .highlights-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
