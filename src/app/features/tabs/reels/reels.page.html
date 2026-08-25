@@ -1,13 +1,65 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>reels</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" [scrollY]="false">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reels</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <swiper-container direction="vertical" slides-per-view="1" space-between="0" mousewheel="true"
+    (swiperslidechange)="onSlideChange($event)" class="reels-swiper">
+    <swiper-slide *ngFor="let reel of reels; let i = index">
+      <!-- 1. Background Video -->
+      <div class="video-wrapper" (click)="togglePlayPause(i)">
+        <video #videoPlayer [src]="reel.videoUrl" [poster]="reel.poster" loop playsinline [muted]="isMuted" [autoplay]="i === 0" preload="auto">
+        </video>
+
+        <!-- Play / Pause State Icon Overlay -->
+        <div *ngIf="!reel.isPlaying" class="play-state-indicator">
+          <ion-icon name="play"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Sound Mute / Unmute Floating Button -->
+      <button class="sound-toggle-btn" (click)="toggleMute($event)" aria-label="Toggle sound">
+        <ion-icon [name]="isMuted ? 'volume-mute-outline' : 'volume-high-outline'"></ion-icon>
+      </button>
+
+      <!-- 2. Instagram Right-Side Action Controls -->
+      <div class="side-actions">
+        <div class="action-btn" (click)="toggleLike(reel)">
+          <ion-icon [name]="reel.isLiked ? 'heart' : 'heart-outline'" [class.liked]="reel.isLiked"></ion-icon>
+          <span>{{ reel.likes }}</span>
+        </div>
+
+        <div class="action-btn">
+          <ion-icon name="chatbubble-outline"></ion-icon>
+          <span>{{reel.comments}}</span>
+        </div>
+
+        <div class="action-btn">
+          <ion-icon name="paper-plane-outline"></ion-icon>
+          <span>{{ reel.shares }}</span>
+        </div>
+
+        <div class="action-btn">
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </div>
+      </div>
+
+      <!-- 3. Bottom Information Overlay (User, Sound, Caption) -->
+      <div class="bottom-info">
+        <div class="user-row">
+          <div class="user-profile">
+            <ion-avatar class="avatar-img">
+              <ion-img [src]="reel.userAvatar" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <div class="user-title">
+              <strong>{{ reel.username }}</strong>
+              <div class="audio-track">
+                <ion-icon name="musical-notes"></ion-icon>
+                <span>{{ reel.audioTrack }}</span>
+              </div>
+            </div>
+          </div>
+          <ion-button size="small" fill="outline" color="light">Follow</ion-button>
+        </div>
+        <p class="description">{{ reel.description }}</p>
+      </div>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>

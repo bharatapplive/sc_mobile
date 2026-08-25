@@ -1,30 +1,25 @@
-<ion-content></ion-content>
-<ion-router-outlet></ion-router-outlet>
+<ion-tabs>
+  <ion-tab-bar slot="bottom" *ngIf="showTabs">
+    <ion-tab-button tab="feeds" (click)="onChangeMode('feeds')">
+      <ion-icon [name]="activeTab === 'feeds' ? 'newspaper' : 'newspaper-outline'"></ion-icon>
+    </ion-tab-button>
 
-<ion-toolbar *ngIf="showTabs">
-  <div class="footer-button-container">
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="feeds" (click)="onChangeMode('feeds')">
-        <ion-icon [name]="activeTab === 'feeds' ? 'newspaper' : 'newspaper-outline'"></ion-icon>
-      </ion-tab-button>
+    <ion-tab-button tab="chat" (click)="onChangeMode('chat')">
+      <ion-icon [name]="activeTab === 'chat' ? 'paper-plane' : 'paper-plane-outline'"></ion-icon>
+    </ion-tab-button>
 
-      <ion-tab-button tab="chat" (click)="onChangeMode('chat')">
-        <ion-icon [name]="activeTab === 'chat' ? 'paper-plane' : 'paper-plane-outline'"></ion-icon>
-      </ion-tab-button>
+    <ion-tab-button tab="reels" (click)="onChangeMode('reels')">
+      <ion-icon [name]="activeTab === 'reels' ? 'play' : 'play-outline'"></ion-icon>
+    </ion-tab-button>
 
-      <ion-tab-button tab="reels" (click)="onChangeMode('reels')">
-        <ion-icon [name]="activeTab === 'reels' ? 'play' : 'play-outline'"></ion-icon>
-      </ion-tab-button>
+    <ion-tab-button tab="search" (click)="onChangeMode('search')">
+      <ion-icon [name]="activeTab === 'search' ? 'search' : 'search-outline'"></ion-icon>
+    </ion-tab-button>
 
-      <ion-tab-button tab="search" (click)="onChangeMode('search')">
-        <ion-icon [name]="activeTab === 'search' ? 'search' : 'search-outline'"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button tab="profile" (click)="onChangeMode('profile')">
-        <ion-avatar class="person" [class.active]="activeTab === 'profile'">
-          <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
-        </ion-avatar>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </div>
-</ion-toolbar>
+    <ion-tab-button tab="profile" (click)="onChangeMode('profile')">
+      <ion-avatar class="person" [class.active]="activeTab === 'profile'">
+        <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
+      </ion-avatar>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

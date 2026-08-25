@@ -1,0 +1,201 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+ion-content {
+  --overflow: hidden;
+  --background: #000000;
+  width: 100%;
+  height: 100%;
+}
+
+.reels-swiper {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  swiper-slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    overflow: hidden;
+  }
+
+  /* Force video frame to fill vertical screen with cover */
+  .video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+
+    /* Big Play indicator when paused */
+    .play-state-indicator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+
+      ion-icon {
+        font-size: 36px;
+        color: #ffffff;
+        margin-left: 4px;
+      }
+    }
+  }
+
+  /* Sound Mute / Unmute Top Right Button */
+  .sound-toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 15;
+    transition: transform 0.15s ease, background 0.2s ease;
+
+    &:active {
+      transform: scale(0.9);
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+
+  /* Right-side Action Buttons */
+  .side-actions {
+    position: absolute;
+    right: 16px;
+    bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    z-index: 10;
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+
+      &:active {
+        transform: scale(0.88);
+      }
+
+      ion-icon {
+        font-size: 28px;
+        filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5));
+        transition: color 0.2s ease, transform 0.2s ease;
+
+        &.liked {
+          color: #ef4444;
+          transform: scale(1.1);
+        }
+      }
+
+            span {
+                font-size: 10px;
+                margin-top: 4px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    /* Bottom User Info */
+    .bottom-info {
+        position: absolute;
+        bottom: 12px;
+        left: 16px;
+        right: 80px;
+        color: #fff;
+        z-index: 10;
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
+
+        .user-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            .user-profile {
+                display: flex;
+                gap: 5px;
+
+                .user-title {
+                    gap: 10px;
+
+                    strong {
+                        font-size: 15px;
+                    }
+
+                    .audio-track {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        font-size: 10px;
+                        opacity: 0.9;
+                    }
+                }
+            }
+
+            ion-button {
+                --border-radius: 8px;
+                height: 28px;
+                font-size: 12px;
+            }
+        }
+
+        .description {
+            font-size: 12px;
+            margin: 0;
+            margin-top: 10px;
+            line-height: 1.3;
+        }
+
+        .audio-track {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+    }
+}

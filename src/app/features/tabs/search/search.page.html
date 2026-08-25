@@ -1,100 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Trends</ion-title>
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar class="ion-padding-top" color="white" style="--padding-top: 12px;">
+    <ion-title color="black" style="font-weight: 800; font-size: 20px;">Social Circle</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Searchbar -->
-  <div class="search-container">
-    <ion-searchbar animated="true" placeholder="Search with Social Circle" (ionInput)="onSearchChange($event)">
-    </ion-searchbar>
-  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
 
-  <!-- Category Chips Carousel -->
-  <section class="category-section">
-    <div class="category-carousel">
-      <button *ngFor="let cat of categories" class="category-chip" [class.active]="selectedCategory === cat.id"
-        (click)="selectCategory(cat.id)">
-        <ion-icon *ngIf="cat.icon" [name]="cat.icon" class="chip-icon"></ion-icon>
-        <span>{{ cat.name }}</span>
-      </button>
-    </div>
-  </section>
+  <div class="container">
+    <section class="search-Bar-container">
+      <ion-item lines="none" class="place-holder">
+        <ion-icon slot="start" name="search-outline"></ion-icon>
+        <ion-input type="text" name="searchbar" placeholder="Search trends, creators, or tags.."
+          (ionInput)="onSearchChange($event)"></ion-input>
+      </ion-item>
+    </section>
 
-  <!-- Trends Media Feed (Scroll Down) -->
-  <div class="trends-feed">
-
-    <!-- Row 1: Asymmetric Split (Tall Left + Stacked Right) -->
-    <div class="trends-row-asymmetric">
-      <!-- Left: Tall Portrait Card -->
-      <div class="trend-card tall-card">
-        <img [src]="activeTrend.tall.image" [alt]="activeTrend.tall.title" class="trend-img" loading="lazy" />
-        <div class="card-overlay-gradient"></div>
-        <div class="card-tag-pill" *ngIf="activeTrend.tall.tag">
-          {{ activeTrend.tall.tag }}
-        </div>
-        <span class="card-title-label">{{ activeTrend.tall.title }}</span>
+    <section class="tab-bar">
+      <div class="tags-scroll-container">
+        <ion-button shape="round" size="small" fill="clear" *ngFor="let tag of tags" class="chips"
+          [class.active]="selectedTag === tag" (click)="selectTag(tag)">
+          <span>{{ tag }}</span>
+        </ion-button>
       </div>
+    </section>
 
-      <!-- Right: Stack of 2 Cards -->
-      <div class="trend-stack-col">
-        <!-- Top Card: Short -->
-        <div class="trend-card short-card">
-          <img [src]="activeTrend.short.image" [alt]="activeTrend.short.title" class="trend-img" loading="lazy" />
-          <div class="card-overlay-gradient"></div>
-          <div class="card-tag-pill mini" *ngIf="activeTrend.short.tag">
-            {{ activeTrend.short.tag }}
+    <section class="file-container card-board">
+      <ion-grid class="masonry-grid">
+        <div class="masonry-item" *ngFor="let item of allItems">
+          <ion-img class="card-img" [src]="item.url"></ion-img>
+          <ion-icon [name]="item.isLiked ? 'heart' : 'heart-outline'" class="favorite-icon" [class.liked]="item.isLiked"
+            (click)="toggleFavorite(item)"></ion-icon>
+          <div class="card-overlay bottom">
+            <div class="user-info">
+              <ion-avatar class="avatar">
+                <ion-img [src]="item.url"></ion-img>
+              </ion-avatar>
+              <span class="username">{{item?.title}}</span>
+            </div>
           </div>
-          <span class="card-title-label" *ngIf="activeTrend.short.title">{{ activeTrend.short.title }}</span>
         </div>
-        <!-- Bottom Card: Medium -->
-        <div class="trend-card medium-card">
-          <img [src]="activeTrend.medium.image" [alt]="activeTrend.medium.title" class="trend-img" loading="lazy" />
-          <div class="card-overlay-gradient"></div>
-          <div class="card-tag-pill" *ngIf="activeTrend.medium.tag">
-            {{ activeTrend.medium.tag }}
-          </div>
-          <span class="card-title-label">{{ activeTrend.medium.title }}</span>
-        </div>
-      </div>
-    </div>
+      </ion-grid>
+    </section>
 
-    <!-- Row 2: Wide Full-Width Live Banner Card -->
-    <div class="trend-card wide-banner-card">
-      <img [src]="activeTrend.banner.image" [alt]="activeTrend.banner.title" class="trend-img" loading="lazy" />
-      <div class="card-overlay-gradient"></div>
-      <div class="live-pill-badge" *ngIf="activeTrend.banner.badge">
-        <span class="live-pulse-dot" *ngIf="activeTrend.banner.isLive"></span>
-        <span class="live-text">{{ activeTrend.banner.badge }}</span>
-      </div>
-      <span class="card-title-label banner-title">{{ activeTrend.banner.title }}</span>
-    </div>
-
-    <!-- Row 3: 2-Column Equal Grid -->
-    <div class="trends-row-equal">
-      <!-- Left Card -->
-      <div class="trend-card portrait-card">
-        <img [src]="activeTrend.bottomLeft.image" [alt]="activeTrend.bottomLeft.title" class="trend-img"
-          loading="lazy" />
-        <div class="card-overlay-gradient"></div>
-        <div class="card-tag-pill" *ngIf="activeTrend.bottomLeft.tag">
-          {{ activeTrend.bottomLeft.tag }}
-        </div>
-        <span class="card-title-label">{{ activeTrend.bottomLeft.title }}</span>
-      </div>
-
-      <!-- Right Card -->
-      <div class="trend-card portrait-card">
-        <img [src]="activeTrend.bottomRight.image" [alt]="activeTrend.bottomRight.title" class="trend-img"
-          loading="lazy" />
-        <div class="card-overlay-gradient"></div>
-        <div class="card-tag-pill" *ngIf="activeTrend.bottomRight.tag">
-          {{ activeTrend.bottomRight.tag }}
-        </div>
-        <span class="card-title-label">{{ activeTrend.bottomRight.title }}</span>
-      </div>
-    </div>
-
+    <ion-infinite-scroll threshold="150px" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

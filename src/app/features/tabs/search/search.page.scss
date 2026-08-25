@@ -2,329 +2,220 @@
   display: block;
   width: 100%;
   height: 100%;
-  --app-bg: #f8f9fb;
+  --primary-purple: #7c3aed;
+  --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  --bg-color: #f8f9fb;
   --card-bg: #ffffff;
   --text-main: #111827;
-  --text-muted: #6b7280;
-  --brand-purple: #7c3aed;
-  --brand-pink: #d946ef;
-  --brand-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #d946ef 100%);
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
 }
 
-ion-header {
-  ion-toolbar {
-    --background: var(--app-bg);
-    --border-width: 0;
-    --min-height: 56px;
-
-    ion-title {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--text-main);
-      padding-inline: 16px;
-    }
-  }
+:host-context(html.dark) {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
 }
 
 ion-content {
-  --background: var(--app-bg);
+  --background: var(--bg-color);
 
   &::part(scroll) {
-    -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
-      width: 0 !important;
     }
   }
 }
 
-// 1. Search Bar Container
-.search-container {
-  padding: 4px 16px 10px 16px;
-
-  ion-searchbar {
-    --background: #ffffff;
-    --border-radius: 16px;
-    --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-    --placeholder-color: #9ca3af;
-    --placeholder-opacity: 1;
-    --icon-color: var(--brand-purple);
-    --color: var(--text-main);
-    padding: 0;
-    font-size: 14px;
-    font-weight: 500;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
-    transition: all 0.2s ease;
-
-    &:focus-within {
-      border-color: rgba(124, 58, 237, 0.4);
-      --box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12);
-    }
-  }
-}
-
-// 2. Category Carousel Section
-.category-section {
-  padding: 2px 0 14px 0;
-  width: 100%;
-
-  .category-carousel {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    overflow-x: auto;
-    touch-action: pan-x;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 2px 16px;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    .category-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 9999px;
-      background: #ffffff;
-      color: #4b5563;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-      font-size: 13px;
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      outline: none;
-
-      .chip-icon {
-        font-size: 16px;
-        color: var(--brand-purple);
-        transition: color 0.2s ease;
-      }
-
-      &:active {
-        transform: scale(0.94);
-      }
-
-      &.active {
-        background: var(--brand-gradient);
-        color: #ffffff;
-        border-color: transparent;
-        box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
-
-        .chip-icon {
-          color: #ffffff;
-        }
-
-        span {
-          color: #ffffff;
-        }
-      }
-    }
-  }
-}
-
-// 3. Trends Feed Layout
-.trends-feed {
-  padding: 0 16px 32px 16px;
+.container {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 680px;
+  max-width: 600px;
   margin: 0 auto;
+  padding: 12px 14px 90px;
+  gap: 14px;
 
-  // Shared Trend Card Styling
-  .trend-card {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    background: #1f2937;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    cursor: pointer;
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
-
-    &:active {
-      transform: scale(0.98);
-    }
-
-    .trend-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    &:hover .trend-img {
-      transform: scale(1.03);
-    }
-
-    .card-overlay-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0) 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .card-tag-pill {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #ffffff;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      z-index: 2;
-
-      &.mini {
-        padding: 3px 8px;
-        font-size: 10px;
-        border-radius: 10px;
-      }
-    }
-
-    .card-title-label {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1.35;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-      z-index: 2;
-    }
-  }
-
-  // Row 1: Asymmetric Split
-  .trends-row-asymmetric {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 12px;
-    height: 310px;
-
-    .tall-card {
-      height: 100%;
-      border-radius: 22px;
-
-      .card-title-label {
-        font-size: 14px;
-        bottom: 14px;
-        left: 14px;
-        right: 14px;
-      }
-    }
-
-    .trend-stack-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      height: 100%;
-
-      .short-card {
-        flex: 1;
-        border-radius: 18px;
-      }
-
-      .medium-card {
-        flex: 1.35;
-        border-radius: 18px;
-      }
-    }
-  }
-
-  // Row 2: Wide Full-Width Live Banner Card
-  .wide-banner-card {
+  // 1. Search Bar
+  .search-Bar-container {
     width: 100%;
-    height: 180px;
-    border-radius: 22px;
 
-    .live-pill-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(220, 38, 38, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #ffffff;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.45);
-      z-index: 2;
+    .place-holder {
+      --background: var(--card-bg);
+      --border-radius: 16px;
+      --padding-start: 14px;
+      --padding-end: 14px;
+      --min-height: 48px;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
 
-      .live-pulse-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #ffffff;
-        box-shadow: 0 0 6px #ffffff;
-        animation: pulse-glow 1.4s infinite ease-in-out;
+      &:focus-within {
+        border-color: var(--primary-purple);
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
       }
 
-      .live-text {
-        color: #ffffff;
+      ion-icon {
+        color: var(--primary-purple);
+        font-size: 20px;
+        margin-right: 10px;
       }
-    }
 
-    .banner-title {
-      font-size: 16px;
-      font-weight: 800;
-      bottom: 14px;
-      left: 14px;
-      right: 14px;
+      ion-input {
+        --color: var(--text-main);
+        --placeholder-color: var(--text-muted);
+        --placeholder-opacity: 0.8;
+        font-size: 14px;
+        font-weight: 500;
+      }
     }
   }
 
-  // Row 3: 2-Column Equal Grid
-  .trends-row-equal {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  // 2. Tab / Tags Filter Bar
+  .tab-bar {
+    width: 100%;
 
-    .portrait-card {
-      height: 200px;
-      border-radius: 20px;
+    .tags-scroll-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 2px 0;
 
-      .card-title-label {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chips {
+        flex: 0 0 auto;
+        margin: 0;
+        height: 36px;
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --border-radius: 20px;
+        --background: var(--card-bg);
+        --color: var(--text-muted);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
         font-size: 13px;
+        font-weight: 600;
+        text-transform: none;
+        transition: all 0.2s ease;
+
+        &:active {
+          transform: scale(0.95);
+        }
+
+        &.active {
+          --background: var(--accent-gradient);
+          --color: #ffffff;
+          border-color: transparent;
+          box-shadow: 0 3px 10px rgba(124, 58, 237, 0.28);
+
+          span {
+            color: #ffffff;
+          }
+        }
       }
     }
+  }
+
+  // 3. Masonry Grid / Cards
+  .file-container {
+    width: 100%;
+
+    .masonry-grid {
+      column-count: 2;
+      column-gap: 12px;
+      padding: 0;
+    }
+
+    .masonry-item {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 12px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      cursor: pointer;
+      break-inside: avoid;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      .card-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+
+      .favorite-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: #ffffff;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+        z-index: 2;
+        transition: transform 0.15s ease, color 0.15s ease;
+
+        &:active {
+          transform: scale(1.25);
+        }
+
+        &.liked {
+          color: #ef4444;
+        }
+      }
+
+      .card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 24px 10px 10px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+        z-index: 1;
+
+        .user-info {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+
+          .avatar {
+            width: 24px;
+            height: 24px;
+            border: 1.5px solid #ffffff;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+          }
+
+          .username {
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  ion-infinite-scroll {
+    margin: 16px 0;
   }
 }
-
-// Live pulse animation
-@keyframes pulse-glow {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.9);
-    opacity: 0.7;
-  }
-}

@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
   standalone: false,
 })
-export class HomePage {
+export class HomePage implements OnInit {
   private router = inject(Router);
 
   activeTab: string = 'feeds';
   showTabs: boolean = true;
+
+  ngOnInit() {
+    this.updateActiveTab(this.router.url);
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.updateActiveTab(event.urlAfterRedirects || event.url);
+      });
+  }
+
+  private updateActiveTab(url: string) {
+    if (url.includes('/home/chat')) {
+      this.activeTab = 'chat';
+    } else if (url.includes('/home/reels')) {
+      this.activeTab = 'reels';
+    } else if (url.includes('/home/search')) {
+      this.activeTab = 'search';
+    } else if (url.includes('/home/profile')) {
+      this.activeTab = 'profile';
+    } else if (url.includes('/home/feeds')) {
+      this.activeTab = 'feeds';
+    }
+  }
 
   onChangeMode(tab: string): void {
     this.activeTab = tab;
@@ -22,3 +46,4 @@ export class HomePage {
     return 'assets/images/user-profile.jpg';
   }
 }
+
