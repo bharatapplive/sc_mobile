@@ -23,12 +23,12 @@ const routes: Routes = [
           import('../add/add.module').then(m => m.AddPageModule),
       },
       {
-        path: 'favourite',
+        path: 'reel',
         loadChildren: () =>
-          import('../favourite/favourite.module').then(
-            m => m.FavouritePageModule
-          ),
+          import('../reel/reel.module').then(m => m.ReelPageModule),
       },
+       
+
       {
         path: 'profile',
         loadChildren: () =>

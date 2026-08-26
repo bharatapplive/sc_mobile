@@ -29,9 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
   },
   {
-    path: 'favourite',
-    loadChildren: () => import('./favourite/favourite.module').then( m => m.FavouritePageModule)
+    path: 'reel',
+    loadChildren: () => import('./reel/reel.module').then( m => m.ReelPageModule)
   },
+  
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
@@ -40,6 +41,11 @@ const routes: Routes = [
     path: 'add',
     loadChildren: () => import('./add/add.module').then( m => m.AddPageModule)
   },
+  {
+    path: 'reel',
+    loadChildren: () => import('./reel/reel.module').then( m => m.ReelPageModule)
+  },
+
   
 ];
 
