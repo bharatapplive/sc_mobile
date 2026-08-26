@@ -18,7 +18,16 @@
 
 <ion-content [fullscreen]="true">
   <div class="mainHolder">
-
+  <!-- Pull to Refresh Component -->
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content 
+        pullingIcon="chevron-down-circle-outline" 
+        pullingText="Pull down to refresh" 
+        refreshingSpinner="circles" 
+        refreshingText="Fetching profile...">
+      </ion-refresher-content>
+    </ion-refresher>
+    
     <section class="story-panel">
       <div class="story-context">
         <div class="height-light" [class.active]="false">

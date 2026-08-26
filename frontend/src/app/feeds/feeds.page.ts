@@ -89,18 +89,34 @@ export class FeedsPage implements OnInit {
   ) { }
 
   ngOnInit() { 
+    this.loadUserProfile();
+  }
+
+  loadUserProfile(event?: any){
     this.authServe.loadUserData().subscribe({
-      next: (userData) => {
+      next: (userData: any) => {
         this.username = userData.username;
         this.avatarUrl = userData.avatarUrl?.trim(); 
         this._id = userData?._id ? String(userData._id).trim() : '';
-        console.log(this._id);
+                
+        // Hide spinner if triggered by pull-to-refresh
+        if (event) {
+          event.target.complete();
+        }        
       },
       error: (err) => {
         console.error('Failed to load user profile:', err);
+      
+        // Hide spinner if triggered by pull-to-refresh
+        if (event) {
+          event.target.complete();
+        }
       },
     });
+  }
 
+  handleRefresh(event: any){
+    this.loadUserProfile(event);
   }
 
   getUserAvatar(): string{

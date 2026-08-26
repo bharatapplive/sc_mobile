@@ -1,8 +1,32 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+
+//#region media
+export type PostType = 'post' | 'story' | 'reel';
+
+export interface OverlayText {
+  id: string;
+  text: string;
+  x: number;
+  y: number;
+  color: string;
+  fontSize: number;
+}
+
+export interface MediaComposerState {
+  type: PostType;
+  mediaBlob: Blob | null;
+  mediaUrl: string | null;
+  audioTrackUrl: string | null;
+  caption: string;
+  overlayTexts: OverlayText[];
+  aspectRatio: '1:1' | '9:16' | '4:5';
+}
+
+//#endregion
 
 export interface User{
   _id?: string;
@@ -20,6 +44,7 @@ export interface User{
   profileBio?: string;
 }
 
+//#region CREATE POST 
 export interface CreatePostPayload {
   userId: string;
   author: string;
@@ -40,21 +65,25 @@ export interface PostResponse extends CreatePostPayload {
   updatedAt: string;
 }
 
+//#endregion
+
 @Injectable({
   providedIn: 'root',
 })
 
 export class AuthService {
-  
-  isAuthenticated = signal<boolean>(false);
-
-  // Signals for managing global user state
-  currentUser = signal<User | null>(null);
 
   constructor(
     private http: HttpClient,
     private router: Router
   ){}
+
+//#region Create Login and Registration..
+  
+  isAuthenticated = signal<boolean>(false);
+
+  // Signals for managing global user state
+  currentUser = signal<User | null>(null);
 
   //1. REGISTER
   register(userData: User): Observable<User> {
@@ -90,6 +119,57 @@ export class AuthService {
     return this.http.post<User>(`${environment.apiUrl}/user/verify-otp`, payload);
   }
 
+  //#endregion
+
+//#region MEDIA DATA
+  private initialState: MediaComposerState = {
+    type: 'story',
+    mediaBlob: null,
+    mediaUrl: null,
+    audioTrackUrl: null,
+    caption: '',
+    overlayTexts: [],
+    aspectRatio: '9:16'
+  };
+
+  private state$ = new BehaviorSubject<MediaComposerState>(this.initialState);
+  public current$ = this.state$.asObservable();
+
+  setType(type: PostType) {
+    const ratio = type === 'post' ? '1:1' : '9:16';
+    this.state$.next({ ...this.state$.value, type, aspectRatio: ratio });
+  }
+
+  setMedia(blob: Blob, url: string) {
+    this.state$.next({ ...this.state$.value, mediaBlob: blob, mediaUrl: url });
+  }
+
+  setAudio(audioUrl: string) {
+    this.state$.next({ ...this.state$.value, audioTrackUrl: audioUrl });
+  }
+
+  addTextOverlay(text: string, color = '#ffffff', fontSize = 24) {
+    const newText: OverlayText = {
+      id: Date.now().toString(),
+      text,
+      x: 50, // center percentages
+      y: 50,
+      color,
+      fontSize
+    };
+    const currentOverlays = this.state$.value.overlayTexts;
+    this.state$.next({ ...this.state$.value, overlayTexts: [...currentOverlays, newText] });
+  }
+
+  updateCaption(caption: string) {
+    this.state$.next({ ...this.state$.value, caption });
+  }
+
+  reset() {
+    this.state$.next(this.initialState);
+  }
+//#endregion
+  
   // 5. Get User Profile..
   loadUserData() {
     const rawId = localStorage.getItem('userID');

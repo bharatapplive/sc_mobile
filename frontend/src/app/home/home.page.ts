@@ -50,8 +50,11 @@ export class HomePage implements OnInit {
           this.activeTab = activeSegment;
         }
 
+        const hiddenRoutes = ['login', 'post'];
+
+        const ishide = hiddenRoutes.some(route => currentRoute.includes(route));
         // Hide tabs on login page
-        this.showTabs = !currentRoute.includes('login');
+        this.showTabs = !ishide;
       });
   }
 

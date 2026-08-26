@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService, CreatePostPayload } from '../auth-service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -15,6 +15,7 @@ export class PostPage implements OnInit {
   //User details...
   username: string = '';
   _id:string = '';
+  activeTab: string = 'Post';
   
   isSelected: boolean = false;
   isPosted:boolean = false;
@@ -49,6 +50,11 @@ export class PostPage implements OnInit {
     {id:'14', url:'assets/images/Post1.jpg', mediaType: 'image', aspectRatio: 1/1},
     {id:'15', url:'assets/images/Post2.jpg', mediaType: 'image', aspectRatio: 1/1}
   ]
+
+  @Input() captionText: string = '';
+  @Input() maxLength: number = 2200;
+  @Output() captionChange = new EventEmitter<string>();
+  
 
   constructor(    
     private router:Router,
@@ -104,7 +110,7 @@ export class PostPage implements OnInit {
       const payload: CreatePostPayload = {      
         userId: this._id ? String(this._id).trim() : '',
         author: generatedUsername?.trim() || 'Anonymous',
-        caption: this.caption.trim(),
+        caption: this.captionText.trim(),
         mediaUrl: this.newMediaUrl,
         mediaType: this.newMediaType as 'image' | 'video',
         hashtags: extractedHashtags,
@@ -116,8 +122,9 @@ export class PostPage implements OnInit {
         next: (user) => {
           alert(`${user} successfully updated`);
           // Reset post creation portal values
+          
+          this.navCtrl.navigateBack('/home/feeds');
           this.isSelected = false;
-          this.router.navigate(['./home/feeds']);
         },
         error: (err) => {
           // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
@@ -139,5 +146,9 @@ export class PostPage implements OnInit {
     }else{
       this.navCtrl.navigateBack('/home');
     }
+  }
+
+  onTextChange() {
+    this.captionChange.emit(this.captionText);
   }
 }

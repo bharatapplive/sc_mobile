@@ -2,13 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    height: 100%;
 
-    .upper-conatiner{
+    .upper-container{
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 400px;
-        height: 400px;
+        background: rgb(59, 58, 58);
+        border-radius: 14px;
+        width: 100%;
+        height: 452px;
     }
 
     .lower-conatiner{
@@ -33,82 +37,249 @@
             }
         }
     }
+
+    .list-aboslute {
+        position: fixed;        /* Stays in place even when scrolling */
+        bottom: 0;           /* Distance from the bottom of the screen */
+        left: 50%;              /* Moves left edge to the middle of screen */
+        transform: translateX(-50%); /* Centers the element precisely */
+        z-index: 1000;          /* Ensures it sits on top of all page content */
+
+        border: 1px solid gray;
+        border-radius: 10px;
+        background: white;
+        display: flex;
+        gap: 15px;
+        padding: 5px;           /* Adds internal spacing around tabs */
+        overflow: hidden;
+
+        a {
+            padding: 5px 15px;
+            font-size: 18px;
+            font-weight: 400;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+
+            &.active {
+            background: gray;
+            color: white;
+            font-weight: bold;
+            }
+        }
+    }
 }
 
-.post-selected{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+.post-container{
+    margin: 10px;
 
-    .selected-image{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 730px;
-    }
-
-    .tab-container{
+    .post-section{
         display: flex;
         flex-direction: column;
-        width: 95%;
-        height: 100px;
+        align-items: center;
+        width: 100%;
+        height: 100%;
 
-        .tabs {
+        .selected-image{
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            height: 44px; /* Increased from 30px to comfortably fit icon + text */
+            justify-content: center;
+            background: black;
+            width: 100%;
+            height: 452px;
+            border-radius: 14px;
+            margin: 10px;
 
-            ion-button {
-                
-                background: gray;
-                color: white;
-                border-radius: 10px;
+            overflow: auto;
 
-                .tab-btn{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
+        }  
 
-                    ion-icon{
-                        font-size: 18px;
-                    }
-
-                    span{
-                        font-size: 8px;
-                    }
-                }
-            }
-        }
-
-        .tab-bottom{
+        .caption-card {
+            position: relative;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            .add-image{
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
+            gap: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 16px;
+            background: rgb(59, 58, 58);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            
+            ion-avatar{
+                width: 40px;
+                height: 40px;
 
                 ion-img{
-                    width: 28px;
-                    height: 36px;
-                    border: 1px solid black;
-                    border-radius: 10px;
-                }
-
-                ion-button{
-                    width: 28px;
-                    height: 36px;
-                    background: gray;
-                    border-radius: 10px;
-                    color: white;
+                    width: 100%;
+                    height: 100%;
                 }
             }
+            .caption-textarea {
+                width: 300px;
+                min-height: 100px;
+                --background: transparent;
+                --color: #ffffff;
+                --placeholder-color: #ffffff;
+                --placeholder-opacity: 0.8;
+                font-size: 1rem;
+                line-height: 1;
+
+                // Remove inner native borders in Ionic
+                ::ng-deep .native-textarea {
+                resize: none;
+                border: none !important;
+                outline: none !important;
+                }
+            }
+
+            .char-count {
+                position: absolute;
+                bottom: 0.5rem; // bottom-unit-2
+                right: 1rem; // right-unit-4
+                font-size: 0.75rem;
+                color: #ffffff;
+                pointer-events: none;
+            }  
+        }
+
+        .add-on-section{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 10px;
+
+            ion-button{
+                
+                background: rgb(28 27 27);
+                color: #ffffff;
+                border-radius: 14px;
+
+                .btn-controls{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    padding: 10px 15px;
+                    font-size: 20px;
+
+                    
+                    .bar{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-transform: none;
+                        gap: 10px;
+
+                        h2{
+                            margin: 0;
+                            font-size: 15px;
+                        }
+
+                        span{
+                            font-size: 12px;
+                        }
+
+                        .icon-btn{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+            ion-button:nth-child(1) .icon-btn {
+                background: rgba(192, 193, 255, 0.397);
+                color: rgb(192 193 255); // Primary blue
+            }
+
+            // Target the second icon (e.g., Text overlay)
+            ion-button:nth-child(2) .icon-btn {
+                background: rgba(255, 176, 205, 0.397);
+                color: rgb(255 176 205); // Success green
+            }
+
+            // Target the third icon (e.g., Audio picker)
+            ion-button:nth-child(3) .icon-btn {
+                background: rgba(76, 215, 246, 0.397);
+                color: rgb(76 215 246); // Danger red
+            }
+        }
+
+        ion-button{
+            width: 100%;
+            background: rgb(225 224 255);
+            border-radius: 14px;
+            color: rgb(16 0 169);      
+            font-size: 20px;
         }
     }
+
+    // .tab-container{
+    //     display: flex;
+    //     flex-direction: column;
+    //     width: 95%;
+    //     height: 100px;
+
+    //     .tabs {
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: space-between;
+    //         height: 44px; /* Increased from 30px to comfortably fit icon + text */
+
+    //         ion-button {
+                
+    //             background: gray;
+    //             color: white;
+    //             border-radius: 10px;
+
+    //             .tab-btn{
+    //                 display: flex;
+    //                 flex-direction: column;
+    //                 align-items: center;
+
+    //                 ion-icon{
+    //                     font-size: 18px;
+    //                 }
+
+    //                 span{
+    //                     font-size: 8px;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     .tab-bottom{
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: space-between;
+
+    //         .add-image{
+    //             display: flex;
+    //             align-items: center;
+    //             justify-content: space-around;
+
+    //             ion-img{
+    //                 width: 28px;
+    //                 height: 36px;
+    //                 border: 1px solid black;
+    //                 border-radius: 10px;
+    //             }
+
+    //             ion-button{
+    //                 width: 28px;
+    //                 height: 36px;
+    //                 background: gray;
+    //                 border-radius: 10px;
+    //                 color: white;
+    //             }
+    //         }
+    //     }
+    // }
 }
+
