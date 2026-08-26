@@ -171,7 +171,15 @@
                         align-items: center;
                         justify-content: center;
                         text-transform: none;
+                        width: 100%;
                         gap: 10px;
+
+                        .title{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            width: 95%;
+                        }
 
                         h2{
                             margin: 0;
@@ -281,5 +289,36 @@
     //         }
     //     }
     // }
+}
+
+.list-music{
+    background: none;
+
+    .track{      
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 8px;
+        padding: 5px;
+        border-radius: 14px;
+        background: rgb(28 27 27);
+        color: #ffffff;
+
+        ion-avatar{
+            width: 40px;
+            height: 40px;
+        }
+
+        .left-toggle{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        ion-icon{
+            color: white;
+        }
+    }
 }
 

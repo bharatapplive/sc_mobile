@@ -53,12 +53,17 @@ export class LoginPage implements OnInit {
   onRegisterHandler(form: any){
     if (form.valid) {
 
-      const cleanName = (this.registerPortal.fullname || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, ''); // strip spaces and special chars
-    
-      const uniqueSuffix = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
-      const generatedUsername = `${cleanName}_${uniqueSuffix}`;
+      // 1. get the fullname and change to lower..
+      const cleanName = (this.registerPortal.fullname || '').toLowerCase().trim(); // strip spaces and special chars
+          
+      // 2. Split into parts
+      const parts = cleanName.split(/\s+/); // Splits by one or more spaces
+
+      const firstName = parts[0] || '';
+      const lastName = parts.slice(1).join('') || '';
+
+      const uniqueSuffix = Math.floor(100 + Math.random() * 900); // 3-digit random number
+      const generatedUsername = `@${firstName}_${lastName}.${uniqueSuffix}`;
 
       const payload = {
         fullname: this.registerPortal.fullname?.trim() || '',

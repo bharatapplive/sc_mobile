@@ -33,6 +33,7 @@ export class PostService {
                 mediaUrl: request.mediaUrl,
                 mediaType: request.mediaType,
                 hashtags:request.hashtags || '',
+                audio: request.audio || '',
                 likesCount: 0,
                 commentsCount: 0,
                 createdDate: new Date(),

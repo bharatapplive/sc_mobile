@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AuthService, CreatePostPayload } from '../auth-service';
+import { AuthService, CreatePostPayload, AudioTrack } from '../auth-service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PreviousRouteServe } from '../previous-route-serve';
@@ -33,6 +33,44 @@ export class PostPage implements OnInit {
   newMediaType: 'image' | 'video' = 'image';
   newAspectRatio: string = '1:1';
   
+  //#region MEDIA OR AUDIO
+  // Music State
+  isMusicModalOpen: boolean = false;
+  selectedAudio: AudioTrack | null = null;
+  isPlayingPreview: boolean = false;
+  previewAudioElement: HTMLAudioElement | null = null;
+  searchQuery: string = '';
+
+  // Mock Available Music Library (Replace with backend API call if needed)
+  musicLibrary: AudioTrack[] = [
+    {
+      id: 'm1',
+      title: 'Midnight City Beats',
+      artist: 'SynthWave Sound',
+      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+      coverUrl: 'assets/images/Post1.jpg',
+      duration: 30
+    },
+    {
+      id: 'm2',
+      title: 'Acoustic Morning',
+      artist: 'Lofi Vibes',
+      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+      coverUrl: 'assets/images/Post2.jpg',
+      duration: 15
+    },
+    {
+      id: 'm3',
+      title: 'Summer Chill',
+      artist: 'DJ Beats',
+      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+      coverUrl: 'assets/images/rock.avif',
+      duration: 60
+    }
+  ]
+
+  //#endregion
+
   posts = [
     {id:'1', url:'assets/images/Magal.avif', mediaType: 'image', aspectRatio: 1/1},
     {id:'2', url:'assets/images/barbidoll.jpg', mediaType: 'image', aspectRatio: 1/1},
@@ -54,7 +92,7 @@ export class PostPage implements OnInit {
   @Input() captionText: string = '';
   @Input() maxLength: number = 2200;
   @Output() captionChange = new EventEmitter<string>();
-  
+  playingTrackId: string | null = null;
 
   constructor(    
     private router:Router,
@@ -66,7 +104,7 @@ export class PostPage implements OnInit {
   ngOnInit() {
     this.authServe.loadUserData().subscribe({
       next: (userData) => {
-        this.username = userData.username;
+        this.username = userData.fullname;
         this._id = userData?._id ? String(userData._id).trim() : '';
         console.log(this._id);
       },
@@ -88,6 +126,61 @@ export class PostPage implements OnInit {
     });
   }
 
+  //#region MUSIC..
+
+  openMusicModal() {
+    this.isMusicModalOpen = true;
+  }
+
+  closeMusicModal() {
+    this.isMusicModalOpen = false;
+    this.stopAudioPreview();
+  }
+
+  previewTrack(track: AudioTrack, event: Event) {
+    event.stopPropagation();
+    if (this.playingTrackId === track.id) {
+      this.stopAudioPreview();
+      return;
+    }
+
+    if(this.previewAudioElement){
+      this.stopAudioPreview();
+    }
+
+    this.previewAudioElement = new Audio(track.audioUrl);
+    this.playingTrackId = track.id;
+    
+    this.previewAudioElement.play().catch(err => {
+      console.error('Audio playback error:', err);
+      this.stopAudioPreview();
+    });
+
+    this.previewAudioElement.onended = () =>{
+      this.stopAudioPreview();
+    }
+  }
+
+  selectMusicTrack(track: AudioTrack) {
+    this.selectedAudio = track;
+    this.closeMusicModal();
+  }
+
+  removeSelectedMusic(event: Event) {
+    event.stopPropagation();
+    this.selectedAudio = null;
+    this.stopAudioPreview();
+  }
+
+  private stopAudioPreview() {
+    if (this.previewAudioElement) {
+      this.previewAudioElement.pause();
+      this.previewAudioElement = null;
+    }
+    this.playingTrackId = null;
+  }
+//#endregion
+
   onCreatePost(){
 
     if(!this._id){
@@ -95,36 +188,41 @@ export class PostPage implements OnInit {
       return;
     }
 
-    const cleanName = (this.username || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, ''); // strip spaces and special chars
+    // 1. get the fullname and change to lower..
+    const cleanName = (this.username || '').toLowerCase().trim(); // strip spaces and special chars
     
-      const uniqueSuffix = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
-      const generatedUsername = `${cleanName}_${uniqueSuffix}`;
-      
-      // Helper to extract #hashtags into an array
-      const extractedHashtags = this.caption
-        ? (this.caption.match(/#[\w]+/g)?.map(tag => tag.substring(1)) || [])
-        : [];
+    // 2. Split into parts
+    const parts = cleanName.split(/\s+/); // Splits by one or more spaces
 
-      const payload: CreatePostPayload = {      
-        userId: this._id ? String(this._id).trim() : '',
-        author: generatedUsername?.trim() || 'Anonymous',
-        caption: this.captionText.trim(),
-        mediaUrl: this.newMediaUrl,
-        mediaType: this.newMediaType as 'image' | 'video',
-        hashtags: extractedHashtags,
-        likesCount: 0,
-        commentsCount: 0
-      };
+    const lastName = parts.slice(1).join('') || '';
+
+    const uniqueSuffix = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
+    const generatedUsername = `@${lastName}_${uniqueSuffix}`;
+    
+    // Helper to extract #hashtags into an array
+    const extractedHashtags = this.caption? (this.caption.match(/#[\w]+/g)?.map(tag => tag.substring(1)) || []) : [];
+
+    const payload: CreatePostPayload = {      
+      userId: this._id ? String(this._id).trim() : '',
+      author: generatedUsername?.trim() || 'Anonymous',
+      caption: this.captionText.trim(),
+      mediaUrl: this.newMediaUrl,
+      mediaType: this.newMediaType as 'image' | 'video',
+      audio: this.selectedAudio,
+      hashtags: extractedHashtags,
+      likesCount: 0,
+      commentsCount: 0
+    };
 
     this.authServe.createNewPost(payload).subscribe({
         next: (user) => {
-          alert(`${user} successfully updated`);
+          alert(`${user.audio} successfully updated`);
           // Reset post creation portal values
           
           this.navCtrl.navigateBack('/home/feeds');
           this.isSelected = false;
+          this.selectedAudio = null;
+          this.stopAudioPreview();
         },
         error: (err) => {
           // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")

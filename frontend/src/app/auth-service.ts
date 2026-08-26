@@ -45,6 +45,15 @@ export interface User{
 }
 
 //#region CREATE POST 
+export interface AudioTrack {
+  id: string;
+  title: string;
+  artist: string;
+  audioUrl: string;
+  coverUrl?: string;
+  duration?: number;
+}
+
 export interface CreatePostPayload {
   userId: string;
   author: string;
@@ -54,6 +63,7 @@ export interface CreatePostPayload {
   hashtags?: string[];          // Changed to array of strings
   likesCount?: number;          // Optional for creation payload
   commentsCount?: number;       // Optional for creation payload
+  audio?: AudioTrack | null; // <-- Add this field
 }
 
 export interface PostResponse extends CreatePostPayload {

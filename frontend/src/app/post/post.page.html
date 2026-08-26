@@ -200,18 +200,19 @@
             </div>
 
             <div class="add-on-section">
-              <ion-button fill="clear">
+              <ion-button fill="clear" (click)="isMusicModalOpen = !isMusicModalOpen">
                 <div class="btn-controls">
                   <div class="bar">
                     <div class="icon-btn">
                       <ion-icon slot="icon-only" name="musical-note"></ion-icon>
                     </div>
                     <div class="title">
-                      <h2>Add Music</h2>
-                      <span>Select a track</span>
+                      <h2>{{ selectedAudio ? selectedAudio.title : 'Add Music' }}</h2>
+                      <span>{{ selectedAudio ? selectedAudio.artist : 'Select a track' }}</span>
                     </div>
                   </div>
-                  <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+                  <ion-icon slot="icon-only" name="close-circle-outline" *ngIf="selectedAudio" (click)="removeSelectedMusic($event)"></ion-icon>
+                  <ion-icon *ngIf="!selectedAudio" slot="icon-only" name="chevron-forward-outline"></ion-icon>
                 </div>
               </ion-button>
 
@@ -248,11 +249,41 @@
               <ion-icon slot="icon-only" name="paper-plane"></ion-icon>
               <span> Share</span>
             </ion-button>
-
-          </div>
-          
-          
+          </div>          
         </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Music Picker Modal -->
+  <ion-modal [isOpen]="isMusicModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Select Audio</ion-title>
+          <ion-buttons slot="end">
+            <ion-icon slot="icon-only" name="close" (click)="closeMusicModal()"></ion-icon>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list class="list-music">
+          <div *ngFor="let track of musicLibrary" (click)="selectMusicTrack(track)" class="track">
+            <div class="left-toggle">
+              <ion-avatar slot="start" *ngIf="track.coverUrl">
+                <img [src]="track.coverUrl" alt="Cover" />
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ track.title }}</h2>
+                <p>{{ track.artist }}</p>
+              </ion-label>
+            </div>
+            <ion-button fill="clear" slot="end" (click)="previewTrack(track, $event)">
+              <ion-icon slot="icon-only" [name]="playingTrackId === track.id ? 'pause' : 'play'"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-list>
       </ion-content>
     </ng-template>
   </ion-modal>
