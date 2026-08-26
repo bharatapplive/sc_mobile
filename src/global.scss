@@ -10,7 +10,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 /* =========================================================
    IONIC CORE CSS
@@ -292,12 +292,10 @@ input {
 .vibrant-gradient {
 
   background:
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       var(--color-primary) 0%,
       #8b5cf6 50%,
-      #d946ef 100%
-    );
+      #d946ef 100%);
 }
 
 
@@ -423,11 +421,9 @@ input {
   bottom: 0;
 
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #6b38d4,
-      #8455ef
-    );
+      #8455ef);
 }
 
 
@@ -438,15 +434,59 @@ input {
 .post-gradient-overlay {
 
   background:
-    linear-gradient(
-      to bottom,
+    linear-gradient(to bottom,
       transparent 60%,
-      rgba(0, 0, 0, 0.4)
-    );
+      rgba(0, 0, 0, 0.4));
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 195, 215, 0.3);
+}
+
+.ambient-glow {
+  box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #1a1c1c;
+  overflow-x: hidden;
+}
+
+/* Custom Masonry-like columns for small screens */
+.masonry-grid {
+  column-count: 2;
+  column-gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    column-count: 3;
+    column-gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    column-count: 4;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
 }
 
 ion-icon {
   font-size: 29px;
   font-weight: 900;
-  color: var(--color-on-surface-variant);
+  color: var(--color-surface);
 }

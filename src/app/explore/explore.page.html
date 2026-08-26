@@ -1,0 +1,230 @@
+<ion-content [fullscreen]="true" class="explore-page">
+
+  <!-- HEADER -->
+  <header class="top-header">
+
+    <div class="header-left">
+      <ion-icon name="camera-outline"></ion-icon>
+
+      <h1>Social Circle</h1>
+    </div>
+
+    <nav class="desktop-nav">
+      <a>Feed</a>
+
+      <a class="active">
+        Explore
+      </a>
+
+      <a>Activity</a>
+    </nav>
+
+    <ion-icon
+      class="send-icon"
+      name="send-outline">
+    </ion-icon>
+
+  </header>
+
+
+  <!-- MAIN -->
+  <main class="explore-container">
+
+    <!-- SEARCH -->
+    <section class="search-section">
+
+      <div class="search-box">
+
+        <ion-icon name="search-outline"></ion-icon>
+
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          (keyup.enter)="search()"
+          placeholder="Search trends, creators, or tags..."
+        />
+
+        <button
+          *ngIf="searchText"
+          (click)="clearSearch()">
+
+          <ion-icon name="close-circle"></ion-icon>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRENDING TAGS -->
+    <section class="tags-section">
+
+      <button
+        *ngFor="let tag of tags"
+        class="tag-button"
+        [class.selected]="selectedTag === tag"
+        (click)="selectTag(tag)">
+
+        {{ tag }}
+
+      </button>
+
+    </section>
+
+
+    <!-- POSTS -->
+    <section class="masonry-grid">
+
+      <article
+        *ngFor="let post of filteredPosts"
+        class="post-card"
+        (click)="openPost(post)">
+
+        <!-- IMAGE -->
+        <div class="post-image-wrapper">
+
+          <img
+            [src]="post.image"
+            [alt]="post.alt || 'Explore post'"
+            class="post-image"
+          />
+
+
+          <!-- TRENDING BADGE -->
+          <div
+            *ngIf="post.tag"
+            class="trending-badge">
+
+            {{ post.tag }}
+
+          </div>
+
+
+          <!-- LIKE -->
+          <button
+            *ngIf="post.username"
+            class="post-action top-action"
+            (click)="toggleLike(post, $event)">
+
+            <ion-icon
+              [name]="post.liked ? 'heart' : 'heart-outline'"
+              [class.liked]="post.liked">
+            </ion-icon>
+
+          </button>
+
+
+          <!-- OVERLAY -->
+          <div
+            *ngIf="post.username || post.caption"
+            class="post-overlay">
+
+            <div
+              *ngIf="post.username"
+              class="creator">
+
+              <img
+                *ngIf="post.avatar"
+                [src]="post.avatar"
+                alt="Creator"
+              />
+
+              <span>
+                {{ post.username }}
+              </span>
+
+            </div>
+
+
+            <p *ngIf="post.caption">
+              {{ post.caption }}
+            </p>
+
+
+            <button
+              *ngIf="post.bookmarked !== undefined"
+              class="bookmark-button"
+              (click)="toggleBookmark(post, $event)">
+
+              <ion-icon
+                [name]="post.bookmarked
+                  ? 'bookmark'
+                  : 'bookmark-outline'">
+              </ion-icon>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- NO RESULTS -->
+    <div
+      *ngIf="filteredPosts.length === 0"
+      class="no-results">
+
+      <ion-icon name="search-outline"></ion-icon>
+
+      <h2>No posts found</h2>
+
+      <p>
+        Try searching for another creator, trend or tag.
+      </p>
+
+    </div>
+
+  </main>
+
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav">
+
+    <button
+      (click)="goHome()">
+
+      <ion-icon name="home-outline"></ion-icon>
+
+    </button>
+
+
+    <button
+      class="active"
+      (click)="goSearch()">
+
+      <ion-icon name="search"></ion-icon>
+
+    </button>
+
+
+    <button
+      (click)="createPost()">
+
+      <ion-icon name="add-circle-outline"></ion-icon>
+
+    </button>
+
+
+    <button
+      (click)="openActivity()">
+
+      <ion-icon name="heart-outline"></ion-icon>
+
+    </button>
+
+
+    <button
+      (click)="openProfile()">
+
+      <ion-icon name="person-outline"></ion-icon>
+
+    </button>
+
+  </nav>
+
+</ion-content>

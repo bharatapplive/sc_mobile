@@ -1,0 +1,787 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.explore-page {
+  --background: #f9f9f9;
+
+  color: #1a1c1c;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.top-header {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 64px;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 16px;
+
+  background: rgba(249, 249, 249, 0.82);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-bottom: 1px solid rgba(203, 195, 215, 0.25);
+
+  box-shadow:
+    0 4px 20px rgba(109, 59, 215, 0.08);
+}
+
+
+/* HEADER LEFT */
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-left ion-icon {
+  font-size: 23px;
+
+  color: #6b38d4;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.header-left ion-icon:active {
+  transform: scale(0.9);
+}
+
+.header-left h1 {
+  margin: 0;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 24px;
+  line-height: 30px;
+
+  font-weight: 800;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6b38d4,
+      #6f5092
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+
+/* DESKTOP NAV */
+
+.desktop-nav {
+  display: none;
+
+  align-items: center;
+
+  gap: 28px;
+}
+
+.desktop-nav a {
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #494454;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.desktop-nav a:hover {
+  opacity: 0.7;
+}
+
+.desktop-nav a.active {
+  color: #6b38d4;
+}
+
+
+/* SEND */
+
+.send-icon {
+  font-size: 23px;
+
+  color: #6b38d4;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.send-icon:active {
+  transform: scale(0.9);
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.explore-container {
+  width: 100%;
+
+  max-width: 1440px;
+
+  margin: 0 auto;
+
+  padding: 84px 16px 90px;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.search-section {
+  width: 100%;
+
+  margin-bottom: 16px;
+}
+
+.search-box {
+  position: relative;
+
+  width: 100%;
+
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+
+  background: #f3f3f4;
+
+  border-radius: 30px;
+
+  box-shadow:
+    0 4px 20px rgba(109, 59, 215, 0.08);
+
+  transition: 0.25s ease;
+}
+
+.search-box:focus-within {
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 2px rgba(107, 56, 212, 0.18),
+    0 8px 25px rgba(109, 59, 215, 0.10);
+
+  transform: scale(1.01);
+}
+
+.search-box ion-icon {
+  flex-shrink: 0;
+
+  font-size: 21px;
+
+  color: #7b7486;
+
+  margin-right: 12px;
+}
+
+.search-box input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 14px;
+
+  color: #1a1c1c;
+}
+
+.search-box input::placeholder {
+  color: rgba(123, 116, 134, 0.65);
+}
+
+.search-box button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
+.search-box button ion-icon {
+  margin: 0;
+
+  font-size: 20px;
+
+  color: #7b7486;
+}
+
+
+/* =========================================
+   TAGS
+========================================= */
+
+.tags-section {
+  width: 100%;
+
+  display: flex;
+
+  gap: 10px;
+
+  overflow-x: auto;
+
+  padding: 8px 0 14px;
+
+  margin-bottom: 20px;
+
+  scrollbar-width: none;
+}
+
+.tags-section::-webkit-scrollbar {
+  display: none;
+}
+
+
+.tag-button {
+  flex-shrink: 0;
+
+  border: 1px solid rgba(203, 195, 215, 0.4);
+
+  background: #e2e2e2;
+
+  color: #494454;
+
+  padding: 9px 18px;
+
+  border-radius: 30px;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.tag-button:hover {
+  background: rgba(217, 181, 255, 0.3);
+}
+
+.tag-button:active {
+  transform: scale(0.95);
+}
+
+.tag-button.selected {
+  color: #ffffff;
+
+  border-color: transparent;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6b38d4,
+      #6f5092
+    );
+
+  box-shadow:
+    0 6px 18px rgba(107, 56, 212, 0.20);
+}
+
+
+/* =========================================
+   MASONRY GRID
+========================================= */
+
+.masonry-grid {
+  column-count: 2;
+
+  column-gap: 14px;
+
+  width: 100%;
+}
+
+
+/* =========================================
+   POST CARD
+========================================= */
+
+.post-card {
+  position: relative;
+
+  width: 100%;
+
+  display: inline-block;
+
+  break-inside: avoid;
+
+  margin-bottom: 14px;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  border: 1px solid rgba(203, 195, 215, 0.3);
+
+  box-shadow:
+    0 4px 20px rgba(109, 59, 215, 0.08);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 10px 30px rgba(109, 59, 215, 0.14);
+}
+
+.post-card:active {
+  transform: scale(0.98);
+}
+
+
+/* IMAGE */
+
+.post-image-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.post-image {
+  width: 100%;
+
+  height: auto;
+
+  min-height: 150px;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.5s ease;
+}
+
+.post-card:hover .post-image {
+  transform: scale(1.06);
+}
+
+
+/* =========================================
+   POST OVERLAY
+========================================= */
+
+.post-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  min-height: 75px;
+
+  padding: 18px 12px 12px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0)
+    );
+
+  color: #ffffff;
+}
+
+
+/* CREATOR */
+
+.creator {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.creator img {
+  width: 25px;
+  height: 25px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.creator span {
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: #ffffff;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* CAPTION */
+
+.post-overlay p {
+  margin: 7px 0 0;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: #ffffff;
+
+  line-height: 16px;
+}
+
+
+/* =========================================
+   POST ACTIONS
+========================================= */
+
+.post-action {
+  position: absolute;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 5;
+}
+
+.top-action {
+  top: 10px;
+  right: 10px;
+}
+
+.top-action ion-icon {
+  font-size: 21px;
+
+  color: #ffffff;
+
+  filter:
+    drop-shadow(
+      0 2px 4px rgba(0, 0, 0, 0.3)
+    );
+}
+
+.top-action ion-icon.liked {
+  color: #ff3b81;
+}
+
+
+/* BOOKMARK */
+
+.bookmark-button {
+  position: absolute;
+
+  right: 10px;
+  bottom: 10px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
+.bookmark-button ion-icon {
+  font-size: 20px;
+}
+
+
+/* =========================================
+   TRENDING BADGE
+========================================= */
+
+.trending-badge {
+  position: absolute;
+
+  top: 10px;
+  left: 10px;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  color: #6b38d4;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(107, 56, 212, 0.2);
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================
+   NO RESULTS
+========================================= */
+
+.no-results {
+  text-align: center;
+
+  padding: 70px 20px;
+
+  color: #7b7486;
+}
+
+.no-results ion-icon {
+  font-size: 45px;
+
+  color: #6b38d4;
+
+  margin-bottom: 10px;
+}
+
+.no-results h2 {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: #1a1c1c;
+}
+
+.no-results p {
+  margin: 0;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   MOBILE BOTTOM NAV
+========================================= */
+
+.bottom-nav {
+  position: fixed;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  height: 64px;
+
+  z-index: 100;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  padding:
+    6px 16px
+    env(safe-area-inset-bottom);
+
+  background: rgba(249, 249, 249, 0.85);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  border-top: 1px solid rgba(203, 195, 215, 0.25);
+
+  box-shadow:
+    0 -4px 20px rgba(109, 59, 215, 0.08);
+
+  border-radius: 16px 16px 0 0;
+}
+
+.bottom-nav button {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 50%;
+
+  color: #494454;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.bottom-nav button ion-icon {
+  font-size: 23px;
+}
+
+.bottom-nav button:hover {
+  background: rgba(217, 181, 255, 0.3);
+}
+
+.bottom-nav button:active {
+  transform: scale(0.88);
+}
+
+.bottom-nav button.active {
+  color: #6b38d4;
+
+  background: rgba(132, 85, 239, 0.15);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 768px) {
+
+  .top-header {
+    padding: 0 48px;
+  }
+
+  .desktop-nav {
+    display: flex;
+  }
+
+  .explore-container {
+    padding:
+      90px 48px
+      40px;
+  }
+
+  .masonry-grid {
+    column-count: 3;
+
+    column-gap: 20px;
+  }
+
+  .bottom-nav {
+    display: none;
+  }
+
+}
+
+
+/* =========================================
+   DESKTOP
+========================================= */
+
+@media (min-width: 1024px) {
+
+  .masonry-grid {
+    column-count: 4;
+  }
+
+  .explore-container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .search-section {
+    max-width: 900px;
+  }
+
+}
+
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1400px) {
+
+  .explore-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
