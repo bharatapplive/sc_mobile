@@ -1,32 +1,751 @@
-.person{
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50%;
-  border: 2px solid #797680; /* Story ring border color */
+/* =====================================================
+   GLOBAL
+===================================================== */
 
-  &.active,
-  &.selected {
-    border: 3px solid #102a43; /* Vibrant Purple */
-  }
+ion-content.main-content {
+  --background: #ffffff;
 }
 
-ion-toolbar {
-  --background: #e3f2fd;
-  --border-width: 0;
 
-  .footer-button-container {
-    background: #e3f2fd; // Standard CSS for the div wrapper
+/* =====================================================
+   DESKTOP SIDEBAR
+===================================================== */
 
-    ion-tab-bar {
-      --background: #e3f2fd;
-      --color-selected: #102a43;
-      --color: #829ab1; // Muted color for unselected tabs
-      border-top: none;
-    }
+.desktop-sidebar {
+  position: fixed;
 
-    ion-tab-button {
-      --background: transparent;
-      --color: #102a43;
-    }
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 72px;
+
+  background: #ffffff;
+
+  /* NO BORDER */
+  border: none;
+  border-right: none;
+
+  z-index: 2000;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px 10px;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  transition:
+    width 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =====================================================
+   SIDEBAR HOVER
+   Instagram style
+===================================================== */
+
+.desktop-sidebar:hover {
+  width: 245px;
+
+  box-shadow:
+    5px 0 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   SOCIAL CIRCLE DESKTOP LOGO
+===================================================== */
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.social-circle-logo {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.social-circle-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.sidebar-logo span {
+  font-size: 20px;
+  font-weight: 700;
+  color: #262626;
+  letter-spacing: -0.4px;
+}
+
+
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
+
+.sidebar-menu {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  width: 100%;
+}
+
+
+/* =====================================================
+   SIDEBAR ITEM
+===================================================== */
+
+.sidebar-item {
+  width: 100%;
+
+  min-height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 10px 12px;
+
+  background: transparent;
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  color: #111111;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+  box-sizing: border-box;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.sidebar-item:hover {
+  background: #f2f2f2;
+}
+
+.sidebar-item:active {
+  transform: scale(0.97);
+}
+
+.sidebar-item.active {
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   SIDEBAR ICON
+===================================================== */
+
+.sidebar-item > ion-icon {
+  width: 28px;
+
+  min-width: 28px;
+
+  font-size: 27px;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   SIDEBAR TEXT HIDDEN
+===================================================== */
+
+.sidebar-item > span {
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translateX(-8px);
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+/* =====================================================
+   SIDEBAR TEXT SHOW ON HOVER
+===================================================== */
+
+.desktop-sidebar:hover
+.sidebar-item > span {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateX(0);
+}
+
+
+/* =====================================================
+   NOTIFICATION SIDEBAR ICON
+===================================================== */
+
+.sidebar-icon-wrapper {
+  position: relative;
+
+  width: 28px;
+
+  min-width: 28px;
+
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.sidebar-icon-wrapper ion-icon {
+  font-size: 27px;
+}
+
+.sidebar-dot {
+  position: absolute;
+
+  top: -1px;
+  right: -1px;
+
+  width: 7px;
+  height: 7px;
+
+  background: #ed4956;
+
+  border-radius: 50%;
+
+  border: 1.5px solid #ffffff;
+}
+
+
+/* =====================================================
+   SIDEBAR AVATAR
+===================================================== */
+
+.sidebar-avatar {
+  width: 28px;
+  height: 28px;
+
+  min-width: 28px;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+}
+
+.sidebar-avatar ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   SIDEBAR BOTTOM
+===================================================== */
+
+.sidebar-bottom {
+  margin-top: auto;
+
+  width: 100%;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+  --padding-start: 0;
+  --padding-end: 0;
+
+  --padding-top: 0;
+  --padding-bottom: 0;
+
+  margin-left: 72px;
+}
+
+
+/* =====================================================
+   HOME LAYOUT
+===================================================== */
+
+.home-page-layout {
+  width: 100%;
+
+  min-height: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  box-sizing: border-box;
+
+  padding-top: 0;
+}
+
+
+/* =====================================================
+   FEED AREA
+===================================================== */
+
+.feed-area {
+  width: 630px;
+
+  max-width: 630px;
+
+  flex-shrink: 0;
+
+  padding: 0 10px 40px;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   RIGHT SIDEBAR
+   FOLLOW + SUGGESTED
+   DISPLAY KE SAATH MOVE / STICKY
+===================================================== */
+
+.right-sidebar {
+  position: sticky;
+
+  top: 25px;
+
+  right: auto;
+
+  width: 300px;
+
+  height: fit-content;
+
+  max-height: calc(100vh - 50px);
+
+  overflow-y: auto;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  align-self: flex-start;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+}
+
+.right-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =====================================================
+   CURRENT USER
+===================================================== */
+
+.current-user {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 25px;
+}
+
+.current-user-info {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-left: 12px;
+
+  min-width: 0;
+
+  flex: 1;
+}
+
+.current-user-info strong {
+  font-size: 14px;
+}
+
+.current-user-info span {
+  color: #737373;
+
+  font-size: 13px;
+
+  margin-top: 2px;
+}
+
+.switch-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #0095f6;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+
+/* =====================================================
+   SUGGESTED HEADER
+===================================================== */
+
+.suggested-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+}
+
+.suggested-header strong {
+  color: #737373;
+
+  font-size: 14px;
+}
+
+.suggested-header button {
+  border: none;
+
+  background: transparent;
+
+  color: #111111;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   SUGGESTED USERS
+===================================================== */
+
+.suggested-user {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 16px;
+}
+
+.suggestion-avatar {
+  width: 40px;
+  height: 40px;
+
+  min-width: 40px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+}
+
+.suggestion-avatar ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.suggested-info {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-left: 12px;
+
+  flex: 1;
+
+  min-width: 0;
+}
+
+.suggested-info strong {
+  font-size: 13px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.suggested-info span {
+  font-size: 11px;
+
+  color: #737373;
+
+  margin-top: 3px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.follow-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #0095f6;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer-links {
+  color: #b0b0b0;
+
+  font-size: 11px;
+
+  line-height: 18px;
+
+  margin-top: 30px;
+}
+
+
+/* =====================================================
+   MOBILE BOTTOM NAV
+===================================================== */
+
+.mobile-bottom-toolbar {
+  display: none;
+
+  --background: #ffffff;
+
+  --border-width: 1px 0 0 0;
+
+  --border-color: #dbdbdb;
+
+  position: fixed;
+
+  bottom: 0;
+
+  left: 0;
+
+  right: 0;
+
+  z-index: 3000;
+}
+
+.mobile-bottom-toolbar ion-tab-bar {
+  --background: #ffffff;
+
+  height: 58px;
+
+  border: none;
+}
+
+.mobile-bottom-toolbar ion-tab-button {
+  --color: #111111;
+
+  --color-selected: #111111;
+
+  background: #ffffff;
+}
+
+.mobile-bottom-toolbar ion-tab-button ion-icon {
+  font-size: 25px;
+}
+
+.mobile-bottom-toolbar ion-tab-button ion-label {
+  display: none;
+}
+
+
+/* =====================================================
+   MOBILE CREATE POST
+===================================================== */
+
+.mobile-create-button ion-icon {
+  font-size: 27px;
+}
+
+
+/* =====================================================
+   MOBILE PROFILE
+===================================================== */
+
+.mobile-profile-avatar {
+  width: 27px;
+
+  height: 27px;
+
+  border-radius: 50%;
+
+  border: 2px solid transparent;
+
+  overflow: hidden;
+}
+
+.mobile-profile-avatar.active {
+  border-color: #111111;
+}
+
+.mobile-profile-avatar ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1200px) and (min-width: 768px) {
+
+  .right-sidebar {
+    display: none;
   }
+
+  .feed-area {
+    width: 630px;
+
+    max-width: 630px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+  /* Desktop sidebar hidden */
+
+  .desktop-sidebar {
+    display: none;
+  }
+
+
+  /* Main content full width */
+
+  .main-content {
+    margin-left: 0;
+
+    --padding-bottom: 58px;
+
+    padding-bottom: 0;
+  }
+
+
+  /* Mobile layout */
+
+  .home-page-layout {
+    display: block;
+
+    width: 100%;
+
+    padding: 0;
+  }
+
+
+  /* Feed full width */
+
+  .feed-area {
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 0 0 70px;
+
+    margin: 0;
+  }
+
+
+  /* Right suggestions hidden */
+
+  .right-sidebar {
+    display: none;
+  }
+
+
+  /* Mobile bottom navigation */
+
+  .mobile-bottom-toolbar {
+    display: block;
+  }
+
+}
+
+
+/* =====================================================
+   LARGE DESKTOP
+===================================================== */
+
+@media (min-width: 1201px) {
+
+  .feed-area {
+    margin-right: 300px;
+  }
+
 }

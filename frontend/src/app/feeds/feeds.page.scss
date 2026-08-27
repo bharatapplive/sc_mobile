@@ -1,162 +1,876 @@
-// 2. Main-Content Panel.....
-.mainHolder{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
+/* =====================================================
+   FEED PAGE
+===================================================== */
 
-    // 2.2 Post Panel...
-    .post-panel{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin: 0 15px;
-        padding-top: 15px;
-
-        .card-board{
-            display: flex;
-            flex-direction: column;
-
-            .post-header{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin: 0 10px;
-                height: 40px;
-
-                .divided{
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 10px;
-                  
-                    .avatar-title{
-                        display: flex;
-                        flex-direction: column;
-                        height: 34px;
-
-                        a{
-                            span{
-                                font-size: 15px;
-                            }
-                        }
-                        span{
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                ion-button{
-                    color: black;
-                }
-            }
-
-            .post-content{
-                height: auto;
-                margin: 5px 0;
-            }
-
-            .post-bottom{
-                display: flex;
-                flex-direction: column;
-
-                .toggle-icon{
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    .left-toggle{
-                        width: 35%;
-                        display: flex;
-                        justify-content: space-between;
-                        margin-left: 10px;
-                        
-                        span{
-                            margin-left: 2px;
-                        }
-                    }
-                    ion-button{
-                        color: black;
-                        font-size: 18px;
-                        margin: 0;
-
-                        span{
-                            font-size: 10px;
-                        }
-                    }
-                }
-
-                .subtitle-panel{
-                    display: flex;
-                    flex-direction: column;
-                    font-size: 14px;
-
-                    p{
-                        margin: 0;
-                        margin: 0 10px;
-                        padding: 2px 0;
-                        font-size: 12px;
-
-                        span{
-                            color: black;
-                            font-weight: bold;
-                        }
-                    }
-
-                    .view-btn{
-                        width: 180px;
-                        color: black;
-                        font-size: 10px;
-                        margin-left: 10px;
-                        padding: 2px 0;
-                    }
-
-                    .para{
-                        font-size: 10px;
-                    }
-                }
-            }
-
-            a{
-                color: black;
-                font-weight: bold;
-            }
-        }
-    }
+ion-content {
+  --background: #ffffff;
 }
 
-.post-view{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.feed-page {
+  width: 100%;
+  min-height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .image-hold{
-        width: 400px;
-        height: 400px;
 
-        ion-img{
-            width: 100%;
-            height: 100%;
-        }
-    }
+/* =====================================================
+   STORIES
+===================================================== */
 
-    .fetch-file{
-        height: 40%;
+.stories {
+  width: min(100%, 920px);
+  box-sizing: border-box;
 
-        .grid{  
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            background: black;
+  display: flex;
+  align-items: flex-start;
 
-            ion-img{
-                aspect-ratio: 1 / 1;
-                border: 1px solid rgba(214, 214, 214, 0.5);
-            }
+  gap: 18px;
 
-            ion-icon{
-                width: 100%;
-                height: 100%;
-            }
-        }
-    }
+  padding: 18px 20px 15px;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  border-bottom: 1px solid #efefef;
+}
+
+.stories::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =====================================================
+   STORY ITEM
+===================================================== */
+
+.story-item {
+  width: 72px;
+  min-width: 72px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.story-item span {
+  width: 72px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  text-align: center;
+
+  font-size: 11px;
+  color: #262626;
+}
+
+
+/* =====================================================
+   STORY RING
+===================================================== */
+
+.story-avatar-wrapper {
+  width: 66px;
+  height: 66px;
+
+  padding: 3px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #feda75,
+      #fa7e1e,
+      #d62976,
+      #962fbf,
+      #4f5bd5
+    );
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =====================================================
+   STORY AVATAR
+===================================================== */
+
+.story-avatar {
+  width: 60px;
+  height: 60px;
+
+  border: 3px solid #ffffff;
+
+  overflow: hidden;
+
+  background: #eeeeee;
+}
+
+.story-avatar ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   ADD STORY BUTTON
+===================================================== */
+
+.story-add {
+  position: absolute;
+
+  right: -3px;
+  bottom: -2px;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  border: 2px solid #ffffff;
+
+  background: #0095f6;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
+.story-add ion-icon {
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   YOUR STORY
+===================================================== */
+
+.your-story {
+  background: #eeeeee;
+}
+
+
+/* =====================================================
+   FEED LIST
+===================================================== */
+
+.feed-list {
+  width: min(100%, 640px);
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =====================================================
+   POST
+===================================================== */
+
+.feed-post {
+  width: 100%;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #dbdbdb;
+
+  padding-bottom: 18px;
+
+  margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   POST HEADER
+===================================================== */
+
+.post-header {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 8px 12px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+}
+
+
+/* =====================================================
+   POST AVATAR
+===================================================== */
+
+.post-avatar {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  padding: 2px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #feda75,
+      #fa7e1e,
+      #d62976,
+      #962fbf
+    );
+
+  border-radius: 50%;
+
+  overflow: hidden;
+}
+
+.post-avatar ion-img {
+  width: 100%;
+  height: 100%;
+
+  border: 2px solid #ffffff;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   USER DETAILS
+===================================================== */
+
+.user-details {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.username-row {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  min-width: 0;
+}
+
+.username-row strong {
+  font-size: 14px;
+
+  color: #262626;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   VERIFIED
+===================================================== */
+
+.verified {
+  width: 15px;
+  height: 15px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #0095f6;
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: bold;
+}
+
+
+/* =====================================================
+   FOLLOW
+===================================================== */
+
+.follow-btn,
+.following-btn {
+  border: none;
+
+  background: transparent;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  margin-left: 3px;
+}
+
+.follow-btn {
+  color: #0095f6;
+}
+
+.following-btn {
+  color: #262626;
+}
+
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.location {
+  font-size: 11px;
+
+  color: #737373;
+
+  margin-top: 2px;
+}
+
+
+/* =====================================================
+   MORE BUTTON
+===================================================== */
+
+.more-btn {
+  --color: #262626;
+
+  width: 35px;
+  height: 35px;
+
+  margin: 0;
+}
+
+.more-btn ion-icon {
+  font-size: 20px;
+}
+
+
+/* =====================================================
+   POST IMAGE
+===================================================== */
+
+.post-image {
+  width: 100%;
+
+  background: #000000;
+
+  overflow: hidden;
+}
+
+.post-image ion-img {
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   POST ACTIONS
+===================================================== */
+
+.post-actions {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 5px 10px 0;
+}
+
+.left-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
+}
+
+.action-btn {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+
+  border: none;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  color: #262626;
+}
+
+.action-btn ion-icon {
+  font-size: 27px;
+
+  transition: transform 0.15s ease;
+}
+
+.action-btn:active ion-icon {
+  transform: scale(0.85);
+}
+
+
+/* =====================================================
+   LIKE
+===================================================== */
+
+.action-btn ion-icon.liked {
+  color: #ed4956;
+}
+
+
+/* =====================================================
+   POST INFO
+===================================================== */
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 12px;
+}
+
+
+/* =====================================================
+   LIKES
+===================================================== */
+
+.likes {
+  font-size: 13px;
+
+  color: #262626;
+
+  margin-bottom: 5px;
+}
+
+
+/* =====================================================
+   CAPTION
+===================================================== */
+
+.caption {
+  margin: 0;
+
+  font-size: 13px;
+
+  line-height: 19px;
+
+  color: #262626;
+}
+
+.caption strong {
+  margin-right: 4px;
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+.comments-link {
+  border: none;
+
+  background: transparent;
+
+  padding: 6px 0;
+
+  text-align: left;
+
+  color: #737373;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   POST TIME
+===================================================== */
+
+.post-time {
+  font-size: 9px;
+
+  color: #737373;
+
+  text-transform: uppercase;
+
+  margin-top: 3px;
+}
+
+
+/* =====================================================
+   DESKTOP
+===================================================== */
+
+@media (min-width: 768px) {
+
+  .feed-page {
+    padding-bottom: 30px;
+  }
+
+  /*
+    Stories aur feed ko same LEFT EDGE par align karna
+    hai.
+
+    Stories = 920px
+    Feed   = 640px
+
+    Isliye feed ko stories ke left edge se start karwa rahe hain.
+  */
+
+  .stories {
+    margin-top: 10px;
+
+    border: none;
+    border-bottom: 1px solid #efefef;
+
+    box-sizing: border-box;
+  }
+
+  .feed-list {
+    margin-top: 10px;
+
+    /*
+      IMPORTANT:
+      Feed ab center mein nahi rahega.
+      Ye stories ke exact left edge se start hoga.
+    */
+    align-self: flex-start;
+
+    margin-left: max(
+      0px,
+      calc((100% - 920px) / 2)
+    );
+  }
+
+  .feed-post {
+    margin-bottom: 18px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+  .stories {
+    width: 100%;
+
+    padding: 14px 12px 12px;
+
+    gap: 14px;
+
+    box-sizing: border-box;
+  }
+
+  .feed-list {
+    width: 100%;
+
+    /*
+      Mobile par koi left shifting nahi.
+      Feed full width rahega.
+    */
+    margin-left: 0;
+  }
+
+  .feed-post {
+    margin-bottom: 8px;
+
+    padding-bottom: 15px;
+  }
+
+  .post-header {
+    padding: 7px 10px;
+  }
+
+  .post-image ion-img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .post-actions {
+    padding-top: 2px;
+  }
+
+  .action-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .action-btn ion-icon {
+    font-size: 25px;
+  }
+}
+.story-avatar {
+  width: 68px;
+  height: 68px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.story-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+}
+/* =====================================================
+   STORY PREVIEW
+===================================================== */
+
+.story-preview {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
+/* Story image/video */
+
+.story-preview-media {
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+
+/* User information */
+
+.story-preview-user {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  z-index: 10;
+
+  color: #fff;
+  font-size: 15px;
+}
+
+
+.story-preview-user ion-avatar {
+  width: 38px;
+  height: 38px;
+
+  border: 2px solid #fff;
+}
+
+
+/* Add to story button */
+
+.post-story-btn {
+  position: absolute;
+
+  bottom: 30px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  min-width: 190px;
+
+  padding: 13px 22px;
+
+  border: none;
+  border-radius: 25px;
+
+  background: #fff;
+
+  color: #000;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  z-index: 20;
+}
+
+
+.post-story-btn:active {
+  transform: translateX(-50%) scale(.96);
+}
+
+
+/* =====================================================
+   STORY ADD BUTTON
+===================================================== */
+
+.story-avatar-wrapper.your-story {
+  position: relative;
+}
+
+
+.story-add {
+  position: absolute;
+
+  right: -2px;
+  bottom: -2px;
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 2px solid #fff;
+
+  border-radius: 50%;
+
+  background: #1877f2;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+
+.story-add ion-icon {
+  font-size: 18px;
+}
+
+
+/* =====================================================
+   STORY AVATAR
+===================================================== */
+
+.story-avatar {
+  width: 68px;
+  height: 68px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+}
+
+
+.story-avatar ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   STORY ITEM
+===================================================== */
+
+.story-item {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 6px;
+
+  cursor: pointer;
+}
+
+
+.story-item > span {
+  max-width: 75px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   YOUR STORY RING
+===================================================== */
+
+.your-story {
+  padding: 3px;
+
+  border-radius: 50%;
+}
+
+
+/* =====================================================
+   MOBILE STORY PREVIEW
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .story-preview-media {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+
+    object-fit: contain;
+  }
+
+
+  .story-preview-user {
+    top: 18px;
+    left: 15px;
+  }
+
+
+  .post-story-btn {
+    bottom: 25px;
+  }
+
 }

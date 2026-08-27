@@ -1,60 +1,219 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="reels-content">
 
-  <swiper-container direction="vertical" slides-per-view="1" space-between="0" (swiperslidechange)="onSlideChange($event)" class="reels-swiper">
-    <swiper-slide *ngFor="let reel of reels; let i = index">
-      <!-- 1. Background YouTube Video (Scales to cover 100vh) -->
+  <swiper-container
+    direction="vertical"
+    slides-per-view="1"
+    space-between="0"
+    [loop]="false"
+    [speed]="350"
+    (swiperslidechange)="onSlideChange($event)"
+    class="reels-swiper">
+
+    <swiper-slide
+      *ngFor="let reel of reels; let i = index"
+      class="reel-slide">
+
+      <!-- =========================================
+           VIDEO
+      ========================================== -->
+
       <div class="video-wrapper">
+
         <video
           #videoPlayer
+          class="reel-video"
           [src]="reel.videoUrl"
-          loop
           playsinline
+          webkit-playsinline
+          loop
+          muted
+          preload="metadata"
           [autoplay]="i === 0"
           (click)="togglePlayPause(i)">
         </video>
+
+        <!-- Play indicator -->
+        <div
+          class="play-indicator"
+          [class.show]="!reel.isPlaying"
+          (click)="togglePlayPause(i)">
+
+          <ion-icon name="play"></ion-icon>
+
+        </div>
+
       </div>
 
-      <!-- 2. Instagram Right-Side Action Controls -->
+
+      <!-- =========================================
+           RIGHT SIDE ACTIONS
+      ========================================== -->
+
       <div class="side-actions">
-        <div class="action-btn" (click)="toggleLike(reel)">
-          <ion-icon name="heart-outline"></ion-icon>
-          <span>{{ reel.likes }}</span>
-        </div>
 
-        <div class="action-btn">
+        <!-- LIKE -->
+
+        <button
+          class="action-btn"
+          type="button"
+          (click)="toggleLike(reel)">
+
+          <ion-icon
+            [name]="reel.isLiked ? 'heart' : 'heart-outline'"
+            [class.liked]="reel.isLiked">
+          </ion-icon>
+
+          <span>
+            {{ reel.likes }}
+          </span>
+
+        </button>
+
+
+        <!-- COMMENT -->
+
+        <button
+          class="action-btn"
+          type="button">
+
           <ion-icon name="chatbubble-outline"></ion-icon>
-          <span>{{reel.comments}}</span>
-        </div>
 
-        <div class="action-btn">
+          <span>
+            {{ reel.comments }}
+          </span>
+
+        </button>
+
+
+        <!-- SHARE -->
+
+        <button
+          class="action-btn"
+          type="button">
+
           <ion-icon name="paper-plane-outline"></ion-icon>
-          <span>{{ reel.shares }}</span>
-        </div>
 
-        <div class="action-btn">
-          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-        </div>
+          <span>
+            {{ reel.shares }}
+          </span>
+
+        </button>
+
+
+        <!-- SAVE -->
+
+        <button
+          class="action-btn"
+          type="button"
+          (click)="toggleSave(reel)">
+
+          <ion-icon
+            [name]="reel.isSaved ? 'bookmark' : 'bookmark-outline'">
+          </ion-icon>
+
+        </button>
+
+
+        <!-- MORE -->
+
+        <button
+          class="action-btn more-action"
+          type="button">
+
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+
+        </button>
+
       </div>
 
-      <!-- 3. Bottom Information Overlay (User, Sound, Caption) -->
+
+      <!-- =========================================
+           BOTTOM USER INFORMATION
+      ========================================== -->
+
       <div class="bottom-info">
+
+        <!-- USER ROW -->
+
         <div class="user-row">
+
           <div class="user-profile">
-            <ion-avatar class="avatar-img">           
-              <ion-img [src]="reel.userAvatar" alt="User Avatar"></ion-img>
+
+            <ion-avatar class="avatar-img">
+
+              <ion-img
+                [src]="reel.userAvatar"
+                alt="User Avatar">
+              </ion-img>
+
             </ion-avatar>
+
+
             <div class="user-title">
-              <strong>{{ reel.username }}</strong>
-              <div class="audio-track">
-                <ion-icon name="musical-notes"></ion-icon>
-                <span>{{ reel.audioTrack }}</span>
+
+              <div class="username-line">
+
+                <strong>
+                  {{ reel.username }}
+                </strong>
+
+                <span
+                  class="verified"
+                  *ngIf="reel.verified">
+
+                  ✓
+
+                </span>
+
               </div>
+
+
+              <div class="audio-track">
+
+                <ion-icon name="musical-notes"></ion-icon>
+
+                <span>
+                  {{ reel.audioTrack }}
+                </span>
+
+              </div>
+
             </div>
-          </div>        
-          <ion-button size="small" fill="outline" color="light">Follow</ion-button>
+
+          </div>
+
+
+          <!-- FOLLOW -->
+
+          <button
+            class="follow-button"
+            type="button"
+            (click)="toggleFollow(reel)">
+
+            {{ reel.isFollowing ? 'Following' : 'Follow' }}
+
+          </button>
+
         </div>
-        <p class="description">{{ reel.description }}</p>
+
+
+        <!-- DESCRIPTION -->
+
+        <p class="description">
+          {{ reel.description }}
+        </p>
+
       </div>
+
+
+      <!-- =========================================
+           BOTTOM GRADIENT
+      ========================================== -->
+
+      <div class="bottom-gradient"></div>
+
     </swiper-slide>
+
   </swiper-container>
+
 </ion-content>

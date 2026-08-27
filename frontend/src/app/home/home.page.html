@@ -1,30 +1,570 @@
-<ion-content>
-<ion-router-outlet></ion-router-outlet>
-</ion-content>
-<ion-toolbar *ngIf="showTabs">
-  <div class="footer-button-container">
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="feeds" (click)="onChangeMode('feeds')">
-        <ion-icon [name]="activeTab === 'feeds' ? 'newspaper' : 'newspaper-outline'"></ion-icon>
-      </ion-tab-button>
+<!-- =====================================================
+     DESKTOP SIDEBAR
+===================================================== -->
+<aside class="desktop-sidebar">
 
-      <ion-tab-button tab="reels" (click)="onChangeMode('reels')">
-        <ion-icon [name]="activeTab === 'reels' ? 'play' : 'play-outline'"></ion-icon>
-      </ion-tab-button>
+  <!-- SOCIAL CIRCLE LOGO -->
+<div
+  class="sidebar-logo"
+  (click)="onChangeMode('feeds')">
 
-      <ion-tab-button tab="chat" (click)="onChangeMode('chat')">
-        <ion-icon [name]="activeTab === 'chat' ? 'paper-plane' : 'paper-plane-outline'"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button tab="search" (click)="onChangeMode('search')">
-        <ion-icon [name]="activeTab === 'search' ? 'search' : 'search-outline'"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button tab="profile" (click)="onChangeMode('profile')">
-        <ion-avatar class="person" [class.active]="activeTab === 'profile'">
-          <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
-        </ion-avatar>
-      </ion-tab-button>
-    </ion-tab-bar>
+  <div class="social-circle-logo">
+    <img
+      src="assets/icon/Logo.png"
+      alt="Social Circle Logo">
   </div>
+
+  <!-- <span>Social Circle</span> -->
+
+</div>
+
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-menu">
+
+    <!-- HOME -->
+    <button
+      class="sidebar-item"
+      [class.active]="activeTab === 'feeds'"
+      (click)="onChangeMode('feeds')">
+
+      <ion-icon
+        [name]="activeTab === 'feeds'
+          ? 'home'
+          : 'home-outline'">
+      </ion-icon>
+
+      <span>Home</span>
+    </button>
+
+
+    <!-- SEARCH -->
+    <button
+      class="sidebar-item"
+      [class.active]="activeTab === 'search'"
+      (click)="onChangeMode('search')">
+
+      <ion-icon
+        [name]="activeTab === 'search'
+          ? 'search'
+          : 'search-outline'">
+      </ion-icon>
+
+      <span>Search</span>
+    </button>
+
+
+    <!-- REELS -->
+    <button
+      class="sidebar-item"
+      [class.active]="activeTab === 'reels'"
+      (click)="onChangeMode('reels')">
+
+      <ion-icon
+        [name]="activeTab === 'reels'
+          ? 'play-circle'
+          : 'play-circle-outline'">
+      </ion-icon>
+
+      <span>Reels</span>
+    </button>
+
+
+    <!-- MESSAGES -->
+    <button
+      class="sidebar-item"
+      [class.active]="activeTab === 'chat'"
+      (click)="onChangeMode('chat')">
+
+      <ion-icon
+        [name]="activeTab === 'chat'
+          ? 'paper-plane'
+          : 'paper-plane-outline'">
+      </ion-icon>
+
+      <span>Messages</span>
+    </button>
+
+
+    <!-- NOTIFICATIONS -->
+    <button
+      class="sidebar-item"
+      type="button"
+      (click)="showNotifications()">
+
+      <div class="sidebar-icon-wrapper">
+
+        <ion-icon
+          name="heart-outline">
+        </ion-icon>
+
+        <span class="sidebar-dot"></span>
+
+      </div>
+
+      <span>Notifications</span>
+
+    </button>
+
+
+    <!-- CREATE POST -->
+    <button
+      class="sidebar-item"
+      type="button"
+      (click)="createPost()">
+
+      <ion-icon
+        name="add-circle-outline">
+      </ion-icon>
+
+      <span>Create</span>
+
+    </button>
+
+
+    <!-- PROFILE -->
+    <button
+      class="sidebar-item"
+      [class.active]="activeTab === 'profile'"
+      (click)="onChangeMode('profile')">
+
+      <ion-avatar class="sidebar-avatar">
+
+        <ion-img
+          [src]="getUserAvatar()"
+          alt="Profile">
+        </ion-img>
+
+      </ion-avatar>
+
+      <span>Profile</span>
+
+    </button>
+
+  </div>
+
+
+  <!-- MORE -->
+  <div class="sidebar-bottom">
+
+    <button
+      class="sidebar-item"
+      type="button">
+
+      <ion-icon
+        name="menu-outline">
+      </ion-icon>
+
+      <span>More</span>
+
+    </button>
+
+  </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<ion-content class="main-content">
+
+  <div class="home-page-layout">
+
+
+    <!-- =================================================
+         FEED AREA
+    ================================================== -->
+
+    <main class="feed-area">
+
+      <ion-router-outlet>
+      </ion-router-outlet>
+
+    </main>
+
+
+
+    <!-- =================================================
+         RIGHT SIDEBAR
+         ONLY HOME / FEEDS PAGE
+    ================================================== -->
+
+    <aside
+      class="right-sidebar"
+      *ngIf="showHomeHeader">
+
+
+      <!-- CURRENT USER -->
+
+      <div class="current-user">
+
+        <ion-avatar class="suggestion-avatar">
+
+          <ion-img
+            [src]="getUserAvatar()"
+            alt="Profile">
+          </ion-img>
+
+        </ion-avatar>
+
+
+        <div class="current-user-info">
+
+          <strong>
+            {{ username || 'Cricket.Edits' }}
+          </strong>
+
+          <span>
+            Your profile
+          </span>
+
+        </div>
+
+
+        <button
+          class="switch-btn"
+          type="button">
+
+          Switch
+
+        </button>
+
+      </div>
+
+
+
+      <!-- SUGGESTED HEADER -->
+
+      <div class="suggested-header">
+
+        <strong>
+          Suggested for you
+        </strong>
+
+        <button type="button">
+          See all
+        </button>
+
+      </div>
+
+
+
+      <!-- USER 1 -->
+
+      <div class="suggested-user">
+
+        <ion-avatar class="suggestion-avatar">
+
+          <ion-img
+            src="assets/images/rock.avif">
+          </ion-img>
+
+        </ion-avatar>
+
+
+        <div class="suggested-info">
+
+          <strong>
+            virat.kohli
+          </strong>
+
+          <span>
+            Suggested for you
+          </span>
+
+        </div>
+
+
+        <button
+          class="follow-btn"
+          type="button">
+
+          Follow
+
+        </button>
+
+      </div>
+
+
+
+      <!-- USER 2 -->
+
+      <div class="suggested-user">
+
+        <ion-avatar class="suggestion-avatar">
+
+          <ion-img
+            src="assets/images/Magal.avif">
+          </ion-img>
+
+        </ion-avatar>
+
+
+        <div class="suggested-info">
+
+          <strong>
+            rohit.sharma
+          </strong>
+
+          <span>
+            Followed by team.india
+          </span>
+
+        </div>
+
+
+        <button
+          class="follow-btn"
+          type="button">
+
+          Follow
+
+        </button>
+
+      </div>
+
+
+
+      <!-- USER 3 -->
+
+      <div class="suggested-user">
+
+        <ion-avatar class="suggestion-avatar">
+
+          <ion-img
+            src="assets/images/Cutipie.jpg">
+          </ion-img>
+
+        </ion-avatar>
+
+
+        <div class="suggested-info">
+
+          <strong>
+            team.india
+          </strong>
+
+          <span>
+            Suggested for you
+          </span>
+
+        </div>
+
+
+        <button
+          class="follow-btn"
+          type="button">
+
+          Follow
+
+        </button>
+
+      </div>
+
+
+
+      <!-- USER 4 -->
+
+      <div class="suggested-user">
+
+        <ion-avatar class="suggestion-avatar">
+
+          <ion-img
+            src="assets/images/barbidoll.jpg">
+          </ion-img>
+
+        </ion-avatar>
+
+
+        <div class="suggested-info">
+
+          <strong>
+            cricket.world
+          </strong>
+
+          <span>
+            Popular on Social Circle
+          </span>
+
+        </div>
+
+
+        <button
+          class="follow-btn"
+          type="button">
+
+          Follow
+
+        </button>
+
+      </div>
+
+
+
+      <!-- USER 5 -->
+
+      <div class="suggested-user">
+
+        <ion-avatar class="suggestion-avatar">
+
+          <ion-img
+            src="assets/images/Slex.jpg">
+          </ion-img>
+
+        </ion-avatar>
+
+
+        <div class="suggested-info">
+
+          <strong>
+            cricket.daily
+          </strong>
+
+          <span>
+            Suggested for you
+          </span>
+
+        </div>
+
+
+        <button
+          class="follow-btn"
+          type="button">
+
+          Follow
+
+        </button>
+
+      </div>
+
+
+
+      <!-- FOOTER -->
+
+      <div class="footer-links">
+
+        About · Help · Privacy · Terms · Locations
+
+        <br>
+        <br>
+
+        © 2026 SOCIAL CIRCLE
+
+      </div>
+
+    </aside>
+
+  </div>
+
+</ion-content>
+
+
+
+<!-- =====================================================
+     MOBILE BOTTOM NAVIGATION
+===================================================== -->
+
+<ion-toolbar
+  class="mobile-bottom-toolbar"
+  *ngIf="showTabs">
+
+  <ion-tab-bar>
+
+
+    <!-- HOME -->
+
+    <ion-tab-button
+      (click)="onChangeMode('feeds')">
+
+      <ion-icon
+        [name]="activeTab === 'feeds'
+          ? 'home'
+          : 'home-outline'">
+      </ion-icon>
+
+    </ion-tab-button>
+
+
+
+    <!-- SEARCH -->
+
+    <ion-tab-button
+      (click)="onChangeMode('search')">
+
+      <ion-icon
+        [name]="activeTab === 'search'
+          ? 'search'
+          : 'search-outline'">
+      </ion-icon>
+
+    </ion-tab-button>
+
+
+
+    <!-- CREATE POST -->
+
+    <ion-tab-button
+      class="mobile-create-button"
+      (click)="createPost()">
+
+      <ion-icon
+        name="add-circle-outline">
+      </ion-icon>
+
+    </ion-tab-button>
+
+
+
+    <!-- REELS -->
+
+    <ion-tab-button
+      (click)="onChangeMode('reels')">
+
+      <ion-icon
+        [name]="activeTab === 'reels'
+          ? 'play-circle'
+          : 'play-circle-outline'">
+      </ion-icon>
+
+    </ion-tab-button>
+
+
+
+    <!-- MESSAGES -->
+
+    <ion-tab-button
+      (click)="onChangeMode('chat')">
+
+      <ion-icon
+        [name]="activeTab === 'chat'
+          ? 'paper-plane'
+          : 'paper-plane-outline'">
+      </ion-icon>
+
+    </ion-tab-button>
+
+
+
+    <!-- PROFILE -->
+
+    <ion-tab-button
+      (click)="onChangeMode('profile')">
+
+      <ion-avatar
+        class="mobile-profile-avatar"
+        [class.active]="activeTab === 'profile'">
+
+        <ion-img
+          [src]="getUserAvatar()"
+          alt="Profile">
+        </ion-img>
+
+      </ion-avatar>
+
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
 </ion-toolbar>

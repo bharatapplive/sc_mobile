@@ -1,0 +1,179 @@
+ion-toolbar {
+  --background: #ffffff;
+  --color: #111111;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+ion-content {
+  --background: #ffffff;
+}
+
+
+// ==========================================
+// MAIN CONTAINER
+// ==========================================
+
+.edit-profile-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px 20px 40px;
+}
+
+
+// ==========================================
+// PROFILE PREVIEW
+// ==========================================
+
+.profile-preview {
+  text-align: center;
+  padding: 15px 0 30px;
+}
+
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.avatar-placeholder {
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f1f1f1;
+
+  border: 1px solid #dddddd;
+
+  overflow: hidden;
+}
+
+.avatar-placeholder ion-icon {
+  font-size: 45px;
+  color: #777777;
+}
+
+.profile-preview h2 {
+  margin: 5px 0;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #111111;
+}
+
+.profile-preview p {
+  margin: 0;
+
+  font-size: 14px;
+
+  color: #777777;
+}
+
+
+// ==========================================
+// FORM
+// ==========================================
+
+.form-container {
+  width: 100%;
+}
+
+ion-item {
+  --background: #ffffff;
+
+  --padding-start: 0;
+  --inner-padding-end: 0;
+
+  margin-bottom: 8px;
+}
+
+ion-item ion-icon {
+  font-size: 22px;
+  color: #555555;
+}
+
+ion-input,
+ion-textarea {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+
+  font-size: 16px;
+}
+
+
+// ==========================================
+// BIO COUNTER
+// ==========================================
+
+.bio-counter {
+  text-align: right;
+
+  margin-top: 4px;
+  margin-bottom: 20px;
+
+  font-size: 12px;
+
+  color: #777777;
+}
+
+
+// ==========================================
+// SAVE BUTTON
+// ==========================================
+
+.save-button {
+  margin-top: 15px;
+
+  height: 48px;
+
+  --border-radius: 12px;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+// ==========================================
+// DESKTOP
+// ==========================================
+
+@media (min-width: 768px) {
+
+  .edit-profile-container {
+    padding-top: 40px;
+  }
+
+  .form-container {
+    padding: 0 20px;
+  }
+
+}
+
+
+// ==========================================
+// MOBILE
+// ==========================================
+
+@media (max-width: 480px) {
+
+  .edit-profile-container {
+    padding: 20px 15px 30px;
+  }
+
+  .profile-preview {
+    padding-bottom: 20px;
+  }
+
+  .avatar-placeholder {
+    width: 80px;
+    height: 80px;
+  }
+
+}

@@ -1,314 +1,1070 @@
-.container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 15px;
-  font-family: 'Segoe UI', sans-serif;
-  width: 100%;
-
-  .profile-panel{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    width: 95%;
-
-    .profileDetails{
-      display: flex;
-      gap: 20px;
-      margin: 0;
-
-      .profile-content{
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        margin-bottom: 15px;
-        padding-top: 8px;
-
-        h2{
-          margin: 0;
-          margin-bottom: 2px;
-          font-size: 18px;
-        }
-
-        .follow-list{
-          display: flex;
-          align-items: center;
-          gap: 45px;
-          width: 100%;
-
-          .list {
-            p{
-              font-size: 13px;
-              font-weight: 500;
-              margin: 0;
-            }
-          }
-        }
-      }
-    }
-
-    .creator{
-
-      h2{
-        font-size: 13px;
-        margin: 0;
-      }
-    }
-    
-    .profileBio{
-      height: 70px;
-      overflow: auto;
-      margin: 10px 0;
-
-      p{
-        font-size: 13px;
-        padding: 0;
-        margin:0;
-      }
-    }
-
-    .add-links{
-      height: auto;
-
-      ion-button{
-        background: rgb(197, 197, 197);
-        border-radius: 12px;
-        width: 30%;
-        text-transform: none;
-        color: black;
-
-        span{
-          margin-left: 8px;
-          font-weight: 600;
-          font-size: 0.9rem;
-        }
-      }
-    }
-
-    .profile-buttons{
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-
-      ion-button{
-        border-radius: 14px;
-        letter-spacing: 0.5px;
-        width: 50%;
-        cursor: pointer;
-
-        
-        &.edit-btn{          
-           &-primary {
-            background: linear-gradient(135deg, #0091ff, #62b6ff);
-            color: #ffffff;
-
-            &:hover {
-              opacity: 0.9;
-            }
-          }
-
-          &-secondary {
-            background-color: #f0f7ff;
-            color: #102a43;
-            border: 1px solid lighten(#d9e2ec, 5%);
-
-            &:hover {
-              background-color: darken(#f0f7ff, 3%);
-            }
-          }
-          ion-icon{
-            font-size: 14px;
-            margin-right: 8px;
-          }
-        }
-
-        &.share-btn{
-          background: rgb(197, 197, 197);
-          color: black;
-
-          ion-icon{
-            font-size: 14px;
-            margin-right: 8px;
-          }
-        }
-
-        &.follow-btn{
-          background: rgb(197, 197, 197);
-          color: black;
-          width: auto;
-
-          ion-icon{
-            font-size: 22px;
-          }
-        }
-
-        span{
-          font-size: 10px;
-        }        
-      }
-    }
-
-  }
-
-  .highlight-panel{
-    display: flex;
-    align-items: center;
-    overflow: auto;
-    scrollbar-width: none;
-    width: 95%;
-    background: white;
-    border-radius: 10px;
-    margin: 5px 0;
-
-    .highlight-context{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 68px;
-      height: 90px;
-      margin: 8px 4px;
-
-      .story{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 68px;
-        height: 68px;
-        border: 2px solid transparent;
-        box-sizing: border-box;
-        border-radius: 50%; /* or 12px for rounded cards */
-        
-        /* Layer 1: Solid background color inside | Layer 2: Gradient for border */
-        background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #e3f2fd, #102a43) border-box;
-
-        ion-img{          
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 58px !important;    /* Overrides Ionic's default 64px avatar width */
-          height: 58px !important;
-          margin: 0 auto;
-          border-radius: 50%;
-          overflow: hidden;
-        }
-      }
-
-      .add-btn{
-        width: 62px;
-        height: 68px;
-        background-color: #c1c1c2a1;
-        border: 2px solid gray;
-        color: black;
-        font-size: 20px;
-        border-radius: 50%;
-      }
-    }
-  }
-
-  .user-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 95%;
-    margin-top: 5px;
- 
-    .header-bar{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 5px;
-      margin: 0 15px;
-
-      ion-segment-button{
-        color: black;
-        font-size: 0.9rem;
-        letter-spacing: 0.5px;
-      }
-    }
-
-    
-    
-    .files{
-      display: flex;
-      align-items: center;
-      
-      .grid{  
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-
-        ion-img{
-            aspect-ratio: 1 / 1;
-        }
-
-        span{
-          font-size: 10px;
-          background: none;
-          color: white;
-        }
-
-        .grid-box{
-          background: black;
-          border: 1px solid rgba(214, 214, 214, 0.5);
-          border-radius: 8px;
-          
-          .view-port{
-            display: flex;
-            color: white;
-            margin-left: 10px;
-          }
-        }
-        
-      }
-    }
-  }
+ion-content {
+  --background: #ffffff;
 }
 
-.header{
+/* =========================================
+   HEADER
+========================================= */
+
+.instagram-header {
+  --background: #ffffff;
+  --border-color: #dbdbdb;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+  --min-height: 54px;
+}
+
+.top-header {
+  width: 100%;
+  max-width: 935px;
+  height: 54px;
+
+  margin: 0 auto;
+
+  padding: 0 12px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding:0 15px;
+
+  box-sizing: border-box;
 }
 
-.toggleAccount{
-  width: auto;
+
+/* Username */
+
+.username {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #111111;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.username ion-icon {
+  font-size: 16px;
+}
+
+
+/* =========================================
+   HEADER ACTIONS
+========================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
+}
+
+.header-actions ion-button {
+  --color: #111111;
+
+  width: 42px;
+  height: 42px;
+
+  margin: 0;
+
+  position: relative;
+}
+
+.header-actions ion-icon {
+  font-size: 25px;
+}
+
+
+/* Notification red dot */
+
+.notification-dot {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 7px;
+  height: 7px;
+
+  background: #ed4956;
+
+  border-radius: 50%;
+
+  border: 1.5px solid #ffffff;
+
+  z-index: 10;
+}
+
+
+/* =========================================
+   MAIN PROFILE
+========================================= */
+
+.instagram-profile {
+  width: 100%;
+  max-width: 935px;
+
+  margin: 0 auto;
+
+  padding-bottom: 50px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   PROFILE HEADER
+========================================= */
+
+.profile-header {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 60px;
+
+  padding: 30px 20px 20px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   PROFILE AVATAR
+========================================= */
+
+.avatar-section {
+  width: 150px;
+  min-width: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+
+  padding: 3px;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(
+      135deg,
+      #833ab4,
+      #fd1d1d,
+      #fcb045
+    ) border-box;
+
+  border: 3px solid transparent;
+}
+
+.profile-avatar ion-img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================
+   PROFILE INFORMATION
+========================================= */
+
+.profile-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.profile-top-row {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.profile-top-row h1 {
+  margin: 0;
+
+  color: #111111;
+
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.more-button {
+  --color: #111111;
+
+  margin-left: auto;
+}
+
+
+/* =========================================
+   PROFILE STATS
+========================================= */
+
+.profile-stats {
+  display: flex;
+  align-items: center;
+
+  gap: 40px;
+
+  margin-bottom: 20px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #111111;
+
   font-size: 15px;
-  --color: white;
+}
+
+.stat strong {
+  color: #111111;
+
+  font-weight: 700;
+}
+
+.stat span {
+  color: #111111;
+}
+
+
+/* =========================================
+   PROFILE BUTTONS
+========================================= */
+
+.profile-buttons {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.profile-buttons ion-button,
+.mobile-buttons ion-button {
+  --background: #efefef;
+  --color: #111111;
+
+  --border-radius: 8px;
+
+  height: 36px;
+
+  margin: 0;
+
+  padding: 0 18px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
   text-transform: none;
 }
 
-.header .icon-class{
-  font-size: 18px;
-  --color:  white;
+.profile-buttons ion-button:hover,
+.mobile-buttons ion-button:hover {
+  --background: #dedede;
 }
 
-.view-count, .duration-badge, .draft-badge {
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  color: #fff;
-  font-size: 11px;
+
+/* Mobile buttons hidden on desktop */
+
+.mobile-buttons {
+  display: none;
+}
+
+
+/* =========================================
+   BIO
+========================================= */
+
+.bio-section {
+  padding: 0 20px 20px;
+
+  color: #111111;
+
+  font-size: 14px;
+}
+
+.bio-section strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #111111;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bio-section p {
+  margin: 0 0 5px;
+
+  color: #111111;
+
+  line-height: 1.5;
+}
+
+.bio-link {
+  color: #00376b;
+
+  font-size: 13px;
+
   font-weight: 600;
+
+  text-decoration: none;
+}
+
+
+/* =========================================
+   HIGHLIGHTS
+========================================= */
+
+.highlights {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 22px;
+
+  width: 100%;
+
+  padding: 10px 20px 30px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  box-sizing: border-box;
+}
+
+.highlights::-webkit-scrollbar {
+  display: none;
+}
+
+.highlight {
+  flex: 0 0 auto;
+
+  width: 75px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.highlight-circle {
+  width: 68px;
+  height: 68px;
+
+  padding: 2px;
+
+  border-radius: 50%;
+
+  border: 1px solid #dbdbdb;
+
+  background: #ffffff;
+
   display: flex;
   align-items: center;
-  gap: 3px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  justify-content: center;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
 }
 
-.draft-badge {
-  top: 6px;
-  bottom: auto;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
+.highlight-circle ion-img {
+  width: 100%;
+  height: 100%;
 
-.person{
-  width: 48px;
-  height: 48px;
+  object-fit: cover;
+
   border-radius: 50%;
-  border: 2px solid #797680; /* Story ring border color */
+}
+
+.add-highlight {
+  background: #fafafa;
+
+  border: 1px solid #dbdbdb;
+
+  color: #111111;
+}
+
+.add-highlight ion-icon {
+  font-size: 28px;
+}
+
+.highlight span {
+  width: 70px;
+
+  color: #111111;
+
+  font-size: 12px;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   PROFILE TABS
+========================================= */
+
+.profile-tabs {
+  width: 100%;
+  height: 53px;
+
+  display: flex;
+  align-items: center;
+
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+
+  box-sizing: border-box;
+}
+
+.profile-tabs button {
+  position: relative;
+
+  width: 33.333%;
+  height: 53px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #8e8e8e;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.profile-tabs button ion-icon {
+  font-size: 23px;
+}
+
+.profile-tabs button.active {
+  color: #111111;
+}
+
+.profile-tabs button.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 25%;
+  right: 25%;
+  bottom: 0;
+
+  height: 2px;
+
+  background: #111111;
+}
+
+
+/* =========================================
+   POSTS GRID
+========================================= */
+
+.content-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 3px;
+}
+
+.post-item {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background: #eeeeee;
+
+  cursor: pointer;
+}
+
+.post-item ion-img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.3s ease;
+}
+
+.post-item:hover ion-img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================
+   POST HOVER
+========================================= */
+
+.post-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 25px;
+
+  color: #ffffff;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  opacity: 0;
+
+  transition: opacity 0.25s ease;
+}
+
+.post-item:hover .post-overlay {
+  opacity: 1;
+}
+
+.post-overlay span {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.post-overlay ion-icon {
+  font-size: 20px;
+}
+
+
+/* =========================================
+   REELS GRID
+========================================= */
+
+.reels-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 3px;
+}
+
+.reel-item {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 9 / 16;
+
+  overflow: hidden;
+
+  background: #111111;
+
+  cursor: pointer;
+}
+
+.reel-item ion-img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =========================================
+   REEL OVERLAY
+========================================= */
+
+.reel-overlay {
+  position: absolute;
+
+  left: 10px;
+  bottom: 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-shadow: 0 1px 4px #000000;
+}
+
+.reel-overlay ion-icon {
+  font-size: 20px;
+}
+
+
+/* =========================================
+   DESKTOP
+========================================= */
+
+@media (min-width: 768px) {
+
+  .instagram-profile {
+    padding-top: 10px;
+  }
+
+  .content-grid {
+    gap: 4px;
+  }
+
+  .reels-grid {
+    gap: 4px;
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) and (min-width: 768px) {
+
+  .profile-header {
+    gap: 40px;
+  }
+
+  .avatar-section {
+    width: 130px;
+    min-width: 130px;
+  }
+
+  .profile-avatar {
+    width: 130px;
+    height: 130px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+  /* Header */
+
+  .top-header {
+    height: 52px;
+
+    padding: 0 8px;
+  }
+
+  .username {
+    font-size: 18px;
+  }
+
+  .username ion-icon {
+    font-size: 14px;
+  }
+
+
+  /* Header buttons */
+
+  .header-actions {
+    gap: 0;
+  }
+
+  .header-actions ion-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header-actions ion-icon {
+    font-size: 23px;
+  }
+
+  .notification-dot {
+    top: 5px;
+    right: 5px;
+
+    width: 7px;
+    height: 7px;
+  }
+
+
+  /* Profile */
+
+  .profile-header {
+    gap: 18px;
+
+    padding: 20px 15px 10px;
+  }
+
+
+  /* Avatar */
+
+  .avatar-section {
+    width: 88px;
+    min-width: 88px;
+  }
+
+  .profile-avatar {
+    width: 88px;
+    height: 88px;
+  }
+
+
+  /* Profile information */
+
+  .profile-info {
+    width: calc(100% - 106px);
+  }
+
+  .profile-top-row {
+    gap: 8px;
+
+    margin-bottom: 12px;
+  }
+
+  .profile-top-row h1 {
+    font-size: 17px;
+  }
+
+
+  /* Stats */
+
+  .profile-stats {
+    justify-content: space-between;
+
+    gap: 5px;
+
+    margin-bottom: 0;
+  }
+
+  .stat {
+    flex-direction: column;
+
+    gap: 0;
+
+    font-size: 12px;
+
+    text-align: center;
+  }
+
+  .stat strong {
+    font-size: 14px;
+  }
+
+
+  /* Desktop buttons off */
+
+  .desktop-buttons {
+    display: none;
+  }
+
+
+  /* Mobile buttons */
+
+  .mobile-buttons {
+    display: flex;
+
+    width: 100%;
+
+    gap: 6px;
+
+    padding: 5px 15px 15px;
+
+    box-sizing: border-box;
+  }
+
+  .mobile-buttons ion-button {
+    flex: 1;
+
+    height: 34px;
+
+    padding: 0;
+
+    font-size: 13px;
+  }
+
+
+  /* Bio */
+
+  .bio-section {
+    padding: 0 15px 15px;
+
+    font-size: 13px;
+  }
+
+  .bio-section strong {
+    font-size: 13px;
+  }
+
+  .bio-section p {
+    line-height: 1.45;
+  }
+
+  .bio-link {
+    font-size: 12px;
+  }
+
+
+  /* Highlights */
+
+  .highlights {
+    gap: 16px;
+
+    padding: 10px 15px 20px;
+  }
+
+  .highlight {
+    width: 65px;
+  }
+
+  .highlight-circle {
+    width: 62px;
+    height: 62px;
+  }
+
+  .highlight span {
+    width: 62px;
+
+    font-size: 11px;
+  }
+
+
+  /* Tabs */
+
+  .profile-tabs {
+    height: 50px;
+  }
+
+  .profile-tabs button {
+    height: 50px;
+  }
+
+  .profile-tabs button ion-icon {
+    font-size: 22px;
+  }
+
+
+  /* Posts */
+
+  .content-grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 2px;
+  }
+
+  .post-overlay {
+    display: none;
+  }
+
+
+  /* Reels */
+
+  .reels-grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 2px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .profile-header {
+    gap: 12px;
+  }
+
+  .avatar-section {
+    width: 75px;
+    min-width: 75px;
+  }
+
+  .profile-avatar {
+    width: 75px;
+    height: 75px;
+  }
+
+  .profile-info {
+    width: calc(100% - 87px);
+  }
+
+  .profile-stats {
+    gap: 3px;
+  }
+
+  .stat {
+    font-size: 10px;
+  }
+
+  .stat strong {
+    font-size: 13px;
+  }
+
+  .mobile-buttons ion-button {
+    font-size: 12px;
+  }
+
+  .highlights {
+    gap: 12px;
+  }
+
+} 
+.bio-section {
+  p {
+    white-space: pre-line;
+    line-height: 1.5;
+    margin: 6px 0;
+  }
+}
+.profile-avatar {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.profile-avatar ion-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.avatar-camera {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+}
+
+.avatar-camera ion-icon {
+  color: #ffffff;
+  font-size: 19px;
+}
+
+.avatar-loading {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 20;
+}
+
+.avatar-loading ion-spinner {
+  color: #ffffff;
+}
+
+.profile-avatar.uploading {
+  cursor: wait;
+}
+.profile-avatar {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.profile-avatar ion-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.avatar-camera {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  color: #fff;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+.avatar-camera ion-icon {
+  font-size: 18px;
 }

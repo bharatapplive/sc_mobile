@@ -1,101 +1,354 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <div class="panels">
-      <ion-button fill="clear">
-        <ion-label>{{username}}</ion-label>
-      </ion-button>
-      <div>
-        <ion-button fill="clear" routerLink="/home/post">
-          <ion-icon name="add"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" >
-          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-        </ion-button>
-      </div>
-    </div>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <div class="mainHolder">
 
-    <section class="story-panel">
-      <div class="story-context">
-        <div class="height-light" [class.active]="false">
-          <div class="story-relative">
-            <ion-avatar class="person">
-              <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
-            </ion-avatar>
-            <ion-button class="story-add-absolute" fill="clear" shape="round" size="small">
-              <ion-icon class="add-btn" slot="icon-only" name="add"></ion-icon>
-            </ion-button>
-          </div>
-        </div>
-        <span>Your story</span>
-      </div>
-      
-      <div class="story-context" *ngFor="let item of highlights">
-        <div class="height-light" [class.active]="true">
-          <ion-avatar class="person">
-              <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
+  <div class="feed-page">
+
+    <!-- ================= STORIES ================= -->
+    <section class="stories">
+
+      <!-- YOUR STORY -->
+      <div class="story-item">
+
+        <div
+          class="story-avatar-wrapper your-story"
+          (click)="openYourStory()">
+
+          <ion-avatar class="story-avatar">
+            <ion-img
+              [src]="getUserAvatar()"
+              alt="Your Story">
+            </ion-img>
           </ion-avatar>
+
+          <!-- PLUS BUTTON -->
+          <button
+            type="button"
+            class="story-add"
+            (click)="createStory($event)">
+
+            <ion-icon name="add"></ion-icon>
+
+          </button>
+
         </div>
-        <span>{{item?.username}}</span>
+
+        <span>Your story</span>
+
       </div>
-      
+
+
+      <!-- OTHER STORIES -->
+      <div
+        class="story-item"
+        *ngFor="let item of highlights">
+
+        <div class="story-avatar-wrapper">
+
+          <ion-avatar class="story-avatar">
+
+            <ion-img
+              [src]="item.imgUrl"
+              alt="Story">
+            </ion-img>
+
+          </ion-avatar>
+
+        </div>
+
+        <span>
+          {{ item.username }}
+        </span>
+
+      </div>
+
     </section>
 
-    <div class="post-panel">
-      <article class="card-board" *ngFor="let feed of feeds" >
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="avatar-img">
-              <ion-img [src]="feed.avatar" alt="User Avatar"></ion-img>  
+
+    <!-- ================= FEED ================= -->
+    <main class="feed-list">
+
+      <article
+        class="feed-post"
+        *ngFor="let feed of feeds; let i = index">
+
+        <!-- POST HEADER -->
+        <header class="post-header">
+
+          <div class="user-info">
+
+            <ion-avatar class="post-avatar">
+
+              <ion-img
+                [src]="feed.avatar"
+                alt="User">
+              </ion-img>
+
             </ion-avatar>
-            <div class="avatar-title">
-              <a><span>{{feed?.username}}</span></a>
-              <span>{{feed?.location}}</span>
+
+            <div class="user-details">
+
+              <div class="username-row">
+
+                <strong>
+                  {{ feed.username }}
+                </strong>
+
+                <span
+                  class="verified"
+                  *ngIf="feed.verified">
+                  ✓
+                </span>
+
+                <button
+                  *ngIf="!feed.isFollowing"
+                  class="follow-btn"
+                  (click)="toggleFollow(feed)">
+                  Follow
+                </button>
+
+                <button
+                  *ngIf="feed.isFollowing"
+                  class="following-btn"
+                  (click)="toggleFollow(feed)">
+                  Following
+                </button>
+
+              </div>
+
+              <span class="location">
+                {{ feed.location }}
+              </span>
+
             </div>
+
           </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+
+          <ion-button
+            fill="clear"
+            class="more-btn">
+
+            <ion-icon
+              slot="icon-only"
+              name="ellipsis-horizontal">
+            </ion-icon>
+
           </ion-button>
+
+        </header>
+
+
+        <!-- POST IMAGE -->
+        <div class="post-image">
+
+          <ion-img
+            [src]="feed.postUrl"
+            alt="Post">
+          </ion-img>
+
         </div>
 
-        <div class="post-content">
-            <ion-img [src]="feed.postUrl"></ion-img>
-        </div>
 
-        <div class="post-bottom">
-          <div class="toggle-icon">
-            <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-                <span>{{feed?.likes}}</span>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-                <span>{{feed?.comments}}</span>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-                <span>{{feed?.shares}}</span>
-              </ion-button>
-            </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
+        <!-- ACTIONS -->
+        <div class="post-actions">
+
+          <div class="left-actions">
+
+            <!-- LIKE -->
+            <button
+              class="action-btn"
+              (click)="toggleLike(feed)">
+
+              <ion-icon
+                [name]="feed.liked
+                  ? 'heart'
+                  : 'heart-outline'"
+                [class.liked]="feed.liked">
+              </ion-icon>
+
+            </button>
+
+
+            <!-- COMMENT -->
+            <button class="action-btn">
+
+              <ion-icon
+                name="chatbox-outline">
+              </ion-icon>
+
+            </button>
+
+
+            <!-- SHARE -->
+            <button class="action-btn">
+
+              <ion-icon
+                name="paper-plane-outline">
+              </ion-icon>
+
+            </button>
+
           </div>
 
-          <div class="subtitle-panel">
-            <p>{{feed?.likes}} likes</p>
-            <p><span>{{feed?.username}}</span> {{feed?.paragraph}}</p>
-            <a class="view-btn">View all {{feed?.comments}} comments</a>
-            <p class="para">{{feed?.postTime}}</p>
-          </div>
+
+          <!-- SAVE -->
+          <button
+            class="action-btn"
+            (click)="toggleSave(feed)">
+
+            <ion-icon
+              [name]="feed.saved
+                ? 'bookmark'
+                : 'bookmark-outline'">
+            </ion-icon>
+
+          </button>
+
         </div>
+
+
+        <!-- POST INFORMATION -->
+        <div class="post-info">
+
+          <strong class="likes">
+            {{ feed.likes }} likes
+          </strong>
+
+          <p class="caption">
+
+            <strong>
+              {{ feed.username }}
+            </strong>
+
+            {{ feed.paragraph }}
+
+          </p>
+
+          <button class="comments-link">
+
+            View all
+            {{ feed.comments }}
+            comments
+
+          </button>
+
+          <span class="post-time">
+            {{ feed.postTime }}
+          </span>
+
+        </div>
+
       </article>
-    </div>
+
+    </main>
 
   </div>
+
 </ion-content>
+
+
+<!-- =====================================================
+     STORY IMAGE PICKER
+===================================================== -->
+
+<input
+  #storyInput
+  type="file"
+  accept="image/*,video/*"
+  hidden
+  (change)="onStorySelected($event)"
+>
+
+
+<!-- =====================================================
+     STORY PREVIEW MODAL
+===================================================== -->
+
+<ion-modal
+  [isOpen]="showStoryPreview"
+  (didDismiss)="closeStoryPreview()">
+
+  <ng-template>
+
+    <ion-header>
+
+      <ion-toolbar>
+
+        <ion-title>
+          Your Story
+        </ion-title>
+
+        <ion-buttons slot="end">
+
+          <ion-button
+            (click)="closeStoryPreview()">
+
+            Close
+
+          </ion-button>
+
+        </ion-buttons>
+
+      </ion-toolbar>
+
+    </ion-header>
+
+
+    <ion-content>
+
+      <div class="story-preview">
+
+        <!-- IMAGE PREVIEW -->
+        <img
+          *ngIf="storyPreviewUrl && storyFileType === 'image'"
+          [src]="storyPreviewUrl"
+          alt="Story Preview"
+          class="story-preview-media"
+        >
+
+
+        <!-- VIDEO PREVIEW -->
+        <video
+          *ngIf="storyPreviewUrl && storyFileType === 'video'"
+          [src]="storyPreviewUrl"
+          class="story-preview-media"
+          controls
+          autoplay
+          playsinline>
+        </video>
+
+
+        <!-- USER INFO -->
+        <div class="story-preview-user">
+
+          <ion-avatar>
+
+            <ion-img
+              [src]="getUserAvatar()"
+              alt="Profile">
+            </ion-img>
+
+          </ion-avatar>
+
+          <strong>
+            {{ username || 'Cricket.Edits' }}
+          </strong>
+
+        </div>
+
+
+        <!-- POST STORY -->
+        <button
+          class="post-story-btn"
+          type="button"
+          (click)="postStory()">
+
+          Add to your story
+
+        </button>
+
+      </div>
+
+    </ion-content>
+
+  </ng-template>
+
+</ion-modal>

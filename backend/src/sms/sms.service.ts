@@ -1,53 +1,185 @@
-// src/sms/sms.service.ts
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Twilio } from 'twilio';
 
 @Injectable()
 export class SmsService {
-  private twilioClient: Twilio;
+  private twilioClient: Twilio | null = null;
+  private twilioPhoneNumber: string | null = null;
 
-  constructor(private readonly configService: ConfigService) {
-    const accountSid = this.configService.get<string>('TWILIO_ACCOUNT_SID')?.trim();
-    const authToken = this.configService.get<string>('TWILIO_AUTH_TOKEN')?.trim();
+  constructor(
+    private readonly configService: ConfigService,
+  ) {
+    const accountSid =
+      this.configService
+        .get<string>('TWILIO_ACCOUNT_SID')
+        ?.trim();
 
-    if (!accountSid || !authToken) {
-      console.error('❌ Twilio credentials are missing from .env file');
+    const authToken =
+      this.configService
+        .get<string>('TWILIO_AUTH_TOKEN')
+        ?.trim();
+
+    const phoneNumber =
+      this.configService
+        .get<string>('TWILIO_PHONE_NUMBER')
+        ?.trim();
+
+    /*
+     * Twilio credentials available hain tabhi
+     * Twilio client create hoga.
+     *
+     * Agar .env mein YOUR_TWILIO... hai,
+     * to backend crash nahi karega.
+     */
+    if (
+      accountSid &&
+      accountSid.startsWith('AC') &&
+      authToken &&
+      !authToken.startsWith('YOUR_') &&
+      phoneNumber &&
+      !phoneNumber.startsWith('YOUR_')
+    ) {
+      try {
+        this.twilioClient = new Twilio(
+          accountSid,
+          authToken,
+        );
+
+        this.twilioPhoneNumber = phoneNumber;
+
+        console.log('✅ Twilio SMS service enabled');
+      } catch (error) {
+        console.error(
+          '❌ Failed to initialize Twilio:',
+          error,
+        );
+
+        this.twilioClient = null;
+      }
+    } else {
+      console.warn(
+        '⚠️ Twilio credentials not configured.',
+      );
+
+      console.warn(
+        '⚠️ OTP will be printed in the backend terminal.',
+      );
     }
-
-    this.twilioClient = new Twilio(accountSid, authToken);
   }
 
-  async sendOtpSms(phoneNumber: string, otp: string): Promise<void> {
-    try {
-      
-      console.log('SID Loaded:', process.env.TWILIO_ACCOUNT_SID ? 'YES' : 'NO');
-      console.log('Token Loaded:', process.env.TWILIO_AUTH_TOKEN ? 'YES' : 'NO');
-      // 1. Clean the input string (remove spaces, dashes, etc.)
-      let cleanPhone = phoneNumber.replace(/\D/g, '');
+  async sendOtpSms(
+    phoneNumber: string,
+    otp: string,
+  ): Promise<void> {
+    /*
+     * ==========================================
+     * LOCAL DEVELOPMENT MODE
+     * ==========================================
+     */
 
-      // 2. If it's a 10-digit Indian number, prepend '+91'
-      if (cleanPhone.length === 10) {
-        cleanPhone = `+91${cleanPhone}`;
-      } else if (!cleanPhone.startsWith('+')) {
-        cleanPhone = `+${cleanPhone}`;
+    if (
+      !this.twilioClient ||
+      !this.twilioPhoneNumber
+    ) {
+      console.log('');
+      console.log(
+        '==========================================',
+      );
+      console.log('🔐 SOCIAL CIRCLE OTP');
+      console.log(
+        '==========================================',
+      );
+      console.log(
+        `📱 Phone: ${phoneNumber}`,
+      );
+      console.log(
+        `🔑 OTP: ${otp}`,
+      );
+      console.log(
+        '⏰ Valid for 10 minutes',
+      );
+      console.log(
+        '==========================================',
+      );
+      console.log('');
+
+      return;
+    }
+
+    /*
+     * ==========================================
+     * TWILIO MODE
+     * ==========================================
+     */
+
+    try {
+      let cleanPhone =
+        String(phoneNumber || '').trim();
+
+      /*
+       * 10 digit Indian number
+       */
+      const digitsOnly =
+        cleanPhone.replace(/\D/g, '');
+
+      if (digitsOnly.length === 10) {
+        cleanPhone = `+91${digitsOnly}`;
+      } else if (
+        !cleanPhone.startsWith('+')
+      ) {
+        cleanPhone = `+${digitsOnly}`;
       }
 
-      console.log(`Sending SMS to formatted number: ${cleanPhone}`);
+      console.log(
+        `📤 Sending OTP SMS to: ${cleanPhone}`,
+      );
 
-      // 3. Send SMS via Twilio
       await this.twilioClient.messages.create({
-        body: `Your verification code for SocialCircle is: ${otp}. Valid for 10 minutes.`,
-        from: process.env.TWILIO_PHONE_NUMBER,
+        body:
+          `Your verification code for SocialCircle is: ${otp}. ` +
+          `Valid for 10 minutes.`,
+
+        from: this.twilioPhoneNumber,
+
         to: cleanPhone,
       });
 
-      console.log(`OTP SMS successfully sent to ${cleanPhone}`);
-    } catch (error: any) {
-      console.error('Twilio SMS Error:', error.message || error);
-      throw new InternalServerErrorException(
-        'Failed to send OTP to mobile number. ' + (error.message || '')
+      console.log(
+        `✅ OTP SMS successfully sent to ${cleanPhone}`,
       );
+    } catch (error: any) {
+      console.error(
+        '❌ Twilio SMS Error:',
+        error?.message || error,
+      );
+
+      /*
+       * Development mein SMS fail hone par
+       * OTP terminal mein dikha denge.
+       *
+       * Isse registration block nahi hoga.
+       */
+      console.log('');
+      console.log(
+        '==========================================',
+      );
+      console.log('🔐 FALLBACK OTP');
+      console.log(
+        `📱 Phone: ${phoneNumber}`,
+      );
+      console.log(
+        `🔑 OTP: ${otp}`,
+      );
+      console.log(
+        '==========================================',
+      );
+      console.log('');
+
+      return;
     }
   }
 }

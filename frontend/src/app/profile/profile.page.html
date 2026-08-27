@@ -1,188 +1,541 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false" class="instagram-header">
+
   <ion-toolbar>
-    <div class="panels">
-      <ion-button fill="clear">
-        <ion-label>{{user?.username}}</ion-label>
-      </ion-button>
-      <div>
-        <ion-button fill="clear" routerLink="/home/post">
-          <ion-icon name="add"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" (click)="onLogout()">
-          <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-        </ion-button>
+
+    <div class="top-header">
+
+      <!-- Username -->
+      <div class="username">
+        <span>{{ user.username || 'Profile' }}</span>
+
+        <ion-icon
+          name="chevron-down-outline">
+        </ion-icon>
       </div>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+
+        <!-- Create Post -->
+        <ion-button
+          fill="clear"
+          routerLink="/home/post"
+          title="Create post">
+
+          <ion-icon
+            slot="icon-only"
+            name="add-box-outline">
+          </ion-icon>
+
+        </ion-button>
+
+        <!-- Notifications -->
+        <ion-button
+          fill="clear"
+          routerLink="/home/notifications"
+          title="Notifications">
+
+          <ion-icon
+            slot="icon-only"
+            name="heart-outline">
+          </ion-icon>
+
+          <span class="notification-dot"></span>
+
+        </ion-button>
+
+        <!-- Menu -->
+        <ion-button
+          fill="clear"
+          title="Menu">
+
+          <ion-icon
+            slot="icon-only"
+            name="menu-outline">
+          </ion-icon>
+
+        </ion-button>
+
+      </div>
+
     </div>
+
   </ion-toolbar>
+
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <!-- Pull to Refresh Component -->
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content 
-      pullingIcon="chevron-down-circle-outline" 
-      pullingText="Pull down to refresh" 
-      refreshingSpinner="circles" 
-      refreshingText="Fetching profile...">
+
+  <!-- Pull Refresh -->
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="handleRefresh($event)">
+
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
     </ion-refresher-content>
+
   </ion-refresher>
 
-  <div class="container">
-    <section class="profile-panel card-board">
-      <div class="profileDetails">
-        <div class="height-light">
-          <ion-avatar class="person">
-            <ion-img [src]="getUserAvatar()" alt="User"></ion-img>
-          </ion-avatar>
-        </div>
 
-        <div class="profile-content">
-          <h2>{{user?.fullname}}</h2>
-          <div class="follow-list">
-            <div class="list">
-              <p>{{user?.postNumber}}</p>
-              <p>posts</p>
-            </div>
-            <div class="list">
-              <p>{{user?.followerNumber}}</p>
-              <p>followers</p>
-            </div>
-            <div class="list">
-              <p>{{user?.followingNumber}}</p>
-              <p>following</p>
-            </div>
+  <main class="instagram-profile">
+
+
+    <!-- ================================================= -->
+    <!-- PROFILE -->
+    <!-- ================================================= -->
+
+    <section class="profile-header">
+
+
+      <!-- ============================= -->
+      <!-- PROFILE IMAGE -->
+      <!-- ============================= -->
+
+      <div class="avatar-section">
+
+        <div
+          class="profile-avatar"
+          (click)="avatarInput.click()"
+          title="Change profile picture">
+
+          <ion-img
+            [src]="getUserAvatar()"
+            [alt]="user.username || 'Profile'">
+          </ion-img>
+
+          <!-- Camera Icon -->
+          <div class="avatar-camera">
+
+            <ion-icon
+              name="camera-outline">
+            </ion-icon>
+
           </div>
+
         </div>
+
+
+        <!-- Hidden File Input -->
+
+        <input
+          #avatarInput
+          type="file"
+          accept="image/jpeg,image/jpg,image/png,image/webp"
+          hidden
+          (change)="onAvatarSelected($event)"
+        />
+
       </div>
 
-      <div class="creator">
-        <h2>Digital Creator</h2>
+
+
+      <!-- ============================= -->
+      <!-- PROFILE INFORMATION -->
+      <!-- ============================= -->
+
+      <div class="profile-info">
+
+
+        <!-- Username + More -->
+
+        <div class="profile-top-row">
+
+          <h1>
+            {{ user.username || 'User' }}
+          </h1>
+
+          <ion-button
+            fill="clear"
+            class="more-button">
+
+            <ion-icon
+              slot="icon-only"
+              name="ellipsis-horizontal">
+            </ion-icon>
+
+          </ion-button>
+
+        </div>
+
+
+
+        <!-- Statistics -->
+
+        <div class="profile-stats">
+
+
+          <!-- Posts -->
+
+          <div class="stat">
+
+            <strong>
+              {{ user.postNumber }}
+            </strong>
+
+            <span>
+              posts
+            </span>
+
+          </div>
+
+
+          <!-- Followers -->
+
+          <div class="stat">
+
+            <strong>
+              {{ user.followerNumber }}
+            </strong>
+
+            <span>
+              followers
+            </span>
+
+          </div>
+
+
+          <!-- Following -->
+
+          <div class="stat">
+
+            <strong>
+              {{ user.followingNumber }}
+            </strong>
+
+            <span>
+              following
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Desktop Buttons -->
+
+        <div class="profile-buttons desktop-buttons">
+
+          <ion-button
+            class="edit-profile"
+            fill="solid"
+            shape="round"
+            (click)="editProfile()">
+
+            Edit profile
+
+          </ion-button>
+
+
+          <ion-button
+            class="share-profile"
+            fill="solid"
+            shape="round">
+
+            Share profile
+
+          </ion-button>
+
+        </div>
+
       </div>
 
-      <div class="profileBio">
-        <p>💡 chasing moments & light<br>
-          📍 [Roorkee, UK]<br>
-          📸 capturing reality, one frame at a time. ✨ <br>
-          📩 contact / collab: Him@gmail.com<br>
-        </p>
-        <!-- <ion-button (click)="updatePost()">
-          Update Post
-        </ion-button>
-        
-        <ion-button (click)="updateFollower()">
-          Update Follower
-        </ion-button>
-        
-        <ion-button (click)="followingBtn()">
-          Update Following
-        </ion-button> -->
-      </div>
-
-      <div class="add-links">
-        <ion-button shape="round" fill="clear" size="small">
-          <ion-icon slot="icon-only" name="link-outline"></ion-icon>
-          <span>Add link's</span>
-        </ion-button>
-      </div>
-
-      <div class="profile-buttons">
-        <ion-button class="edit-btn-primary" shape="round" fill="clear" size="small" (click)="editProfile()">
-          <ion-icon slot="icon-only" name="pencil"></ion-icon>
-          <span>Edit Profile</span>
-        </ion-button>
-        <ion-button class="share-btn" shape="round" fill="clear" size="small">
-          <ion-icon lot="icon-only" name="share-social-outline"></ion-icon>
-          <span>Share Profile</span>
-        </ion-button>
-        <!-- <ion-button class="follow-btn" shape="round" fill="clear" size="small">
-          <ion-icon lot="icon-only" name="add-outline"></ion-icon>
-        </ion-button> -->
-      </div>
     </section>
 
-    <section class="highlight-panel">
-      <div class="highlight-context">
-        <ion-button class="add-btn" shape="round" fill="clear">
-            <ion-icon slot="icon-only" name="add"></ion-icon>
-        </ion-button>
-        <span>Add</span>
-      </div>
-      <div class="highlight-context">
-        <ion-avatar class="story">
-            <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>New York</span>
-      </div>
-      <div class="highlight-context">
-        <ion-avatar class="story">
-            <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>Fashion</span>
-      </div>
-      <div class="highlight-context">
-        <ion-avatar class="story">
-            <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>Work</span>
-      </div>
-      <div class="highlight-context">
-        <ion-avatar class="story">
-            <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
-        </ion-avatar>
-        <span>Travel</span>
-      </div>
+
+
+    <!-- ================================================= -->
+    <!-- BIO -->
+    <!-- ================================================= -->
+
+    <section class="bio-section">
+
+
+      <!-- Full Name -->
+
+      <strong>
+        {{ user.fullname }}
+      </strong>
+
+
+      <!-- Dynamic Bio -->
+
+      <p *ngIf="user.profileBio">
+        {{ user.profileBio }}
+      </p>
+
+
+      <!-- Default Bio -->
+
+      <p *ngIf="!user.profileBio">
+
+        🏏 Cricket's Best Moments<br>
+        🇮🇳 Team India • IPL • World Cricket<br>
+        🔥 Daily Cricket Edits & Reels<br>
+        🎬 Turning cricket moments into memories<br>
+        👑 Virat • Rohit • Dhoni • Bumrah
+
+      </p>
+
+
+      <!-- Bio Link -->
+
+      <a class="bio-link">
+
+        🔗 Follow for daily cricket content
+
+      </a>
+
     </section>
 
-    <section class="user-content card-board">
-      <div class="header-bar">
-        <ion-segment [(ngModel)]="activeTab" mode="md" class="profile-tabs">
-          <ion-segment-button value="posts">
-            <ion-icon [name]="activeTab === 'posts' ? 'grid' : 'grid-outline'"></ion-icon>
-          </ion-segment-button>
 
-          <ion-segment-button value="drafts">
-            <ion-icon [name]="activeTab === 'drafts' ? 'musical-notes' : 'musical-notes-outline'"></ion-icon>
-          </ion-segment-button>
 
-          <ion-segment-button value="replays">
-            <ion-icon [name]="activeTab === 'replays' ? 'sync-circle' : 'sync-circle-outline'"></ion-icon>
-          </ion-segment-button>
-        </ion-segment>
+    <!-- ================================================= -->
+    <!-- MOBILE BUTTONS -->
+    <!-- ================================================= -->
+
+    <div class="mobile-buttons">
+
+      <ion-button
+        class="edit-profile"
+        fill="solid"
+        shape="round"
+        (click)="editProfile()">
+
+        Edit profile
+
+      </ion-button>
+
+
+      <ion-button
+        class="share-profile"
+        fill="solid"
+        shape="round">
+
+        Share profile
+
+      </ion-button>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- HIGHLIGHTS -->
+    <!-- ================================================= -->
+
+    <section class="highlights">
+
+
+      <!-- Add Highlight -->
+
+      <div class="highlight">
+
+        <div
+          class="highlight-circle add-highlight">
+
+          <ion-icon
+            name="add-outline">
+          </ion-icon>
+
+        </div>
+
+        <span>
+          New
+        </span>
+
       </div>
 
-      <div [ngSwitch]="activeTab" class="files">
-        <div *ngSwitchCase="'posts'">
-          <div class="grid">
-            <div class="grid-box" *ngFor="let post of posts">
-              <ion-img [src]="post.mediaUrl"></ion-img>
-              <div class="view-port">
-                <ion-icon slot="icon-only" name="play-outline"></ion-icon>
-                <span>{{post.likesCount}}</span>
-              </div>
-            </div>
-          </div>
+
+      <!-- Existing Highlights -->
+
+      <div
+        class="highlight"
+        *ngFor="let highlight of highlights">
+
+        <div class="highlight-circle">
+
+          <ion-img
+            [src]="highlight.image"
+            [alt]="highlight.title">
+          </ion-img>
+
         </div>
 
-        <div *ngSwitchCase="'drafts'" class="grid-main">
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="draft-badge">Draft</span>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"></ion-img>
-            <span class="draft-badge">Draft</span>
-          </div>
-        </div>
+        <span>
+          {{ highlight.title }}
+        </span>
 
-        <div *ngSwitchCase="'replays'" class="grid-main">
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80"></ion-img>
-          </div>
-          <div class="grid-box">
-            <ion-img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"></ion-img>
-          </div>
-        </div>
       </div>
+
     </section>
-  </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- TABS -->
+    <!-- ================================================= -->
+
+    <div class="profile-tabs">
+
+
+      <!-- Posts -->
+
+      <button
+        [class.active]="activeTab === 'posts'"
+        (click)="activeTab = 'posts'">
+
+        <ion-icon
+          [name]="activeTab === 'posts'
+            ? 'grid'
+            : 'grid-outline'">
+        </ion-icon>
+
+      </button>
+
+
+      <!-- Reels -->
+
+      <button
+        [class.active]="activeTab === 'reels'"
+        (click)="activeTab = 'reels'">
+
+        <ion-icon
+          [name]="activeTab === 'reels'
+            ? 'play'
+            : 'play-outline'">
+        </ion-icon>
+
+      </button>
+
+
+      <!-- Tagged -->
+
+      <button
+        [class.active]="activeTab === 'tagged'"
+        (click)="activeTab = 'tagged'">
+
+        <ion-icon
+          [name]="activeTab === 'tagged'
+            ? 'person'
+            : 'person-outline'">
+        </ion-icon>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- POSTS -->
+    <!-- ================================================= -->
+
+    <section
+      class="content-grid"
+      *ngIf="activeTab === 'posts'">
+
+      <div
+        class="post-item"
+        *ngFor="let post of posts">
+
+        <ion-img
+          [src]="post.image">
+        </ion-img>
+
+
+        <div class="post-overlay">
+
+          <span>
+
+            <ion-icon
+              name="heart">
+            </ion-icon>
+
+            {{ post.likes }}
+
+          </span>
+
+
+          <span>
+
+            <ion-icon
+              name="chatbubble">
+            </ion-icon>
+
+            {{ post.comments }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- REELS -->
+    <!-- ================================================= -->
+
+    <section
+      class="reels-grid"
+      *ngIf="activeTab === 'reels'">
+
+      <div
+        class="reel-item"
+        *ngFor="let reel of reels">
+
+        <ion-img
+          [src]="reel.image">
+        </ion-img>
+
+
+        <div class="reel-overlay">
+
+          <ion-icon
+            name="play">
+          </ion-icon>
+
+          <span>
+            {{ reel.views }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- TAGGED -->
+    <!-- ================================================= -->
+
+    <section
+      class="content-grid"
+      *ngIf="activeTab === 'tagged'">
+
+      <div
+        class="post-item"
+        *ngFor="let post of taggedPosts">
+
+        <ion-img
+          [src]="post">
+        </ion-img>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
 </ion-content>
