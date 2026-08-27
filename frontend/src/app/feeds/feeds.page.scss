@@ -52,8 +52,31 @@
             }
 
             .post-content{
+                position: relative;
                 height: auto;
                 margin: 5px 0;
+
+                .btn-absolue{
+                    position: absolute;
+                    left: 88%;
+                    bottom: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 22px;
+                    width: 40px;
+                    height: 40px;
+                    
+                    background: rgba(128, 128, 128, 0.767);
+                    border-radius: 50%;
+
+                    // .ion-tab{
+                        
+
+                    // }
+                    
+                }
             }
 
             .post-bottom{

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PostService } from './post.service';
 
 @Controller('post')
@@ -8,13 +8,13 @@ export class PostController {
         private readonly postServe: PostService
     ){}
 
-    @Get(':id')
-    async fetchAllPostById(@Param('id') id:string){
-        return await this.postServe.getAllPostById(id);
+    @Get()
+    async fetchAllPost(){
+        return await this.postServe.getAllPost();
     }
 
-    @Get()
-    async fetchAllPostByuserId(@Query('userId') userId: string){
+    @Get(':userId')
+    async fetchAllPostByuserId(@Param('userId') userId: string){
         return await this.postServe.getAllPostByUserId(userId);
     }
 

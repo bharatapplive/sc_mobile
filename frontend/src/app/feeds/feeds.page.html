@@ -55,7 +55,59 @@
     </section>
 
     <div class="post-panel">
-      <article class="card-board" *ngFor="let feed of feeds" >
+      <article class="card-board" *ngFor="let feed of postList" >
+        <div class="post-header">
+          <div class="divided">
+            <ion-avatar class="avatar-img">
+              <ion-img [src]="feed.userUrl" alt="User Avatar"></ion-img>  
+            </ion-avatar>
+            <div class="avatar-title">
+              <a><span>{{feed?.author}}</span></a>
+              <span>{{feed?.audio?.artist}}</span>
+            </div>
+          </div>
+          <ion-button shape="round" fill="clear" size="small">
+            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="post-content">
+            <ion-img [src]="feed.mediaUrl"></ion-img>
+            <div size="small" fill="clear" slot="end" (click)="previewTrack(feed?.audio, $event)" class="btn-absolue">
+              <ion-icon [name]="isPlayingPreview && isAudioId === feed?.audio?.id ? 'volume-high' : 'volume-mute'"></ion-icon>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+          <div class="toggle-icon">
+            <div class="left-toggle">
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+                <span>{{feed?.likesCount}}</span>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
+                <span>{{feed?.commentsCount}}</span>
+              </ion-button>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+                <span>{{feed?.sharesCount}}</span>
+              </ion-button>
+            </div>
+            <ion-button shape="round" fill="clear" size="small">
+              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div class="subtitle-panel">
+            <p>{{feed?.likesCount}} likes</p>
+            <p><span>{{feed?.author}}</span> {{feed?.caption}}</p>
+            <a class="view-btn">View all {{feed?.commentsCount}} comments</a>
+            <p class="para">{{feed?.postTime}}</p>
+          </div>
+        </div>
+      </article>
+      <!-- <article class="card-board" *ngFor="let feed of feeds" >
         <div class="post-header">
           <div class="divided">
             <ion-avatar class="avatar-img">
@@ -103,7 +155,7 @@
             <p class="para">{{feed?.postTime}}</p>
           </div>
         </div>
-      </article>
+      </article> -->
     </div>
 
   </div>

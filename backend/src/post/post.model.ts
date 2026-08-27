@@ -13,20 +13,6 @@ export const AudioSchema = new mongoose.Schema(
   { _id: false } // Prevents Mongoose from auto-generating sub-document _id
 );
 
-export const PostSchema = new mongoose.Schema({
-    userId: { type: String, required: true },
-    author: { type: String, required: true },
-    caption: { type: String, default: '' },
-    mediaUrl: { type: String, required: true },
-    mediaType: { type: String, enum: ['image', 'video'], default: 'image' },
-    likesCount: { type: Number, default: 0 },
-    commentsCount: { type: Number, default: 0 },
-    hashtags: [{ type: String }],
-    audio: { type: AudioSchema, default: null }, // <-- Added Audio Field
-    createdDate: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
-});
-
 // TypeScript Interface for Audio
 export interface AudioTrack {
   id: string;
@@ -37,14 +23,61 @@ export interface AudioTrack {
   duration?: number;
 }
 
+export const PostSchema = new mongoose.Schema(
+  {
+    userId: { type: String, required: true, index: true },
+    userUrl:{type: String, required: true },
+    author: { type: String, required: true },
+    username:{type: String, required: true},
+    caption: { 
+      type: String, 
+      maxlength: 2200, // Instagram standard limit
+      trim: true, 
+      default: '' 
+    },
+    mediaUrl: { type: String, required: true },
+    mediaType: { type: String, enum: ['image', 'video'], default: 'image' },
+    likesCount: { 
+      type: Number,
+      default: 0,
+      min: 0, 
+    },
+    commentsCount: { 
+      type: Number,
+      default: 0,
+      min: 0,
+    },sharesCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    hashtags: [
+      { 
+        type: String,
+        lowercase: true,
+        trim: true,
+        index: true, 
+      }
+    ],
+    audio: { type: AudioSchema, default: null }, // <-- Added Audio Field
+    createdDate: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+  },{
+    timestamps: true, // Automatically manages createdAt and updatedAt
+  }
+);
+
 export interface Post extends mongoose.Document{
     userId: string;
+    userUrl: string;
     author: string;
+    username: string;
     caption?: string;
     mediaUrl: string;
     mediaType: string;
     likesCount: number;
     commentsCount: number;
+    sharesCount: number;
     hashtags: string[]; // Fixed type from string to string[]
     audio?: AudioTrack | null; // <-- Added Audio Field
     createdDate: Date;

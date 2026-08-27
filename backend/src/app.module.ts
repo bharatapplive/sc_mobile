@@ -14,7 +14,7 @@ import { PostModule } from './post/post.module';
     ConfigModule.forRoot({
       isGlobal: true, // 👈 Makes process.env available everywhere
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/Lumia'),
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017/Lumia'),
     // 👈 Mounts the 'uploads' directory to be publicly accessible
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),

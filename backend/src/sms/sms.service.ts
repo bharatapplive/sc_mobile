@@ -37,8 +37,8 @@ export class SmsService {
 
       // 3. Send SMS via Twilio
       await this.twilioClient.messages.create({
-        body: `Your verification code for SocialCircle is: ${otp}. Valid for 10 minutes.`,
-        from: process.env.TWILIO_PHONE_NUMBER,
+        body: `Your verification code is: ${otp}. Valid for 10 minutes.`,
+        from: this.configService.get<string>('TWILIO_PHONE_NUMBER'),
         to: cleanPhone,
       });
 

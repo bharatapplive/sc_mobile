@@ -86,12 +86,17 @@ export class ProfilePage implements OnInit {
   updatePost(){
     this.authServe.loadPostData().subscribe({
       next: (userData: any) => {
+        // If backend returns an array (from find({ userId }))
         if (Array.isArray(userData)) {
-          this.posts.push(...userData);
-        }else {
-          this.posts.push(userData);
+          this.posts = userData;
+        } 
+        // If backend returns a single object (from findById)
+        else if (userData) {
+          this.posts = [userData];
+        } else {
+          this.posts = [];
         }
-
+        
         if (this.user) {
           this.user.postNumber = this.posts.length;
         }

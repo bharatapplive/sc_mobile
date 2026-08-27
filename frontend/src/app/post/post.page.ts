@@ -13,7 +13,9 @@ import { PreviousRouteServe } from '../previous-route-serve';
 export class PostPage implements OnInit {
 
   //User details...
+  fullname: string = '';
   username: string = '';
+  avatarUl?: string = '';
   _id:string = '';
   activeTab: string = 'Post';
   
@@ -39,6 +41,7 @@ export class PostPage implements OnInit {
   selectedAudio: AudioTrack | null = null;
   isPlayingPreview: boolean = false;
   previewAudioElement: HTMLAudioElement | null = null;
+  playingTrackId: string | null = null;
   searchQuery: string = '';
 
   // Mock Available Music Library (Replace with backend API call if needed)
@@ -92,7 +95,6 @@ export class PostPage implements OnInit {
   @Input() captionText: string = '';
   @Input() maxLength: number = 2200;
   @Output() captionChange = new EventEmitter<string>();
-  playingTrackId: string | null = null;
 
   constructor(    
     private router:Router,
@@ -104,8 +106,10 @@ export class PostPage implements OnInit {
   ngOnInit() {
     this.authServe.loadUserData().subscribe({
       next: (userData) => {
-        this.username = userData.fullname;
+        this.username = userData.username;
+        this.fullname = userData.fullname;
         this._id = userData?._id ? String(userData._id).trim() : '';
+        this.avatarUl = userData.avatarUrl;
         console.log(this._id);
       },
       error: (err) => {
@@ -204,14 +208,17 @@ export class PostPage implements OnInit {
 
     const payload: CreatePostPayload = {      
       userId: this._id ? String(this._id).trim() : '',
-      author: generatedUsername?.trim() || 'Anonymous',
+      userUrl: this.avatarUl? String(this.avatarUl).trim() : '',
+      author: this.username,
+      username: generatedUsername?.trim() || 'Anonymous',
       caption: this.captionText.trim(),
       mediaUrl: this.newMediaUrl,
       mediaType: this.newMediaType as 'image' | 'video',
       audio: this.selectedAudio,
       hashtags: extractedHashtags,
       likesCount: 0,
-      commentsCount: 0
+      commentsCount: 0,
+      sharesCount:0
     };
 
     this.authServe.createNewPost(payload).subscribe({

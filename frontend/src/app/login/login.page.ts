@@ -76,7 +76,6 @@ export class LoginPage implements OnInit {
       this.authServe.register(payload).subscribe({
         next: (user) => {
           localStorage.setItem('uploadPro', JSON.stringify(user._id));
-          console.log(user._id);
           this.step = 'OTP';
         },
         error: (err) => {

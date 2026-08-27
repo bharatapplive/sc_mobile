@@ -110,10 +110,10 @@
           &-secondary {
             background-color: #f0f7ff;
             color: #102a43;
-            border: 1px solid lighten(#d9e2ec, 5%);
+            border: 1px solid #d9e2ec;
 
             &:hover {
-              background-color: darken(#f0f7ff, 3%);
+              background-color: #f0f7ff;
             }
           }
           ion-icon{

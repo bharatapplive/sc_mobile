@@ -56,13 +56,16 @@ export interface AudioTrack {
 
 export interface CreatePostPayload {
   userId: string;
+  userUrl: string;
   author: string;
+  username: string;
   caption?: string;
   mediaUrl: string;
   mediaType: 'image' | 'video'; // Use strict union types instead of plain string
   hashtags?: string[];          // Changed to array of strings
   likesCount?: number;          // Optional for creation payload
   commentsCount?: number;       // Optional for creation payload
+  sharesCount?: number;
   audio?: AudioTrack | null; // <-- Add this field
 }
 
@@ -204,6 +207,11 @@ export class AuthService {
     const rawId = localStorage.getItem('userID');
     const userId = rawId ? JSON.parse(rawId) : null;
 
-    return this.http.get<PostResponse>(`${environment.apiUrl}/post?userId=${encodeURIComponent(userId)}`);
+    return this.http.get<PostResponse>(`${environment.apiUrl}/post/${encodeURIComponent(userId)}`);
+  }
+
+  // 8. Load the whole post...
+  loadAllPost(){
+    return this.http.get<PostResponse>(`${environment.apiUrl}/post`);
   }
 }

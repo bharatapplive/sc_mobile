@@ -10,12 +10,12 @@ export class PostService {
         @InjectModel('Post') private postModel: Model<Post>
     ){}
 
-    async getAllPostById(id: string){
-        return await this.postModel.findById(id).exec();
+    async getAllPost(){
+        return await this.postModel.find();
     }
 
     async getAllPostByUserId(userId: string){
-        return await this.postModel.find({userId}).exec();
+        return await this.postModel.find({ userId: userId }).exec();
     }
 
     async createPost(request: any){
@@ -28,7 +28,9 @@ export class PostService {
             };
             const newPost = new this.postModel({
                 userId: request.userId,
+                userUrl: request.userUrl,
                 author: request.author,
+                username: request.username,
                 caption: request.caption ?? '',
                 mediaUrl: request.mediaUrl,
                 mediaType: request.mediaType,
@@ -36,6 +38,7 @@ export class PostService {
                 audio: request.audio || '',
                 likesCount: 0,
                 commentsCount: 0,
+                sharesCount: 0,
                 createdDate: new Date(),
                 updatedAt: new Date(),
             });
@@ -51,4 +54,9 @@ export class PostService {
             throw new InternalServerErrorException('Error creating user: ' + error.message);
         }
     }
+
+    
+    // async getAllPostById(id: string){
+    //     return await this.postModel.findById(id).exec();
+    // }
 }
