@@ -1,19 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AudioTrack, AuthService } from '../auth-service';
 
-interface FeedItem{
-  avatar: string;
-  username: string;
-  location: string;
-  postUrl: string;
-  likes: string;
-  comments: string;
-  shares: string;
-  saved: string;
-  paragraph: string;
-  postTime: string;
-}
-
 interface HighLight{
   imgUrl: string;
   username: string;
@@ -39,49 +26,8 @@ export class FeedsPage implements OnInit, OnDestroy{
   isPlayingPreview: boolean = false;
 
   // List / Array / Collection....
-  feeds: FeedItem[] = [
-    {
-      avatar:'assets/images/rock.avif',
-      username: '@aman.rock',
-      location: 'Bhiar',
-      postUrl: 'assets/images/Post2.jpg',
-      likes: '1,284',
-      comments: '42',
-      shares: '128',
-      saved: '',
-      paragraph: `Exploring the boundaries of digital reality today. 
-              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes`,
-      postTime: '2HOUR AGO',
-    },
-    {
-      avatar:'assets/images/Magal.avif',
-      username: '@ayushi.cuti',
-      location: 'Dehradun',
-      postUrl: 'assets/images/barbidoll.jpg',
-      likes: '6,520',
-      comments: '742',
-      shares: '28',
-      saved: '',
-      paragraph: `Exploring the boundaries of digital reality today. 
-              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes`,
-      postTime: '2HOUR AGO',
-    },
-    {
-      avatar:'assets/images/Cutipie.jpg',
-      username: '@bhim.kumar',
-      location: 'Roorkee',
-      postUrl: 'assets/images/Post1.jpg',
-      likes: '5,274',
-      comments: '85',
-      shares: '158',
-      saved: '',
-      paragraph: `Exploring the boundaries of digital reality today. 
-              This installation in Tokyo is pure magic. ✨ #DigitalArt #TokyoVibes`,
-      postTime: '2HOUR AGO',
-    }
-  ]
-
   postList: any[] = [];
+  
   highlights: HighLight[] = [
     {imgUrl:'assets/images/Slex.jpg', username:'@ayushi.cuteii'},
     {imgUrl:'assets/images/Magal.avif', username:'@rani.kumari'},
