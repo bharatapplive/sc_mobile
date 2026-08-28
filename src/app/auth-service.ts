@@ -38,10 +38,12 @@ export interface User{
   // Mark missing fields as optional
   password?: string;
   avatarUrl?: string;
-  postNumber?: number;
-  followerNumber?: number;
-  followingNumber?: number;
-  profileBio?: string;
+  bio?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  isVerified?: boolean;
+  otpCode?: string;
+  otpExpireAt?: string;
 }
 
 //#region CREATE POST 
@@ -100,7 +102,7 @@ export class AuthService {
 
   //1. REGISTER
   register(userData: User): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/user/register`, userData).pipe(
+    return this.http.post<User>(`${environment.apiUrl}/auth/register`, userData).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Server side error during registration:', error);
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
@@ -110,7 +112,7 @@ export class AuthService {
 
   // 2.LOGIN
   login(identity: string, password: string): Observable<User>{
-    return this.http.post<User>(`${environment.apiUrl}/user/login`,{identity, password}).pipe(
+    return this.http.post<User>(`${environment.apiUrl}/auth/login`,{identity, password}).pipe(
       tap((user)=>
       {
         this.currentUser.set(user);
@@ -128,8 +130,8 @@ export class AuthService {
   }
 
   // 4. VerifyOtp..
-  verifyOtp(payload: { userId: string; otp: string }): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/user/verify-otp`, payload);
+  verifyOtp(payload: { userId: string; otpCode: string }): Observable<User> {
+    return this.http.post<User>(`${environment.apiUrl}/auth/verify-otp`, payload);
   }
 
   //#endregion
@@ -188,7 +190,7 @@ export class AuthService {
     const rawId = localStorage.getItem('userID');
     const userId = rawId ? JSON.parse(rawId) : null;
 
-    return this.http.get<User>(`${environment.apiUrl}/user/${userId}`);
+    return this.http.get<User>(`${environment.apiUrl}/auth/${userId}`);
   }
 
   // 6. Create the post...

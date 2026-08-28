@@ -154,7 +154,7 @@
         <div *ngSwitchCase="'posts'">
           <div class="grid">
             <div class="grid-box" *ngFor="let post of posts">
-              <ion-img [src]="post.mediaUrl"></ion-img>
+              <ion-img [src]="post.mediaUrl" class="imaged"></ion-img>
               <div class="view-port">
                 <ion-icon slot="icon-only" name="play-outline"></ion-icon>
                 <span>{{post.likesCount}}</span>

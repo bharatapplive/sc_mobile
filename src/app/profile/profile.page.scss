@@ -239,7 +239,7 @@
         grid-template-columns: repeat(3, 1fr);
 
         ion-img{
-            aspect-ratio: 1 / 1;
+          aspect-ratio: 1 / 1;
         }
 
         span{
@@ -258,8 +258,12 @@
             color: white;
             margin-left: 10px;
           }
-        }
-        
+
+          ion-img::part(image) {
+            border-radius: 8px;
+            overflow: hidden;
+          }
+        }        
       }
     }
   }

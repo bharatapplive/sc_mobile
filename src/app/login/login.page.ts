@@ -43,7 +43,9 @@ export class LoginPage implements OnInit {
           });
         },
         error: (err) => {
-          alert('Invalid username and password');
+          // Log the backend response message to get specific details
+          console.error('Login error details:', err.error);
+          alert(err.error?.message || 'Invalid username or password');
         }
       })
     }
@@ -91,7 +93,6 @@ export class LoginPage implements OnInit {
     if(form.valid){
       // Retrieve stored user id
       const userID = JSON.parse(localStorage.getItem('uploadPro') || '""');
-      console.log(userID);
 
       if(!userID){
         alert('Session expired. Please register again');
@@ -99,9 +100,8 @@ export class LoginPage implements OnInit {
         return;
       }
 
-      const request = {userId: userID, otp: this.verifyPortal.otp ? this.verifyPortal.otp.toString().trim() : ''};
+      const request = {userId: userID, otpCode: this.verifyPortal.otp ? this.verifyPortal.otp.toString().trim() : ''};
 
-      console.log(request.otp);
       this.authServe.verifyOtp(request).subscribe({
         next: (user) =>{
           alert('OTP verified successfully');
