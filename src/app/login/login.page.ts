@@ -36,7 +36,6 @@ export class LoginPage implements OnInit {
       this.authServe.login(this.loginPortal.identity, this.loginPortal.password).subscribe({
         next: (user) =>{
           this.zone.run(() => {
-            alert(`Welcome back, ${user.phoneNumber || user.email || 'User'}!`);
             
             // Replaces router.navigate for robust root navigation in Ionic
             this.navCtrl.navigateRoot('/home');

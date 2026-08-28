@@ -82,6 +82,12 @@ export interface PostResponse extends CreatePostPayload {
 
 //#endregion
 
+export interface LoginResponse {
+  message: string;
+  accessToken: string;
+  user: any;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -111,12 +117,16 @@ export class AuthService {
   }
 
   // 2.LOGIN
-  login(identity: string, password: string): Observable<User>{
-    return this.http.post<User>(`${environment.apiUrl}/auth/login`,{identity, password}).pipe(
+  login(identity: string, password: string): Observable<LoginResponse>{
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`,{identity, password}).pipe(
       tap((user)=>
       {
-        this.currentUser.set(user);
-        localStorage.setItem('userID', JSON.stringify(user._id));
+        if (user && user.accessToken) {
+          console.log(user.user._id);
+          // Save token and user info locally
+          localStorage.setItem('userID', JSON.stringify(user.user._id));
+          localStorage.setItem('accessToken', user.accessToken);
+        }
       })
     );
   }
@@ -124,7 +134,8 @@ export class AuthService {
   // 3. LOGOUT
   logout() {
     this.currentUser.set(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userID');
     this.isAuthenticated.set(false);
     this.router.navigate(['/login']);
   }
@@ -134,6 +145,9 @@ export class AuthService {
     return this.http.post<User>(`${environment.apiUrl}/auth/verify-otp`, payload);
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('accessToken');
+  }
   //#endregion
 
 //#region MEDIA DATA
@@ -189,7 +203,6 @@ export class AuthService {
   loadUserData() {
     const rawId = localStorage.getItem('userID');
     const userId = rawId ? JSON.parse(rawId) : null;
-
     return this.http.get<User>(`${environment.apiUrl}/auth/${userId}`);
   }
 
