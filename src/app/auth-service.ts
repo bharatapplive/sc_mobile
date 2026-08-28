@@ -122,7 +122,7 @@ export class AuthService {
       tap((user)=>
       {
         if (user && user.accessToken) {
-          console.log(user.user._id);
+          alert(`${user.message} ${user.user.username}`)
           // Save token and user info locally
           localStorage.setItem('userID', JSON.stringify(user.user._id));
           localStorage.setItem('accessToken', user.accessToken);

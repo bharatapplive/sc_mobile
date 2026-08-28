@@ -6,9 +6,6 @@ import { AuthService } from '../auth-service';
 export interface UserProfile{
   fullname: string;
   username: string;
-  postNumber: number;
-  followerNumber: number;
-  followingNumber: number;
   avatarUrl?: string;
 }
 
@@ -21,9 +18,13 @@ export interface UserProfile{
 
 export class ProfilePage implements OnInit {
 
-  user: UserProfile | null = null;
-  
+  //#region User Details...
+  user: UserProfile | null = null;  
   avatarUrl?: string = '';
+  postNumber: number = 0;
+  followerNum: number = 0;
+  followingNum: number = 0;
+  //#endregion
 
   isFollowing: boolean = false;
   isGrid = true;
@@ -42,6 +43,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.loadUserProfile();
     this.updatePost();
+    
     console.log(this.posts);
   }
   
@@ -97,9 +99,8 @@ export class ProfilePage implements OnInit {
           this.posts = [];
         }
         
-        if (this.user) {
-          this.user.postNumber = this.posts.length;
-        }
+        this.postNumber = this.posts.length;
+        
       },
       error: (err) => {
         console.error('Failed to load user profile:', err);
@@ -110,37 +111,13 @@ export class ProfilePage implements OnInit {
   // 3. UPDATE FOLLOWER..
   updateFollower(){
     
-    // Fallback to 0 if database returns null/undefined, then increment
-    //this.follower = (Number(this.follower) || 0) + 1;
-
-    //const payload = {userId: this.userId, followerNumber: this.follower};
-
-    // this.http.patch<{followerNumber: number}>(`${this.API_URL}/user/follower`, payload).subscribe(
-    //   {
-    //     next:(response) => {
-    //       console.log('Successfully updated on server:', response);
-    //     },
-    //     error: (err) => console.error('Upload failed:', err)
-    //   }
-    // )
+   
   }
 
   // 4. UPDATE FOLLOWING..
   updateFollowing(){
     
-    // Fallback to 0 if database returns null/undefined, then increment
-    //this.following = (Number(this.following) || 0) + 1;
-
-    //const payload = {userId: this.userId, followingNumber: this.following};
-
-    // this.http.patch<{followingNumber: number}>(`${this.API_URL}/user/following`, payload).subscribe(
-    //   {
-    //     next:(response) => {
-    //       console.log('Successfully updated on server:', response);
-    //     },
-    //     error: (err) => console.error('Upload failed:', err)
-    //   }
-    // )
+    
   }
 
   // 5. FOLLOWING PEOPLES
