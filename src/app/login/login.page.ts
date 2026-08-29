@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Location } from '@angular/common';
-import { AuthService } from '../auth-service';
+import { AuthService } from '../authcontroller/auth-service';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -34,9 +34,8 @@ export class LoginPage implements OnInit {
   OnLoginHandler(form: any){
     if(form.valid){
       this.authServe.login(this.loginPortal.identity, this.loginPortal.password).subscribe({
-        next: (user) =>{
-          this.zone.run(() => {
-            
+        next: () =>{
+          this.zone.run(() => {            
             // Replaces router.navigate for robust root navigation in Ionic
             this.navCtrl.navigateRoot('/home');
           });
@@ -53,7 +52,6 @@ export class LoginPage implements OnInit {
 
   onRegisterHandler(form: any){
     if (form.valid) {
-
       // 1. get the fullname and change to lower..
       const cleanName = (this.registerPortal.fullname || '').toLowerCase().trim(); // strip spaces and special chars
           
@@ -76,8 +74,8 @@ export class LoginPage implements OnInit {
 
       this.authServe.register(payload).subscribe({
         next: (user) => {
-          localStorage.setItem('uploadPro', JSON.stringify(user._id));
           this.step = 'OTP';
+          alert(`Please verify OTP sent to your ${user.phoneNumber}`);
         },
         error: (err) => {
           // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
@@ -102,10 +100,8 @@ export class LoginPage implements OnInit {
       const request = {userId: userID, otpCode: this.verifyPortal.otp ? this.verifyPortal.otp.toString().trim() : ''};
 
       this.authServe.verifyOtp(request).subscribe({
-        next: (user) =>{
-          alert('OTP verified successfully');
-
-          localStorage.removeItem('uploadPro');
+        next: () =>{
+          alert('OTP verified successfully. Please Login to your account');
 
           this.isLogin = true;
           this.step = 'REGISTER';

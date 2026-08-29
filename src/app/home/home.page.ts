@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { filter, Subscription } from 'rxjs';
-import { AuthService } from '../auth-service';
+import { AuthService } from '../authcontroller/auth-service';
 
 
 @Component({

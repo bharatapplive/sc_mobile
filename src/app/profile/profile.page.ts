@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth-service';
+import { AuthService } from '../authcontroller/auth-service';
 
 export interface UserProfile{
   fullname: string;
@@ -19,14 +19,15 @@ export interface UserProfile{
 export class ProfilePage implements OnInit {
 
   //#region User Details...
-  user: UserProfile | null = null;  
-  avatarUrl?: string = '';
+  user: UserProfile | null = null;
+
   postNumber: number = 0;
   followerNum: number = 0;
   followingNum: number = 0;
   //#endregion
 
   isFollowing: boolean = false;
+
   isGrid = true;
   isDraft = false;
   isReply = false;
@@ -43,8 +44,6 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.loadUserProfile();
     this.updatePost();
-    
-    console.log(this.posts);
   }
   
   loadUserProfile(event?: any){

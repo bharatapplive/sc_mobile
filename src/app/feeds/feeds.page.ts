@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AudioTrack, AuthService } from '../auth-service';
+import { AuthService } from '../authcontroller/auth-service';
+import { AudioTrack } from '../authcontroller/authInterface';
 
 interface HighLight{
   imgUrl: string;
@@ -18,7 +19,6 @@ export class FeedsPage implements OnInit, OnDestroy{
   // User content...
   avatarUrl?: string = '';
   username: string = '';
-  _id:string = '';
 
   //Music...
   isAudioId: string | null = null;
@@ -54,7 +54,6 @@ export class FeedsPage implements OnInit, OnDestroy{
       next: (data: any) =>{
         // Spreads new posts at the beginning of the array
         this.postList = [...data];
-        console.log(this.postList)
       
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
@@ -77,7 +76,6 @@ export class FeedsPage implements OnInit, OnDestroy{
       next: (userData: any) => {
         this.username = userData.username;
         this.avatarUrl = userData.avatarUrl?.trim(); 
-        this._id = userData?._id ? String(userData._id).trim() : '';
                 
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
@@ -130,7 +128,7 @@ export class FeedsPage implements OnInit, OnDestroy{
     }
   }
 
-  private stopAudio(): void {
+  stopAudio(): void {
     if (this.isAudioPlay) {
       this.isAudioPlay.pause();
       this.isAudioPlay.currentTime = 0; // Resets position to start

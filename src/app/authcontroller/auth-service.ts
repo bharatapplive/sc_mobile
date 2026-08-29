@@ -3,6 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { CreatePostPayload, LoginResponse, PostResponse, User } from './authInterface';
 
 //#region media
 export type PostType = 'post' | 'story' | 'reel';
@@ -28,65 +29,12 @@ export interface MediaComposerState {
 
 //#endregion
 
-export interface User{
-  _id?: string;
-  email: string;
-  phoneNumber: string;
-  username:string;
-  fullname:string;
-  
-  // Mark missing fields as optional
-  password?: string;
-  avatarUrl?: string;
-  bio?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  isVerified?: boolean;
-  otpCode?: string;
-  otpExpireAt?: string;
-}
 
-//#region CREATE POST 
-export interface AudioTrack {
-  id: string;
-  title: string;
-  artist: string;
-  audioUrl: string;
-  coverUrl?: string;
-  duration?: number;
-}
 
-export interface CreatePostPayload {
-  userId: string;
-  userUrl: string;
-  author: string;
-  username: string;
-  caption?: string;
-  mediaUrl: string;
-  mediaType: 'image' | 'video'; // Use strict union types instead of plain string
-  hashtags?: string[];          // Changed to array of strings
-  likesCount?: number;          // Optional for creation payload
-  commentsCount?: number;       // Optional for creation payload
-  sharesCount?: number;
-  audio?: AudioTrack | null; // <-- Add this field
-}
-
-export interface PostResponse extends CreatePostPayload {
-  _id: string;
-  likes: string[];              // User IDs who liked the post
-  likesCount: number;           // Guaranteed number from DB
-  commentsCount: number;        // Guaranteed number from DB
-  createdDate: string;
-  updatedAt: string;
-}
+//#region CREATE P
 
 //#endregion
 
-export interface LoginResponse {
-  message: string;
-  accessToken: string;
-  user: any;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -101,19 +49,21 @@ export class AuthService {
 
 //#region Create Login and Registration..
   
-  isAuthenticated = signal<boolean>(false);
-
-  // Signals for managing global user state
-  currentUser = signal<User | null>(null);
 
   //1. REGISTER
   register(userData: User): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/register`, userData).pipe(
-      catchError((error: HttpErrorResponse) => {
+      tap((user)=>
+      {
+        if (user && user._id) {
+          // Save token and user info locally
+          localStorage.setItem('uploadPro', JSON.stringify(user._id));
+        }
+      },catchError((error: HttpErrorResponse) => {
         console.error('Server side error during registration:', error);
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
       })
-    );
+    ));
   }
 
   // 2.LOGIN
@@ -133,10 +83,8 @@ export class AuthService {
 
   // 3. LOGOUT
   logout() {
-    this.currentUser.set(null);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userID');
-    this.isAuthenticated.set(false);
     this.router.navigate(['/login']);
   }
 

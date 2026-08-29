@@ -12,6 +12,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="container">
+    <div class="post-panel" [style.display]="activeTab === 'POST' ? 'flex' : 'none'">
      <div class="upper-container">
         <ion-img [src]="postUrl"></ion-img>
       </div>
@@ -28,6 +29,7 @@
           </div>
         </div>
       </div>
+    </div>
     <!-- <div class="post-panel" [style.display]="activeTab === 'Post' ? 'flex' : 'none'">
       <div class="upper-container" [class.has-preview]="mediaUrl !== null" (click)="openModal()">
         
@@ -154,9 +156,9 @@
     </div> -->
 
     <div class="list-aboslute">
-      <a [class.active]="activeTab === 'Post'" (click)="activeTab = 'Post'">Post</a>
-      <a [class.active]="activeTab === 'Reel'" (click)="activeTab = 'Reel'">Reel</a>
-      <a [class.active]="activeTab === 'Story'" (click)="activeTab = 'Story'">Story</a>
+      <a [class.active]="activeTab === 'POST'" (click)="onChangeContentType('POST')">Post</a>
+      <a [class.active]="activeTab === 'REEL'" (click)="onChangeContentType('REEL')">Reel</a>
+      <a [class.active]="activeTab === 'STORY'" (click)="onChangeContentType('STORY')">Story</a>
     </div>
   </div>
 
@@ -172,7 +174,7 @@
       </ion-header>
       <ion-content>
         <div class="post-container">
-          <div class="post-section" [style.display]="activeTab === 'Post' ? 'flex' : 'none'">
+          <div class="post-section" [style.display]="activeTab === 'POST' ? 'flex' : 'none'">
             <div class="selected-image">
               <ion-img [src]="postUrl"></ion-img>            
             </div>

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AuthService, CreatePostPayload, AudioTrack } from '../auth-service';
+import { AuthService } from '../authcontroller/auth-service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PreviousRouteServe } from '../previous-route-serve';
+import { AudioTrack, ContentAuthor, CreatePostPayload } from '../authcontroller/authInterface';
 
 @Component({
   selector: 'app-post',
@@ -12,12 +13,10 @@ import { PreviousRouteServe } from '../previous-route-serve';
 })
 export class PostPage implements OnInit {
 
-  //User details...
-  fullname: string = '';
+  //User details...  
+  profile: ContentAuthor | null = null;
   username: string = '';
-  avatarUl?: string = '';
-  _id:string = '';
-  activeTab: string = 'Post';
+  activeTab: 'POST' | 'REEL' | 'STORY' = 'POST';
   
   isSelected: boolean = false;
   isPosted:boolean = false;
@@ -106,11 +105,13 @@ export class PostPage implements OnInit {
   ngOnInit() {
     this.authServe.loadUserData().subscribe({
       next: (userData) => {
+        this.profile = {
+          ...this.profile,
+          userId: userData?._id ? String(userData._id).trim() : '',
+          authorName: userData?.username || '',
+          avatarUrl: userData?.avatarUrl || '',
+        };
         this.username = userData.username;
-        this.fullname = userData.fullname;
-        this._id = userData?._id ? String(userData._id).trim() : '';
-        this.avatarUl = userData.avatarUrl;
-        console.log(this._id);
       },
       error: (err) => {
         console.error('Failed to load user profile:', err);
@@ -187,11 +188,6 @@ export class PostPage implements OnInit {
 
   onCreatePost(){
 
-    if(!this._id){
-      alert('User session not found. Please log in again.');
-      return;
-    }
-
     // 1. get the fullname and change to lower..
     const cleanName = (this.username || '').toLowerCase().trim(); // strip spaces and special chars
     
@@ -207,10 +203,9 @@ export class PostPage implements OnInit {
     const extractedHashtags = this.caption? (this.caption.match(/#[\w]+/g)?.map(tag => tag.substring(1)) || []) : [];
 
     const payload: CreatePostPayload = {      
-      userId: this._id ? String(this._id).trim() : '',
-      userUrl: this.avatarUl? String(this.avatarUl).trim() : '',
-      author: this.username,
+      author: this.profile,
       username: generatedUsername?.trim() || 'Anonymous',
+      type: this.activeTab,
       caption: this.captionText.trim(),
       mediaUrl: this.newMediaUrl,
       mediaType: this.newMediaType as 'image' | 'video',
@@ -223,7 +218,7 @@ export class PostPage implements OnInit {
 
     this.authServe.createNewPost(payload).subscribe({
         next: (user) => {
-          alert(`${user.audio} successfully updated`);
+          alert(`${user.type} successfully updated`);
           // Reset post creation portal values
           
           this.navCtrl.navigateBack('/home/feeds');
@@ -255,5 +250,9 @@ export class PostPage implements OnInit {
 
   onTextChange() {
     this.captionChange.emit(this.captionText);
+  }
+
+  onChangeContentType(tab: any){
+    this.activeTab = tab;
   }
 }

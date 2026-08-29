@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth-service';
+import { AuthService } from '../authcontroller/auth-service';
 
 interface FollowList{
   _id: string;

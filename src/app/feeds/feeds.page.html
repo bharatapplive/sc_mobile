@@ -59,10 +59,10 @@
         <div class="post-header">
           <div class="divided">
             <ion-avatar class="avatar-img">
-              <ion-img [src]="feed.userUrl" alt="User Avatar"></ion-img>  
+              <ion-img [src]="feed?.author?.avatarUrl" alt="User Avatar"></ion-img>  
             </ion-avatar>
             <div class="avatar-title">
-              <a><span>{{feed?.author}}</span></a>
+              <a><span>{{feed?.author?.authorName}}</span></a>
               <span>{{feed?.audio?.artist}}</span>
             </div>
           </div>
@@ -101,9 +101,9 @@
 
           <div class="subtitle-panel">
             <p>{{feed?.likesCount}} likes</p>
-            <p><span>{{feed?.author}}</span> {{feed?.caption}}</p>
+            <p><span>{{feed?.author?.authorName}}</span> {{feed?.caption}}</p>
             <a class="view-btn">View all {{feed?.commentsCount}} comments</a>
-            <p class="para">{{feed?.postTime}}</p>
+            <p class="para">{{(feed?.time || feed?.createdAt) | timeAgo}}</p>
           </div>
         </div>
       </article>
