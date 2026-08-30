@@ -1,0 +1,112 @@
+<ion-content [fullscreen]="true" class="home-content">
+
+  <!-- Main page content -->
+  <ion-router-outlet></ion-router-outlet>
+
+</ion-content>
+
+
+<!-- Bottom navigation on mobile/tablet -->
+<ion-toolbar
+  *ngIf="showTabs"
+  class="navigation-toolbar"
+>
+
+  <div class="navigation-container">
+
+    <!-- Desktop Logo -->
+    <div class="desktop-logo">
+      <span>Social Circle</span>
+    </div>
+
+
+    <!-- Navigation -->
+    <div class="navigation-buttons">
+
+      <!-- HOME -->
+      <button
+        class="navigation-button"
+        [class.active]="activeTab === 'feeds'"
+        (click)="onChangeMode('feeds')"
+      >
+        <ion-icon
+          [name]="activeTab === 'feeds'
+            ? 'home'
+            : 'home-outline'"
+        ></ion-icon>
+
+        <span>Home</span>
+      </button>
+
+
+      <!-- REELS -->
+      <button
+        class="navigation-button"
+        [class.active]="activeTab === 'reels'"
+        (click)="onChangeMode('reels')"
+      >
+        <ion-icon
+          [name]="activeTab === 'reels'
+            ? 'play'
+            : 'play-outline'"
+        ></ion-icon>
+
+        <span>Reels</span>
+      </button>
+
+
+      <!-- MESSAGES -->
+      <button
+        class="navigation-button"
+        [class.active]="activeTab === 'chat'"
+        (click)="onChangeMode('chat')"
+      >
+        <ion-icon
+          [name]="activeTab === 'chat'
+            ? 'paper-plane'
+            : 'paper-plane-outline'"
+        ></ion-icon>
+
+        <span>Messages</span>
+      </button>
+
+
+      <!-- SEARCH -->
+      <button
+        class="navigation-button"
+        [class.active]="activeTab === 'search'"
+        (click)="onChangeMode('search')"
+      >
+        <ion-icon
+          [name]="activeTab === 'search'
+            ? 'search'
+            : 'search-outline'"
+        ></ion-icon>
+
+        <span>Search</span>
+      </button>
+
+
+      <!-- PROFILE -->
+      <button
+        class="navigation-button profile-button"
+        [class.active]="activeTab === 'profile'"
+        (click)="onChangeMode('profile')"
+      >
+
+        <ion-avatar class="person">
+          <ion-img
+            [src]="getUserAvatar()"
+            alt="Profile"
+          ></ion-img>
+        </ion-avatar>
+
+        <span>Profile</span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</ion-toolbar>

@@ -1,0 +1,473 @@
+<ion-content
+  [fullscreen]="true"
+  class="feeds-content">
+
+  <div class="instagram-layout">
+
+    <!-- =================================================
+         CENTER FEED
+    ================================================== -->
+
+    <main class="feed-column">
+
+      <!-- =================================================
+           STORIES
+      ================================================== -->
+
+      <section class="story-panel">
+
+        <!-- YOUR STORY -->
+        <div class="story-context">
+
+          <div class="story-relative">
+
+            <div class="height-light your-story-ring">
+
+              <ion-avatar class="person">
+
+                <ion-img
+                  [src]="getUserAvatar()"
+                  alt="Your Story">
+                </ion-img>
+
+              </ion-avatar>
+
+            </div>
+
+            <!-- ADD STORY -->
+            <ion-button
+              class="story-add-absolute"
+              fill="clear"
+              shape="round">
+
+              <ion-icon
+                class="add-btn"
+                slot="icon-only"
+                name="add-circle">
+              </ion-icon>
+
+            </ion-button>
+
+          </div>
+
+          <span>Your story</span>
+
+        </div>
+
+
+        <!-- =================================================
+             OTHER STORIES
+        ================================================== -->
+
+        <div
+          class="story-context"
+          *ngFor="let item of highlights"
+          (click)="openStory(item)">
+
+          <!--
+            isSeen = false
+            → Instagram style colourful ring
+
+            isSeen = true
+            → Grey ring
+          -->
+
+          <div
+            class="height-light"
+            [class.story-seen]="item.isSeen"
+            [class.story-unseen]="!item.isSeen">
+
+            <ion-avatar class="person">
+
+              <ion-img
+                [src]="item.imgUrl"
+                alt="Story">
+              </ion-img>
+
+            </ion-avatar>
+
+          </div>
+
+          <span>
+            {{ item?.username }}
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           POSTS
+      ================================================== -->
+
+      <div class="post-panel">
+
+        <article
+          class="card-board"
+          *ngFor="let feed of feeds">
+
+
+          <!-- =================================================
+               POST HEADER
+          ================================================== -->
+
+          <div class="post-header">
+
+            <div class="divided">
+
+              <ion-avatar class="avatar-img">
+
+                <ion-img
+                  [src]="feed.avatar"
+                  alt="User">
+                </ion-img>
+
+              </ion-avatar>
+
+
+              <div class="avatar-title">
+
+                <a>
+                  <span>
+                    {{ feed?.username }}
+                  </span>
+                </a>
+
+                <span>
+                  {{ feed?.location }}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <ion-button
+              fill="clear"
+              shape="round">
+
+              <ion-icon
+                slot="icon-only"
+                name="ellipsis-horizontal">
+              </ion-icon>
+
+            </ion-button>
+
+          </div>
+
+
+          <!-- =================================================
+               POST IMAGE
+          ================================================== -->
+
+          <div
+            class="post-content"
+            (dblclick)="toggleLike(feed)">
+
+            <ion-img
+              [src]="feed.postUrl">
+            </ion-img>
+
+
+            <!-- DOUBLE TAP HEART -->
+
+            <div
+              class="heart-animation-overlay"
+              *ngIf="feed.isJustLiked">
+
+              <ion-icon
+                name="heart">
+              </ion-icon>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               POST BOTTOM
+          ================================================== -->
+
+          <div class="post-bottom">
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+
+            <div class="toggle-icon">
+
+              <div class="left-toggle">
+
+
+                <!-- LIKE -->
+
+                <ion-button
+                  fill="clear"
+                  shape="round"
+                  (click)="toggleLike(feed)">
+
+                  <ion-icon
+                    slot="icon-only"
+                    [name]="
+                      feed.isLiked
+                        ? 'heart'
+                        : 'heart-outline'
+                    "
+                    [color]="
+                      feed.isLiked
+                        ? 'danger'
+                        : ''
+                    ">
+                  </ion-icon>
+
+                </ion-button>
+
+
+                <!-- COMMENT -->
+
+                <ion-button
+                  fill="clear"
+                  shape="round"
+                  (click)="openComments(feed)">
+
+                  <ion-icon
+                    slot="icon-only"
+                    name="chatbubble-outline">
+                  </ion-icon>
+
+                </ion-button>
+
+
+                <!-- SHARE -->
+
+                <ion-button
+                  fill="clear"
+                  shape="round">
+
+                  <ion-icon
+                    slot="icon-only"
+                    name="paper-plane-outline">
+                  </ion-icon>
+
+                </ion-button>
+
+              </div>
+
+
+              <!-- SAVE -->
+
+              <ion-button
+                fill="clear"
+                shape="round"
+                (click)="toggleSave(feed)">
+
+                <ion-icon
+                  slot="icon-only"
+                  [name]="
+                    feed.isSaved
+                      ? 'bookmark'
+                      : 'bookmark-outline'
+                  ">
+                </ion-icon>
+
+              </ion-button>
+
+            </div>
+
+
+            <!-- =================================================
+                 POST INFORMATION
+            ================================================== -->
+
+            <div class="subtitle-panel">
+
+
+              <!-- LIKES -->
+
+              <p class="likes-count">
+
+                <strong>
+
+                  {{
+                    (feed?.likes || 0)
+                    +
+                    (feed.isLiked ? 1 : 0)
+                  }}
+
+                  likes
+
+                </strong>
+
+              </p>
+
+
+              <!-- CAPTION -->
+
+              <p class="caption">
+
+                <strong>
+                  {{ feed?.username }}
+                </strong>
+
+                {{ feed?.paragraph }}
+
+              </p>
+
+
+              <!-- COMMENTS -->
+
+              <a
+                class="view-btn"
+                *ngIf="feed?.comments"
+                (click)="openComments(feed)">
+
+                View all
+                {{ feed?.comments }}
+                comments
+
+              </a>
+
+
+              <!-- TIME -->
+
+              <p class="para">
+
+                {{ feed?.postTime }}
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </main>
+
+
+    <!-- =================================================
+         RIGHT SIDEBAR
+    ================================================== -->
+
+    <aside class="right-sidebar">
+
+
+      <!-- CURRENT USER -->
+
+      <div class="current-user">
+
+        <ion-avatar>
+
+          <ion-img
+            [src]="getUserAvatar()"
+            alt="Profile">
+          </ion-img>
+
+        </ion-avatar>
+
+
+        <div class="current-user-info">
+
+          <strong>
+            {{ username }}
+          </strong>
+
+          <span>
+            Social Circle
+          </span>
+
+        </div>
+
+
+        <button>
+          Switch
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           SUGGESTIONS
+      ================================================== -->
+
+      <div class="suggestions-header">
+
+        <strong>
+          Suggested for you
+        </strong>
+
+        <button>
+          See All
+        </button>
+
+      </div>
+
+
+      <div class="suggestion-list">
+
+        <div
+          class="suggestion-item"
+          *ngFor="let item of highlights">
+
+          <ion-avatar>
+
+            <ion-img
+              [src]="item.imgUrl"
+              alt="Suggested">
+            </ion-img>
+
+          </ion-avatar>
+
+
+          <div class="suggestion-info">
+
+            <strong>
+              {{ item?.username }}
+            </strong>
+
+            <span>
+              Suggested for you
+            </span>
+
+          </div>
+
+
+          <button>
+            Follow
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           FOOTER
+      ================================================== -->
+
+      <div class="sidebar-footer">
+
+        <span>About</span>
+        <span>Help</span>
+        <span>Press</span>
+        <span>API</span>
+        <span>Jobs</span>
+        <span>Privacy</span>
+        <span>Terms</span>
+        <span>Locations</span>
+
+        <p>
+          © 2026 SOCIAL CIRCLE
+        </p>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+</ion-content>

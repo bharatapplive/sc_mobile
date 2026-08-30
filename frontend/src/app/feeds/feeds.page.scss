@@ -1,0 +1,1056 @@
+/* =========================================================
+   SOCIAL CIRCLE — INSTAGRAM STYLE FEED
+========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+ion-content {
+  --background: #fff;
+}
+
+
+/* =========================================================
+   MAIN INSTAGRAM LAYOUT
+========================================================= */
+
+.instagram-layout {
+  width: calc(100% - 72px);
+  min-height: 100%;
+
+  margin-left: 72px;
+
+  display: grid;
+  grid-template-columns: 650px 300px;
+
+  /* Feed → Suggestions gap */
+  column-gap: 75px;
+
+  justify-content: start;
+  align-items: start;
+
+  /* Navigation → Feed gap */
+  padding: 28px 0 60px 75px;
+
+  box-sizing: border-box;
+}
+/* =========================================================
+   CENTER FEED
+========================================================= */
+
+.feed-column {
+  width: 650px;
+  max-width: 650px;
+  min-width: 650px;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================================
+   STORIES
+========================================================= */
+
+.story-panel {
+  width: 650px;
+  height: 140px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 18px;
+
+  padding: 5px 0 20px;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  border-bottom: 1px solid #dbdbdb;
+
+  scrollbar-width: none;
+}
+
+.story-panel::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   STORY ITEM
+========================================================= */
+
+.story-context {
+  width: 84px;
+  min-width: 84px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.story-context > span {
+  width: 84px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+  color: #262626;
+
+  font-size: 12px;
+
+  line-height: 16px;
+}
+
+
+/* =========================================================
+   STORY RING
+========================================================= */
+
+.height-light {
+  width: 72px;
+  height: 72px;
+
+  padding: 3px;
+
+  border-radius: 50%;
+
+  box-sizing: border-box;
+
+  flex-shrink: 0;
+
+  transition: all 0.2s ease;
+}
+
+
+/* NEW / UNSEEN STORY */
+
+.story-unseen {
+  background:
+    linear-gradient(
+      45deg,
+      #feda75,
+      #fa7e1e,
+      #d62976,
+      #962fbf,
+      #4f5bd5
+    );
+}
+
+
+/* SEEN STORY */
+
+.story-seen {
+  background: #c7c7c7;
+}
+
+
+/* =========================================================
+   STORY PROFILE IMAGE
+========================================================= */
+
+.height-light .person {
+  width: 100% !important;
+  height: 100% !important;
+
+  border: 3px solid #fff;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  background: #fff;
+
+  box-sizing: border-box;
+}
+
+.height-light ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   YOUR STORY
+========================================================= */
+
+.story-relative {
+  position: relative;
+
+  width: 72px;
+  height: 72px;
+
+  flex-shrink: 0;
+}
+
+
+.your-story-ring {
+  background:
+    linear-gradient(
+      45deg,
+      #feda75,
+      #fa7e1e,
+      #d62976,
+      #962fbf,
+      #4f5bd5
+    );
+}
+
+
+/* =========================================================
+   ADD STORY BUTTON
+========================================================= */
+
+.story-add-absolute {
+  position: absolute;
+
+  right: -4px;
+  bottom: -3px;
+
+  width: 24px;
+  height: 24px;
+
+  margin: 0;
+  padding: 0;
+
+  --padding-start: 0;
+  --padding-end: 0;
+
+  z-index: 10;
+}
+
+.story-add-absolute .add-btn {
+  width: 23px;
+  height: 23px;
+
+  font-size: 22px;
+
+  color: #0095f6;
+
+  background: #fff;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   POSTS
+========================================================= */
+
+.post-panel {
+  width: 650px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 28px;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================================
+   POST CARD
+========================================================= */
+
+.card-board {
+  width: 650px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #fff;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #dbdbdb;
+}
+
+
+/* =========================================================
+   POST HEADER
+========================================================= */
+
+.post-header {
+  width: 650px;
+  height: 80px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+
+.divided {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+/* =========================================================
+   POST AVATAR
+========================================================= */
+
+.avatar-img {
+  width: 38px !important;
+  height: 38px !important;
+
+  min-width: 38px !important;
+  min-height: 38px !important;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+}
+
+.avatar-img ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   POST USER INFO
+========================================================= */
+
+.avatar-title {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  line-height: 1.25;
+}
+
+.avatar-title a {
+  color: #262626;
+
+  text-decoration: none;
+}
+
+.avatar-title a span {
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.avatar-title > span {
+  color: #737373;
+
+  font-size: 12px;
+
+  margin-top: 2px;
+}
+
+.post-header ion-button {
+  --color: #262626;
+
+  margin: 0;
+
+  --padding-start: 5px;
+  --padding-end: 5px;
+}
+
+
+/* =========================================================
+   POST IMAGE
+========================================================= */
+
+.post-content {
+  position: relative;
+
+  width: 650px;
+  height: 440px;
+
+  overflow: hidden;
+
+  background: #f5f5f5;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.post-content ion-img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   POST ACTIONS
+========================================================= */
+
+.post-bottom {
+  width: 650px;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.toggle-icon {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 7px 0 3px;
+}
+
+
+.left-toggle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1px;
+
+  margin: 0;
+}
+
+
+.toggle-icon ion-button {
+  --color: #262626;
+
+  margin: 0;
+
+  --padding-start: 5px;
+  --padding-end: 5px;
+
+  font-size: 23px;
+}
+
+.toggle-icon ion-button:hover {
+  opacity: 0.6;
+}
+
+
+/* =========================================================
+   POST TEXT
+========================================================= */
+
+.subtitle-panel {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 0 0 4px;
+
+  box-sizing: border-box;
+}
+
+.subtitle-panel p {
+  margin: 0;
+
+  padding: 3px 0;
+
+  color: #262626;
+
+  line-height: 1.35;
+}
+
+.likes-count {
+  font-size: 14px !important;
+
+  font-weight: 600;
+}
+
+.caption {
+  font-size: 14px !important;
+}
+
+.caption strong {
+  margin-right: 5px;
+}
+
+.view-btn {
+  width: fit-content;
+
+  color: #737373;
+
+  font-size: 13px;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  margin-top: 2px;
+}
+
+.para {
+  color: #737373 !important;
+
+  font-size: 10px !important;
+
+  text-transform: uppercase;
+
+  margin-top: 2px !important;
+}
+
+
+/* =========================================================
+   RIGHT SIDEBAR
+========================================================= */
+
+.right-sidebar {
+  width: 300px;
+  min-width: 300px;
+
+  flex-shrink: 0;
+
+  padding-top: 15px;
+}
+
+
+/* =========================================================
+   CURRENT USER
+========================================================= */
+
+.current-user {
+  width: 300px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 28px;
+}
+
+.current-user ion-avatar {
+  width: 52px !important;
+  height: 52px !important;
+
+  min-width: 52px !important;
+  min-height: 52px !important;
+}
+
+.current-user ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.current-user-info {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.current-user-info strong {
+  color: #262626;
+
+  font-size: 14px;
+}
+
+.current-user-info span {
+  color: #8e8e8e;
+
+  font-size: 13px;
+}
+
+.current-user button {
+  border: none;
+
+  background: transparent;
+
+  color: #0095f6;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   SUGGESTIONS
+========================================================= */
+
+.suggestions-header {
+  width: 300px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.suggestions-header strong {
+  color: #8e8e8e;
+
+  font-size: 14px;
+}
+
+.suggestions-header button {
+  border: none;
+
+  background: transparent;
+
+  color: #262626;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.suggestion-list {
+  width: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.suggestion-item {
+  width: 300px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.suggestion-item ion-avatar {
+  width: 38px !important;
+  height: 38px !important;
+
+  min-width: 38px !important;
+  min-height: 38px !important;
+}
+
+.suggestion-item ion-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.suggestion-info {
+  flex: 1;
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.suggestion-info strong {
+  color: #262626;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.suggestion-info span {
+  color: #8e8e8e;
+
+  font-size: 11px;
+}
+
+.suggestion-item button {
+  border: none;
+
+  background: transparent;
+
+  color: #0095f6;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.sidebar-footer {
+  width: 300px;
+
+  margin-top: 45px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 5px 8px;
+
+  color: #c7c7c7;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+.sidebar-footer p {
+  width: 100%;
+
+  margin-top: 12px;
+
+  color: #c7c7c7;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   DOUBLE TAP HEART
+========================================================= */
+
+.heart-animation-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+
+  background: rgba(0, 0, 0, 0.04);
+
+  animation: fadeInOut 0.8s ease-in-out;
+}
+
+.heart-animation-overlay ion-icon {
+  font-size: 100px;
+
+  color: #ed4956;
+
+  filter:
+    drop-shadow(
+      0 5px 15px rgba(0, 0, 0, 0.25)
+    );
+
+  animation:
+    scaleUp
+    0.3s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+@keyframes scaleUp {
+
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+@keyframes fadeInOut {
+
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1199px) {
+
+  .instagram-layout {
+  width: calc(100% - 72px);
+  min-height: 100%;
+
+  margin-left: 72px;
+
+  display: grid;
+
+  grid-template-columns: 650px 300px;
+
+  column-gap: 25px;
+
+  justify-content: start;
+  align-items: start;
+
+  padding: 28px 0 60px 40px;
+
+  box-sizing: border-box;
+}
+
+  .right-sidebar {
+    display: none;
+  }
+
+  .feed-column {
+    width: 650px;
+    max-width: 650px;
+    min-width: 0;
+  }
+
+  .story-panel,
+  .post-panel,
+  .card-board,
+  .post-header,
+  .post-content,
+  .post-bottom {
+    width: 100%;
+  }
+
+  .post-content {
+    height: auto;
+
+    aspect-ratio: 1.48 / 1;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .instagram-layout {
+    width: 100%;
+
+    margin-left: 0;
+
+    display: block;
+
+    padding: 0 0 75px;
+  }
+
+  .feed-column {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+
+  /* STORIES */
+
+  .story-panel {
+    width: 100%;
+
+    height: 115px;
+
+    padding: 12px 12px 16px;
+
+    gap: 14px;
+
+    border-bottom: 1px solid #efefef;
+
+    overflow-x: auto;
+  }
+
+
+  .story-context {
+    width: 66px;
+    min-width: 66px;
+  }
+
+  .story-context > span {
+    width: 66px;
+
+    font-size: 11px;
+  }
+
+
+  .height-light,
+  .story-relative {
+    width: 62px;
+    height: 62px;
+  }
+
+  .story-relative .height-light {
+    width: 62px;
+    height: 62px;
+  }
+
+
+  /* POSTS */
+
+  .post-panel {
+    width: 100%;
+
+    gap: 15px;
+  }
+
+  .card-board {
+    width: 100%;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #efefef;
+  }
+
+  .post-header {
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 10px;
+  }
+
+  .post-content {
+    width: 100%;
+
+    height: auto;
+
+    aspect-ratio: 1.48 / 1;
+
+    border-radius: 0;
+  }
+
+  .post-bottom {
+    width: 100%;
+  }
+
+  .subtitle-panel {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .right-sidebar {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .story-context,
+  .story-context > span {
+    width: 62px;
+  }
+
+  .height-light,
+  .story-relative {
+    width: 62px;
+    height: 62px;
+  }
+
+  .story-relative .height-light {
+    width: 62px;
+    height: 62px;
+  }
+
+  .post-header {
+    height: 50px;
+  }
+
+  .avatar-img {
+    width: 36px !important;
+    height: 36px !important;
+
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+
+  .avatar-title a span {
+    font-size: 13px;
+  }
+
+  .avatar-title > span {
+    font-size: 11px;
+  }
+
+  .caption {
+    font-size: 13px !important;
+  }
+}
