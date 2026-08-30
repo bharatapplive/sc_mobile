@@ -37,23 +37,27 @@ export interface AudioTrack {
 //#region POST CONTENT...
 
 export interface ContentAuthor{  
-    userId:     string;
-    authorName: string;
-    avatarUrl:  string;
+    userId:          string;
+    authorName:      string;
+    avatarUrl:       string;
+    isFollowing?:    boolean;
+    hasUnseenStory?: boolean;
 }
 
 export interface CreatePostPayload {
-  author: ContentAuthor | null;
-  username: string;
-  type: 'POST' | 'REEL' | 'STORY';
-  caption?: string;
-  mediaUrl: string;
-  mediaType: 'image' | 'video'; // Use strict union types instead of plain string
-  hashtags?: string[];          // Changed to array of strings
-  likesCount?: number;          // Optional for creation payload
-  commentsCount?: number;       // Optional for creation payload
-  sharesCount?: number;
-  audio?: AudioTrack | null; // <-- Add this field
+    _id?:                string;
+    author:           ContentAuthor | null;
+    username:         string;
+    type:             'POST' | 'REEL' | 'STORY';
+    caption?:         string;
+    mediaUrl:         string;
+    mediaType:        'image' | 'video'; // Use strict union types instead of plain string
+    hashtags?:        string[];          // Changed to array of strings
+    isLiked?:         boolean;
+    likesCount:      number;          // Optional for creation payload
+    commentsCount?:   number;       // Optional for creation payload
+    sharesCount?:     number;
+    audio?:           AudioTrack | null; // <-- Add this field
 }
 
 export interface PostResponse extends CreatePostPayload {

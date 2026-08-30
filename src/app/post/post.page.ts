@@ -218,7 +218,7 @@ export class PostPage implements OnInit {
 
     this.authServe.createNewPost(payload).subscribe({
         next: (user) => {
-          alert(`${user.type} successfully updated`);
+          alert(`Post successfully updated`);
           // Reset post creation portal values
           
           this.navCtrl.navigateBack('/home/feeds');

@@ -81,8 +81,8 @@
         <div class="post-bottom">
           <div class="toggle-icon">
             <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+              <ion-button shape="round" fill="clear" size="small" (click)="toggleLikes(feed)">
+                <ion-icon slot="icon-only" [name]="feed?.likedBy?.includes(this.currentUserId) ? 'heart' : 'heart-outline'" [class.active]="feed?.likedBy?.includes(this.currentUserId)"></ion-icon>
                 <span>{{feed?.likesCount}}</span>
               </ion-button>
               <ion-button shape="round" fill="clear" size="small">

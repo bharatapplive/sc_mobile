@@ -29,13 +29,6 @@ export interface MediaComposerState {
 
 //#endregion
 
-
-
-//#region CREATE P
-
-//#endregion
-
-
 @Injectable({
   providedIn: 'root',
 })
@@ -53,17 +46,11 @@ export class AuthService {
   //1. REGISTER
   register(userData: User): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/register`, userData).pipe(
-      tap((user)=>
-      {
-        if (user && user._id) {
-          // Save token and user info locally
-          localStorage.setItem('uploadPro', JSON.stringify(user._id));
-        }
-      },catchError((error: HttpErrorResponse) => {
+      catchError((error: HttpErrorResponse) => {
         console.error('Server side error during registration:', error);
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
       })
-    ));
+    );
   }
 
   // 2.LOGIN
@@ -176,5 +163,10 @@ export class AuthService {
   // 8. Load the whole post...
   loadAllPost(){
     return this.http.get<PostResponse>(`${environment.apiUrl}/post`);
+  }
+
+  updateLikes(postId: string, userId:string): Observable<any>{
+
+    return this.http.patch(`${environment.apiUrl}/post/${postId}/like`, {userId});
   }
 }

@@ -76,6 +76,7 @@ export class LoginPage implements OnInit {
         next: (user) => {
           this.step = 'OTP';
           alert(`Please verify OTP sent to your ${user.phoneNumber}`);
+          localStorage.setItem('regUser', JSON.stringify(user._id));
         },
         error: (err) => {
           // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
@@ -89,7 +90,7 @@ export class LoginPage implements OnInit {
   onVerifyHandler(form: any){
     if(form.valid){
       // Retrieve stored user id
-      const userID = JSON.parse(localStorage.getItem('uploadPro') || '""');
+      const userID = JSON.parse(localStorage.getItem('regUser') || '""');
 
       if(!userID){
         alert('Session expired. Please register again');

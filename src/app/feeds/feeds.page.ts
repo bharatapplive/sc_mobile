@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../authcontroller/auth-service';
-import { AudioTrack } from '../authcontroller/authInterface';
+import { AudioTrack, CreatePostPayload } from '../authcontroller/authInterface';
 
 interface HighLight{
   imgUrl: string;
@@ -19,6 +19,8 @@ export class FeedsPage implements OnInit, OnDestroy{
   // User content...
   avatarUrl?: string = '';
   username: string = '';
+  isliked: boolean = false;
+  currentUserId: string | null = null; // Declare property here
 
   //Music...
   isAudioId: string | null = null;
@@ -41,6 +43,7 @@ export class FeedsPage implements OnInit, OnDestroy{
   ) { }
 
   ngOnInit() { 
+    
     this.loadUserProfile();
     this.loadPost();
   }
@@ -50,11 +53,12 @@ export class FeedsPage implements OnInit, OnDestroy{
   }
 
   loadPost(event?: any){
+
     this.authServe.loadAllPost().subscribe({
       next: (data: any) =>{
         // Spreads new posts at the beginning of the array
         this.postList = [...data];
-      
+
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
           event.target.complete();
@@ -76,6 +80,7 @@ export class FeedsPage implements OnInit, OnDestroy{
       next: (userData: any) => {
         this.username = userData.username;
         this.avatarUrl = userData.avatarUrl?.trim(); 
+        this.currentUserId = userData._id;
                 
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
@@ -159,5 +164,30 @@ export class FeedsPage implements OnInit, OnDestroy{
 
     // Default fallback placeholder
     return 'assets/images/default-avatar.png';
+  }
+
+  toggleLikes(item: any){  
+    const userId = item._id;
+    if (!userId || !this.currentUserId) return;
+
+    // 1. Optimistically update local UI state immediately
+    item.isLiked = !item.isLiked;
+    item.likesCount += item.isLiked ? 1 : -1;
+  
+
+    this.authServe.updateLikes(userId, this.currentUserId).subscribe({
+      next: (updatedPost: any) => {
+        console.log('Successfully updated in DB:', updatedPost);
+        item.likesCount = updatedPost.likesCount;
+        item.likedBy = updatedPost.likedBy;
+        item.isLiked = updatedPost.isLiked;
+      },
+      error: (err) => {
+        console.error('DB Update failed:', err);
+        // Revert optimistic update if API call fails
+        item.isLiked = !item.isLiked;
+        item.likesCount += item.isLiked ? 1 : -1;
+      }
+    });
   }
 }

@@ -97,6 +97,15 @@
                         span{
                             margin-left: 2px;
                         }
+
+                        ion-icon {
+                            font-size: 24px;
+                            color: var(--ion-color-dark, #222);
+
+                            &.active {
+                                color: #ed4956; // Instagram red color
+                            }
+                        }
                     }
                     ion-button{
                         color: black;
