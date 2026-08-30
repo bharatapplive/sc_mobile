@@ -5,11 +5,6 @@
 </ion-header>-->
 <ion-content [fullscreen]="true" class="page">
   <main class="box">
-    <!-- <div class="toggle" role="group" aria-label="Theme switcher">
-      <button type="button" [class.active]="theme === 'light'" (click)="setTheme('light')">Light</button>
-      <button type="button" [class.active]="theme === 'dark'" (click)="setTheme('dark')">Dark</button>
-    </div> -->
-
     <header class="head">
       <div class="icon vibrant-gradient">
         <span class="material-symbols-outlined">group</span>
@@ -19,13 +14,32 @@
     </header>
 
     <div class="card">
-      <form class="form" action="#" method="POST">
+      <form class="form" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
         <div class="field">
-          <label for="identity">Mobile Number or Email</label>
+          <label for="mobile">Mobile Number</label>
           <div class="input">
             <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required type="text" />
+            <input
+              id="mobile"
+              name="mobile"
+              [(ngModel)]="mobile"
+              placeholder="9876543210"
+              required
+              minlength="10"
+              maxlength="10"
+              type="text"
+              #mobileField="ngModel"
+            />
           </div>
+          <small class="error-message" *ngIf="mobileField.errors?.['required'] && (mobileField.dirty || mobileField.touched)">
+            Please enter your mobile number.
+          </small>
+          <small class="error-message" *ngIf="mobileField.errors?.['minlength'] && (mobileField.dirty || mobileField.touched)">
+            Mobile number must be at least 10 digits.
+          </small>
+          <small class="error-message" *ngIf="mobileField.errors?.['maxlength'] && (mobileField.dirty || mobileField.touched)">
+            Mobile number cannot exceed 10 digits.
+          </small>
         </div>
 
         <div class="field">
@@ -35,19 +49,38 @@
           </div>
           <div class="input">
             <span class="material-symbols-outlined">lock</span>
-            <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <button type="button" aria-label="Show password">
-              <span class="material-symbols-outlined">visibility</span>
+            <input
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="••••••••"
+              required
+              minlength="6"
+              maxlength="20"
+              [type]="isPasswordVisible ? 'text' : 'password'"
+              #passwordField="ngModel"
+            />
+            <button type="button" aria-label="Show password" (click)="togglePasswordVisibility()">
+              <span class="material-symbols-outlined">{{ isPasswordVisible ? 'visibility_off' : 'visibility' }}</span>
             </button>
           </div>
+          <small class="error-message" *ngIf="passwordField.errors?.['required'] && (passwordField.dirty || passwordField.touched)">
+            Password is required.
+          </small>
+          <small class="error-message" *ngIf="passwordField.errors?.['minlength'] && (passwordField.dirty || passwordField.touched)">
+            Password must be at least 6 characters.
+          </small>
+          <small class="error-message" *ngIf="passwordField.errors?.['maxlength'] && (passwordField.dirty || passwordField.touched)">
+            Password cannot exceed 20 characters.
+          </small>
         </div>
 
-        <button class="btn vibrant-gradient" type="submit">Log In</button>
+        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+        <button class="btn vibrant-gradient" type="submit" [disabled]="isSubmitting || loginForm.invalid">
+          {{ isSubmitting ? 'Logging In...' : 'Log In' }}
+        </button>
       </form>
-
-
-
-    
     </div>
 
     <footer class="foot">
