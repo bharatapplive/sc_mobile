@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
-export interface UserData {
+export interface userData {
   fullName?: string;
   UserName?: string;
   username?: string;
@@ -16,30 +18,23 @@ export interface UserData {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() {}
+  private apiUrl = `${environment.apiUrl}/auth/create`;
+  constructor(private http: HttpClient) { }
 
-  loadUserData(): Observable<UserData> {
-    const raw = localStorage.getItem('currentUser');
-    if (raw) {
-      try {
-        const user: UserData = JSON.parse(raw);
-        return of(user);
-      } catch (e) {
-        console.error('Error parsing currentUser from localStorage:', e);
-      }
-    }
-    return of({} as UserData);
+
+  register(userData: any) {
+    return this.http.post(this.apiUrl, userData);
   }
 
-  getCurrentUser(): UserData | null {
-    const raw = localStorage.getItem('currentUser');
-    if (raw) {
-      try {
-        return JSON.parse(raw);
-      } catch {
-        return null;
-      }
-    }
-    return null;
-  }
+  // getCurrentUser(): userData | null {
+  //   const raw = localStorage.getItem('currentUser');
+  //   if (raw) {
+  //     try {
+  //       return JSON.parse(raw);
+  //     } catch {
+  //       return null;
+  //     }
+  //   }
+  //   return null;
+  // }
 }
