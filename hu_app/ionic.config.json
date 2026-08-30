@@ -1,7 +1,0 @@
-{
-  "name": "hu_app",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}
