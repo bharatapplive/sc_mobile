@@ -1,0 +1,247 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>feed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">feed</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+<ion-header>
+  <ion-toolbar>
+    <div class="feed-toolbar">
+      <div class="feed-brand">
+        <button class="icon-button" aria-label="Camera">
+          <span class="material-symbols-outlined">camera_alt</span>
+        </button>
+        <h1 class="feed-title">Social Circle</h1>
+      </div>
+      <button class="icon-button" aria-label="Messages">
+        <span class="material-symbols-outlined">send</span>
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="feed-main">
+    <section class="stories-row" aria-label="Stories">
+      <div class="story-item">
+        <div class="story-avatar-plain">
+         <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=200&h=200&fit=crop">
+          <div class="story-plus">
+            <span class="material-symbols-outlined">add</span>
+          </div>
+        </div>
+        <span class="story-label">Your Story</span>
+      </div>
+
+      <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+            <img
+  src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=200&h=200&fit=crop"
+  alt="Moonlit night"
+>
+>
+
+          </div>
+        </div>
+        <span class="story-label">strvrlight</span>
+      </div>
+
+      <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4K6UQl8YeKnRlYyIDiquAUTWhbTD7uhwPjKbnUymtss9SBPtqSwhz49am_QUusP0hq0BCRdwV-1n4maK76ZHZpz9fc5iV8vpqbJiUrUjiTFkiaAsbgEWs533oGa3zMIIYVZviHlxf8_635qeq22fxqXcRecOmBJDmGuMQw8MYuXPX3XQtZ4H7tr4lILvvwn9uPkFsIbqq4HMMsEf_i7mlXraO05B7YZwA_wS2dRQUAHzX8xR-LV9VVL5qmOQ30PCArNcjOfrj1No" alt="neo_pixel" />
+          </div>
+        </div>
+        <span class="story-label">manpreet08</span>
+      </div>
+
+      <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+        <img
+  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop"
+  alt="Boy at sunset"
+>
+>
+          </div>
+        </div>
+        <span class="story-label">rohitrana</span>
+      </div>
+
+      <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuByww0uE6lke2FnrYFMVZzWGb_W99pu6A1lsmf0NifQFgWXG_43MKKbr74wKZmjEoON1H68ZYtRDckqav2JvLRYu8eG0BeOx7Iu5NYjEmwT3cZSG4W3gDzvSUvHAg11P97N9sY2lWdowEyPQob1FT7kLUc33jwbYbbCGTO2kxUw0rNM2xy0QSGe-6Mh5p9PXSbfM_H5dhAHPHhiZOqZXZ3dnkNdR0yRjZqa6JwRa_tpfEWqG3jc9LAnr_54YmVRmz66ahHqJNwV-Zo" alt="travel_joy" />
+          </div>
+        </div>
+        <span class="story-label">travel_joy</span>
+      </div>
+    </section>
+
+    <div class="feed-list">
+      <article class="feed-post glass-card">
+        <div class="post-header">
+          <div class="post-user">
+            <div class="avatar-wrap story-gradient">
+              <div class="avatar-inner">
+               <img
+  src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200&h=200&fit=crop"
+  alt="Beautiful green forest"
+>
+              </div>
+            </div>
+            <div>
+              <p class="username">nature_love</p>
+              <p class="location">📍Rohini,Delhi</p>
+            </div>
+          </div>
+          <button class="icon-button icon-button--small" aria-label="More options">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+        </div>
+
+        <div class="post-image-wrap">
+          <img class="post-image" src ="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=200&h=200&fit=crop"
+  alt="Flowers in nature"/>
+        </div>
+
+        <div class="post-content">
+          <div class="post-actions">
+            <div class="action-group">
+              <button class="icon-button icon-button--action" aria-label="Like">
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
+              <button class="icon-button icon-button--action" aria-label="Comment">
+                <span class="material-symbols-outlined">chat_bubble</span>
+              </button>
+              <button class="icon-button icon-button--action" aria-label="Share">
+                <span class="material-symbols-outlined">send</span>
+              </button>
+            </div>
+            <button class="icon-button icon-button--action" aria-label="Save">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+          </div>
+          <div class="post-meta">
+            <p class="likes">10,452 likes</p>
+            <p class="caption"><span class="caption-user">nature_love</span> 🌿✨ Lost in nature, found in myself. 🍃💚🌎 #NatureVibes #NatureLover #PeacefulMind #NaturePhotography #GoodVibes #GreenSoul #BeautifulWorld 🌿✨
+</p>
+            <button class="comment-link" type="button">View all 67 comments</button>
+            <p class="time-stamp">2 hours ago</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="feed-post glass-card">
+        <div class="post-header">
+          <div class="post-user">
+            <div class="avatar-wrap story-gradient">
+              <div class="avatar-inner">
+               <img
+  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop"
+  alt="Laptop with programming code"
+>
+              </div>
+            </div>
+            <div>
+              <p class="username">techwithSam</p>
+              <p class="location">ByteLabs</p>
+            </div>
+          </div>
+          <button class="icon-button icon-button--small" aria-label="More options">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+        </div>
+
+        <div class="post-image-wrap">
+          <img
+  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop"
+  alt="Developer coding on laptop"
+>
+        </div>
+
+        <div class="post-content">
+          <div class="post-actions">
+            <div class="action-group">
+              <button class="icon-button icon-button--action" aria-label="Like">
+                <span class="material-symbols-outlined icon-filled">favorite</span>
+              </button>
+              <button class="icon-button icon-button--action" aria-label="Comment">
+                <span class="material-symbols-outlined">chat_bubble</span>
+              </button>
+              <button class="icon-button icon-button--action" aria-label="Share">
+                <span class="material-symbols-outlined">send</span>
+              </button>
+            </div>
+            <button class="icon-button icon-button--action" aria-label="Save">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+          </div>
+          <div class="post-meta">
+            <p class="likes">3,490 likes</p>
+            <p class="caption"><span class="caption-user">techwithSam</span> Code. Create. Innovate. 🚀
+🧠 Exploring the world of technology
+👩‍💻 Developer in progress</p>
+            <button class="comment-link" type="button">View all 180 comments</button>
+            <p class="time-stamp">6 hours ago</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="feed-post glass-card">
+        <div class="post-header">
+          <div class="post-user">
+            <div class="avatar-wrap border-avatar">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFpqmxphnWGMH7T_9ULeKQhIRo-edB5Ko9VyVSbW4dnj3LoEDiqe5tATiYiyC1oFCg2ZbFeywm294e7t4vEWNjerFN1MeiFjODhduOGQ8g9KnMtBTN1c8ORe6PAll4kSgw4HVUClGD8DApJ5aycBt81Y7iuVj7PaehgOO3smCcI84czZ0sHLUTHcpaJBqofm_2lZVtsJcGo1jKVFnV5DmfYfqq_K86dICY5A7eB4320I9zYHdRe1jychL0h-HHSYoatmorEov6HdQ" alt="zen_explorer" />
+            </div>
+            <div>
+              <p class="username">zen_explorer</p>
+              <p class="location">Iceland</p>
+            </div>
+          </div>
+          <button class="icon-button icon-button--small" aria-label="More options">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+        </div>
+
+        <div class="post-image-wrap">
+          <img class="post-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsWBVJPlrQGM44JrCYJvROiMwcleZ4Z1X_InBV0T2QJPpl1AXzXhzLbrZX33Am4f5hSfuxU_l2lyFuios0OD8p-8SHDElmmTJE4TeejidYZXE0RX_khNTFEiHkDjE6bxDRIJihLNVSi9k8FKc-lu1kLuk6Tsv0zzgMhNwjhAuSqi9huled7w03ITPC3MLHRYP2PGPeZGfwersBOml-a7FX9IVJF1hKd29nvbcIXEH-BeF2-G5jZpG7iEfK7UQi7f7EBxly17w4VzQ" alt="Iceland scenic photo" />
+        </div>
+
+        <div class="post-content">
+          <div class="post-actions">
+            <div class="action-group">
+              <button class="icon-button icon-button--action" aria-label="Like">
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
+              <button class="icon-button icon-button--action" aria-label="Comment">
+                <span class="material-symbols-outlined">chat_bubble</span>
+              </button>
+              <button class="icon-button icon-button--action" aria-label="Share">
+                <span class="material-symbols-outlined">send</span>
+              </button>
+            </div>
+            <button class="icon-button icon-button--action" aria-label="Save">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+          </div>
+          <div class="post-meta">
+            <p class="likes">821 likes</p>
+            <p class="caption"><span class="caption-user">zen_explorer</span> Cold air, clear mind.</p>
+            <button class="comment-link" type="button">View all 12 comments</button>
+            <p class="time-stamp">9 hours ago</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+  
+</ion-content>

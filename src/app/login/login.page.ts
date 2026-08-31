@@ -80,6 +80,6 @@ showPassword = false;
 
 
     
-    this.router.navigate(['/tabs/home']);
+    this.router.navigate(['home']);
   }
 }

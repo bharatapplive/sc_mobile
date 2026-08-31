@@ -1,0 +1,314 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <div class="add-toolbar">
+      <div class="add-brand">
+        <button class="icon-button" aria-label="Camera">
+          <span class="material-symbols-outlined">camera_alt</span>
+        </button>
+        <h1 class="add-title">Social Circle</h1>
+      </div>
+      <button class="icon-button" aria-label="Messages">
+        <span class="material-symbols-outlined">send</span>
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-header> -->
+<ion-header class="add-header">
+  <ion-toolbar>
+
+    <div class="top-navigation">
+
+      <!-- CLOSE -->
+      <button class="close-button" (click)="closePage()">
+        <span class="material-symbols-outlined">
+          close
+        </span>
+      </button>
+
+      <!-- TITLE -->
+      <h1>NEW POST</h1>
+
+      <!-- NEXT -->
+      <button class="next-button" (click)="nextStep()">
+        Next
+      </button>
+
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content
+  [fullscreen]="true"
+  class="add-content">
+
+  <div class="add-container">
+
+    <!-- =========================
+         IMAGE PREVIEW
+    ========================== -->
+
+    <div class="preview-area">
+
+      <img
+        class="preview-image"
+        [src]="selectedImage"
+        alt="Selected post image"
+      />
+
+      <!-- PREVIEW CONTROL -->
+
+      <div class="preview-controls">
+
+        <button
+          class="preview-button"
+          (click)="togglePreview()">
+
+          <span class="material-symbols-outlined">
+            aspect_ratio
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         MODE SELECTOR
+    ========================== -->
+
+    <div class="mode-bar">
+
+      <div class="mode-tabs">
+
+        <button
+          [class.active]="selectedMode === 'POST'"
+          (click)="selectMode('POST')">
+          POST
+        </button>
+
+        <button
+          [class.active]="selectedMode === 'STORY'"
+          (click)="selectMode('STORY')">
+          STORY
+        </button>
+
+        <button
+          [class.active]="selectedMode === 'REEL'"
+          (click)="selectMode('REEL')">
+          REEL
+        </button>
+
+        <button
+          [class.active]="selectedMode === 'LIVE'"
+          (click)="selectMode('LIVE')">
+          LIVE
+        </button>
+
+      </div>
+
+
+      <!-- CONTROL BUTTONS -->
+
+      <div class="media-controls">
+
+        <!-- CAMERA -->
+
+        <button
+          class="small-control"
+          (click)="openCamera()">
+
+          <span class="material-symbols-outlined">
+            photo_camera
+          </span>
+
+        </button>
+
+
+        <!-- GALLERY -->
+
+        <button
+          class="gallery-button"
+          (click)="openGallery()">
+
+          <span class="material-symbols-outlined">
+            content_copy
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Hidden file input -->
+
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      hidden
+      (change)="onImageSelected($event)"
+    />
+
+
+    <!-- =========================
+         GALLERY
+    ========================== -->
+
+    <div class="gallery-grid">
+
+      <!-- IMAGE 1 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=600'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=600"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 2 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=601'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=601"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 3 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=602'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=602"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 4 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 5 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=603'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=603"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 6 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=604'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=604"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 7 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=605'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=605"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 8 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=606'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=606"
+          alt="Gallery image"
+        />
+
+      </div>
+
+
+      <!-- IMAGE 9 -->
+
+      <div
+        class="gallery-item"
+        (click)="selectGalleryImage(
+          'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=607'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=607"
+          alt="Gallery image"
+        />
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+

@@ -1,0 +1,237 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="search-toolbar">
+      <div class="search-brand">
+        <button class="icon-button" aria-label="Camera">
+          <span class="material-symbols-outlined">camera_alt</span>
+        </button>
+        <h1 class="search-title">Social Circle</h1>
+      </div>
+      <button class="icon-button" aria-label="Messages">
+        <span class="material-symbols-outlined">send</span>
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+  
+
+  
+  <main class="search-content">
+
+    <!-- Search -->
+    <div class="search-box">
+
+      <ion-icon name="search-outline"></ion-icon>
+
+      <input
+        type="text"
+        placeholder="Search trends, tags, people..."
+        [(ngModel)]="searchText"
+      />
+
+    </div>
+
+
+    <!-- Trending Header -->
+    <div class="section-header">
+
+      <h2>Trending Now</h2>
+
+      <span class="live-badge">
+        <ion-icon name="flame"></ion-icon>
+        LIVE
+      </span>
+
+    </div>
+
+
+    <!-- Trend Cards -->
+    <div class="trend-grid">
+
+      <!-- Large Card -->
+      <div
+        class="trend-card large-card"
+        (click)="openTrend('Neon Nights Festival 2024')"
+      >
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtH9ZjvuSjBlHxgVoOEv8wkFhmf5UecPtht0yJpry6pXyPTjnnKEQjNQtzClBLp00Zkd8GYAZ1JfReWlFwC1TP_ImGXZ8Y1Byev6C6gZULE32SQyd7v0SW4YjRKu7uceeUfc87T6QejforurMKFr7JUOVcq1tMvmGweDoZD5DLyih7HtrCB_LEpKx41GpoMXdLc0XBf7NgQ1DVwNizzZypleSTSLZc0tpy92_PaqfyoioLBT5UH9DL"
+          alt="Neon Nights Festival"
+        />
+
+        <div class="card-overlay"></div>
+
+        <div class="card-content">
+
+          <span class="rank">
+            #1 Worldwide
+          </span>
+
+          <h3>
+            Neon Nights Festival 2024
+          </h3>
+
+          <div class="stats">
+
+            <span>
+              <ion-icon name="bar-chart-outline"></ion-icon>
+              2.4M posts
+            </span>
+
+            <span>
+              <ion-icon name="trending-up-outline"></ion-icon>
+              +45% this hour
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Urban Dance -->
+      <div
+        class="trend-card small-card"
+        (click)="openTrend('Urban Dance Challenge')"
+      >
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-WQQr-guidTC_UYW3V2nA67rkVcwfxE8BgeD8y2_WxyUJQRYuwQFRy_TYrWrZEpinw040dfkZByOWYzW3e1uICmr5RT6mXa5Fkj3hx_1tITW7vWO_Cvv66gNgmOHNzhjuggTuTB7noDhowj6hjr5fI3pO_UEq1gwbvHKFO1Dd6cjYqbfi7tXm8xLZb-z5LoiChNA4kr5KqlRsgsIuSooQKt8OH9wU37dNnPf7lR79_L5Cshgiftz1"
+          alt="Urban Dance"
+        />
+
+        <div class="card-overlay"></div>
+
+        <div class="card-content">
+
+          <h3>#UrbanDanceChallenge</h3>
+
+          <span>
+            <ion-icon name="bar-chart-outline"></ion-icon>
+            850K posts
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- AR Vision -->
+      <div
+        class="trend-card small-card"
+        (click)="openTrend('AR Vision Pro Launch')"
+      >
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuy57Ayx5kVlY1cRkCV8DLsliyDySGGDBf_QDffLuRXvjr1VNjLIyloC01AbjdtKXUFv1bVnwY7csGDbkHnDbcxe7hfSebcpOyhbMgrsnMg6X2s1CYzWzjsqWYiyWg9Y9qFeneVjK0v8j-nSU8g9IUitz7uwZH1PPDcx_T2wretYLfO-TY1bOWR8jX5wmsIgx1JgvrcRfuMZEyDC-VzU4iRdD8B8QqoMbvy5jhS2ANT9JD79oSWWqK"
+          alt="AR Vision"
+        />
+
+        <div class="card-overlay"></div>
+
+        <div class="card-content">
+
+          <h3>AR Vision Pro Launch</h3>
+
+          <span>
+            <ion-icon name="bar-chart-outline"></ion-icon>
+            620K posts
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Explore Tags -->
+    <section class="tags-section">
+
+      <h2>Explore Tags</h2>
+
+      <div class="tag-list">
+
+        <!-- Tag -->
+        <div class="tag-item">
+
+          <div class="tag-left">
+
+            <div class="tag-icon">
+              <ion-icon name="pricetag-outline"></ion-icon>
+            </div>
+
+            <div>
+              <h4>DigitalNomadLife</h4>
+              <p>Trending in Lifestyle</p>
+            </div>
+
+          </div>
+
+          <div class="tag-count">
+            <strong>1.2M</strong>
+            <span>posts</span>
+          </div>
+
+        </div>
+
+
+        <!-- Tag -->
+        <div class="tag-item">
+
+          <div class="tag-left">
+
+            <div class="tag-icon">
+              <ion-icon name="pricetag-outline"></ion-icon>
+            </div>
+
+            <div>
+              <h4>VaporwaveArt</h4>
+              <p>Trending in Art</p>
+            </div>
+
+          </div>
+
+          <div class="tag-count">
+            <strong>890K</strong>
+            <span>posts</span>
+          </div>
+
+        </div>
+
+
+        <!-- Tag -->
+        <div class="tag-item">
+
+          <div class="tag-left">
+
+            <div class="tag-icon">
+              <ion-icon name="pricetag-outline"></ion-icon>
+            </div>
+
+            <div>
+              <h4>StreetFoodFinds</h4>
+              <p>Trending in Food</p>
+            </div>
+
+          </div>
+
+          <div class="tag-count">
+            <strong>450K</strong>
+            <span>posts</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  
+  
