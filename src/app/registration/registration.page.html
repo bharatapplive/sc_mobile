@@ -5,18 +5,23 @@
 
   <!-- Background decoration -->
   <div class="background-decoration">
+
     <div class="glow glow-one"></div>
     <div class="glow glow-two"></div>
     <div class="glow glow-three"></div>
+
   </div>
+
 
   <!-- Top Logo -->
   <header class="top-header">
 
     <div class="brand">
+
       <span class="brand-circle"></span>
 
       <h1>Social Circle</h1>
+
     </div>
 
     <a class="desktop-login" href="#">
@@ -28,6 +33,7 @@
 
   <!-- Main Content -->
   <main class="main-container">
+
 
     <!-- Welcome Header -->
     <div class="welcome-section">
@@ -44,82 +50,221 @@
     <!-- Signup Card -->
     <section class="signup-card">
 
-      <!-- Card Decoration -->
       <div class="card-decoration"></div>
 
 
-      <form>
+      <!-- FORM -->
+      <form
+        [formGroup]="registrationForm"
+        (ngSubmit)="signUp()"
+        novalidate
+      >
 
-        <!-- Full Name -->
+
+        <!-- FULL NAME -->
         <div class="form-group">
 
-          <label>Full Name</label>
+          <label for="fullName">
+            Full Name
+          </label>
 
-          <div class="input-wrapper">
+
+          <div
+            class="input-wrapper"
+            [class.invalid]="
+              fullName?.invalid &&
+              (fullName?.touched || submitted)
+            "
+          >
 
             <ion-icon name="person-outline"></ion-icon>
 
             <input
+              id="fullName"
               type="text"
+              formControlName="fullName"
               placeholder="Alex Rivera"
             />
 
           </div>
 
+
+          <!-- Required -->
+          <small
+            class="error"
+            *ngIf="
+              fullName?.hasError('required') &&
+              (fullName?.touched || submitted)
+            "
+          >
+            Full name is required.
+          </small>
+
+
+          <!-- Minimum length -->
+          <small
+            class="error"
+            *ngIf="
+              fullName?.hasError('minlength') &&
+              (fullName?.touched || submitted)
+            "
+          >
+            Full name must be at least 3 characters.
+          </small>
+
+
+          <!-- Only letters -->
+          <small
+            class="error"
+            *ngIf="
+              fullName?.hasError('pattern') &&
+              (fullName?.touched || submitted)
+            "
+          >
+            Full name can contain only letters and spaces.
+          </small>
+
         </div>
 
 
-        <!-- Email -->
+
+        <!-- EMAIL -->
         <div class="form-group">
 
-          <label>Email</label>
+          <label for="email">
+            Email
+          </label>
 
-          <div class="input-wrapper">
+
+          <div
+            class="input-wrapper"
+            [class.invalid]="
+              email?.invalid &&
+              (email?.touched || submitted)
+            "
+          >
 
             <ion-icon name="mail-outline"></ion-icon>
 
             <input
+              id="email"
               type="email"
+              formControlName="email"
               placeholder="alex@creators.io"
             />
 
           </div>
 
+
+          <!-- Required -->
+          <small
+            class="error"
+            *ngIf="
+              email?.hasError('required') &&
+              (email?.touched || submitted)
+            "
+          >
+            Email is required.
+          </small>
+
+
+          <!-- Invalid email -->
+          <small
+            class="error"
+            *ngIf="
+              email?.hasError('email') &&
+              (email?.touched || submitted)
+            "
+          >
+            Enter a valid email address.
+          </small>
+
         </div>
 
 
-        <!-- Mobile Number -->
+
+        <!-- MOBILE -->
         <div class="form-group">
 
-          <label>Mobile Number</label>
+          <label for="mobile">
+            Mobile Number
+          </label>
 
-          <div class="input-wrapper">
+
+          <div
+            class="input-wrapper"
+            [class.invalid]="
+              mobile?.invalid &&
+              (mobile?.touched || submitted)
+            "
+          >
 
             <ion-icon name="phone-portrait-outline"></ion-icon>
 
             <input
+              id="mobile"
               type="tel"
-              placeholder="+1 (555) 000-0000"
+              formControlName="mobile"
+              placeholder="9876543210"
+              maxlength="10"
             />
 
           </div>
 
+
+          <!-- Required -->
+          <small
+            class="error"
+            *ngIf="
+              mobile?.hasError('required') &&
+              (mobile?.touched || submitted)
+            "
+          >
+            Mobile number is required.
+          </small>
+
+
+          <!-- Invalid mobile -->
+          <small
+            class="error"
+            *ngIf="
+              mobile?.hasError('pattern') &&
+              (mobile?.touched || submitted)
+            "
+          >
+            Enter a valid 10-digit mobile number.
+          </small>
+
         </div>
 
 
-        <!-- Password -->
+
+        <!-- PASSWORD -->
         <div class="form-group">
 
-          <label>Password</label>
+          <label for="password">
+            Password
+          </label>
 
-          <div class="input-wrapper">
+
+          <div
+            class="input-wrapper"
+            [class.invalid]="
+              password?.invalid &&
+              (password?.touched || submitted)
+            "
+          >
 
             <ion-icon name="lock-closed-outline"></ion-icon>
 
+
             <input
+              id="password"
               [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
               placeholder="••••••••"
             />
+
 
             <button
               type="button"
@@ -127,29 +272,63 @@
               (click)="togglePassword()"
             >
 
-              <ion-icon
-                [name]="showPassword ? 'eye-off-outline' : 'eye-outline'">
+              <ion-icon class="eye-icon"
+                [name]="
+                  showPassword
+                    ? 'eye-off-outline'
+                    : 'eye-outline'
+                "
+              >
               </ion-icon>
 
             </button>
 
           </div>
 
+
+          <!-- Required -->
+          <small
+            class="error"
+            *ngIf="
+              password?.hasError('required') &&
+              (password?.touched || submitted)
+            "
+          >
+            Password is required.
+          </small>
+
+
+          <!-- Minimum length -->
+          <small
+            class="error"
+            *ngIf="
+              password?.hasError('minlength') &&
+              (password?.touched || submitted)
+            "
+          >
+            Password must be at least 6 characters.
+          </small>
+
         </div>
 
 
-        <!-- Sign Up Button -->
+
+        <!-- SIGN UP BUTTON -->
         <div class="button-container">
 
           <button
-            type="button"
+            type="submit"
             class="signup-button"
-            (click)="signUp()"
           >
 
-            <span>Sign Up</span>
+            <span>
+              Sign Up
+            </span>
 
-            <ion-icon name="arrow-forward-outline"></ion-icon>
+            <ion-icon
+              name="arrow-forward-outline"
+            >
+            </ion-icon>
 
           </button>
 
@@ -158,19 +337,29 @@
       </form>
 
 
+
       <!-- Terms -->
       <div class="terms">
 
         <p>
           By signing up, you agree to our
-          <a href="#">Terms</a>
+
+          <a href="#">
+            Terms
+          </a>
+
           &
-          <a href="#">Privacy Policy</a>.
+
+          <a href="#">
+            Privacy Policy
+          </a>.
+
         </p>
 
       </div>
 
     </section>
+
 
 
     <!-- Profile Images -->
@@ -198,17 +387,24 @@
     </div>
 
 
-    <!-- Login -->
+
+    <!-- LOGIN -->
     <div class="login-section">
 
       <p>
+
         Already have an account?
-        <a href="#">Log In</a>
+
+        <a href="#">
+          Log In
+        </a>
+
       </p>
 
     </div>
 
   </main>
+
 
 
   <!-- Footer -->

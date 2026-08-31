@@ -1,68 +1,247 @@
 <ion-content [fullscreen]="true" class="page">
+
   <main class="box">
+
+    <!-- HEADER -->
     <header class="head">
+
       <div class="icon vibrant-gradient" id="rotate">
-        <ion-icon class="user" name="people-outline"></ion-icon>
+        <ion-icon
+          class="user"
+          name="people-outline">
+        </ion-icon>
       </div>
+
       <h1>Social Circle</h1>
-      <p>Connect with creators, share your story, and join the digital circle.</p>
+
+      <p>
+        Connect with creators, share your story,
+        and join the digital circle.
+      </p>
+
     </header>
 
+
+    <!-- LOGIN CARD -->
     <div class="card">
-      <form class="form" action="#" method="POST">
+
+      <form
+        class="form"
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+        novalidate
+      >
+
+        <!-- MOBILE -->
         <div class="field">
-          <label for="identity">Mobile Number or Email</label>
-          <div class="input">
-            <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="social@gmail.com" required type="text"/>
+
+          <label for="identity">
+            Mobile Number
+          </label>
+
+          <div
+            class="input"
+            [class.invalid]="
+              identity?.invalid &&
+              (identity?.touched || submitted)
+            "
+          >
+
+            <span class="material-symbols-outlined">
+              phone
+            </span>
+
+            <input
+              id="identity"
+              type="tel"
+              formControlName="identity"
+              placeholder="9876543210"
+              maxlength="10"
+              autocomplete="tel"
+            />
+
           </div>
+
+
+          <!-- REQUIRED -->
+          <small
+            class="error"
+            *ngIf="
+              identity?.hasError('required') &&
+              (identity?.touched || submitted)
+            "
+          >
+            Mobile number is required.
+          </small>
+
+
+          <!-- PATTERN -->
+          <small
+            class="error"
+            *ngIf="
+              identity?.hasError('pattern') &&
+              (identity?.touched || submitted)
+            "
+          >
+            Enter a valid 10-digit mobile number.
+          </small>
+
         </div>
 
+
+        <!-- PASSWORD -->
         <div class="field">
+
           <div class="row flex justify-content-between">
-            <label for="password">Password</label>
-            <a href="#">Forgot Password?</a>
+
+            <label for="password">
+              Password
+            </label>
+
+            <a href="#">
+              Forgot Password?
+            </a>
+
           </div>
-          <div class="input">
-            <span class="material-symbols-outlined">lock</span>
-            <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <div type="button" aria-label="Show password">
-              <span class="material-symbols-outlined">visibility</span>
-            </div>
+
+
+          <div
+            class="input"
+            [class.invalid]="
+              password?.invalid &&
+              (password?.touched || submitted)
+            "
+          >
+
+            <span class="material-symbols-outlined">
+              lock
+            </span>
+
+
+            <input
+              id="password"
+              [type]="passwordVisible ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+            />
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              aria-label="Show password"
+              (click)="togglePassword()"
+            >
+
+              <span class="material-symbols-outlined">
+                {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+              </span>
+
+            </button>
+
           </div>
+
+
+          <!-- REQUIRED -->
+          <small
+            class="error"
+            *ngIf="
+              password?.hasError('required') &&
+              (password?.touched || submitted)
+            "
+          >
+            Password is required.
+          </small>
+
+
+          <!-- MIN LENGTH -->
+          <small
+            class="error"
+            *ngIf="
+              password?.hasError('minlength') &&
+              (password?.touched || submitted)
+            "
+          >
+            Password must be at least 6 characters.
+          </small>
+
         </div>
 
-        <button class="btn vibrant-gradient" type="submit">Log In</button>
+
+        <!-- LOGIN BUTTON -->
+        <button
+          class="btn vibrant-gradient"
+          type="submit"
+        >
+          Log In
+        </button>
+
+
+        <!-- DIVIDER -->
         <div class="line">
-          <div class="Divido">------------ OR CONTINUE WITH ------------</div>
+
+          <div class="Divido">
+            ------------ OR CONTINUE WITH ------------
+          </div>
+
         </div>
+
+
+        <!-- SOCIAL LOGIN -->
         <div class="option">
+
           <div class="google">
-            <!-- <ion-icon class="user" name=""></ion-icon> -->
             Google
           </div>
-          <div class="google">Apple</div>
+
+          <div class="google">
+            Apple
+          </div>
+
         </div>
+
       </form>
-
-
-
 
     </div>
 
+
+    <!-- FOOTER -->
     <footer class="foot">
+
       <div class="account">
+
         <p class="acc">
+
           Don't have an account?
-          <a href="#">Sign Up</a>
+
+          <a href="#">
+            Sign Up
+          </a>
+
         </p>
+
       </div>
 
+
       <div class="links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Help</a>
+
+        <a href="#">
+          Privacy
+        </a>
+
+        <a href="#">
+          Terms
+        </a>
+
+        <a href="#">
+          Help
+        </a>
+
       </div>
+
     </footer>
+
   </main>
+
 </ion-content>

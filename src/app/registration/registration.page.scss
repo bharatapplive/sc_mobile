@@ -552,3 +552,79 @@ footer p {
     line-height: 56px;
   }
 }
+
+/* ============================= */
+/* REGISTRATION VALIDATION */
+/* ============================= */
+
+.invalid {
+  border: 1px solid #ff4d6d;
+}
+
+
+/* Error message */
+
+.error {
+  display: block;
+
+  margin-top: 6px;
+  margin-left: 4px;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: #ff4d6d;
+}
+
+.input-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 56px;
+
+  background: #f3f3f4;
+
+  border: 1px solid transparent;
+
+  border-radius: 12px;
+
+  transition: 0.3s;
+}
+
+/* Password button */
+
+.password-toggle {
+  border: none;
+  background: transparent;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  color: inherit;
+}
+
+.eye-icon{
+  color: #7b7486;
+}
+/* Remove default focus */
+
+.password-toggle:focus {
+  outline: none;
+}
+
+
+/* Input */
+
+.input-wrapper input {
+  flex: 1;
+  min-width: 0;
+}
+

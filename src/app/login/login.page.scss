@@ -28,13 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color:var(--color-surface);
+  color: var(--color-surface);
 
   .user {
     height: 5rem;
     width: 3rem;
     rotate: 1deg;
-    color:var(color-surface);
+    color: var(color-surface);
   }
 }
 
@@ -76,10 +76,11 @@ html.dark .card {
   gap: var(--spacing-sm);
 }
 
-#rotate{
+#rotate {
   rotate: 4deg;
   height: 5rem;
-  width: 5rem;;
+  width: 5rem;
+  ;
 }
 
 #ss {
@@ -113,9 +114,10 @@ html.dark .card {
 
 }
 
-.field label{
+.field label {
   font-weight: 700;
 }
+
 .input {
   display: flex;
   align-items: center;
@@ -124,13 +126,15 @@ html.dark .card {
   border-radius: var(--radius-lg);
   padding: 0 var(--spacing-sm);
   height: 58px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .input input {
   flex: 1;
   border: 0;
   background: transparent;
-  padding: 14px 0;
+  padding: 16px 0;
   color: var(--color-on-surface);
 }
 
@@ -265,3 +269,96 @@ html.dark .card {
   opacity: 0.8;
 }
 
+/* ============================= */
+/* FORM VALIDATION */
+/* ============================= */
+
+.input.invalid {
+  border: 1px solid #ff4d6d;
+}
+
+
+/* Error message */
+
+.error {
+  display: block;
+  margin-top: 6px;
+  margin-left: 4px;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: #ff4d6d;
+}
+
+
+/* Password eye button */
+
+.password-toggle {
+  border: none;
+  background: transparent;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  color: inherit;
+}
+
+
+/* Remove default button appearance */
+
+.password-toggle:focus {
+  outline: none;
+}
+
+
+/* Prevent input overflow */
+
+.input input {
+  min-width: 0;
+  flex: 1;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(123, 116, 134, 0.3);
+  background: #f8f8fa;
+  border-radius: var(--radius-lg);
+  padding: 0 var(--spacing-sm);
+  height: 58px;
+}
+
+.input input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 14px 0;
+  color: #1a1c1c;
+}
+
+.input input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+/* AUTOFILL FIX */
+
+.input input:-webkit-autofill,
+.input input:-webkit-autofill:hover,
+.input input:-webkit-autofill:focus,
+.input input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #f8f8fa inset !important;
+  box-shadow: 0 0 0 1000px #f8f8fa inset !important;
+  -webkit-text-fill-color: #1a1c1c !important;
+  caret-color: #1a1c1c !important;
+  transition: background-color 9999s ease-in-out 0s;
+}

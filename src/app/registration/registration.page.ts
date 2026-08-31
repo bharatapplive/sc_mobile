@@ -1,189 +1,263 @@
+import { Component } from '@angular/core';
 import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  ViewChild
-} from '@angular/core';
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
-
-import { IonicModule } from '@ionic/angular';
+import {
+  AuthService,
+  RegisterRequest,
+  RegisterResponse
+} from '../core/services/auth.service';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-registration',
   templateUrl: './registration.page.html',
   styleUrls: ['./registration.page.scss'],
-  standalone: true,
-  imports: [IonicModule]
+  standalone: false
 })
-export class RegistrationPage implements AfterViewInit {
+export class RegistrationPage {
 
-  @ViewChild('particleCanvas')
-  particleCanvas!: ElementRef<HTMLCanvasElement>;
+  registrationForm: FormGroup;
 
+  submitted = false;
   showPassword = false;
+  isLoading = false;
 
-  private ctx!: CanvasRenderingContext2D;
-  private particles: Particle[] = [];
+  errorMessage = '';
+  successMessage = '';
 
-  ngAfterViewInit(): void {
-    this.initializeParticles();
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+
+    this.registrationForm = this.fb.group({
+
+      fullName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/^[a-zA-Z ]+$/)
+        ]
+      ],
+
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+
+      mobile: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[6-9][0-9]{9}$/)
+        ]
+      ],
+
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6)
+        ]
+      ]
+
+    });
   }
 
+
+  // =====================================
+  // FORM CONTROLS
+  // =====================================
+
+  get fullName() {
+    return this.registrationForm.get('fullName');
+  }
+
+  get email() {
+    return this.registrationForm.get('email');
+  }
+
+  get mobile() {
+    return this.registrationForm.get('mobile');
+  }
+
+  get password() {
+    return this.registrationForm.get('password');
+  }
+
+
+  // =====================================
+  // PASSWORD TOGGLE
+  // =====================================
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 
 
+  // =====================================
+  // REGISTRATION
+  // =====================================
+
   signUp(): void {
-    console.log('Sign Up clicked');
-  }
+
+    this.submitted = true;
+
+    this.errorMessage = '';
+    this.successMessage = '';
 
 
-  private initializeParticles(): void {
+    // Form invalid
+    if (this.registrationForm.invalid) {
 
-    const canvas = this.particleCanvas.nativeElement;
+      this.registrationForm.markAllAsTouched();
 
-    this.ctx = canvas.getContext('2d')!;
+      return;
+    }
 
-    this.resizeCanvas();
 
-    window.addEventListener(
-      'resize',
-      () => this.resizeCanvas()
+    // =====================================
+    // GET FORM DATA
+    // =====================================
+
+    const formValue =
+      this.registrationForm.value;
+
+
+    const fullName =
+      formValue.fullName.trim();
+
+
+    // =====================================
+    // SPLIT NAME
+    // =====================================
+
+    const nameParts =
+      fullName.split(/\s+/);
+
+
+    const firstName =
+      nameParts[0];
+
+
+    const lastName =
+      nameParts.slice(1).join(' ') || 'User';
+
+
+    // =====================================
+    // CREATE USERNAME
+    // =====================================
+
+    const userName =
+      fullName
+        .toLowerCase()
+        .replace(/\s+/g, '.')
+        .replace(/[^a-z0-9.]/g, '');
+
+
+    // =====================================
+    // API REQUEST
+    // =====================================
+
+    const registrationData: RegisterRequest = {
+
+      firstName: firstName,
+
+      lastName: lastName,
+
+      userName: userName,
+
+      mobile: formValue.mobile,
+
+      password: formValue.password,
+
+      email: formValue.email
+
+    };
+
+
+    console.log(
+      'Registration data:',
+      {
+        ...registrationData,
+        password: '********'
+      }
     );
 
-    for (let i = 0; i < 40; i++) {
-      this.particles.push(
-        new Particle(canvas)
-      );
-    }
 
-    this.animate();
+    // =====================================
+    // LOADING
+    // =====================================
+
+    this.isLoading = true;
+
+
+    // =====================================
+    // API CALL
+    // =====================================
+
+    this.authService
+      .register(registrationData)
+      .subscribe({
+
+        // -----------------------------
+        // SUCCESS
+        // -----------------------------
+
+        next: (response: RegisterResponse) => {
+
+          this.isLoading = false;
+
+          console.log(
+            'Registration successful:',
+            response
+          );
+
+
+          this.successMessage =
+            response?.message ||
+            'Registration successful!';
+
+
+          // Login page
+          setTimeout(() => {
+
+            this.router.navigate(['/login']);
+
+          }, 1000);
+        },
+
+
+        // -----------------------------
+        // ERROR
+        // -----------------------------
+
+        error: (error) => {
+
+          this.isLoading = false;
+
+          console.error(
+            'Registration failed:',
+            error
+          );
+
+
+          this.errorMessage =
+            error?.error?.message ||
+            'Registration failed. Please try again.';
+        }
+
+      });
   }
 
-
-  private resizeCanvas(): void {
-
-    const canvas = this.particleCanvas.nativeElement;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-
-  private animate(): void {
-
-    const canvas = this.particleCanvas.nativeElement;
-
-    this.ctx.clearRect(
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-    this.particles.forEach((particle) => {
-
-      particle.update();
-
-      particle.draw(this.ctx);
-
-    });
-
-    requestAnimationFrame(
-      () => this.animate()
-    );
-  }
-}
-
-
-class Particle {
-
-  x: number;
-  y: number;
-
-  size: number;
-
-  speedX: number;
-  speedY: number;
-
-  opacity: number;
-
-  color = '#8455ef';
-
-  private canvas: HTMLCanvasElement;
-
-
-  constructor(canvas: HTMLCanvasElement) {
-
-    this.canvas = canvas;
-
-    this.x =
-      Math.random() *
-      canvas.width;
-
-    this.y =
-      Math.random() *
-      canvas.height;
-
-    this.size =
-      Math.random() * 2 + 1;
-
-    this.speedX =
-      Math.random() * 0.5 - 0.25;
-
-    this.speedY =
-      Math.random() * 0.5 - 0.25;
-
-    this.opacity =
-      Math.random() * 0.5;
-  }
-
-
-  update(): void {
-
-    this.x += this.speedX;
-
-    this.y += this.speedY;
-
-
-    if (this.x > this.canvas.width) {
-      this.x = 0;
-    }
-
-    if (this.x < 0) {
-      this.x = this.canvas.width;
-    }
-
-    if (this.y > this.canvas.height) {
-      this.y = 0;
-    }
-
-    if (this.y < 0) {
-      this.y = this.canvas.height;
-    }
-  }
-
-
-  draw(ctx: CanvasRenderingContext2D): void {
-
-    ctx.globalAlpha = this.opacity;
-
-    ctx.fillStyle = this.color;
-
-    ctx.beginPath();
-
-    ctx.arc(
-      this.x,
-      this.y,
-      this.size,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fill();
-
-    ctx.globalAlpha = 1;
-  }
 }
