@@ -1,20 +1,18 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <div class="panels">
-      <ion-button fill="clear">
-        <ion-label>{{username}}</ion-label>
+<ion-toolbar slot="top">
+  <div class="panels">
+    <ion-button fill="clear">
+      <ion-label>{{username}}</ion-label>
+    </ion-button>
+    <div>
+      <ion-button fill="clear" routerLink="/home/post">
+        <ion-icon name="add"></ion-icon>
       </ion-button>
-      <div>
-        <ion-button fill="clear" routerLink="/home/post">
-          <ion-icon name="add"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" >
-          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-        </ion-button>
-      </div>
+      <ion-button fill="clear" >
+        <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+      </ion-button>
     </div>
-  </ion-toolbar>
-</ion-header>
+  </div>
+</ion-toolbar>
 
 <ion-content [fullscreen]="true">
   <div class="mainHolder">
@@ -33,7 +31,7 @@
         <div class="height-light" [class.active]="false">
           <div class="story-relative">
             <ion-avatar class="person">
-              <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
+              <ion-img [src]="avatarUrl" alt="User Avatar"></ion-img>
             </ion-avatar>
             <ion-button class="story-add-absolute" fill="clear" shape="round" size="small">
               <ion-icon class="add-btn" slot="icon-only" name="add"></ion-icon>
@@ -87,7 +85,7 @@
               </ion-button>
               <ion-button shape="round" fill="clear" size="small">
                 <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-                <span>{{feed?.commentsCount}}</span>
+                <span>1000</span>
               </ion-button>
               <ion-button shape="round" fill="clear" size="small">
                 <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>

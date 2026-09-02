@@ -52,7 +52,7 @@
     }
 
     .file-container{
-        width: 95%;
+        width: 100%;
 
         // Theme Variables
         $primary-color: #8b5cf6; // Purple accent
@@ -62,8 +62,8 @@
 
         // Masonry Grid Wrapper
         .masonry-grid {
-            column-count: 2; // Default 2 columns for mobile
-
+            column-count: 3; // Default 2 columns for mobile
+            column-gap: 5px;
             @media (min-width: 640px) {
                 column-count: 3;
             }
@@ -75,10 +75,9 @@
 
         // Masonry Card Item
         .masonry-item {
-            position: relative;
-            display: inline-block; // Essential for CSS Column masonry flow
+            display: inline-block;
+            position: relative; // Essential for CSS Column masonry flow
             width: 100%;
-            border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
 

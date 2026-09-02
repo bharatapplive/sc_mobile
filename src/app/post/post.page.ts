@@ -99,7 +99,7 @@ export class PostPage implements OnInit {
     private router:Router,
     private navCtrl: NavController,
     private readonly authServe: AuthService,
-    private readonly previousRoute: PreviousRouteServe
+    private readonly previousRoute: PreviousRouteServe,
   ) { }
 
   ngOnInit() {
@@ -191,6 +191,7 @@ export class PostPage implements OnInit {
     // 1. get the fullname and change to lower..
     const cleanName = (this.username || '').toLowerCase().trim(); // strip spaces and special chars
     
+        console.log(cleanName)
     // 2. Split into parts
     const parts = cleanName.split(/\s+/); // Splits by one or more spaces
 
@@ -199,6 +200,7 @@ export class PostPage implements OnInit {
     const uniqueSuffix = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
     const generatedUsername = `@${lastName}_${uniqueSuffix}`;
     
+        console.log(`generatedUsername + ${parts} + ${lastName}`)
     // Helper to extract #hashtags into an array
     const extractedHashtags = this.caption? (this.caption.match(/#[\w]+/g)?.map(tag => tag.substring(1)) || []) : [];
 
@@ -255,4 +257,5 @@ export class PostPage implements OnInit {
   onChangeContentType(tab: any){
     this.activeTab = tab;
   }
+
 }

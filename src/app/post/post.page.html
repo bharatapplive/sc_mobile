@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-toolbar slot="top">
+  <div class="panels">
     <ion-button fill="clear" slot="start" (click)="goBack()">
       <ion-icon slot="icon-only" name="close"></ion-icon>
     </ion-button>    
@@ -7,8 +7,8 @@
     <ion-button fill="clear" slot="end" (click)="openModal()">
       <span>Next</span>
     </ion-button>
-  </ion-toolbar>
-</ion-header>
+  </div>
+</ion-toolbar>
 
 <ion-content [fullscreen]="true">
   <div class="container">

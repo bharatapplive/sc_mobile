@@ -1,7 +1,8 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Location } from '@angular/common';
 import { AuthService } from '../authcontroller/auth-service';
-import { NavController } from '@ionic/angular';
+import { ActionSheetController, NavController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +12,24 @@ import { NavController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
+  selectedFile: File | null = null;
+  previewPath: string | null = null;
+  isSelected: boolean = false;
+  
   loginPortal = {identity:'', password:''};
   registerPortal = {fullname:'', email:'', phone:'', password:''};
   verifyPortal = {otp:''};
   isLogin = true;
   showPassword = false;
   step: 'REGISTER' | 'OTP' = 'REGISTER';
+  isCreateModel: boolean = false;
 
   title: string = 'Social Circle';
   subtitle: string = 'Connect with creators, share your story, and join the digital circle.';
 
   constructor(
     private location: Location,
+    private actionSheetCtrl: ActionSheetController,
     private readonly authServe: AuthService,
     private navCtrl: NavController, // 👈 Inject NavController
     private zone: NgZone           // 👈 Inject NgZone
@@ -75,6 +82,11 @@ export class LoginPage implements OnInit {
       this.authServe.register(payload).subscribe({
         next: (user) => {
           this.step = 'OTP';
+
+          this.location.replaceState('/VerifyOTP');      
+          this.title = 'Verify the OTP';
+          this.subtitle= 'Verification is necessary to join the Social Circle.';
+
           alert(`Please verify OTP sent to your ${user.phoneNumber}`);
           localStorage.setItem('regUser', JSON.stringify(user._id));
         },
@@ -102,11 +114,10 @@ export class LoginPage implements OnInit {
 
       this.authServe.verifyOtp(request).subscribe({
         next: () =>{
-          alert('OTP verified successfully. Please Login to your account');
-
-          this.isLogin = true;
-          this.step = 'REGISTER';
-          this.registerPortal = { fullname: '', email: '', phone: '', password: '' };
+          this.upLoadImage();
+          //this.isLogin = true;
+          //this.step = 'REGISTER';
+          //this.registerPortal = { fullname: '', email: '', phone: '', password: '' };
         },
         error: (err) => {
           const serverError = err.error?.message || 'Invalid or expired OTP. Please try again.';
@@ -132,5 +143,86 @@ export class LoginPage implements OnInit {
 
   cancelOtp(){
     this.step = 'REGISTER';
+  }
+
+  upLoadImage(){
+    this.isCreateModel = !this.isCreateModel
+  }
+
+  // 1. SELECT THE FILE
+  async pickPhotoFromGallery(){
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Select Avatar Source',
+      buttons: [
+        {
+          text: 'Take Photo',
+          icon: 'camera',
+          handler: () => this.captureImage(CameraSource.Camera),
+        },
+        {
+          text: 'Choose from Gallery',
+          icon: 'image',
+          handler: () => this.captureImage(CameraSource.Photos),
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
+
+  async captureImage(source: CameraSource){
+    try{
+
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri,
+        source: source // Opens gallery instead of camera
+      });
+
+      if(image.webPath){
+        this.previewPath = image.webPath;
+
+        const res = (await fetch(image.webPath));
+        const resBlob = await res.blob();
+        const resFile = new File([resBlob],'avatar.jpg', { type: resBlob.type })
+
+        this.selectedFile = resFile;
+        this.isSelected = true;
+      }
+    } catch (error) {
+      // Handles permission denied, device unsupported, or runtime errors
+      console.error('Failed to pick image from gallery:', error);
+    }
+  }
+
+  updateAvatar(){
+    if (!this.selectedFile) return;
+
+        console.log(this.selectedFile);
+    const rawId = localStorage.getItem('regUser');
+    const userId = rawId ? JSON.parse(rawId) : '';
+
+    this.authServe.uploadAnImage(userId, this.selectedFile).subscribe(
+      { next: (res: any) => {
+          console.log('Uploaded successfully!', res);
+          this.isCreateModel = false;
+          this.isLogin = true;
+          this.step = 'REGISTER';
+          this.registerPortal = { fullname: '', email: '', phone: '', password: '' };          
+          this.selectedFile = null;
+        },
+        error: (err) => console.error('Upload failed:', err)
+      });
+  }
+
+  skipForNow(){
+    this.isCreateModel=false;
+    this.isLogin = true;
+    this.step = 'REGISTER';
+    this.registerPortal = { fullname: '', email: '', phone: '', password: '' };
   }
 }

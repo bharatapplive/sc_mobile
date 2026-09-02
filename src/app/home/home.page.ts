@@ -26,10 +26,9 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-
-     this.authServe.loadUserData().subscribe({
+    this.authServe.loadUserData().subscribe({
       next: (userData) => {
-        this.avatarUrl = userData.avatarUrl?.trim();       
+        this.avatarUrl = userData?.avatarUrl?.trim();   
       },
       error: (err) => {
         console.error('Failed to load user profile:', err);
@@ -38,24 +37,24 @@ export class HomePage implements OnInit {
 
     // Clean subscription tracking
     this.routerSub = this.router.events
-      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        const currentRoute = event.urlAfterRedirects || event.url;
-        
-        // Split by single slash and filter out empty strings (e.g., "/home/feeds" -> ["home", "feeds"])
-        const segments = currentRoute.split('/').filter(segment => segment.length > 0);
-        const activeSegment = segments[segments.length - 1];
+    .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      const currentRoute = event.urlAfterRedirects || event.url;
+      
+      // Split by single slash and filter out empty strings (e.g., "/home/feeds" -> ["home", "feeds"])
+      const segments = currentRoute.split('/').filter(segment => segment.length > 0);
+      const activeSegment = segments[segments.length - 1];
 
-        if (activeSegment) {
-          this.activeTab = activeSegment;
-        }
+      if (activeSegment) {
+        this.activeTab = activeSegment;
+      }
 
-        const hiddenRoutes = ['login', 'post'];
+      const hiddenRoutes = ['login', 'post'];
 
-        const ishide = hiddenRoutes.some(route => currentRoute.includes(route));
-        // Hide tabs on login page
-        this.showTabs = !ishide;
-      });
+      const ishide = hiddenRoutes.some(route => currentRoute.includes(route));
+      // Hide tabs on login page
+      this.showTabs = !ishide;
+    });
   }
 
   onChangeMode(tabName: string){
@@ -63,17 +62,10 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot(['home', tabName], { animated: false });
   }
 
-  // 1. GET AVATAR...
-  getUserAvatar(): string{
-
-    if (this.avatarUrl) {
-      // Return absolute URLs directly
-      if (this.avatarUrl.startsWith('http://') || this.avatarUrl.startsWith('https://')) {
-        return this.avatarUrl;
-      }
+  ionViewWillLeave() {
+    // Remove focus from active element before page transition
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
     }
-
-    // Default fallback placeholder
-    return 'assets/images/default-avatar.png';
   }
 }

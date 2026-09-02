@@ -162,4 +162,37 @@
   <div class="footer-class">
     <p>@ 2024 Social Circle. All rights reserved.</p>
   </div>
+
+  <ion-modal [isOpen]="isCreateModel" class="modal-container">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-button shape="round" fill="clear" size="small" slot="end" (click)="skipForNow()">Skip</ion-button>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="image-hold">
+          <ion-text>
+            Add a profile photo that shows your vibe
+          </ion-text>
+          <div class="ion-hold">
+            <ion-avatar class="panel" [style.display]="isSelected ? 'grid' : 'none'">
+              <img [src]="previewPath ? previewPath : 'assets/images/default-avatar.png'"  alt="Avatar" />
+            </ion-avatar>
+            <div class="panel" [style.display]="!isSelected ? 'grid' : 'none'">
+              <ion-icon name="camera" (click)="pickPhotoFromGallery()"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+      <ion-footer class="ion-no-border">
+          <ion-toolbar class="ion-text-center" [style.display]="!isSelected ? 'grid' : 'none'">
+            <ion-button shape="round" (click)="pickPhotoFromGallery()">Add Photo</ion-button>
+          </ion-toolbar>
+          <ion-toolbar class="ion-text-center" [style.display]="isSelected ? 'grid' : 'none'">
+            <ion-button shape="round" (click)="updateAvatar()">Submit</ion-button>
+          </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -9,24 +9,3 @@
     border: 3px solid #102a43; /* Vibrant Purple */
   }
 }
-
-ion-toolbar {
-  --background: #e3f2fd;
-  --border-width: 0;
-
-  .footer-button-container {
-    background: #e3f2fd; // Standard CSS for the div wrapper
-
-    ion-tab-bar {
-      --background: #e3f2fd;
-      --color-selected: #102a43;
-      --color: #829ab1; // Muted color for unselected tabs
-      border-top: none;
-    }
-
-    ion-tab-button {
-      --background: transparent;
-      --color: #102a43;
-    }
-  }
-}

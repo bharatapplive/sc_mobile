@@ -19,7 +19,7 @@ export class FeedsPage implements OnInit, OnDestroy{
   // User content...
   avatarUrl?: string = '';
   username: string = '';
-  isliked: boolean = false;
+  isLikedBy: boolean =false;
   currentUserId: string | null = null; // Declare property here
 
   //Music...
@@ -40,10 +40,13 @@ export class FeedsPage implements OnInit, OnDestroy{
 
   constructor(
     private readonly authServe: AuthService
-  ) { }
+  ) {
+    
+    this.loadUserProfile();
+    this.loadPost();
+   }
 
   ngOnInit() { 
-    
     this.loadUserProfile();
     this.loadPost();
   }
@@ -58,7 +61,6 @@ export class FeedsPage implements OnInit, OnDestroy{
       next: (data: any) =>{
         // Spreads new posts at the beginning of the array
         this.postList = [...data];
-
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
           event.target.complete();
@@ -76,6 +78,7 @@ export class FeedsPage implements OnInit, OnDestroy{
   }
 
   loadUserProfile(event?: any){
+    
     this.authServe.loadUserData().subscribe({
       next: (userData: any) => {
         this.username = userData.username;
@@ -153,41 +156,27 @@ export class FeedsPage implements OnInit, OnDestroy{
     this.loadPost(event);
   }
 
-  getUserAvatar(): string{
-
-     if (this.avatarUrl) {
-      // Return absolute URLs directly
-      if (this.avatarUrl.startsWith('http://') || this.avatarUrl.startsWith('https://')) {
-        return this.avatarUrl;
-      }
-    }
-
-    // Default fallback placeholder
-    return 'assets/images/default-avatar.png';
-  }
-
   toggleLikes(item: any){  
-    const userId = item._id;
-    if (!userId || !this.currentUserId) return;
+    // const userId = item._id;
+    // if (!userId || !this.currentUserId) {return};
 
-    // 1. Optimistically update local UI state immediately
-    item.isLiked = !item.isLiked;
-    item.likesCount += item.isLiked ? 1 : -1;
+    // // 1. Optimistically update local UI state immediately
+    // item.isLiked = !item.isLiked;
+    // item.likesCount += item.isLiked ? 1 : -1;
   
-
-    this.authServe.updateLikes(userId, this.currentUserId).subscribe({
-      next: (updatedPost: any) => {
-        console.log('Successfully updated in DB:', updatedPost);
-        item.likesCount = updatedPost.likesCount;
-        item.likedBy = updatedPost.likedBy;
-        item.isLiked = updatedPost.isLiked;
-      },
-      error: (err) => {
-        console.error('DB Update failed:', err);
-        // Revert optimistic update if API call fails
-        item.isLiked = !item.isLiked;
-        item.likesCount += item.isLiked ? 1 : -1;
-      }
-    });
+    // this.authServe.updateLikes(userId, this.currentUserId).subscribe({
+    //   next: (updatedPost: any) => {
+    //     console.log('Successfully updated in DB:', updatedPost);
+    //     item.likedBy = updatedPost.likedBy;
+    //     item.isLiked = updatedPost.isLiked;
+    //     item.likesCount = updatedPost.likesCount;
+    //   },
+    //   error: (err: any) => {
+    //     console.error('DB Update failed:', err);
+    //     // Revert optimistic update if API call fails
+    //     item.isLiked = !item.isLiked;
+    //     item.likesCount += item.isLiked ? 1 : -1;
+    //   }
+    // });
   }
 }

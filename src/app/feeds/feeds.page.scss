@@ -3,15 +3,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
 
     // 2.2 Post Panel...
     .post-panel{
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin: 0 15px;
-        padding-top: 15px;
+        gap: 15px;
+        padding-top: 10px;
 
         .card-board{
             display: flex;
@@ -21,13 +19,14 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin: 0 10px;
+                margin: 10px;
                 height: 40px;
 
                 .divided{
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    padding-top: 10px;
                     gap: 10px;
                   
                     .avatar-title{
@@ -37,7 +36,7 @@
 
                         a{
                             span{
-                                font-size: 15px;
+                                font-size: 14px;
                             }
                         }
                         span{
@@ -53,8 +52,7 @@
 
             .post-content{
                 position: relative;
-                height: auto;
-                margin: 5px 0;
+                height: 450;
 
                 .btn-absolue{
                     position: absolute;
@@ -69,13 +67,7 @@
                     height: 40px;
                     
                     background: rgba(128, 128, 128, 0.767);
-                    border-radius: 50%;
-
-                    // .ion-tab{
-                        
-
-                    // }
-                    
+                    border-radius: 50%;                    
                 }
             }
 
@@ -84,33 +76,38 @@
                 flex-direction: column;
 
                 .toggle-icon{
+                    height: 30px;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    margin: 0 2px;
 
                     .left-toggle{
                         width: 35%;
                         display: flex;
-                        justify-content: space-between;
-                        margin-left: 10px;
+                        gap: 10px;
                         
-                        span{
-                            margin-left: 2px;
-                        }
-
-                        ion-icon {
-                            font-size: 24px;
-                            color: var(--ion-color-dark, #222);
-
-                            &.active {
-                                color: #ed4956; // Instagram red color
-                            }
-                        }
                     }
+
                     ion-button{
+                        width: auto;
+                        display: flex;
+                        gap: 5px;
                         color: black;
                         font-size: 18px;
                         margin: 0;
+
+                        ion-icon {
+                            font-size: 22px;
+                            font-weight: 550;
+                            color: var(--ion-color-dark, #222);
+
+                            &.active {
+                                
+                                font-weight: 550;   
+                                color: #ed4956; // Instagram red color
+                            }
+                        }
 
                         span{
                             font-size: 10px;

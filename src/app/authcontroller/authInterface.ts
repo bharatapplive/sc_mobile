@@ -20,7 +20,7 @@ export interface User{
 // Login Data...
 export interface LoginResponse {
   message: string;
-  accessToken: string;
+  jwt: string;
   user: any;
 }
 
@@ -70,3 +70,24 @@ export interface PostResponse extends CreatePostPayload {
 }
 
 //#endregion
+
+export type PostType = 'post' | 'story' | 'reel';
+
+export interface OverlayText {
+  id:       string;
+  text:     string;
+  x:        number;
+  y:        number;
+  color:    string;
+  fontSize: number;
+}
+
+export interface MediaComposerState {
+  type:           PostType;
+  mediaBlob:      Blob | null;
+  mediaUrl:       string | null;
+  audioTrackUrl:  string | null;
+  caption:        string;
+  overlayTexts:   OverlayText[];
+  aspectRatio:    '1:1' | '9:16' | '4:5';
+}

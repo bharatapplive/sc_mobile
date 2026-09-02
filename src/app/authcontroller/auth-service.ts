@@ -1,49 +1,24 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, map, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CreatePostPayload, LoginResponse, PostResponse, User } from './authInterface';
-
-//#region media
-export type PostType = 'post' | 'story' | 'reel';
-
-export interface OverlayText {
-  id: string;
-  text: string;
-  x: number;
-  y: number;
-  color: string;
-  fontSize: number;
-}
-
-export interface MediaComposerState {
-  type: PostType;
-  mediaBlob: Blob | null;
-  mediaUrl: string | null;
-  audioTrackUrl: string | null;
-  caption: string;
-  overlayTexts: OverlayText[];
-  aspectRatio: '1:1' | '9:16' | '4:5';
-}
-
-//#endregion
+import { CreatePostPayload, LoginResponse, MediaComposerState, OverlayText, PostResponse, PostType, User } from './authInterface';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class AuthService {
-
+private currentUserSubject = new BehaviorSubject<User | null>(null);
   constructor(
     private http: HttpClient,
     private router: Router
   ){}
 
-//#region Create Login and Registration..
+  //#region CREATE / REGISTRATION USER DATA...
   
-
-  //1. REGISTER
+  //1. REGISTER...
   register(userData: User): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/register`, userData).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -53,39 +28,158 @@ export class AuthService {
     );
   }
 
-  // 2.LOGIN
-  login(identity: string, password: string): Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`,{identity, password}).pipe(
-      tap((user)=>
-      {
-        if (user && user.accessToken) {
-          alert(`${user.message} ${user.user.username}`)
-          // Save token and user info locally
-          localStorage.setItem('userID', JSON.stringify(user.user._id));
-          localStorage.setItem('accessToken', user.accessToken);
-        }
-      })
-    );
-  }
-
-  // 3. LOGOUT
-  logout() {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userID');
-    this.router.navigate(['/login']);
-  }
-
-  // 4. VerifyOtp..
+  // 2. VERIFICATION...
   verifyOtp(payload: { userId: string; otpCode: string }): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/verify-otp`, payload);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('accessToken');
+  // 3. Upload Image...
+  uploadAnImage(userid: string, file: File){
+    
+    const formData = new FormData();
+    formData.append('avatar', file, file.name);
+
+    return this.http.post(`${environment.apiUrl}/auth/${userid}/avatar`, formData)
+  }
+
+  // 4. POST CREATION...
+  createNewPost(postData: CreatePostPayload): Observable<PostResponse>{
+    return this.http.post<PostResponse>(`${environment.apiUrl}/post`, postData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Server side error during registration:', error);
+        return throwError(() => new Error(error.error?.message || 'Server error occurred'));
+      })
+    );
+  }
+
+  //#endregion
+ 
+  //#region LOADING DATA FROM API SERVER...............
+  
+  // 1. LOGIN DATA...
+  login(identity: string, password: string): Observable<LoginResponse>{
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, {identity, password}).pipe
+      (tap((user)=> 
+        {
+          if (user && user.jwt) {
+            alert(`${user.message} ${user.user.username}`)
+            localStorage.setItem('accessToken', user.jwt);
+          }
+        })
+    );
+  }
+
+  // 2. USER DATA...
+  loadUserData(): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/auth/user`).pipe(
+      map((user) => {
+        if (user) {
+          const avatar = user.avatarUrl?.trim();
+          let formattedAvatar = 'assets/images/default-avatar.png';
+
+          if (avatar) {
+            // 1. Keep absolute URLs (e.g. S3, Cloudinary)
+            if (avatar.startsWith('http://') || avatar.startsWith('https://')) {
+              formattedAvatar = avatar;
+            } else {
+              // 2. Prepend backend server URL to relative paths
+              // Note: If environment.apiUrl contains '/auth', clean it up to get the domain root
+              const backendUrl = environment.apiUrl.replace(/\/auth\/?$/, '') || 'http://localhost:3000';
+              formattedAvatar = `${backendUrl}${avatar.startsWith('/') ? '' : '/'}${avatar}`;
+            }
+          }
+
+          // Return updated user object with fully formatted avatarUrl
+          return {
+            ...user,
+            avatarUrl: formattedAvatar
+          };
+        }
+        return user;
+      })
+    );
+  }
+
+  // 2. LOAD ALL POST....
+  loadAllPost(){
+    return this.http.get<PostResponse>(`${environment.apiUrl}/post`).pipe(
+      map((user) => {
+        if (user) {
+          if (!user) return user;
+
+          // Clean base origin URL regardless of trailing paths like /auth or /post
+          const baseUrl = environment.apiUrl.replace(/\/(auth|post)\/?$/, '') || 'http://localhost:3000';
+          
+          const formatUrl = (path?: string): string => {
+            const trimmed = path?.trim();
+            if (!trimmed) return 'assets/images/default-avatar.png';
+            if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+            return `${baseUrl}${trimmed.startsWith('/') ? '' : '/'}${trimmed}`;
+          };
+
+          // Return updated user object with fully formatted avatarUrl
+          if (Array.isArray(user)) {
+            return user.map((post) => ({
+              ...post,
+              author: post.author
+                ? { ...post.author, avatarUrl: formatUrl(post.author.avatarUrl) }
+                : post.author
+            }));
+          }
+        }
+        return user;
+      })
+    );
+  }
+
+  // 3. LOAD SINGLE POST...
+  loadPostData(){
+    return this.http.get<PostResponse>(`${environment.apiUrl}/post/user`).pipe(
+      map((user) => {
+        if (user) {
+          if (!user) return [];
+          // Clean base origin URL regardless of trailing paths like /auth or /post
+          const baseUrl = environment.apiUrl.replace(/\/(auth|post)\/?$/, '') || 'http://localhost:3000';
+          
+          const formatUrl = (path?: string): string => {
+            const trimmed = path?.trim();
+            if (!trimmed) return 'assets/images/default-avatar.png';
+            if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+            return `${baseUrl}${trimmed.startsWith('/') ? '' : '/'}${trimmed}`;
+          };
+
+          // Return updated user object with fully formatted avatarUrl
+          if (Array.isArray(user)) {
+            return user.map((post) => ({
+              ...post,
+              author: post.author
+                ? { ...post.author, avatarUrl: formatUrl(post.author.avatarUrl) }
+                : post.author
+            }));
+          }
+        }
+        console.log(user);
+        return user;
+      })
+    );
+  }
+
+  // 4. LogOut
+  logout(): void {
+    this.http.post(`${environment.apiUrl}/auth/logout`, {}, { withCredentials: true }).pipe(
+      finalize(() => {
+        // Runs ALWAYS whether the backend request succeeds or fails
+        localStorage.removeItem('accessToken');
+        sessionStorage.clear();
+        this.currentUserSubject.next(null);
+        this.router.navigate(['/login'], { replaceUrl: true });
+      })
+    ).subscribe(); // Trigger the Observable execution
   }
   //#endregion
 
-//#region MEDIA DATA
+  //#region MEDIA DATA.....
+
   private initialState: MediaComposerState = {
     type: 'story',
     mediaBlob: null,
@@ -132,41 +226,15 @@ export class AuthService {
   reset() {
     this.state$.next(this.initialState);
   }
-//#endregion
-  
-  // 5. Get User Profile..
-  loadUserData() {
-    const rawId = localStorage.getItem('userID');
-    const userId = rawId ? JSON.parse(rawId) : null;
-    return this.http.get<User>(`${environment.apiUrl}/auth/${userId}`);
+  //#endregion
+
+  getToken(): string | null {
+    const token =  localStorage.getItem('accessToken');
+    return token;
   }
 
-  // 6. Create the post...
-  createNewPost(postData: CreatePostPayload): Observable<PostResponse>{
-    return this.http.post<PostResponse>(`${environment.apiUrl}/post`, postData).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('Server side error during registration:', error);
-        return throwError(() => new Error(error.error?.message || 'Server error occurred'));
-      })
-    );
-  }
+  // updateLikes(postId: string, userId:string): Observable<any>{
 
-  // 7. Load the post...
-  loadPostData(){
-    
-    const rawId = localStorage.getItem('userID');
-    const userId = rawId ? JSON.parse(rawId) : null;
-
-    return this.http.get<PostResponse>(`${environment.apiUrl}/post/${encodeURIComponent(userId)}`);
-  }
-
-  // 8. Load the whole post...
-  loadAllPost(){
-    return this.http.get<PostResponse>(`${environment.apiUrl}/post`);
-  }
-
-  updateLikes(postId: string, userId:string): Observable<any>{
-
-    return this.http.patch(`${environment.apiUrl}/post/${postId}/like`, {userId});
-  }
+  //   return this.http.patch(`${environment.apiUrl}/post/${postId}/like`, {userId});
+  // }
 }

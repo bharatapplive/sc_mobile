@@ -1,20 +1,18 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <div class="panels">
-      <ion-button fill="clear">
-        <ion-label>{{user?.username}}</ion-label>
+<ion-toolbar slot="top">
+  <div class="panels">
+    <ion-button fill="clear">
+      <ion-label>{{user?.username}}</ion-label>
+    </ion-button>
+    <div>
+      <ion-button fill="clear" routerLink="/home/post">
+        <ion-icon name="add"></ion-icon>
       </ion-button>
-      <div>
-        <ion-button fill="clear" routerLink="/home/post">
-          <ion-icon name="add"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" (click)="onLogout()">
-          <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-        </ion-button>
-      </div>
+      <ion-button fill="clear" (click)="onLogout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
     </div>
-  </ion-toolbar>
-</ion-header>
+  </div>
+</ion-toolbar>
 
 <ion-content [fullscreen]="true">
   <!-- Pull to Refresh Component -->
@@ -32,7 +30,7 @@
       <div class="profileDetails">
         <div class="height-light">
           <ion-avatar class="person">
-            <ion-img [src]="getUserAvatar()" alt="User"></ion-img>
+            <ion-img [src]="this.user?.avatarUrl" alt="User"></ion-img>
           </ion-avatar>
         </div>
 

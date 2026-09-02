@@ -20,6 +20,7 @@ export class ProfilePage implements OnInit {
 
   //#region User Details...
   user: UserProfile | null = null;
+  currentUserId: string = '';
 
   postNumber: number = 0;
   followerNum: number = 0;
@@ -46,11 +47,13 @@ export class ProfilePage implements OnInit {
     this.updatePost();
   }
   
+  // 1. USER DATA.....
   loadUserProfile(event?: any){
     this.authServe.loadUserData().subscribe({
       next: (userData: any) => {
         this.user = userData;
-                
+        this.currentUserId = userData?._id;
+      
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
           event.target.complete();
@@ -71,25 +74,15 @@ export class ProfilePage implements OnInit {
     this.loadUserProfile(event);
   }
 
-  // 1. GET AVATAR...
-  getUserAvatar(){         
-    if (this.user?.avatarUrl) {
-      // Return absolute URLs directly
-      if (this.user?.avatarUrl.startsWith('http://') || this.user?.avatarUrl.startsWith('https://')) {
-        return this.user?.avatarUrl.trim();
-      }
-    }
-    // Default fallback placeholder
-    return 'assets/images/default-avatar.png';
-  }
-
   // 2. UPDATE POST..
   updatePost(){
+    
     this.authServe.loadPostData().subscribe({
       next: (userData: any) => {
         // If backend returns an array (from find({ userId }))
         if (Array.isArray(userData)) {
           this.posts = userData;
+          
         } 
         // If backend returns a single object (from findById)
         else if (userData) {
@@ -147,6 +140,11 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['./post']);
   }
   onLogout(){
+    // Remove focus from any active button to prevent accessibility focus warnings
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     this.authServe.logout();
   }
 }

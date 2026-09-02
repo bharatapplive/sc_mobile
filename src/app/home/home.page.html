@@ -22,7 +22,7 @@
 
       <ion-tab-button tab="profile" (click)="onChangeMode('profile')">
         <ion-avatar class="person" [class.active]="activeTab === 'profile'">
-          <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>
+          <ion-img [src]="avatarUrl" alt="User Avatar"></ion-img>
         </ion-avatar>
       </ion-tab-button>
     </ion-tab-bar>
