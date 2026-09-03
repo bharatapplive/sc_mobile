@@ -1,0 +1,509 @@
+/* =========================================================
+   Global Page
+   ========================================================= */
+
+.messages-content {
+    --background: #f9f9f9;
+
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* =========================================================
+   Header
+   ========================================================= */
+
+.messages-header {
+    ion-toolbar {
+        --background: rgba(249, 249, 249, 0.8);
+        --border-width: 0;
+
+        height: 64px;
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+
+        box-shadow: 0 4px 20px rgba(109, 59, 215, 0.08);
+    }
+
+    ion-title {
+        font-size: 24px;
+        font-weight: 800;
+
+        color: #6b38d4;
+    }
+
+    ion-button {
+        --color: #6b38d4;
+    }
+
+    ion-icon {
+        font-size: 24px;
+    }
+}
+
+
+/* =========================================================
+   Search
+   ========================================================= */
+
+.search-section {
+    padding: 16px;
+    margin-top: 8px;
+}
+
+.conversation-search {
+    padding: 0;
+
+    --background: #f3f3f4;
+    --border-radius: 24px;
+    --box-shadow: none;
+    --color: #1a1c1c;
+    --placeholder-color: #7b7486;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   Stories
+   ========================================================= */
+
+.stories-section {
+    padding: 8px 16px 24px;
+
+    overflow: hidden;
+}
+
+.stories-list {
+    display: flex;
+
+    gap: 16px;
+
+    padding: 4px 2px 8px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.story-item {
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+
+    width: 64px;
+}
+
+.story-avatar {
+    position: relative;
+
+    width: 64px;
+    height: 64px;
+
+    padding: 2px;
+
+    border-radius: 50%;
+
+    background: rgba(226, 226, 226, 0.3);
+
+    img {
+        width: 100%;
+        height: 100%;
+
+        display: block;
+
+        object-fit: cover;
+
+        border: 2px solid #f9f9f9;
+        border-radius: 50%;
+    }
+}
+
+.story-ring {
+    background: linear-gradient(45deg,
+            #6b38d4,
+            #d9b5ff);
+}
+
+.your-story {
+    border: 2px dashed #cbc3d7;
+
+    background: #f9f9f9;
+}
+
+.story-name {
+    max-width: 64px;
+
+    overflow: hidden;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    line-height: 16px;
+
+    color: #494454;
+
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* Add Story */
+
+.add-story {
+    position: absolute;
+
+    right: -1px;
+    bottom: -1px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    border: 2px solid #f9f9f9;
+    border-radius: 50%;
+
+    background: #6b38d4;
+    color: #ffffff;
+
+    ion-icon {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================================
+   Messages Section
+   ========================================================= */
+
+.messages-section {
+    padding: 0 16px 80px;
+}
+
+.messages-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+
+    h2 {
+        margin: 0;
+
+        font-size: 24px;
+        font-weight: 700;
+
+        line-height: 32px;
+
+        color: #1a1c1c;
+    }
+}
+
+.requests-button {
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #6b38d4;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   Message Item
+   ========================================================= */
+
+.message-item {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    min-height: 80px;
+
+    margin-bottom: 12px;
+    padding: 12px 16px;
+
+    border: 1px solid rgba(203, 195, 215, 0.1);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 20px rgba(109, 59, 215, 0.04);
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.unread-message {
+    border-color: rgba(107, 56, 212, 0.1);
+}
+
+
+/* =========================================================
+   Message Avatar
+   ========================================================= */
+
+.message-avatar {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 56px;
+    height: 56px;
+
+    img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+    }
+}
+
+
+/* Online */
+
+.online-status {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 14px;
+    height: 14px;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow: 0 0 12px rgba(107, 56, 212, 0.4);
+}
+
+
+/* =========================================================
+   Message Content
+   ========================================================= */
+
+.message-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.message-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 2px;
+}
+
+.message-name {
+    overflow: hidden;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 20px;
+
+    color: #1a1c1c;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.message-time {
+    flex-shrink: 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    line-height: 16px;
+
+    color: #7b7486;
+}
+
+.unread-time {
+    color: #6b38d4;
+}
+
+.message-content p {
+    margin: 0;
+
+    overflow: hidden;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 24px;
+
+    color: #494454;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.unread-message .message-content p {
+    font-weight: 700;
+
+    color: #1a1c1c;
+}
+
+
+/* =========================================================
+   Unread Dot
+   ========================================================= */
+
+.unread-dot {
+    flex-shrink: 0;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #6b38d4;
+}
+
+
+/* =========================================================
+   Group Avatar
+   ========================================================= */
+
+.group-avatar {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 56px;
+    height: 56px;
+}
+
+.group-avatar-top,
+.group-avatar-bottom {
+    position: absolute;
+
+    width: 36px;
+    height: 36px;
+
+    overflow: hidden;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
+}
+
+.group-avatar-top {
+    top: 0;
+    right: 0;
+
+    z-index: 2;
+}
+
+.group-avatar-bottom {
+    bottom: 0;
+    left: 0;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   Bottom Navigation
+   ========================================================= */
+
+.bottom-navigation {
+    position: fixed;
+
+    left: 0;
+    bottom: 0;
+
+    z-index: 50;
+
+    width: 100%;
+    height: 64px;
+
+    padding: 8px 16px;
+
+    border-top: 1px solid rgba(203, 195, 215, 0.2);
+    border-radius: 12px 12px 0 0;
+
+    background: rgba(249, 249, 249, 0.8);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow: 0 -4px 20px rgba(109, 59, 215, 0.08);
+
+    ion-tab-button {
+        --color: #494454;
+        --color-selected: #6b38d4;
+
+        --background: transparent;
+
+        ion-icon {
+            font-size: 24px;
+        }
+
+        &.tab-selected {
+            ion-icon {
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+    .search-section,
+    .stories-section,
+    .messages-section {
+        max-width: 640px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
