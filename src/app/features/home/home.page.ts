@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { filter } from 'rxjs/operators';
 })
 export class HomePage implements OnInit {
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   activeTab: string = 'feeds';
   showTabs: boolean = true;
@@ -43,7 +45,8 @@ export class HomePage implements OnInit {
   }
 
   getUserAvatar(): string {
-    return 'assets/images/user-profile.jpg';
+    const user = this.authService.getCurrentUser();
+    return user?.avatar || user?.avatarUrl || 'assets/images/user-profile.jpg';
   }
 }
 

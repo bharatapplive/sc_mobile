@@ -27,6 +27,22 @@
         text-align: center;
         margin-bottom: 30px;
 
+        .logo-wrapper {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .brand-logo-img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                filter: drop-shadow(0 4px 12px rgba(124, 58, 237, 0.2));
+            }
+        }
+
         h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 40px;
@@ -49,6 +65,88 @@
         padding: 32px;
         border-radius: 24px;
         box-shadow: 0 8px 25px rgba(107, 56, 212, 0.15);
+
+        .avatar-upload-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+
+            .avatar-picker {
+                position: relative;
+                width: 96px;
+                height: 96px;
+                border-radius: 50%;
+                padding: 3px;
+                background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
+                cursor: pointer;
+                box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25);
+                transition: transform 0.2s ease;
+
+                &:hover {
+                    transform: scale(1.04);
+                }
+
+                &:active {
+                    transform: scale(0.96);
+                }
+
+                .preview-avatar-img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 2px solid #ffffff;
+                    background: #ffffff;
+                }
+
+                .camera-badge {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background: #7c3aed;
+                    border: 2.5px solid #ffffff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ffffff;
+                    font-size: 14px;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                }
+            }
+
+            .avatar-hint {
+                margin-top: 10px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #7c3aed;
+                cursor: pointer;
+                transition: color 0.15s ease;
+
+                &:hover {
+                    color: #6b21a8;
+                    text-decoration: underline;
+                }
+            }
+
+            .remove-photo-btn {
+                background: transparent;
+                border: none;
+                color: #ef4444;
+                font-size: 11px;
+                font-weight: 600;
+                margin-top: 4px;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 
     .register-container ion-item {

@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
+import { AuthService } from '../../../core/services/auth.service';
 
 export interface ProfileHighlight {
   id: string;
@@ -22,17 +24,21 @@ export interface ProfileMediaItem {
   styleUrls: ['./profile.page.scss'],
   standalone: false,
 })
-export class ProfilePage {
+export class ProfilePage implements OnInit {
+  private router = inject(Router);
+  private authService = inject(AuthService);
+  private actionSheetCtrl = inject(ActionSheetController);
+
   activeTab: 'posts' | 'reels' | 'saved' = 'posts';
   isFollowing = false;
 
   user = {
-    username: 'itz_liveXlife221',
-    fullname: 'Aman Sharma',
-    category: 'Fullstack devloper & Video Editor',
+    username: '',
+    fullname: '',
+    category: 'Fullstack developer & Creator',
     avatar: 'assets/images/user-profile.jpg',
-    bio: '💡 eating => programing =>sleeping  \n📍 New Delhi, India\n📸 Capturing reality, one frame at a time ✨\n📩 Contact & collab: [EMAIL_ADDRESS]',
-    website: 'https://www.amanfolio.me',
+    bio: '💡 eating => programming => sleeping\n📸 Capturing reality, one frame at a time ✨',
+    website: 'https://www.socialcircle.app',
     postsCount: 24,
     followersCount: '14.2K',
     followingCount: 382,
@@ -42,7 +48,7 @@ export class ProfilePage {
   highlights: ProfileHighlight[] = [
     {
       id: 'h1',
-      title: 'Chandni Chowk',
+      title: 'Moments 📸',
       coverImage: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=200&q=80',
     },
     {
@@ -54,16 +60,6 @@ export class ProfilePage {
       id: 'h3',
       title: 'Travel ✈️',
       coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80',
-    },
-    {
-      id: 'h4',
-      title: 'Moments 📸',
-      coverImage: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=200&q=80',
-    },
-    {
-      id: 'h5',
-      title: 'Setup 💻',
-      coverImage: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=200&q=80',
     }
   ];
 
@@ -71,30 +67,36 @@ export class ProfilePage {
     { id: '1', image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=600&q=80', likes: '1.2K', isMultiple: true },
     { id: '2', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80', likes: '840' },
     { id: '3', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', likes: '2.5K', isMultiple: true },
-    { id: '4', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', likes: '960' },
-    { id: '5', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80', likes: '1.9K' },
-    { id: '6', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80', likes: '3.1K', isMultiple: true },
-    { id: '7', image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80', likes: '710' },
-    { id: '8', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80', likes: '1.4K' },
-    { id: '9', image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80', likes: '2.2K' }
   ];
 
   reels: ProfileMediaItem[] = [
     { id: 'r1', image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=600&q=80', views: '48.2K', isReel: true },
     { id: 'r2', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', views: '112K', isReel: true },
-    { id: 'r3', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80', views: '29.5K', isReel: true },
-    { id: 'r4', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80', views: '84.1K', isReel: true },
-    { id: 'r5', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80', views: '63.0K', isReel: true },
-    { id: 'r6', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', views: '15.8K', isReel: true }
   ];
 
   saved: ProfileMediaItem[] = [
     { id: 's1', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80', likes: '5.2K' },
-    { id: 's2', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80', likes: '10.4K' },
-    { id: 's3', image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80', likes: '4.8K' }
   ];
 
-  private router = inject(Router);
+  ngOnInit() {
+    this.loadUserData();
+  }
+
+  ionViewWillEnter() {
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      this.user.username = currentUser.userName || currentUser.username || currentUser.mobile || 'User';
+      const fullName = [currentUser.firstName, currentUser.lastName].filter(Boolean).join(' ');
+      this.user.fullname = fullName || currentUser.fullName || currentUser.userName || this.user.username;
+      if (currentUser.avatar || currentUser.avatarUrl) {
+        this.user.avatar = currentUser.avatar || currentUser.avatarUrl || this.user.avatar;
+      }
+    }
+  }
 
   getUserAvatar(): string {
     return this.user.avatar;
@@ -109,13 +111,37 @@ export class ProfilePage {
   }
 
   handleRefresh(event: any) {
+    this.loadUserData();
     setTimeout(() => {
       event.target.complete();
-    }, 1200);
+    }, 800);
   }
 
   editProfile() {
     console.log('Open Edit Profile modal');
+  }
+
+  onAvatarSelected(event: any) {
+    const file: File = event.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        this.user.avatar = base64;
+        const currentUser = this.authService.getCurrentUser();
+        const userId = currentUser?.id || currentUser?._id;
+        if (userId) {
+          this.authService.updateAvatar(userId, base64).subscribe({
+            next: () => {
+              console.log('Avatar updated in DB successfully');
+            },
+            error: (err) => console.error('Failed to update avatar in DB', err)
+          });
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   shareProfile() {
@@ -128,8 +154,51 @@ export class ProfilePage {
     }
   }
 
+  async openMenu() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Menu & Settings',
+      buttons: [
+        {
+          text: 'Settings & Privacy',
+          icon: 'settings-outline',
+          handler: () => {
+            console.log('Open settings');
+          }
+        },
+        {
+          text: 'Saved Posts',
+          icon: 'bookmark-outline',
+          handler: () => {
+            this.setTab('saved');
+          }
+        },
+        {
+          text: 'Share Profile',
+          icon: 'share-social-outline',
+          handler: () => {
+            this.shareProfile();
+          }
+        },
+        {
+          text: 'Log Out',
+          role: 'destructive',
+          icon: 'log-out-outline',
+          handler: () => {
+            this.onLogout();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          icon: 'close-outline'
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
   onLogout() {
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 }
-

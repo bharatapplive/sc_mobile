@@ -41,6 +41,18 @@ ion-header {
     }
   }
 
+  .brand-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .feed-brand-logo {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+  }
+
   .top-username {
     margin: 0;
     font-size: 17px;

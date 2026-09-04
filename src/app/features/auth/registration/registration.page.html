@@ -3,6 +3,9 @@
   <div class="register-container">
 
     <div class="header">
+      <div class="logo-wrapper">
+        <img src="assets/images/bharatapp-logo.png" alt="Social Circle Logo" class="brand-logo-img" />
+      </div>
       <h1>Join the Circle</h1>
       <p>
         Where creators connect and the digital<br>
@@ -11,7 +14,18 @@
     </div>
 
     <div class="form-card">
-
+      <!-- Profile Picture Upload Picker -->
+      <div class="avatar-upload-section">
+        <div class="avatar-picker" (click)="fileInput.click()">
+          <img [src]="avatar || 'assets/images/user-profile.jpg'" alt="Profile Preview" class="preview-avatar-img" />
+          <div class="camera-badge">
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+        <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
+        <span class="avatar-hint" (click)="fileInput.click()">{{ avatar ? 'Change Profile Photo' : 'Upload Profile Photo' }}</span>
+        <button *ngIf="avatar" type="button" class="remove-photo-btn" (click)="removeAvatar()">Remove</button>
+      </div>
 
       <div class="input-group">
         <label>Full Name</label>

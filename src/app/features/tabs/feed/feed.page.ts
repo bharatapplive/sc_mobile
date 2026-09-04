@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { AuthService } from '../../../core/services/auth.service';
 
 export interface Story {
   id: string;
@@ -41,7 +42,8 @@ export interface Post {
   styleUrls: ['./feed.page.scss'],
   standalone: false,
 })
-export class FeedPage {
+export class FeedPage implements OnInit {
+  private authService = inject(AuthService);
   defaultAvatar = 'assets/images/user-profile.jpg';
 
   stories: Story[] = [
@@ -60,91 +62,84 @@ export class FeedPage {
     },
     {
       id: '2',
-      username: 'Himanshu_Rana',
-      avatar: 'https://bharatapp.info/assets/images/team/himanshu_rana.png',
+      username: 'Himanshu',
+      avatar: 'https://bharatapp.info/assets/images/team/himanshu.png',
       hasUnseen: true,
     },
     {
       id: '3',
-      username: 'Ayushi_Singh',
-      avatar: 'https://bharatapp.info/assets/images/team/ayushi_singh.png',
-      hasUnseen: false,
+      username: 'Ayushi_Shri',
+      avatar: 'https://bharatapp.info/assets/images/team/ayushi.png',
+      hasUnseen: true,
     },
     {
       id: '4',
-      username: 'Saurav_ali',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-      hasUnseen: true,
+      username: 'Saurav_Sir',
+      avatar: 'https://bharatapp.info/assets/images/team/saurav.png',
+      hasUnseen: false,
     },
-    {
-      id: '5',
-      username: 'Deepa_mam',
-      avatar: 'https://bharatapp.info/assets/images/team/deepa.jpg',
-      hasUnseen: true,
-    }
   ];
 
   posts: Post[] = [
     {
-      id: 'p1',
+      id: '1',
       author: {
-        username: 'itz_liveXlife221',
+        username: 'Aman Sharma',
         avatar: 'assets/images/user-profile.jpg',
         location: 'New Delhi, India',
         isVerified: true,
       },
-      image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1080&q=80',
-      caption: 'Exploring the boundaries of digital reality today. This light installation in Tokyo is pure magic! ✨',
-      hashtags: ['#DigitalArt', '#TokyoVibes', '#CyberAesthetics', '#Creativity'],
-      likesCount: 1284,
+      image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',
+      caption: 'Walking through history at the Great Wall. Absolutely breathless by this ancient wonder! 🏯✨',
+      hashtags: ['#TravelDiaries', '#Wanderlust', '#Heritage', '#Explore'],
+      likesCount: 1248,
       isLiked: false,
       isSaved: false,
       timeAgo: '2 hours ago',
-      commentsCount: 42,
+      commentsCount: 84,
       comments: [
-        { username: 'slex_vibe', text: 'Colors on this are insane 🔥' },
-        { username: 'luna.art', text: 'Which lens was used for this shot?' }
+        { username: 'alex.nomad', text: 'Incredible shot! What camera did you use? 📸' },
+        { username: 'sarah_travels', text: 'This is on my bucket list for next year! 😍' }
       ],
       newCommentText: '',
       showComments: false,
       animatingHeart: false,
     },
     {
-      id: 'p2',
+      id: '2',
       author: {
-        username: 'Himanshu_rana',
-        avatar: 'https://bharatapp.info/assets/images/team/himanshu_rana.png',
-        location: 'Rorkee, Uttarkhand',
+        username: 'tech_insider',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
+        location: 'Bengaluru, India',
         isVerified: true,
       },
-      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1080&q=80',
-      caption: 'Architectural minimalism hitting different in the golden morning light 🏙️ Lines and shadows in harmony.',
-      hashtags: ['#Architecture', '#NYC', '#Minimalism', '#GoldenHour'],
-      likesCount: 5291,
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+      caption: 'The future of quantum computing is happening right now. Silicon meets next-gen AI processing. ⚡🤖',
+      hashtags: ['#TechTrends', '#AI', '#Hardware', '#Innovation'],
+      likesCount: 3420,
       isLiked: true,
       isSaved: true,
       timeAgo: '4 hours ago',
-      commentsCount: 88,
+      commentsCount: 230,
       comments: [
-        { username: 'neo_pixel', text: 'Pure geometry perfection 👌' },
-        { username: 'itz_liveXlife221', text: 'Incredible framing bro!' }
+        { username: 'dev_guy', text: 'Mind-blowing speed benchmarks! 🚀' }
       ],
       newCommentText: '',
       showComments: false,
       animatingHeart: false,
     },
     {
-      id: 'p3',
+      id: '3',
       author: {
-        username: 'Ayushi_Singh',
-        avatar: 'https://bharatapp.info/assets/images/team/ayushi_singh.png',
-        location: 'Uttrakhand,India',
+        username: 'nature.vibe',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        location: 'Manali, Himachal Pradesh',
         isVerified: false,
       },
-      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1080&q=80',
-      caption: 'Crystal waters and Mediterranean breeze. Taking a quick reset before the next creative project launches 🌊☀️',
-      hashtags: ['#TravelDiaries', '#AmalfiCoast', '#SummerVibes', '#Wanderlust'],
-      likesCount: 10420,
+      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+      caption: 'Golden hour hits different when the waves are calm. Take a deep breath and unwind. 🌅🌊',
+      hashtags: ['#SunsetLovers', '#Peace', '#GoldenHour'],
+      likesCount: 892,
       isLiked: false,
       isSaved: false,
       timeAgo: '7 hours ago',
@@ -157,6 +152,35 @@ export class FeedPage {
       animatingHeart: false,
     }
   ];
+
+  ngOnInit() {
+    this.updateUserStoryAvatar();
+  }
+
+  ionViewWillEnter() {
+    this.updateUserStoryAvatar();
+  }
+
+  updateUserStoryAvatar() {
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      const userStory = this.stories.find(s => s.isUser);
+      if (userStory && user.avatar) {
+        userStory.avatar = user.avatar;
+      }
+      // Update first post with logged in user details
+      if (this.posts.length > 0) {
+        this.posts[0].author.username = user.userName || user.username || user.firstName || this.posts[0].author.username;
+        if (user.avatar) {
+          this.posts[0].author.avatar = user.avatar;
+        }
+      }
+    }
+  }
+
+  onImgError(event: any) {
+    event.target.src = this.defaultAvatar;
+  }
 
   toggleLike(post: Post) {
     post.isLiked = !post.isLiked;
@@ -184,8 +208,9 @@ export class FeedPage {
 
   addComment(post: Post) {
     if (post.newCommentText && post.newCommentText.trim().length > 0) {
+      const currentUser = this.authService.getCurrentUser();
       post.comments.push({
-        username: 'itz_liveXlife221',
+        username: currentUser?.userName || currentUser?.username || 'User',
         text: post.newCommentText.trim()
       });
       post.commentsCount += 1;
@@ -195,6 +220,7 @@ export class FeedPage {
   }
 
   handleRefresh(event: any) {
+    this.updateUserStoryAvatar();
     setTimeout(() => {
       event.target.complete();
     }, 1200);

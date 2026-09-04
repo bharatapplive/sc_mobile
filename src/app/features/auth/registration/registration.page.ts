@@ -19,6 +19,7 @@ export class RegisterPage {
   email = '';
   mobile = '';
   password = '';
+  avatar = '';
   showPassword = false;
 
   togglePassword() {
@@ -32,6 +33,30 @@ export class RegisterPage {
     if (name && digits.length === 4) {
       this.UserName = `${name}.${digits}`;
     }
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        this.showAlert('Invalid File', 'Please select a valid image file.');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        this.showAlert('File Too Large', 'Please select an image smaller than 5MB.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.avatar = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  removeAvatar() {
+    this.avatar = '';
   }
 
   async register() {
@@ -49,6 +74,7 @@ export class RegisterPage {
       email: this.email,
       mobile: this.mobile,
       password: this.password,
+      avatar: this.avatar || 'assets/images/user-profile.jpg',
       role: 'user',
       active: true,
     };

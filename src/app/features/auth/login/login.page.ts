@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   private router = inject(Router);
   private alertController = inject(AlertController);
+  private authService = inject(AuthService);
 
   theme: 'light' | 'dark' = 'light';
   identity = '';
@@ -41,22 +43,21 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(
-      (u: any) => (u.email === this.identity || u.mobile === this.identity) && u.password === this.password
-    );
-
-    if (user) {
-      // Login successful
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      this.router.navigate(['/home']);
-    } else {
-      const alert = await this.alertController.create({
-        header: 'Login Failed',
-        message: 'Invalid email/mobile number or password.',
-        buttons: ['OK']
-      });
-      await alert.present();
-    }
+    this.authService.login({ identity: this.identity.trim(), password: this.password }).subscribe({
+      next: (res: any) => {
+        if (res?.user) {
+          localStorage.setItem('currentUser', JSON.stringify(res.user));
+        }
+        this.router.navigate(['/home']);
+      },
+      error: async (err: any) => {
+        const alert = await this.alertController.create({
+          header: 'Login Failed',
+          message: err.error?.message || 'Invalid username/mobile/email or password.',
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
+    });
   }
 }

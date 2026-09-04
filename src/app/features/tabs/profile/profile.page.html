@@ -10,8 +10,8 @@
         <button class="icon-action-btn" aria-label="Create new">
           <ion-icon name="add-circle-outline"></ion-icon>
         </button>
-        <button class="icon-action-btn logout-btn" (click)="onLogout()" aria-label="Log out">
-          <ion-icon name="log-out-outline"></ion-icon>
+        <button class="icon-action-btn" (click)="openMenu()" aria-label="Open menu">
+          <ion-icon name="menu-outline"></ion-icon>
         </button>
       </div>
     </div>
@@ -31,14 +31,17 @@
     <section class="profile-hero-card">
       <div class="hero-top-row">
         <!-- Avatar with Story Ring -->
-        <div class="avatar-holder">
+        <div class="avatar-holder" (click)="profileFileInput.click()" title="Change Profile Picture">
           <div class="avatar-ring">
             <ion-avatar class="main-avatar">
               <ion-img [src]="user.avatar" [alt]="user.fullname"></ion-img>
             </ion-avatar>
           </div>
-          <span class="live-dot" title="Active creator"></span>
+          <div class="avatar-edit-badge">
+            <ion-icon name="camera"></ion-icon>
+          </div>
         </div>
+        <input #profileFileInput type="file" accept="image/*" (change)="onAvatarSelected($event)" style="display: none;" />
 
         <!-- Stats Counters -->
         <div class="stats-group">

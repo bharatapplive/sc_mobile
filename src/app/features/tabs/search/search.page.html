@@ -1,54 +1,189 @@
-<ion-header class="ion-no-border" mode="ios">
-  <ion-toolbar class="ion-padding-top" color="white" style="--padding-top: 12px;">
-    <ion-title color="black" style="font-weight: 800; font-size: 20px;">Social Circle</ion-title>
+<ion-header class="ion-no-border search-header" [translucent]="true">
+  <ion-toolbar>
+    <div class="search-top-bar">
+      <div class="brand-group">
+        <img src="assets/images/bharatapp-logo.png" alt="Logo" class="top-logo" />
+        <h1 class="page-title">Explore</h1>
+      </div>
+      <div class="header-badges">
+        <span class="live-badge">
+          <span class="pulse-dot"></span>
+          Live Discover
+        </span>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="search-content">
+  <!-- Pull to Refresh -->
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="crescent">
     </ion-refresher-content>
   </ion-refresher>
 
-  <div class="container">
-    <section class="search-Bar-container">
-      <ion-item lines="none" class="place-holder">
-        <ion-icon slot="start" name="search-outline"></ion-icon>
-        <ion-input type="text" name="searchbar" placeholder="Search trends, creators, or tags.."
-          (ionInput)="onSearchChange($event)"></ion-input>
-      </ion-item>
-    </section>
+  <main class="search-main-container">
+    <!-- 1. Search Bar -->
+    <section class="search-box-wrapper">
+      <div class="custom-search-bar" [class.focused]="isSearching || searchTerm">
+        <ion-icon name="search" class="search-icon"></ion-icon>
+        <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange($event)" (focus)="onSearchFocus()"
+          (blur)="onSearchBlur()" placeholder="Search creators, trends, tags..." class="search-input-field" />
 
-    <section class="tab-bar">
-      <div class="tags-scroll-container">
-        <ion-button shape="round" size="small" fill="clear" *ngFor="let tag of tags" class="chips"
-          [class.active]="selectedTag === tag" (click)="selectTag(tag)">
-          <span>{{ tag }}</span>
-        </ion-button>
+        <button *ngIf="searchTerm" type="button" class="clear-btn" (click)="clearSearch()" aria-label="Clear search">
+          <ion-icon name="close-circle"></ion-icon>
+        </button>
+
+        <div class="filter-pill" *ngIf="!searchTerm">
+          <ion-icon name="options-outline"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Quick Recent Searches (visible on search input focus) -->
+      <div class="recent-searches-box" *ngIf="isSearching && !searchTerm">
+        <div class="recent-header">
+          <span>Recent Searches</span>
+        </div>
+        <div class="recent-chips">
+          <button type="button" *ngFor="let term of recentSearches" class="recent-chip"
+            (click)="applyRecentSearch(term)">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ term }}</span>
+          </button>
+        </div>
       </div>
     </section>
 
-    <section class="file-container card-board">
-      <ion-grid class="masonry-grid">
-        <div class="masonry-item" *ngFor="let item of allItems">
-          <ion-img class="card-img" [src]="item.url"></ion-img>
-          <ion-icon [name]="item.isLiked ? 'heart' : 'heart-outline'" class="favorite-icon" [class.liked]="item.isLiked"
-            (click)="toggleFavorite(item)"></ion-icon>
-          <div class="card-overlay bottom">
-            <div class="user-info">
-              <ion-avatar class="avatar">
-                <ion-img [src]="item.url"></ion-img>
-              </ion-avatar>
-              <span class="username">{{item?.title}}</span>
+    <!-- 2. Category Chips -->
+    <section class="category-tabs-section">
+      <div class="category-scroll-track">
+        <button *ngFor="let tag of tags" class="category-chip" [class.active]="selectedTag === tag.name"
+          (click)="selectTag(tag.name)">
+          <ion-icon [name]="tag.icon" class="chip-icon"></ion-icon>
+          <span>{{ tag.label }}</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. Dual-Column Explore Grid -->
+    <section class="explore-grid-section" *ngIf="allItems.length > 0">
+      <div class="explore-columns-wrapper">
+        <!-- Left Column -->
+        <div class="explore-column">
+          <div *ngFor="let item of leftColumn" class="explore-card" [ngClass]="item.aspect"
+            (click)="openPreview(item)">
+            <div class="card-media-wrapper">
+              <img [src]="item.imgUrl" [alt]="item.title" class="card-img" loading="lazy" />
+
+              <!-- Reel Badge -->
+              <div *ngIf="item.isReel" class="media-type-badge">
+                <ion-icon name="play"></ion-icon>
+                <span>{{ item.views }}</span>
+              </div>
+
+              <!-- Like Button -->
+              <button class="card-like-btn" [class.liked]="item.isLiked" (click)="toggleFavorite($event, item)"
+                aria-label="Like">
+                <ion-icon [name]="item.isLiked ? 'heart' : 'heart-outline'"></ion-icon>
+              </button>
+
+              <!-- Card Bottom Info Overlay -->
+              <div class="card-gradient-overlay">
+                <div class="author-row">
+                  <div class="author-avatar-wrap">
+                    <img [src]="item.avatar || item.imgUrl" [alt]="item.title" class="author-avatar" />
+                  </div>
+                  <span class="author-name">{{ item.title }}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </ion-grid>
+
+        <!-- Right Column -->
+        <div class="explore-column">
+          <div *ngFor="let item of rightColumn" class="explore-card" [ngClass]="item.aspect"
+            (click)="openPreview(item)">
+            <div class="card-media-wrapper">
+              <img [src]="item.imgUrl" [alt]="item.title" class="card-img" loading="lazy" />
+
+              <!-- Reel Badge -->
+              <div *ngIf="item.isReel" class="media-type-badge">
+                <ion-icon name="play"></ion-icon>
+                <span>{{ item.views }}</span>
+              </div>
+
+              <!-- Like Button -->
+              <button class="card-like-btn" [class.liked]="item.isLiked" (click)="toggleFavorite($event, item)"
+                aria-label="Like">
+                <ion-icon [name]="item.isLiked ? 'heart' : 'heart-outline'"></ion-icon>
+              </button>
+
+              <!-- Card Bottom Info Overlay -->
+              <div class="card-gradient-overlay">
+                <div class="author-row">
+                  <div class="author-avatar-wrap">
+                    <img [src]="item.avatar || item.imgUrl" [alt]="item.title" class="author-avatar" />
+                  </div>
+                  <span class="author-name">{{ item.title }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- Empty State -->
+    <section class="empty-results-state" *ngIf="allItems.length === 0">
+      <div class="empty-icon-wrap">
+        <ion-icon name="search-outline"></ion-icon>
+      </div>
+      <h3>No results found</h3>
+      <p>We couldn't find anything matching "{{ searchTerm }}". Try exploring different tags or creators.</p>
+      <button class="reset-btn" (click)="clearSearch()">Clear Filters</button>
+    </section>
+
+    <!-- Infinite Scroll -->
     <ion-infinite-scroll threshold="150px" (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more...">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Discovering more...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-  </div>
+  </main>
+
+  <!-- Item Preview Modal -->
+  <ion-modal [isOpen]="isPreviewOpen" (didDismiss)="closePreview()" [initialBreakpoint]="0.85" [breakpoints]="[0, 0.85, 1]">
+    <ng-template>
+      <div class="preview-modal-content" *ngIf="selectedItem">
+        <div class="modal-grab-bar"></div>
+        <div class="modal-header">
+          <div class="modal-creator">
+            <img [src]="selectedItem.avatar || selectedItem.imgUrl" [alt]="selectedItem.title" class="modal-avatar" />
+            <div>
+              <h4>{{ selectedItem.title }}</h4>
+              <span class="modal-tag">#{{ selectedItem.tag }}</span>
+            </div>
+          </div>
+          <button class="close-modal-btn" (click)="closePreview()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </div>
+
+        <div class="modal-image-container">
+          <img [src]="selectedItem.imgUrl" [alt]="selectedItem.title" class="modal-preview-img" />
+        </div>
+
+        <div class="modal-footer-actions">
+          <div class="stat-pill">
+            <ion-icon name="heart" color="danger"></ion-icon>
+            <span>{{ selectedItem.likes }} likes</span>
+          </div>
+          <button class="modal-action-btn primary" (click)="closePreview()">
+            <span>View Full Post</span>
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>

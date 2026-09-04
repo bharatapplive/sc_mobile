@@ -21,6 +21,22 @@
   margin-bottom: var(--spacing-lg);
 }
 
+.logo-wrapper {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .brand-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(124, 58, 237, 0.25));
+  }
+}
+
 .icon {
   width: 64px;
   height: 64px;
