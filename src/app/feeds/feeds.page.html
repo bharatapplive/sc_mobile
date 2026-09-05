@@ -70,7 +70,7 @@
         </div>
 
         <div class="post-content">
-            <ion-img [src]="feed.mediaUrl"></ion-img>
+            <ion-img [src]="feed.mediaUrl" class="post-image"></ion-img>
             <div size="small" fill="clear" slot="end" (click)="previewTrack(feed?.audio, $event)" class="btn-absolue">
               <ion-icon [name]="isPlayingPreview && isAudioId === feed?.audio?.id ? 'volume-high' : 'volume-mute'"></ion-icon>
             </div>
@@ -79,82 +79,125 @@
         <div class="post-bottom">
           <div class="toggle-icon">
             <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small" (click)="toggleLikes(feed)">
-                <ion-icon slot="icon-only" [name]="feed?.likedBy?.includes(this.currentUserId) ? 'heart' : 'heart-outline'" [class.active]="feed?.likedBy?.includes(this.currentUserId)"></ion-icon>
-                <span>{{feed?.likesCount}}</span>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-                <span>1000</span>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
+              <div class="likebtn">
+                <ion-icon slot="icon-only" 
+                  [name]="feed?.likedBy?.includes(this.currentUserId) ? 'heart' : 'heart-outline'" 
+                  [class.active]="feed?.likedBy?.includes(this.currentUserId)" 
+                  (click)="toggleLikes(feed)">
+                </ion-icon>
+                <div class="likeTitle"(click)="openLikesModal(feed)"><span>{{feed?.likesCount}}</span></div>
+              </div>
+             
+              <div class="likebtn">
+                <ion-icon slot="icon-only" name="chatbox-outline" (click)="openCommitModel(feed)"></ion-icon>
+                <div class="likeTitle"><span>{{feed?.commentsCount}}</span></div>
+              </div>
+
+              <div class="likebtn">
                 <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-                <span>{{feed?.sharesCount}}</span>
-              </ion-button>
+                <div class="likeTitle"><span>{{feed?.sharesCount}}</span></div>
+              </div>
+
             </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
+            <div class="likebtn">
+                <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+            </div>
           </div>
 
           <div class="subtitle-panel">
-            <p>{{feed?.likesCount}} likes</p>
+            <p (click)="openLikesModal(feed)">{{feed?.likesCount}} likes</p>
             <p><span>{{feed?.author?.authorName}}</span> {{feed?.caption}}</p>
-            <a class="view-btn">View all {{feed?.commentsCount}} comments</a>
+            <a class="view-btn" (click)="openCommitModel(feed)">View all {{feed?.commentsCount}} comments</a>
             <p class="para">{{(feed?.time || feed?.createdAt) | timeAgo}}</p>
           </div>
         </div>
       </article>
-      <!-- <article class="card-board" *ngFor="let feed of feeds" >
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="avatar-img">
-              <ion-img [src]="feed.avatar" alt="User Avatar"></ion-img>  
-            </ion-avatar>
-            <div class="avatar-title">
-              <a><span>{{feed?.username}}</span></a>
-              <span>{{feed?.location}}</span>
-            </div>
-          </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-          </ion-button>
-        </div>
-
-        <div class="post-content">
-            <ion-img [src]="feed.postUrl"></ion-img>
-        </div>
-
-        <div class="post-bottom">
-          <div class="toggle-icon">
-            <div class="left-toggle">
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-                <span>{{feed?.likes}}</span>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
-                <span>{{feed?.comments}}</span>
-              </ion-button>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
-                <span>{{feed?.shares}}</span>
-              </ion-button>
-            </div>
-            <ion-button shape="round" fill="clear" size="small">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
-            </ion-button>
-          </div>
-
-          <div class="subtitle-panel">
-            <p>{{feed?.likes}} likes</p>
-            <p><span>{{feed?.username}}</span> {{feed?.paragraph}}</p>
-            <a class="view-btn">View all {{feed?.comments}} comments</a>
-            <p class="para">{{feed?.postTime}}</p>
-          </div>
-        </div>
-      </article> -->
     </div>
-
   </div>
+
+  <ion-modal 
+    [isOpen]="isLikesModalOpen" 
+    (didDismiss)="isLikesModalOpen = false"
+    [initialBreakpoint]="0.5" 
+    [breakpoints]="[0, 0.5, 1]"
+    [handle]="true"
+    class="bottom-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Likes</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="like-panel">
+          <div class="card">
+            <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+            <span>{{selectedFeedForLikes?.likesCount}}</span>
+          </div>
+          <div class="card">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+            <span>{{selectedFeedForLikes?.likesCount}}</span>
+          </div>
+        </div>
+        <div class="person-list" *ngFor="let user of likedByUsers">
+          <div class="avatar">
+            <ion-avatar>           
+              <ion-img [src]="user.avatarUrl" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <div class="title">
+              <h2>{{user?.username}}</h2>
+              <span>{{user?.fullname}}</span>
+            </div>
+          </div>
+          <div class="tabs">
+            <ion-button slot="end" shape="round" size="small" fill="clear">Follow</ion-button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal 
+    [isOpen]="isCommitModalOpen" 
+    (didDismiss)="isCommitModalOpen = false"
+    [initialBreakpoint]="0.5" 
+    [breakpoints]="[0, 0.5, 1]"
+    [handle]="true"
+    class="bottom-modal commit-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Comments</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="user-conatin">
+          <ion-avatar class="avatar">           
+            <ion-img [src]="avatarUrl" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <ion-item class="inputplace">
+            <ion-input type="text" name="searchbar" placeholder="Join the conversation..." required minlength="5">
+              <ion-icon slot="end" name="image-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-icon name="send-outline"></ion-icon>
+        </div>
+        <div class="person-list" *ngFor="let user of likedByUsers">
+          <div class="avatar">
+            <ion-avatar>           
+              <ion-img [src]="user.avatarUrl" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <div class="title">
+              <h2>{{user?.username}}</h2>
+              <span>{{user?.fullname}}</span>
+              <a>Reply</a>
+            </div>
+          </div>
+          <div class="tabs">
+            <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

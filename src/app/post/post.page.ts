@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PreviousRouteServe } from '../previous-route-serve';
 import { AudioTrack, ContentAuthor, CreatePostPayload } from '../authcontroller/authInterface';
+import { ProfileService } from '../authcontroller/profile-service';
+import { PostService } from '../authcontroller/Post-service';
 
 @Component({
   selector: 'app-post',
@@ -96,14 +98,14 @@ export class PostPage implements OnInit {
   @Output() captionChange = new EventEmitter<string>();
 
   constructor(    
-    private router:Router,
     private navCtrl: NavController,
-    private readonly authServe: AuthService,
+    private readonly profileServe: ProfileService,
+    private readonly postServe: PostService,
     private readonly previousRoute: PreviousRouteServe,
   ) { }
 
   ngOnInit() {
-    this.authServe.loadUserData().subscribe({
+    this.profileServe.loadUserData().subscribe({
       next: (userData) => {
         this.profile = {
           ...this.profile,
@@ -218,8 +220,8 @@ export class PostPage implements OnInit {
       sharesCount:0
     };
 
-    this.authServe.createNewPost(payload).subscribe({
-        next: (user) => {
+    this.postServe.createNewPost(payload).subscribe({
+        next: () => {
           alert(`Post successfully updated`);
           // Reset post creation portal values
           

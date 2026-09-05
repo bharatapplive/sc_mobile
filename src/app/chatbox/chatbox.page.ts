@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../authcontroller/auth-service';
+import { ProfileService } from '../authcontroller/profile-service';
+import { ChatService } from '../authcontroller/chat-service';
 
 interface FollowList{
   _id: string;
@@ -15,6 +16,7 @@ interface FollowList{
   styleUrls: ['./chatbox.page.scss'],
   standalone: false
 })
+
 export class ChatboxPage implements OnInit {
   
   avatarUrl?: string = '';
@@ -37,11 +39,12 @@ export class ChatboxPage implements OnInit {
   ]
   
   constructor(
-    private readonly authServe: AuthService
+    private readonly profileServe: ProfileService,
+    private readonly chatServe: ChatService
   ) { }
 
   ngOnInit() { 
-    this.authServe.loadUserData().subscribe({
+    this.profileServe.loadUserData().subscribe({
       next: (userData) => {
         this.avatarUrl = userData.avatarUrl?.trim();       
       },

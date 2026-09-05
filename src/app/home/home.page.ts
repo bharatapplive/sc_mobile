@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { filter, Subscription } from 'rxjs';
-import { AuthService } from '../authcontroller/auth-service';
+import { ProfileService } from '../authcontroller/profile-service';
 
 
 @Component({
@@ -21,12 +21,12 @@ export class HomePage implements OnInit {
 
   constructor(
     private router: Router,
-    private readonly authServe: AuthService,
+    private readonly profileServe: ProfileService,
     private navCtrl: NavController
   ) { }
 
   ngOnInit() {
-    this.authServe.loadUserData().subscribe({
+    this.profileServe.loadUserData().subscribe({
       next: (userData) => {
         this.avatarUrl = userData?.avatarUrl?.trim();   
       },

@@ -226,14 +226,14 @@ ion-content{
 }
 
 ion-toolbar {
-  --background: #{$bg-primary};
+  //--background: #{$bg-primary};
   --border-width: 0;
 
   .footer-button-container {
     background: #{$bg-primary}; // Standard CSS for the div wrapper
 
     ion-tab-bar {
-      --background: #{$bg-primary};
+      //--background: #{$bg-primary};
       --color-selected: #{$text-primary};
       --color: #{$text-muted}; // Muted color for unselected tabs
         border-top: none;
@@ -245,8 +245,37 @@ ion-toolbar {
     }
   }
 
-  .panels{
+    .panels{
         border-bottom: none !important;
-  }
+    }
 }
 
+.bottom-modal{
+
+    --border-radius: 0; /* Reset default full radius */
+
+
+    &::part(content) {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        overflow: hidden; /* Ensures child headers match rounded corners */
+    }
+
+    ion-toolbar{
+        text-align: center;
+        color: black;        
+        border-bottom: none !important;
+    }
+}
+
+ion-content::part(scroll) {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

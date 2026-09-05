@@ -1,6 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../authcontroller/auth-service';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AudioTrack, CreatePostPayload } from '../authcontroller/authInterface';
+import { IonModal } from '@ionic/angular';
+import { forkJoin } from 'rxjs';
+import { PostService } from '../authcontroller/Post-service';
+import { ProfileService } from '../authcontroller/profile-service';
 
 interface HighLight{
   imgUrl: string;
@@ -15,11 +18,16 @@ interface HighLight{
 })
 
 export class FeedsPage implements OnInit, OnDestroy{
+  
+  @ViewChild(IonModal) modal!: IonModal;
+  // Modal visibility and selected post state
+  isLikesModalOpen = false;
+  selectedFeedForLikes: any = null;
 
+  isCommitModalOpen = false;
   // User content...
   avatarUrl?: string = '';
   username: string = '';
-  isLikedBy: boolean =false;
   currentUserId: string | null = null; // Declare property here
 
   //Music...
@@ -29,7 +37,8 @@ export class FeedsPage implements OnInit, OnDestroy{
 
   // List / Array / Collection....
   postList: any[] = [];
-  
+  likedByUsers: any[] = [];
+
   highlights: HighLight[] = [
     {imgUrl:'assets/images/Slex.jpg', username:'@ayushi.cuteii'},
     {imgUrl:'assets/images/Magal.avif', username:'@rani.kumari'},
@@ -39,12 +48,9 @@ export class FeedsPage implements OnInit, OnDestroy{
   ]
 
   constructor(
-    private readonly authServe: AuthService
-  ) {
-    
-    this.loadUserProfile();
-    this.loadPost();
-   }
+    private readonly postServe: PostService,
+    private readonly profileServe: ProfileService
+  ) { }
 
   ngOnInit() { 
     this.loadUserProfile();
@@ -57,7 +63,7 @@ export class FeedsPage implements OnInit, OnDestroy{
 
   loadPost(event?: any){
 
-    this.authServe.loadAllPost().subscribe({
+    this.postServe.loadAllPost().subscribe({
       next: (data: any) =>{
         // Spreads new posts at the beginning of the array
         this.postList = [...data];
@@ -79,7 +85,7 @@ export class FeedsPage implements OnInit, OnDestroy{
 
   loadUserProfile(event?: any){
     
-    this.authServe.loadUserData().subscribe({
+    this.profileServe.loadUserData().subscribe({
       next: (userData: any) => {
         this.username = userData.username;
         this.avatarUrl = userData.avatarUrl?.trim(); 
@@ -157,26 +163,47 @@ export class FeedsPage implements OnInit, OnDestroy{
   }
 
   toggleLikes(item: any){  
-    // const userId = item._id;
-    // if (!userId || !this.currentUserId) {return};
-
-    // // 1. Optimistically update local UI state immediately
-    // item.isLiked = !item.isLiked;
-    // item.likesCount += item.isLiked ? 1 : -1;
+    const userId = item._id;
+    if (!userId) {return};
   
-    // this.authServe.updateLikes(userId, this.currentUserId).subscribe({
-    //   next: (updatedPost: any) => {
-    //     console.log('Successfully updated in DB:', updatedPost);
-    //     item.likedBy = updatedPost.likedBy;
-    //     item.isLiked = updatedPost.isLiked;
-    //     item.likesCount = updatedPost.likesCount;
-    //   },
-    //   error: (err: any) => {
-    //     console.error('DB Update failed:', err);
-    //     // Revert optimistic update if API call fails
-    //     item.isLiked = !item.isLiked;
-    //     item.likesCount += item.isLiked ? 1 : -1;
-    //   }
-    // });
+    this.postServe.updateLikes(userId).subscribe({
+      next: (updatedPost: any) => {
+        item.likedBy = updatedPost.likedBy;
+        item.likesCount = updatedPost.likesCount;
+      },
+      error: (err: any) => {
+        console.error('DB Update failed:', err);
+      }
+    });
+  }
+
+  openLikesModal(feed: any) {
+    this.selectedFeedForLikes = feed;
+    this.isLikesModalOpen = true;
+
+    const userIds: string[] = feed?.likedBy || [];
+
+    if(userIds.length === 0){
+      this.likedByUsers = [];
+      return;
+    }
+    
+    const currentUser = userIds.map((id) =>{
+      return this.profileServe.loadUserDataById(id);
+    })
+
+    forkJoin(currentUser).subscribe({
+      next: (userData: any[]) => {
+        this.likedByUsers = userData;
+      }
+    })
+  }
+
+  openCommitModel(feed: any){
+    this.isCommitModalOpen = true;
+  }
+  
+  dismissModal() {
+    this.isLikesModalOpen = false;
   }
 }

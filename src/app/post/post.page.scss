@@ -14,7 +14,16 @@
             justify-content: center;
             background: rgb(59, 58, 58);
             width: 100%;
-            height: 452px;
+            max-width: 443px;  /* Target width */
+            aspect-ratio: 443 / 450;
+            height: auto;
+
+            .post-image{
+                width: 100%;
+                height: 100%;
+                object-fit: cover; 
+                object-position: center;
+            }
 
             ion-img::part(image) {
                 width: 100%;
@@ -94,11 +103,16 @@
             justify-content: center;
             background: black;
             width: 100%;
-            height: 452px;
-            border-radius: 14px;
-            margin: 10px;
+            max-width: 443px;  /* Target width */
+            aspect-ratio: 443 / 450;
+            height: auto;
 
-            overflow: auto;
+            .post-image{
+                width: 100%;
+                height: 100%;
+                object-fit: cover; 
+                object-position: center;
+            }
 
         }  
 

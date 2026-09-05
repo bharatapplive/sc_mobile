@@ -14,7 +14,7 @@
   <div class="container">
     <div class="post-panel" [style.display]="activeTab === 'POST' ? 'flex' : 'none'">
      <div class="upper-container">
-        <ion-img [src]="postUrl"></ion-img>
+        <ion-img [src]="postUrl" class="post-image"></ion-img>
       </div>
       <div class="lower-conatiner">
         <div class="btn-header">
@@ -176,7 +176,7 @@
         <div class="post-container">
           <div class="post-section" [style.display]="activeTab === 'POST' ? 'flex' : 'none'">
             <div class="selected-image">
-              <ion-img [src]="postUrl"></ion-img>            
+              <ion-img [src]="postUrl" class="post-image"></ion-img>            
             </div>
 
             <div class="caption-card">

@@ -8,10 +8,14 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth-service';
+import { AlertController } from '@ionic/angular';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private alertController: AlertController,
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const endpoints = ['/auth/login', '/auth/register', '/auth/verify-otp'];
@@ -38,10 +42,31 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 || error.status === 403) {
-          this.authService.logout();
+          this.showSessionExpiredAlert();
         }
         return throwError(() => error);
       })
     );
+  }
+
+  async showSessionExpiredAlert() {
+    // Clear saved storage data
+    localStorage.clear();
+
+    const alert = await this.alertController.create({
+      header: 'Session Expired',
+      message: 'Please login again!',
+      buttons: [
+        {
+          text: 'Login',
+          handler: () => {
+            this.authService.logout();
+          }
+        }
+      ],
+      backdropDismiss: false // Alert ko miss/dismiss hone se rokne ke liye
+    });
+
+    await alert.present();
   }
 }

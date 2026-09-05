@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
 import { AuthService } from '../authcontroller/auth-service';
+import { ProfileService } from '../authcontroller/profile-service';
+import { PostService } from '../authcontroller/Post-service';
 
 export interface UserProfile{
   fullname: string;
@@ -39,7 +41,9 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private router: Router,
-    private readonly authServe: AuthService
+    private readonly authServe: AuthService,
+    private readonly postServe: PostService,
+    private readonly profileServe: ProfileService
   ) {}
 
   ngOnInit() {
@@ -49,7 +53,7 @@ export class ProfilePage implements OnInit {
   
   // 1. USER DATA.....
   loadUserProfile(event?: any){
-    this.authServe.loadUserData().subscribe({
+    this.profileServe.loadUserData().subscribe({
       next: (userData: any) => {
         this.user = userData;
         this.currentUserId = userData?._id;
@@ -77,7 +81,7 @@ export class ProfilePage implements OnInit {
   // 2. UPDATE POST..
   updatePost(){
     
-    this.authServe.loadPostData().subscribe({
+    this.postServe.loadPostData().subscribe({
       next: (userData: any) => {
         // If backend returns an array (from find({ userId }))
         if (Array.isArray(userData)) {
