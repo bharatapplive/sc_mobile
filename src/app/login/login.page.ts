@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 
 @Component({
@@ -15,7 +16,10 @@ export class LoginPage implements OnInit {
   isSubmitting = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.setTheme('light');
@@ -44,18 +48,19 @@ export class LoginPage implements OnInit {
         mobile: this.mobile.trim(),
         password: this.password,
       })
-      .subscribe({
-        next: (response) => {
+      .subscribe(
+        (response: any) => {
           this.isSubmitting = false;
+          this.authService.setToken(response.access_token);
+          this.router.navigate(['/home']);
           console.log('Login successful', response);
-          // Replace with navigation logic if needed.
         },
-        error: (error) => {
+        (error) => {
           this.isSubmitting = false;
-          this.errorMessage = error?.error?.message || 'Invalid credentials. Please try again.';
+          this.errorMessage =
+            error?.error?.message || 'Invalid credentials. Please try again.';
           console.error('Login failed', error);
         },
-      });
+      );
   }
 }
-

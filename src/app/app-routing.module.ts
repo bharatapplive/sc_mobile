@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./home/home.module').then((m) => m.HomePageModule),
   },
   {
@@ -17,18 +19,14 @@ const routes: Routes = [
   },
   // registeration routes
   {
-  path: 'registration',
-  loadChildren: () =>
-    import('./registration/registration.module').then(
-      m => m.RegistrationModule
-    )
-}
+    path: 'registration',
+    loadChildren: () =>
+      import('./registration/registration.module').then((m) => m.RegistrationModule),
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
