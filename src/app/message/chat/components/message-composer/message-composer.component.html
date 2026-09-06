@@ -1,0 +1,62 @@
+<div class="composer-container">
+  
+  <!-- Attachment Popover -->
+  <app-attachment-menu
+    *ngIf="showAttachmentMenu"
+    (selectOption)="onAttachmentSelect($event)"
+    (closeMenu)="showAttachmentMenu = false"
+  />
+
+  <!-- Emoji Popover -->
+  <app-emoji-picker
+    *ngIf="showEmojiPicker"
+    (selectEmoji)="onEmojiSelect($event)"
+    (closePicker)="showEmojiPicker = false"
+  />
+
+  <div class="composer-inner">
+    <!-- Attachment Plus Button -->
+    <button
+      class="icon-btn action-btn"
+      [class.active]="showAttachmentMenu"
+      (click)="toggleAttachmentMenu($event)"
+      aria-label="Add attachment"
+    >
+      <span class="material-symbols-outlined">add</span>
+    </button>
+
+    <!-- Text Input Box -->
+    <div class="input-wrapper">
+      <input
+        #messageInput
+        type="text"
+        class="message-input"
+        placeholder="Write a message..."
+        [(ngModel)]="messageText"
+        (keydown)="onKeyDown($event)"
+        aria-label="Write a message"
+        autocomplete="off"
+      />
+
+      <!-- Emoji Button inside input end -->
+      <button
+        class="icon-btn emoji-trigger"
+        [class.active]="showEmojiPicker"
+        (click)="toggleEmojiPicker($event)"
+        aria-label="Insert emoji"
+      >
+        <span class="material-symbols-outlined">sentiment_satisfied</span>
+      </button>
+    </div>
+
+    <!-- Send Button -->
+    <button
+      class="send-btn"
+      [disabled]="!canSend"
+      (click)="onSend()"
+      aria-label="Send message"
+    >
+      <span class="material-symbols-outlined send-icon">send</span>
+    </button>
+  </div>
+</div>

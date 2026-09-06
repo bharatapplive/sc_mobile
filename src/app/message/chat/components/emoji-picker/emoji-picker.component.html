@@ -1,0 +1,16 @@
+<div class="emoji-backdrop" (click)="onBackdropClick()"></div>
+<div class="emoji-popover">
+  <div class="emoji-header">
+    <span class="header-title">Quick Emojis</span>
+  </div>
+  <div class="emoji-grid">
+    <button
+      *ngFor="let emoji of emojis"
+      class="emoji-btn"
+      (click)="onEmojiClick(emoji)"
+      [attr.aria-label]="'Select emoji ' + emoji"
+    >
+      {{ emoji }}
+    </button>
+  </div>
+</div>

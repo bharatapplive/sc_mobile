@@ -1,0 +1,82 @@
+.attachment-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 120;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(2px);
+}
+
+.attachment-popover {
+  position: absolute;
+  bottom: 70px;
+  left: 16px;
+  z-index: 130;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 36px rgba(107, 56, 212, 0.18);
+  border: 1px solid rgba(203, 195, 215, 0.3);
+  padding: 16px;
+  width: min(280px, calc(100vw - 32px));
+  animation: popoverSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popoverSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.attachment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.attachment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    background: rgba(107, 56, 212, 0.05);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .material-symbols-outlined {
+    font-size: 24px;
+  }
+}
+
+.item-label {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--color-on-surface, #1a1c1c);
+}

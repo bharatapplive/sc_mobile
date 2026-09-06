@@ -1,0 +1,16 @@
+<div class="attachment-backdrop" (click)="onBackdropClick()"></div>
+<div class="attachment-popover">
+  <div class="attachment-grid">
+    <button
+      *ngFor="let opt of options"
+      class="attachment-item"
+      (click)="onSelect(opt.id)"
+      [attr.aria-label]="opt.label"
+    >
+      <div class="icon-circle" [style.background-color]="opt.color + '18'" [style.color]="opt.color">
+        <span class="material-symbols-outlined">{{ opt.icon }}</span>
+      </div>
+      <span class="item-label">{{ opt.label }}</span>
+    </button>
+  </div>
+</div>

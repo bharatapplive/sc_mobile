@@ -1,0 +1,48 @@
+<div #scrollContainer class="message-list-container hide-scrollbar" (scroll)="onScroll()">
+  
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="messages.length === 0">
+    <div class="empty-avatar-ring">
+      <img [src]="user.avatar" [alt]="user.name" class="empty-avatar" />
+    </div>
+    <h3 class="empty-title">Start a conversation</h3>
+    <p class="empty-subtitle">Send a message to start chatting with {{ user.name }}</p>
+    <div class="empty-badge">
+      <span class="material-symbols-outlined">chat_bubble</span>
+      <span>Say Hi 👋</span>
+    </div>
+  </div>
+
+  <!-- Message Groups with Date Separators -->
+  <ng-container *ngIf="messages.length > 0">
+    <div *ngFor="let group of groupedMessages" class="message-group">
+      
+      <!-- Date Separator -->
+      <div class="date-separator">
+        <span class="date-pill">{{ group.dateLabel }}</span>
+      </div>
+
+      <!-- Messages in Group -->
+      <app-message-bubble
+        *ngFor="let msg of group.messages; trackBy: trackByMsgId"
+        [message]="msg"
+      />
+    </div>
+
+    <!-- Typing Indicator -->
+    <app-typing-indicator
+      *ngIf="isTyping"
+      [userName]="user.name"
+    />
+  </ng-container>
+
+  <!-- Floating Scroll To Bottom Button -->
+  <button
+    *ngIf="showScrollBottomBtn"
+    class="scroll-bottom-btn"
+    (click)="scrollToBottom()"
+    aria-label="Scroll to latest message"
+  >
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</div>

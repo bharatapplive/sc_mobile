@@ -1,0 +1,29 @@
+<div class="message-wrapper" [class.outgoing]="isOutgoing" [class.incoming]="!isOutgoing">
+  <div class="message-bubble" [attr.aria-label]="(isOutgoing ? 'Sent message: ' : 'Received message: ') + message.text">
+    
+    <!-- Optional Image Attachment -->
+    <div class="image-attachment" *ngIf="message.type === 'image' && message.imageUrl">
+      <img [src]="message.imageUrl" alt="Attachment" />
+    </div>
+
+    <!-- Message Text -->
+    <div class="message-text" *ngIf="message.text">
+      {{ message.text }}
+    </div>
+
+    <!-- Metadata Footer -->
+    <div class="message-meta">
+      <span class="message-time">{{ message.timestamp }}</span>
+      
+      <span *ngIf="isOutgoing" class="status-indicator" [class]="message.status" [title]="statusText" [attr.aria-label]="statusText">
+        <!-- Sending Icon -->
+        <span *ngIf="message.status === 'sending'" class="material-symbols-outlined status-icon">schedule</span>
+        <!-- Sent Icon (Single Check) -->
+        <span *ngIf="message.status === 'sent'" class="material-symbols-outlined status-icon">check</span>
+        <!-- Delivered / Read Icons (Double Check) -->
+        <span *ngIf="message.status === 'delivered' || message.status === 'read'" class="material-symbols-outlined status-icon">done_all</span>
+      </span>
+    </div>
+
+  </div>
+</div>

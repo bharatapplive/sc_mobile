@@ -1,0 +1,49 @@
+<header class="chat-header">
+  <div class="header-content">
+    <button class="icon-btn back-btn" (click)="goBack()" aria-label="Back to messages">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+
+    <div class="user-info" (click)="onAvatarClick()" role="button" tabindex="0">
+      <div class="avatar-wrapper">
+        <img [src]="user.avatar" [alt]="user.name" class="avatar-img" />
+        <span *ngIf="user.isOnline" class="online-badge"></span>
+      </div>
+      <div class="user-details">
+        <h1 class="user-name">{{ user.name }}</h1>
+        <p class="online-status">
+          <span class="status-dot" [class.online]="user.isOnline"></span>
+          {{ user.lastSeen || (user.isOnline ? 'Active now' : 'Offline') }}
+        </p>
+      </div>
+    </div>
+
+    <div class="menu-container">
+      <button class="icon-btn menu-btn" (click)="toggleMenu($event)" aria-label="More options">
+        <span class="material-symbols-outlined">more_vert</span>
+      </button>
+
+      <!-- Options Dropdown Menu -->
+      <div class="dropdown-menu" *ngIf="showMenu" (click)="$event.stopPropagation()">
+        <button class="menu-item" (click)="onOptionClick('profile')">
+          <span class="material-symbols-outlined">person</span>
+          View Profile
+        </button>
+        <button class="menu-item" (click)="onOptionClick('search')">
+          <span class="material-symbols-outlined">search</span>
+          Search in conversation
+        </button>
+        <button class="menu-item" (click)="onOptionClick('mute')">
+          <span class="material-symbols-outlined">notifications_off</span>
+          Mute notifications
+        </button>
+        <div class="menu-divider"></div>
+        <button class="menu-item danger" (click)="onOptionClick('clear')">
+          <span class="material-symbols-outlined">delete_outline</span>
+          Clear chat
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="menu-overlay" *ngIf="showMenu" (click)="closeMenu()"></div>

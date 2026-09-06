@@ -7,6 +7,12 @@
   margin: 0 -16px;
   padding-left: 16px;
   padding-right: 16px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera, Ionic WebView */
+  }
 
   @media (min-width: 768px) {
     margin: 0 -48px;
@@ -27,7 +33,7 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   border: 1px solid rgba(203, 195, 215, 0.3);
-  transition: transform 0.2s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s ease, var(--background) 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
   margin: 0;
 
   ion-label {
