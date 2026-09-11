@@ -1,0 +1,151 @@
+ion-content {
+  --background: #fdfdfd;
+}
+/* Screen ke center mein sab kuch set karne ke liye */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
+  min-height: 90vh;
+  padding: 10px;
+}
+
+/* Logo aur Titles ki styling */
+.header {
+  text-align: center;
+  margin-bottom: 35px;
+
+  .logo-box {
+    background: linear-gradient(45deg, #FF0080 0%, #7928cA 100%); 
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 32px;
+      color: white;
+    }
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0 0 10px;
+    color: #1a1a1a;
+  }
+
+  p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+/* Text boxes aur Button ki styling */
+.form-section {
+  label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    margin-left: 5px;
+  }
+
+  .custom-input {
+    --background: #f4f5f8;
+    --border-radius: 12px;
+    --color: #000000;
+    margin-bottom: 20px;
+    border: 1px solid #e1e2e6;
+    border-radius: 12px;
+  }
+
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 25px;
+    margin-top: -10px;
+    
+    a {
+      font-size: 13px;
+      color: #6c5ce7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  }
+
+  /* Image mein dikhaya gaya Purple se Pink gradient! */
+  .login-btn {
+    --background: linear-gradient(45deg, #FF0080 0%, #7928cA 100%, #d62976 50%, #962fbf 75%, #4f5bd5 100%);
+    --border-radius: 12px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* OR CONTINUE WITH wali line */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 35px 0;
+
+  hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ddd;
+  }
+
+  span {
+    padding: 0 15px;
+    font-size: 11px;
+    color: #888;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+}
+
+/* Google & Apple Buttons */
+.social-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  .social-btn {
+    flex: 1;
+    --border-color: #ddd;
+    --border-radius: 12px;
+    --color: #333;
+    height: 50px;
+    font-weight: 700;
+    font-size: 15px;
+    
+    ion-icon {
+      font-size: 22px;
+      color: #111;
+    }
+  }
+}
+
+/* Sign up text */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #666;
+
+  a {
+    color: #6c5ce7;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}

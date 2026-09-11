@@ -1,0 +1,157 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .search-Bar-container{
+        width: 90%;
+
+        .place-holder{
+            --min-height: 40px;
+        }
+    }
+
+    .tab-bar{
+        width: 95%;
+        margin: 10px 0;
+
+        .tags-scroll-container{
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            gap: 10px;padding: 4px 16px;
+            white-space: nowrap;
+
+            .chips{
+                flex: 0 0 auto;
+                margin: 0;
+                background: rgba(226, 226, 226, 0.801);
+                border-radius: 14px;
+                color: #0f172a;
+                font-size: 16px;
+                padding: 2px;
+                font-weight: bold;
+                text-transform: none; 
+                
+                /* Active State */
+                &.active {
+                    // Background for the tab container
+                    --background: linear-gradient(135deg, #102a43, #e3f2fd);
+
+                    // Text/Icon Gradient technique for Shadow DOM elements
+                    span{
+                        background: linear-gradient(135deg, White 60%, black 40%);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                    }
+                }
+            }           
+        }
+    }
+
+    .file-container{
+        width: 95%;
+
+        // Theme Variables
+        $primary-color: #8b5cf6; // Purple accent
+        $glass-bg: rgba(255, 255, 255, 0.12);
+        $glass-border: rgba(255, 255, 255, 0.2);
+        $text-white: #ffffff;
+
+        // Masonry Grid Wrapper
+        .masonry-grid {
+            column-count: 2; // Default 2 columns for mobile
+
+            @media (min-width: 640px) {
+                column-count: 3;
+            }
+
+            @media (min-width: 1024px) {
+                column-count: 4;
+            }
+        }
+
+        // Masonry Card Item
+        .masonry-item {
+            position: relative;
+            display: inline-block; // Essential for CSS Column masonry flow
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+
+            // Image Zoom on Hover
+            .card-img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &:hover .card-img {
+                transform: scale(1.08);
+            }
+
+            // Heart Favorite Icon
+            .favorite-icon {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: $text-white;
+                font-size: 18px;
+                z-index: 2;
+            }
+
+            // Overlays
+            .card-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 12px;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+                color: $text-white;
+                z-index: 2;
+
+                &.space-between {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .user-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    .avatar {
+                        width: 26px;
+                        height: 26px;
+                        border: 1.5px solid rgba(255, 255, 255, 0.6);
+                    }
+
+                    .username {
+                        font-size: 0.8rem;
+                        font-weight: 500;
+                    }
+                }
+
+                .caption {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .action-icon {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+

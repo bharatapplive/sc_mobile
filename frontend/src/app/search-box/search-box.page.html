@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <section class="search-Bar-container">
+      <ion-item lines="none" class="place-holder">
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+          <ion-input type="text" name="searchbar" placeholder="Search trends, creators, or tags.." required minlength="5" (ionInput)="onSearchChange($event)"></ion-input>
+      </ion-item>
+    </section>
+
+    <section class="tab-bar">
+      <div class="tags-scroll-container">
+        <ion-button 
+          shape="round" 
+          size="small" 
+          fill="clear" 
+          *ngFor="let tag of tags" 
+          class="chips"
+          [class.active]="selectedTag === tag"
+          (click)="selectTag(tag)">
+          <span>{{ tag }}</span>
+        </ion-button >
+      </div>
+    </section>
+
+    <section class="file-container card-board">
+      <ion-grid class="masonry-grid">
+        <div class="masonry-item" *ngFor="let item of allItems" >
+          <ion-img class="card-img" [src]="item.url"></ion-img>
+          <ion-icon name="heart" class="favorite-icon"></ion-icon>
+          <div class="card-overlay bottom">
+            <div class="user-info">
+              <ion-avatar class="avatar">
+                <ion-img [src]="item.url"></ion-img>
+              </ion-avatar>
+              <span class="username">{{item?.title}}</span>
+            </div>
+          </div>
+        </div>
+      </ion-grid>
+    </section>
+  </div>
+</ion-content>

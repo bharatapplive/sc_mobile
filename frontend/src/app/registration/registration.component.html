@@ -1,0 +1,148 @@
+<div class="register-page">
+
+  <!-- Logo -->
+  <div class="logo">
+    <span>♟</span>
+  </div>
+
+  <!-- Heading -->
+  <h1>Social Circle</h1>
+
+  <p class="subtitle">
+    Connect with creators, share your story, and join the digital circle
+  </p>
+
+  <!-- Registration Card -->
+  <div class="register-card">
+
+    <h2>Create Account</h2>
+
+    <p class="description">
+      Join Social Circle today
+    </p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+      <!-- Email / Mobile -->
+      <div class="input-group">
+
+        <label>Mobile Number or Email</label>
+
+        <div class="input-box">
+
+          <span>👤</span>
+
+          <input
+            type="text"
+            formControlName="emailOrMobile"
+            placeholder="Enter mobile number or email"
+          />
+
+        </div>
+
+        <small
+          *ngIf="
+            registerForm.get('emailOrMobile')?.touched &&
+            registerForm.get('emailOrMobile')?.invalid
+          "
+        >
+          Mobile number or email is required
+        </small>
+
+      </div>
+
+      <!-- Password -->
+      <div class="input-group">
+
+        <label>Password</label>
+
+        <div class="input-box">
+
+          <span>🔒</span>
+
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Create password"
+          />
+
+          <button
+            type="button"
+            class="eye-btn"
+            (click)="showPassword = !showPassword"
+          >
+            {{ showPassword ? '🙈' : '👁️' }}
+          </button>
+
+        </div>
+
+        <small
+          *ngIf="
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.invalid
+          "
+        >
+          Password must be at least 6 characters
+        </small>
+
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="input-group">
+
+        <label>Confirm Password</label>
+
+        <div class="input-box">
+
+          <span>🔒</span>
+
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            placeholder="Confirm password"
+          />
+
+          <button
+            type="button"
+            class="eye-btn"
+            (click)="showConfirmPassword = !showConfirmPassword"
+          >
+            {{ showConfirmPassword ? '🙈' : '👁️' }}
+          </button>
+
+        </div>
+
+        <small
+          *ngIf="
+            registerForm.hasError('passwordMismatch') &&
+            registerForm.get('confirmPassword')?.touched
+          "
+        >
+          Passwords do not match
+        </small>
+
+      </div>
+
+      <!-- Register Button -->
+      <button
+        type="submit"
+        class="register-btn"
+        [disabled]="registerForm.invalid"
+      >
+        Create Account
+      </button>
+
+    </form>
+
+    <!-- Login -->
+    <p class="login-text">
+      Already have an account?
+
+      <a routerLink="/login">
+        Log In
+      </a>
+    </p>
+
+  </div>
+
+</div>

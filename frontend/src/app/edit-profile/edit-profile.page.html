@@ -1,0 +1,199 @@
+<ion-header [translucent]="false">
+
+  <ion-toolbar>
+
+    <!-- BACK -->
+
+    <ion-buttons slot="start">
+
+      <ion-button
+        fill="clear"
+        [disabled]="saving"
+        (click)="cancel()">
+
+        <ion-icon
+          slot="icon-only"
+          name="arrow-back-outline">
+        </ion-icon>
+
+      </ion-button>
+
+    </ion-buttons>
+
+
+    <!-- TITLE -->
+
+    <ion-title>
+      Edit Profile
+    </ion-title>
+
+
+    <!-- SAVE -->
+
+    <ion-buttons slot="end">
+
+      <ion-button
+        strong="true"
+        [disabled]="saving || loading"
+        (click)="saveProfile()">
+
+        <span *ngIf="!saving">
+          Save
+        </span>
+
+        <ion-spinner
+          *ngIf="saving"
+          name="crescent">
+        </ion-spinner>
+
+      </ion-button>
+
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div class="edit-profile-container">
+
+    <!-- PROFILE PREVIEW -->
+
+    <div class="profile-preview">
+
+      <div class="profile-avatar">
+
+        <div class="avatar-placeholder">
+
+          <ion-icon
+            name="person-outline">
+          </ion-icon>
+
+        </div>
+
+      </div>
+
+      <h2>
+        {{ fullname || 'Your Name' }}
+      </h2>
+
+      <p>
+        @{{ username || 'username' }}
+      </p>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <div class="form-container">
+
+      <!-- FULL NAME -->
+
+      <ion-item lines="full">
+
+        <ion-icon
+          slot="start"
+          name="person-outline">
+        </ion-icon>
+
+        <ion-input
+          label="Full name"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="Enter your full name"
+          [(ngModel)]="fullname">
+        </ion-input>
+
+      </ion-item>
+
+
+      <!-- USERNAME -->
+
+      <ion-item lines="full">
+
+        <ion-icon
+          slot="start"
+          name="at-outline">
+        </ion-icon>
+
+        <ion-input
+          label="Username"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="Enter username"
+          [(ngModel)]="username">
+        </ion-input>
+
+      </ion-item>
+
+
+      <!-- BIO -->
+
+      <ion-item lines="full">
+
+        <ion-icon
+          slot="start"
+          name="information-circle-outline">
+        </ion-icon>
+
+        <ion-textarea
+          label="Bio"
+          labelPlacement="stacked"
+          placeholder="Write something about yourself"
+          [autoGrow]="true"
+          [maxlength]="150"
+          [(ngModel)]="profileBio">
+        </ion-textarea>
+
+      </ion-item>
+
+
+      <!-- BIO COUNTER -->
+
+      <div class="bio-counter">
+        {{ profileBio.length }}/150
+      </div>
+
+
+      <!-- SAVE -->
+
+      <ion-button
+        expand="block"
+        shape="round"
+        class="save-button"
+        [disabled]="saving || loading"
+        (click)="saveProfile()">
+
+        <ion-spinner
+          *ngIf="saving"
+          name="crescent">
+        </ion-spinner>
+
+        <span *ngIf="!saving">
+          Save Changes
+        </span>
+
+      </ion-button>
+
+
+      <!-- CANCEL -->
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        color="medium"
+        [disabled]="saving"
+        (click)="cancel()">
+
+        Cancel
+
+      </ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>

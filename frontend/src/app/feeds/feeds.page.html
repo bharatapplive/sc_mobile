@@ -1,0 +1,354 @@
+<ion-content [fullscreen]="true">
+
+  <div class="feed-page">
+
+    <!-- ================= STORIES ================= -->
+    <section class="stories">
+
+      <!-- YOUR STORY -->
+      <div class="story-item">
+
+        <div
+          class="story-avatar-wrapper your-story"
+          (click)="openYourStory()">
+
+          <ion-avatar class="story-avatar">
+            <ion-img
+              [src]="getUserAvatar()"
+              alt="Your Story">
+            </ion-img>
+          </ion-avatar>
+
+          <!-- PLUS BUTTON -->
+          <button
+            type="button"
+            class="story-add"
+            (click)="createStory($event)">
+
+            <ion-icon name="add"></ion-icon>
+
+          </button>
+
+        </div>
+
+        <span>Your story</span>
+
+      </div>
+
+
+      <!-- OTHER STORIES -->
+      <div
+        class="story-item"
+        *ngFor="let item of highlights">
+
+        <div class="story-avatar-wrapper">
+
+          <ion-avatar class="story-avatar">
+
+            <ion-img
+              [src]="item.imgUrl"
+              alt="Story">
+            </ion-img>
+
+          </ion-avatar>
+
+        </div>
+
+        <span>
+          {{ item.username }}
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= FEED ================= -->
+    <main class="feed-list">
+
+      <article
+        class="feed-post"
+        *ngFor="let feed of feeds; let i = index">
+
+        <!-- POST HEADER -->
+        <header class="post-header">
+
+          <div class="user-info">
+
+            <ion-avatar class="post-avatar">
+
+              <ion-img
+                [src]="feed.avatar"
+                alt="User">
+              </ion-img>
+
+            </ion-avatar>
+
+            <div class="user-details">
+
+              <div class="username-row">
+
+                <strong>
+                  {{ feed.username }}
+                </strong>
+
+                <span
+                  class="verified"
+                  *ngIf="feed.verified">
+                  ✓
+                </span>
+
+                <button
+                  *ngIf="!feed.isFollowing"
+                  class="follow-btn"
+                  (click)="toggleFollow(feed)">
+                  Follow
+                </button>
+
+                <button
+                  *ngIf="feed.isFollowing"
+                  class="following-btn"
+                  (click)="toggleFollow(feed)">
+                  Following
+                </button>
+
+              </div>
+
+              <span class="location">
+                {{ feed.location }}
+              </span>
+
+            </div>
+
+          </div>
+
+          <ion-button
+            fill="clear"
+            class="more-btn">
+
+            <ion-icon
+              slot="icon-only"
+              name="ellipsis-horizontal">
+            </ion-icon>
+
+          </ion-button>
+
+        </header>
+
+
+        <!-- POST IMAGE -->
+        <div class="post-image">
+
+          <ion-img
+            [src]="feed.postUrl"
+            alt="Post">
+          </ion-img>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+        <div class="post-actions">
+
+          <div class="left-actions">
+
+            <!-- LIKE -->
+            <button
+              class="action-btn"
+              (click)="toggleLike(feed)">
+
+              <ion-icon
+                [name]="feed.liked
+                  ? 'heart'
+                  : 'heart-outline'"
+                [class.liked]="feed.liked">
+              </ion-icon>
+
+            </button>
+
+
+            <!-- COMMENT -->
+            <button class="action-btn">
+
+              <ion-icon
+                name="chatbox-outline">
+              </ion-icon>
+
+            </button>
+
+
+            <!-- SHARE -->
+            <button class="action-btn">
+
+              <ion-icon
+                name="paper-plane-outline">
+              </ion-icon>
+
+            </button>
+
+          </div>
+
+
+          <!-- SAVE -->
+          <button
+            class="action-btn"
+            (click)="toggleSave(feed)">
+
+            <ion-icon
+              [name]="feed.saved
+                ? 'bookmark'
+                : 'bookmark-outline'">
+            </ion-icon>
+
+          </button>
+
+        </div>
+
+
+        <!-- POST INFORMATION -->
+        <div class="post-info">
+
+          <strong class="likes">
+            {{ feed.likes }} likes
+          </strong>
+
+          <p class="caption">
+
+            <strong>
+              {{ feed.username }}
+            </strong>
+
+            {{ feed.paragraph }}
+
+          </p>
+
+          <button class="comments-link">
+
+            View all
+            {{ feed.comments }}
+            comments
+
+          </button>
+
+          <span class="post-time">
+            {{ feed.postTime }}
+          </span>
+
+        </div>
+
+      </article>
+
+    </main>
+
+  </div>
+
+</ion-content>
+
+
+<!-- =====================================================
+     STORY IMAGE PICKER
+===================================================== -->
+
+<input
+  #storyInput
+  type="file"
+  accept="image/*,video/*"
+  hidden
+  (change)="onStorySelected($event)"
+>
+
+
+<!-- =====================================================
+     STORY PREVIEW MODAL
+===================================================== -->
+
+<ion-modal
+  [isOpen]="showStoryPreview"
+  (didDismiss)="closeStoryPreview()">
+
+  <ng-template>
+
+    <ion-header>
+
+      <ion-toolbar>
+
+        <ion-title>
+          Your Story
+        </ion-title>
+
+        <ion-buttons slot="end">
+
+          <ion-button
+            (click)="closeStoryPreview()">
+
+            Close
+
+          </ion-button>
+
+        </ion-buttons>
+
+      </ion-toolbar>
+
+    </ion-header>
+
+
+    <ion-content>
+
+      <div class="story-preview">
+
+        <!-- IMAGE PREVIEW -->
+        <img
+          *ngIf="storyPreviewUrl && storyFileType === 'image'"
+          [src]="storyPreviewUrl"
+          alt="Story Preview"
+          class="story-preview-media"
+        >
+
+
+        <!-- VIDEO PREVIEW -->
+        <video
+          *ngIf="storyPreviewUrl && storyFileType === 'video'"
+          [src]="storyPreviewUrl"
+          class="story-preview-media"
+          controls
+          autoplay
+          playsinline>
+        </video>
+
+
+        <!-- USER INFO -->
+        <div class="story-preview-user">
+
+          <ion-avatar>
+
+            <ion-img
+              [src]="getUserAvatar()"
+              alt="Profile">
+            </ion-img>
+
+          </ion-avatar>
+
+          <strong>
+            {{ username || 'Cricket.Edits' }}
+          </strong>
+
+        </div>
+
+
+        <!-- POST STORY -->
+        <button
+          class="post-story-btn"
+          type="button"
+          (click)="postStory()">
+
+          Add to your story
+
+        </button>
+
+      </div>
+
+    </ion-content>
+
+  </ng-template>
+
+</ion-modal>

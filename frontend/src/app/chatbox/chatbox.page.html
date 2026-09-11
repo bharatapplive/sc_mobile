@@ -1,0 +1,162 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="panels">
+      <ion-button fill="clear">
+        <ion-label>Social Circle</ion-label>
+      </ion-button>
+      <div>
+        <ion-button fill="clear" slot="end">
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <section class="search-Bar-container">
+      <ion-item lines="none" class="place-holder">
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+          <ion-input type="text" name="searchbar" placeholder="Search trends, creators, or tags.." required minlength="5"></ion-input>
+      </ion-item>
+    </section>
+
+    <section class="story-panel">
+      <div class="story-context">
+        <ion-avatar class="person">
+          <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>  
+        </ion-avatar>
+        <span>Your note</span>
+      </div>
+      
+      <div class="story-context" *ngFor="let item of onlineFriend">
+        <div class="online-relative">
+          <ion-avatar class="person">
+            <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <ion-icon class="story-add-absolute" name="online"></ion-icon>
+        </div>
+        <span>{{item?.fullname}}</span>
+      </div>
+    </section>
+
+    <section class="switch-msg">
+      <div class="filter toggle">
+        <ion-button shape="round" size="small" fill="clear">
+          <ion-icon slot="icon-only" name="options-outline"></ion-icon>
+          <ion-icon slot="icon-only" name="chevron-down-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button shape="round" size="small" fill="clear" *ngFor="let tag of tags" [class.active]="selectedTag === tag"
+          (click)="selectTag(tag)"><span>{{tag}}</span></ion-button>
+      </div>
+
+      <div class="list-msg">
+        <div class="card-board" >
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <ion-icon class="story-add-absolute" name="online"></ion-icon>
+          </div>
+          <div class="card-title-msg" [class.seen]="isSeen" [class.unseen]="!isSeen">
+            <div class="person-name-time" [class.seen]="isSeen" [class.unseen]="!isSeen">
+              <span>Luna Art</span>
+              <h6>Now</h6>
+            </div>
+            <p>Helo! Ranaji How are you. Where are you now a days</p>
+          </div>
+        </div>
+
+        <div class="card-board">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <ion-icon class="story-add-absolute" name="online"></ion-icon>
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Neo Pixel</span>
+              <h6>02mins ago</h6>
+            </div>
+            <p>Helo! Ranaji..</p>
+          </div>
+        </div>
+
+        <div class="card-board">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <ion-icon class="story-add-absolute" name="online"></ion-icon>
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Travel Joy</span>
+              <h6>15mins ago</h6>
+            </div>
+            <p>Congratulation! ranaji, you got travel tour at 50% off</p>
+          </div>
+        </div>
+
+        <div class="card-board">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Rok Joyi</span>
+              <h6>1days ago</h6>
+            </div>
+            <p>Hello..</p>
+          </div>
+        </div>
+
+        <div class="card-board">
+          <div class="online-relative">
+            <ion-avatar class="msg-person">
+              <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>
+            </ion-avatar>
+            <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
+          </div>
+          <div class="card-title-msg">
+            <div class="person-name-time">
+              <span>Slex Vibe</span>
+              <h6>3days ago</h6>
+            </div>
+            <p>Congratulation! ranaji, you got an anti piece price on our brand</p>
+          </div>
+        </div>
+            
+      </div>
+    </section>
+    
+    <section class="follow-list card-board">
+      <div class="header-bar">
+        <span>Accounts to follow</span>
+        <ion-button shape="round" size="small" fill="clear">See all</ion-button>
+      </div>
+
+      <div class="person-list" *ngFor="let item of follows">
+        <div class="avatar">
+          <ion-avatar>           
+            <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <div class="title">
+            <h2>{{item?.username}}</h2>
+            <span>{{item?.fullname}}</span>
+          </div>
+        </div>
+        <div class="tabs">
+          <ion-button shape="round" size="small" fill="clear">{{item?.status}}</ion-button>
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>
