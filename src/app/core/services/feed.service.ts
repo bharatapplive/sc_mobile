@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+//any i dont know- no type safe
+
+// thos is type safe interface for the feed post response
 export interface FeedMediaItem {
   id: string;
   type: string;
@@ -42,4 +45,5 @@ export class FeedService {
 
 
 // step 1  create a feed server
-// step api call to fetch the feed data from the Feed API ('http://localhost:3000/feed';)
+// step 2  api call to fetch the feed data from the Feed API ('http://localhost:3000/feed';)
+// ste 3 move to controller and create a service to handle the api call
