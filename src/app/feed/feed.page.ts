@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FeedMediaItem,
-  FeedPostResponse,
-  FeedService,
-} from '../core/services/feed.service';
+import { FeedService } from '../core/services/feed.service';
 
-export type FeedPost = FeedPostResponse;
+export type FeedPost = any;
 
 @Component({
   selector: 'app-feed',
@@ -39,7 +35,7 @@ export class FeedPage implements OnInit {
     });
   }
 
-  getPrimaryMedia(post: FeedPost): FeedMediaItem | undefined {
+  getPrimaryMedia(post: FeedPost): any | undefined {
     return post?.media?.[0];
   }
 
