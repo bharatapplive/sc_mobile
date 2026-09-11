@@ -64,18 +64,18 @@
       </div>
     </section>
 
-    <div class="feed-list">
-      <article class="feed-post glass-card">
+    <div class="feed-list" *ngIf="!isLoading && !errorMessage">
+      <article class="feed-post glass-card" *ngFor="let post of feed">
         <div class="post-header">
           <div class="post-user">
             <div class="avatar-wrap story-gradient">
               <div class="avatar-inner">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJFLSU08xEhS5mDsiUwmQpkN4wKn247sXC2dAN4Ll6nSC81ec8AMW4x4rhoanGlN0ZD315GOY3rdSGtj1LqrHhTglEjl8cRtbLG1XGNgb_z_TnLcjdqqaRhcwy0cy0aNFKxgwTQPI2xEuopvgj0IjArPQHXxUlOSe_PnI3ZuVNANwTbvdQuLX--edE-NGC9tjKwD-5gBxw4aQGS1beCfdOJ2rmno2PTE_CCzdflxGwmj0uNfvibRrSs0FJTrdbhcCED86VSIuzn8M" alt="creative_soul" />
+                <img [src]="post.avatar" [alt]="post.userName" />
               </div>
             </div>
             <div>
-              <p class="username">creative_soul</p>
-              <p class="location">Tokyo, Japan</p>
+              <p class="username">{{ post.userName }}</p>
+              <p class="location">{{ post.location }}</p>
             </div>
           </div>
           <button class="icon-button icon-button--small" aria-label="More options">
@@ -83,15 +83,15 @@
           </button>
         </div>
 
-        <div class="post-image-wrap">
-          <img class="post-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmLGb7vfQlCMYgMw6_dxjvV2S8n602NQnJurBCYkF-DUmasGuXouXqcig2gD33CiP5P9RL2S_zzbgDwVW-gMW99qYRADXXqh6tcoRcl_1T5vdpNQzL_U-wlEB-Hvpia3eq4wdN5tdn2wQpmlz8CGD2FYCv0HGD9W7PlMAU8J50CoVcXpykmG4SByutTHKxjgeb7YUO_Otnn2KBTmMwB8hy_YtW8g92nz6JZWKP2RAk5gtXbmpFIH1HxNDyi6KkN8z8FRSApGpHcCU" alt="Creative feed post" />
+        <div class="post-image-wrap" *ngIf="getPrimaryMedia(post) as media">
+          <img class="post-image" [src]="media.url" [alt]="media.altText" />
         </div>
 
         <div class="post-content">
           <div class="post-actions">
             <div class="action-group">
               <button class="icon-button icon-button--action" aria-label="Like">
-                <span class="material-symbols-outlined">favorite</span>
+                <span class="material-symbols-outlined" [class.icon-filled]="post.isLikedByMe">favorite</span>
               </button>
               <button class="icon-button icon-button--action" aria-label="Comment">
                 <span class="material-symbols-outlined">chat_bubble</span>
@@ -101,19 +101,28 @@
               </button>
             </div>
             <button class="icon-button icon-button--action" aria-label="Save">
-              <span class="material-symbols-outlined">bookmark</span>
+              <span class="material-symbols-outlined" [class.icon-filled]="post.isBookmarkedByMe">bookmark</span>
             </button>
           </div>
           <div class="post-meta">
-            <p class="likes">1,284 likes</p>
-            <p class="caption"><span class="caption-user">creative_soul</span> Exploring the boundaries of digital reality today. This installation in Tokyo is pure magic. #DigitalArt #TokyoVibes</p>
-            <button class="comment-link" type="button">View all 42 comments</button>
-            <p class="time-stamp">2 hours ago</p>
+            <p class="likes">{{ post.likesCount | number }} likes</p>
+            <p class="caption"><span class="caption-user">{{ post.userName }}</span> {{ post.caption }}</p>
+            <button class="comment-link" type="button">View all {{ post.commentsCount }} comments</button>
+            <p class="time-stamp">{{ formatTimeAgo(post.createdAt) }}</p>
           </div>
         </div>
       </article>
+    </div>
 
-      <article class="feed-post glass-card">
+    <div *ngIf="isLoading" class="feed-list">
+      <p>Loading feed...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="feed-list">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <!-- <article class="feed-post glass-card">
         <div class="post-header">
           <div class="post-user">
             <div class="avatar-wrap story-gradient">
@@ -212,7 +221,6 @@
             <p class="time-stamp">9 hours ago</p>
           </div>
         </div>
-      </article>
-    </div>
+      </article> -->
   </main>
 </ion-content>
