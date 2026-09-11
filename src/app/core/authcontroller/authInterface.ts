@@ -72,6 +72,7 @@ export interface PostResponse extends CreatePostPayload {
 //#endregion
 
 export type PostType = 'post' | 'story' | 'reel';
+export type reelType = 'post' | 'story' | 'reel';
 
 export interface OverlayText {
   id:       string;

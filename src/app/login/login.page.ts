@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Location } from '@angular/common';
-import { AuthService } from '../authcontroller/auth-service';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { AuthService } from '../core/authcontroller/auth-service';
+import { ActionSheetController, NavController, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
@@ -32,7 +32,8 @@ export class LoginPage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private readonly authServe: AuthService,
     private navCtrl: NavController, // 👈 Inject NavController
-    private zone: NgZone           // 👈 Inject NgZone
+    private zone: NgZone,          // 👈 Inject NgZone
+    private readonly toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -44,6 +45,7 @@ export class LoginPage implements OnInit {
         next: () =>{
           this.zone.run(() => {            
             // Replaces router.navigate for robust root navigation in Ionic
+            this.presentSuccessToast('Logged in successfully!');
             this.navCtrl.navigateRoot('/home');
           });
         },
@@ -224,5 +226,17 @@ export class LoginPage implements OnInit {
     this.isLogin = true;
     this.step = 'REGISTER';
     this.registerPortal = { fullname: '', email: '', phone: '', password: '' };
+  }
+
+  async presentSuccessToast(messageText: string) {
+    const toast = await this.toastController.create({
+      message: messageText,
+      duration: 2500,
+      position: 'bottom',
+      color: 'success',
+      icon: 'checkmark-circle-outline', // Optional icon
+    });
+
+    await toast.present();
   }
 }

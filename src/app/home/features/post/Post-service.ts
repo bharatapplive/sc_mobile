@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CreatePostPayload, MediaComposerState, OverlayText, PostResponse, PostType } from './authInterface';
+import { CreatePostPayload, MediaComposerState, OverlayText, PostResponse, PostType } from '../../../core/authcontroller/authInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -73,6 +73,16 @@ export class PostService {
     this.state$.next(this.initialState);
   }
   //#endregion
+
+  // 2. DELETE POST..
+  deletePostfromUser(postId: string):Observable<PostResponse>{
+    return this.http.delete<PostResponse>(`${environment.apiUrl}/post/${postId}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Server side error during registration:', error);
+        return throwError(() => new Error(error.error?.message || 'Server error occurred'));
+      })
+    );
+  }
 
   // 2. ALL FEEDS....
   loadAllPost(){

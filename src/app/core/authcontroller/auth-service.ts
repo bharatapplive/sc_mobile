@@ -46,7 +46,6 @@ private currentUserSubject = new BehaviorSubject<User | null>(null);
       (tap((user)=> 
         {
           if (user && user.jwt) {
-            alert(`${user.message} ${user.user.username}`)
             localStorage.setItem('accessToken', user.jwt);
           }
         })

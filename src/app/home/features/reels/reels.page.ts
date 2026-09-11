@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChildren, QueryList} from '@angular/core';
 import { ViewDidEnter, ViewWillLeave } from '@ionic/angular';
 import { register } from 'swiper/element/bundle';
+import { ReelService } from './reel-service';
 
 // Register Swiper Custom Elements
 register();
@@ -33,8 +34,17 @@ export class ReelsPage implements OnInit, ViewDidEnter, ViewWillLeave {
   private currentAudio: HTMLAudioElement | null = null;
   private activeIndex: number = 0;
 
-  constructor(){}
+  constructor(
+    private readonly reelServe: ReelService
+  ){}
   ngOnInit(): void {
+
+    this.reelServe.loadReelData().subscribe({
+      next: (response: any) => {
+        //this.reels = [...response];
+        console.log(response);
+      }
+    })
   }
 
   // Triggered when entering the Reels page

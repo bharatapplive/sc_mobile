@@ -63,17 +63,6 @@
           📸 capturing reality, one frame at a time. ✨ <br>
           📩 contact / collab: Him@gmail.com<br>
         </p>
-        <!-- <ion-button (click)="updatePost()">
-          Update Post
-        </ion-button>
-        
-        <ion-button (click)="updateFollower()">
-          Update Follower
-        </ion-button>
-        
-        <ion-button (click)="followingBtn()">
-          Update Following
-        </ion-button> -->
       </div>
 
       <div class="add-links">
@@ -152,7 +141,7 @@
         <div *ngSwitchCase="'posts'">
           <div class="grid">
             <div class="grid-box" *ngFor="let post of posts">
-              <ion-img [src]="post.mediaUrl" class="imaged"></ion-img>
+              <ion-img [src]="post.mediaUrl" class="imaged" (click)="OpenThePostModel(post)"></ion-img>
               <div class="view-port">
                 <ion-icon slot="icon-only" name="play-outline"></ion-icon>
                 <span>{{post.likesCount}}</span>
@@ -183,4 +172,79 @@
       </div>
     </section>
   </div>
+
+  <ion-modal [isOpen]="isPostModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-button fill="clear" slot="start" (click)="isPostModalOpen = !isPostModalOpen">
+            <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+          </ion-button> 
+          <span>Posts</span>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="post-panel">
+          <article class="card-board" *ngFor="let feed of showPost" >
+            <div class="post-header">
+              <div class="divided">
+                <ion-avatar class="avatar-img">
+                  <ion-img [src]="feed?.author?.avatarUrl" alt="User Avatar"></ion-img>  
+                </ion-avatar>
+                <div class="avatar-title">
+                  <a><span>{{feed?.author?.authorName}}</span></a>
+                  <span>{{feed?.audio?.artist}}</span>
+                </div>
+              </div>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+            </div>
+
+            <div class="post-content">
+                <ion-img [src]="feed.mediaUrl" class="post-image"></ion-img>
+                <div (click)="feed?.audio" class="btn-absolue">
+                </div>
+            </div>
+
+            <!-- <div class="post-bottom">
+              <div class="toggle-icon">
+                <div class="left-toggle">
+                  <div class="likebtn">
+                    <ion-icon slot="icon-only" 
+                      [name]="feed?.likedBy?.includes(this.currentUserId) ? 'heart' : 'heart-outline'" 
+                      [class.active]="feed?.likedBy?.includes(this.currentUserId)" 
+                      (click)="toggleLikes(feed)">
+                    </ion-icon>
+                    <div class="likeTitle"(click)="openLikesModal(feed)"><span>{{feed?.likesCount}}</span></div>
+                  </div>
+                
+                  <div class="likebtn">
+                    <ion-icon slot="icon-only" name="chatbox-outline" (click)="openCommitModel(feed)"></ion-icon>
+                    <div class="likeTitle"><span>{{feed?.commentsCount}}</span></div>
+                  </div>
+
+                  <div class="likebtn">
+                    <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+                    <div class="likeTitle"><span>{{feed?.sharesCount}}</span></div>
+                  </div>
+
+                </div>
+                <div class="likebtn">
+                    <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+                </div>
+              </div>
+
+              <div class="subtitle-panel">
+                <p (click)="openLikesModal(feed)">{{feed?.likesCount}} likes</p>
+                <p><span>{{feed?.author?.authorName}}</span> {{feed?.caption}}</p>
+                <a class="view-btn" (click)="openCommitModel(feed)">View all {{feed?.commentsCount}} comments</a>
+                <p class="para">{{(feed?.time || feed?.createdAt) | timeAgo}}</p>
+              </div>
+            </div> -->
+          </article>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

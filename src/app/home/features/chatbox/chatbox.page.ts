@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../authcontroller/profile-service';
-import { ChatService } from '../authcontroller/chat-service';
+import { ProfileService } from 'src/app/core/authcontroller/profile-service';
+import { ChatService } from 'src/app/core/authcontroller/chat-service';
 
 interface FollowList{
   _id: string;

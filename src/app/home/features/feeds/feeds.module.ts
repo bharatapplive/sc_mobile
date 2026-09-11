@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FeedsPageRoutingModule } from './feeds-routing.module';
 
 import { FeedsPage } from './feeds.page';
-import { TimeAgoPipe } from '../time-ago-pipe';
+import { TimeAgoPipe } from 'src/app/core/time-ago-pipe';
 
 @NgModule({
   imports: [

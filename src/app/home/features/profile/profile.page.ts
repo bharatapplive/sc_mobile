@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
-import { AuthService } from '../authcontroller/auth-service';
-import { ProfileService } from '../authcontroller/profile-service';
-import { PostService } from '../authcontroller/Post-service';
+import { AuthService } from 'src/app/core/authcontroller/auth-service';
+import { ProfileService } from 'src/app/core/authcontroller/profile-service';
+import { PostService } from 'src/app/home/features/post/Post-service';
+import { ToastController } from '@ionic/angular';
 
 export interface UserProfile{
   fullname: string;
@@ -23,6 +24,7 @@ export class ProfilePage implements OnInit {
   //#region User Details...
   user: UserProfile | null = null;
   currentUserId: string = '';
+  isPostModalOpen = false;
 
   postNumber: number = 0;
   followerNum: number = 0;
@@ -38,12 +40,14 @@ export class ProfilePage implements OnInit {
   activeTab: string = 'posts';
 
   posts: any[] = [];
+  showPost: any[] = [];
 
   constructor(
     private router: Router,
     private readonly authServe: AuthService,
     private readonly postServe: PostService,
-    private readonly profileServe: ProfileService
+    private readonly profileServe: ProfileService,
+    private readonly toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -86,7 +90,6 @@ export class ProfilePage implements OnInit {
         // If backend returns an array (from find({ userId }))
         if (Array.isArray(userData)) {
           this.posts = userData;
-          
         } 
         // If backend returns a single object (from findById)
         else if (userData) {
@@ -104,23 +107,53 @@ export class ProfilePage implements OnInit {
     })
   }
 
-  // 3. UPDATE FOLLOWER..
-  updateFollower(){
-    
+  // 3. DELETE POST..
+  deletePost(item: any){
+    const item_Id = item._id;
+    console.log(item_Id);
+
+    this.postServe.deletePostfromUser(item_Id).subscribe({
+      next:()=>{
+        this.presentSuccessToast('Post deleted succesfully');
+        this.updatePost();
+      },
+      error: (err) => {
+        console.error('Failed to load Post:', err);
+      
+      },
+    })
    
   }
 
-  // 4. UPDATE FOLLOWING..
-  updateFollowing(){
-    
-    
+  // 4. OPEN thePOST..
+  OpenThePostModel(item: any){
+    this.isPostModalOpen = true;
+    if (Array.isArray(item)) {
+      this.showPost = item;
+    } 
+    // If backend returns a single object (from findById)
+    else if (item) {
+      this.showPost = [item];
+    } else {
+      this.showPost = [];
+    }
+    console.log(this.showPost);
   }
 
   // 5. FOLLOWING PEOPLES
-  followingBtn(){
-    this.isFollowing = !this.isFollowing;
-    console.log(this.isFollowing);
-    this.updateFollowingList();
+  toggleLikes(item: any){  
+    const userId = item._id;
+    if (!userId) {return};
+  
+    this.postServe.updateLikes(userId).subscribe({
+      next: (updatedPost: any) => {
+        item.likedBy = updatedPost.likedBy;
+        item.likesCount = updatedPost.likesCount;
+      },
+      error: (err: any) => {
+        console.error('DB Update failed:', err);
+      }
+    });
   }
 
   updateFollowingList()
@@ -150,5 +183,17 @@ export class ProfilePage implements OnInit {
     }
 
     this.authServe.logout();
+  }
+
+  async presentSuccessToast(messageText: string) {
+    const toast = await this.toastController.create({
+      message: messageText,
+      duration: 2500,
+      position: 'bottom',
+      color: 'success',
+      icon: 'checkmark-circle-outline', // Optional icon
+    });
+
+    await toast.present();
   }
 }

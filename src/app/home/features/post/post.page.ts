@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AuthService } from '../authcontroller/auth-service';
-import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import { PreviousRouteServe } from '../previous-route-serve';
-import { AudioTrack, ContentAuthor, CreatePostPayload } from '../authcontroller/authInterface';
-import { ProfileService } from '../authcontroller/profile-service';
-import { PostService } from '../authcontroller/Post-service';
+import { NavController, ToastController } from '@ionic/angular';
+import { AudioTrack, ContentAuthor, CreatePostPayload } from 'src/app/core/authcontroller/authInterface';
+import { ProfileService } from 'src/app/core/authcontroller/profile-service';
+import { PostService } from 'src/app/home/features/post/Post-service';
+import { PreviousRouteServe } from 'src/app/core/previous-route-serve';
 
 @Component({
   selector: 'app-post',
@@ -102,6 +100,7 @@ export class PostPage implements OnInit {
     private readonly profileServe: ProfileService,
     private readonly postServe: PostService,
     private readonly previousRoute: PreviousRouteServe,
+    private readonly toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -222,13 +221,14 @@ export class PostPage implements OnInit {
 
     this.postServe.createNewPost(payload).subscribe({
         next: () => {
-          alert(`Post successfully updated`);
-          // Reset post creation portal values
           
-          this.navCtrl.navigateBack('/home/feeds');
+          this.presentSuccessToast('Post successfully updated');
+          // Reset post creation portal values
           this.isSelected = false;
           this.selectedAudio = null;
           this.stopAudioPreview();
+          
+          this.navCtrl.navigateBack('/home/feeds');
         },
         error: (err) => {
           // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
@@ -260,4 +260,15 @@ export class PostPage implements OnInit {
     this.activeTab = tab;
   }
 
+  async presentSuccessToast(messageText: string) {
+    const toast = await this.toastController.create({
+      message: messageText,
+      duration: 2500,
+      position: 'bottom',
+      color: 'success',
+      icon: 'checkmark-circle-outline', // Optional icon
+    });
+
+    await toast.present();
+  }
 }

@@ -139,9 +139,11 @@
                     height: 100%;
                 }
             }
+            
             .caption-textarea {
                 width: 300px;
                 min-height: 100px;
+                padding: 0;
                 --background: transparent;
                 --color: #ffffff;
                 --placeholder-color: #ffffff;

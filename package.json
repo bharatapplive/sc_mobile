@@ -14,6 +14,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "20.3.25",
+    "@angular/cdk": "^20.2.14",
     "@angular/common": "20.3.25",
     "@angular/compiler": "20.3.25",
     "@angular/core": "20.3.25",
@@ -30,6 +31,7 @@
     "@capacitor/status-bar": "8.0.3",
     "@ionic/angular": "^8.0.0",
     "ionicons": "^7.0.0",
+    "jwt-decode": "^4.0.0",
     "ngx-image-cropper": "^9.1.6",
     "rxjs": "~7.8.0",
     "swiper": "^14.1.0",

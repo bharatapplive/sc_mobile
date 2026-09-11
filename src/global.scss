@@ -279,3 +279,167 @@ ion-content::part(scroll) {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+textarea{
+    padding: 0;
+}
+
+.post-panel{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 10px;
+
+    .card-board{
+        display: flex;
+        flex-direction: column;
+
+        .post-header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px;
+            height: 40px;
+
+            .divided{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-top: 10px;
+                gap: 10px;
+                
+                .avatar-title{
+                    display: flex;
+                    flex-direction: column;
+                    height: 34px;
+
+                    a{
+                        span{
+                            font-size: 14px;
+                        }
+                    }
+                    span{
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            ion-button{
+                color: black;
+            }
+        }
+
+        .post-content{
+            position: relative;
+            width: 100%;
+            max-width: 443px;  /* Target width */
+            aspect-ratio: 443 / 450;
+            height: auto;
+
+            .post-image{
+                width: 100%;
+                height: 100%;
+                object-fit: cover; 
+                object-position: center;
+            }
+            
+            .btn-absolue{
+                position: absolute;
+                left: 88%;
+                bottom: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 22px;
+                width: 40px;
+                height: 40px;
+                
+                background: rgba(128, 128, 128, 0.767);
+                border-radius: 50%;                    
+            }
+        }
+
+        .post-bottom{
+            display: flex;
+            flex-direction: column;
+
+            .toggle-icon{
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0 5px;
+
+                .left-toggle{
+                    width: 35%;
+                    display: flex;
+                    gap: 10px;
+                    
+                }
+
+                .likebtn{
+                    width: auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    color: black;
+                    font-size: 18px;
+                    margin: 0;
+                    gap: 5px;
+
+                        ion-icon {
+                        font-size: 22px;
+                        font-weight: 550;
+                        color: var(--ion-color-dark, #222);
+
+                        &.active {
+                            
+                            font-weight: 550;   
+                            color: #ed4956; // Instagram red color
+                        }
+                    }
+
+                    span{
+                        font-size: 15px;
+                    }
+                }
+            }
+
+            .subtitle-panel{
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
+
+                p{
+                    margin: 0;
+                    margin: 0 10px;
+                    padding: 2px 0;
+                    font-size: 12px;
+
+                    span{
+                        color: black;
+                        font-weight: bold;
+                    }
+                }
+
+                .view-btn{
+                    width: 180px;
+                    color: black;
+                    font-size: 10px;
+                    margin-left: 10px;
+                    padding: 2px 0;
+                }
+
+                .para{
+                    font-size: 10px;
+                }
+            }
+        }
+
+        a{
+            color: black;
+            font-weight: bold;
+        }
+    }
+}

@@ -7,7 +7,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthInterceptor } from './authcontroller/auth.interceptor';
+import { AuthInterceptor } from './core/authcontroller/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],

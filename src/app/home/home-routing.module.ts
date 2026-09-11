@@ -13,27 +13,27 @@ const routes: Routes = [
       },
       {
         path: 'feeds',
-        loadChildren: () => import('../feeds/feeds.module').then( m => m.FeedsPageModule)
+        loadChildren: () => import('./features/feeds/feeds.module').then( m => m.FeedsPageModule)
       },
       {
         path: 'reels',
-        loadChildren: () => import('../reels/reels.module').then( m => m.ReelsPageModule)
+        loadChildren: () => import('./features/reels/reels.module').then( m => m.ReelsPageModule)
       },
       {
         path: 'chat',
-        loadChildren: () => import('../chatbox/chatbox.module').then( m => m.ChatboxPageModule)
+        loadChildren: () => import('./features/chatbox/chatbox.module').then( m => m.ChatboxPageModule)
       },
       {
         path: 'search',
-        loadChildren: () => import('../search-box/search-box.module').then( m => m.SearchBoxPageModule)
+        loadChildren: () => import('./features/search-box/search-box.module').then( m => m.SearchBoxPageModule)
       },
       {
         path: 'profile',
-        loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
+        loadChildren: () => import('./features/profile/profile.module').then( m => m.ProfilePageModule)
       },
       {
         path: 'post',
-        loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
+        loadChildren: () => import('./features/post/post.module').then( m => m.PostPageModule)
       }
     ]
   }
