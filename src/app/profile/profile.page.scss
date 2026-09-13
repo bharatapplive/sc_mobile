@@ -25,7 +25,7 @@ ion-toolbar {
 
 .profile-title {
   margin: 0;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -66,6 +66,27 @@ ion-toolbar {
 
 .icon-filled {
   font-variation-settings: "FILL" 1;
+}
+
+.header-favourite {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+}
+
+.heart-circle {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #6B38D4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-circle .material-symbols-outlined {
+  font-size: 18px;
+  color: #6B38D4;
 }
 
 .profile-main {
@@ -207,104 +228,117 @@ ion-toolbar {
         line-height: 16px;
         font-weight: 600;
     }
-    .story-image {
-        width: 64px;
-        height: 64px;
-        padding: 2px;
-        overflow: hidden;
-        border: 2px solid var(--color-outline-variant);
-        border-radius: 50%;
-        background: var(--color-surface);
-        img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: 2px solid var(--color-surface);
-            border-radius: 50%;
-        }
-    }
-    .profile-tabs {
-        display: flex;
-        margin-top: 16px;
-        border-top: 1px solid var(--profile-border);
-        button {
-            position: relative;
-            flex: 1;
-            padding: 16px;
-            border: 0;
-            background: transparent;
-            color: var(--color-on-surface-variant);
-            cursor: pointer;
-            &.active {
-                color: var(--color-primary);
-            }
-        }
-    }
-    .active-tab-indicator {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--color-primary), #8455ef);
-    }
-    .post-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 4px;
-        padding-top: 8px;
-    }
-    .post-tile {
-        position: relative;
-        aspect-ratio: 1;
-        overflow: hidden;
-        background: var(--color-surface-variant);
-        img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 500ms ease;
-        }
-        &:hover img {
-            transform: scale(1.05);
-        }
-        .post-likes {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            color: white;
-            background: rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            font-size: 14px;
-            font-weight: 700;
-            transition: opacity 150ms ease;
-        }
-        &:hover .post-likes {
-            opacity: 1;
-        }
-    }
-    .post-likes .material-symbols-outlined {
-        font-size: 18px;
-        font-variation-settings:
-            "FILL" 1,
-            "wght" 400,
-            "GRAD" 0,
-            "opsz" 24;
-    }
-    .desktop-actions {
-        display: none;
-    }
-    .mobile-actions {
-        display: flex;
+
+.add-highlight{
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 50%;
+    background: var(--color-outline-variant);
+    width: 64px;
+    height: 64px;
+    padding: 2px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+}
+.story-image {
+    width: 64px;
+    height: 64px;
+    padding: 2px;
+    overflow: hidden;
+    border: 2px solid var(--color-outline-variant);
+    border-radius: 50%;
+    background: var(--color-surface);
+    img {
+        display: block;
         width: 100%;
-        gap: 8px;
-        padding: 16px 0;
-        button {
-            flex: 1;
+        height: 100%;
+        object-fit: cover;
+        border: 2px solid var(--color-surface);
+        border-radius: 50%;
+    }
+}
+.profile-tabs {
+    display: flex;
+    margin-top: 16px;
+    border-top: 1px solid var(--profile-border);
+    button {
+        position: relative;
+        flex: 1;
+        padding: 16px;
+        border: 0;
+        background: transparent;
+        color: var(--color-on-surface-variant);
+        cursor: pointer;
+        &.active {
+            color: var(--color-primary);
         }
     }
+}
+.active-tab-indicator {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), #8455ef);
+}
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    padding-top: 8px;
+}
+.post-tile {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--color-surface-variant);
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 500ms ease;
+    }
+    &:hover img {
+        transform: scale(1.05);
+    }
+.post-likes {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: white;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    font-size: 14px;
+    font-weight: 700;
+    transition: opacity 150ms ease;
+    }
+    &:hover .post-likes {
+        opacity: 1;
+    }
+}
+.post-likes .material-symbols-outlined {
+    font-size: 18px;
+    font-variation-settings:
+        "FILL" 1,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+}
+.desktop-actions {
+    display: none;
+}
+.mobile-actions {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    padding: 16px 0;
+    button {
+        flex: 1;
+    }
+}

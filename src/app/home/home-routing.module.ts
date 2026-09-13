@@ -23,9 +23,9 @@ const routes: Routes = [
           import('../feed/feed.module').then((m) => m.FeedPageModule),
       },
       {
-        path: 'favourite',
+        path: 'messages',
         loadChildren: () =>
-          import('../favourite/favourite.module').then((m) => m.FavouritePageModule),
+          import('../messages/messages.module').then((m) => m.MessagesPageModule),
       },
       {
         path: 'profile',

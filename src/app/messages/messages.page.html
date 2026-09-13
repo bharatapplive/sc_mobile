@@ -1,0 +1,284 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="messages-header">
+
+      <h1 class="messages-title">prachi_developer</h1>
+
+      <button class="header-icon" aria-label="New group">
+        <span class="material-symbols-outlined">group_add</span>
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="messages-main">
+
+    <section class="searchmesg">
+
+      <div class="searchmesg-container">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Search for messages..." />
+      </div>
+
+    </section>
+
+    <section class="story">
+
+      <div class="story-container">
+        <div class="story-item my-story">
+
+          <button class="note-bubble" id="noteBubble" (click)="addNote()">
+            <span id="noteText">✨ Add a note</span>
+          </button>
+
+          <div class="story-gradient">
+            <div class="story-avatar">
+              <img src="assets/profile.jpg" alt="profile_photo" />
+            </div>
+          </div>
+
+          <span class="story-label">prachi_developer</span>
+
+        </div>
+      
+
+        <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUHRi2-QhqqHpB_7BDvc9gqBi41cVDvXGyWahFdHvx5valgXZu4CNqVG-63xYsHRoZxfcqW8jsb8v3LqjP6tjk0CntOABI9j4eUWNtHiJ4WhjqhTHPX4yr8-zXZr8K7Y56lr1QYN-h1jntrJpSm_nBAF1BVWOQdOdn7OfWJY-wA_OujyY2ZtUffzVZf44QMLGcQmb-P3mnbWlp2n9ub_M8W3jCj04Mtu_QngNOg3p5gqeZ00WoVy38kARhkH_LwyihDXN565uQ44c" alt="alex_vibe" />
+          </div>
+        </div>
+        <span class="story-label">alex_vibe</span>
+        </div>
+
+      <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4K6UQl8YeKnRlYyIDiquAUTWhbTD7uhwPjKbnUymtss9SBPtqSwhz49am_QUusP0hq0BCRdwV-1n4maK76ZHZpz9fc5iV8vpqbJiUrUjiTFkiaAsbgEWs533oGa3zMIIYVZviHlxf8_635qeq22fxqXcRecOmBJDmGuMQw8MYuXPX3XQtZ4H7tr4lILvvwn9uPkFsIbqq4HMMsEf_i7mlXraO05B7YZwA_wS2dRQUAHzX8xR-LV9VVL5qmOQ30PCArNcjOfrj1No" alt="neo_pixel" />
+          </div>
+        </div>
+        <span class="story-label">neo_pixel</span>
+      </div>
+
+      <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD97OZyo9vcgdGRd6eFUx4FiL7ww4LY9areHnQZHPzWqwv-r7I2NKJIAZnJaOJrEzfn_hUQ9VWx2bIluVg-ROYwuj-6C8Q_5L6S4mzwK9b22SYx9rnaP1iLKAKYz44MdwibsoSSmrBCmBSmBGX_knwkDKgMid99ryMeKc2eU0koiPlPRT2Q1Qp6H5knrBDrhdNpw_SP3u-PVumwBTHGCOoEuqHvineDkFfKHgr3yNhLERA17_1f-kRvzVONqqdS-z6wOSYWOLgJy4s" alt="luna.art" />
+          </div>
+        </div>
+        <span class="story-label">luna.art</span>
+      </div>
+
+      <div class="story-item">
+        <div class="story-gradient">
+          <div class="story-avatar">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuByww0uE6lke2FnrYFMVZzWGb_W99pu6A1lsmf0NifQFgWXG_43MKKbr74wKZmjEoON1H68ZYtRDckqav2JvLRYu8eG0BeOx7Iu5NYjEmwT3cZSG4W3gDzvSUvHAg11P97N9sY2lWdowEyPQob1FT7kLUc33jwbYbbCGTO2kxUw0rNM2xy0QSGe-6Mh5p9PXSbfM_H5dhAHPHhiZOqZXZ3dnkNdR0yRjZqa6JwRa_tpfEWqG3jc9LAnr_54YmVRmz66ahHqJNwV-Zo" alt="travel_joy" />
+          </div>
+        </div>
+        <span class="story-label">travel_joy</span>
+      </div>
+
+    </div>
+
+    </section>
+
+    <section class="messages-section">
+
+      <div class="messages-section-header">
+        <h2 class="messages-heading">Messages</h2>
+
+        <button class="requests-button">
+          Requests (2)
+        </button>
+      </div>
+
+      <div class="message-item message-unread">
+
+        <div class="message-avatar-wrapper">
+
+          <img
+            class="message-avatar"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD07_S3eQPzzP91tFtSaiWi4xJecJ8e4WaVQUglCM5PjQQju0YX6FGLgs_p0jnX-pRVrG34BJ0bfjtNuq7UwENDhbQUjRFrt8zxueW-ADrqtHh-e5C-KU2KXRFtdrm6raLZIDLq7e3Nc4MP2bFkDgOT8zpSdNHlrBrRCk3CmJNx6qgpEXKDUpR7Lq7THYwxSUjzU3RlnyrSw0cljE44ydlASvRXU4syi-sQnAXpQWVT4z3V_s4-mMdGyOw8TOQMOU5myrbTl1Fwz_o"
+            alt="Alex Rivera"
+          />
+
+          <span class="online-dot"></span>
+
+        </div>
+
+        <div class="message-content">
+
+          <div class="message-top-row">
+
+            <span class="message-name">
+              Alex Rivera
+            </span>
+
+            <span class="message-time message-time-active">
+              Now
+            </span>
+
+          </div>
+
+          <p class="message-preview message-preview-unread">
+            Are you coming to the creative mixer tonight?
+          </p>
+
+        </div>
+
+        <span class="unread-dot"></span>
+
+      </div>
+
+      <div class="message-item">
+
+        <div class="message-avatar-wrapper">
+
+          <img
+            class="message-avatar message-avatar-grayscale"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM_yfzjQYPRrh5pfGistHa-YLXlSLsALZOXKONJ3grBFFqnrutKo3oHWRotqMI34Rom_atqrhl_odg_06m2ga_S0WUhVRvetcPTvp2iM-cyzvw0vfb46QJpBN2JsXFrusDM53BOHQ091mMlWEYtU2vVQonrY4rDpJFzNtZt-jsQADz6iyyGYLEQQQs7JBdH2wbfLkDcVPp0dVr_vxa51Wo2m7if3KtgYGLoR1XdSg7-LXGGlMnaBctIe56vEa9HCPJVQdMH3MPt1Q"
+            alt="Jordan Smith"
+          />
+
+          <span class="offline-dot"></span>
+
+        </div>
+
+        <div class="message-content">
+
+          <div class="message-top-row">
+
+            <span class="message-name">
+              Jordan Smith
+            </span>
+
+            <span class="message-time">
+              12m
+            </span>
+
+          </div>
+
+          <p class="message-preview">
+            That design you posted is absolutely fire!
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="message-item">
+
+        <div class="group-avatar">
+
+          <div class="group-avatar-top">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuArIbDwpvym7pD31bc9FA1PMQI3hM35HT-As8RXEJp5cY2MSv-HbVmhGdA4uKIRqL9QOMi4D5NzObaowzjARpGQ0dWVMyHRyY8Bzq3eWTp9kC6aGpekiA_fNCYABqirSjxgtG-6bXJqqQZQCywuyXQngh829Z2VKsCXX4Nn20NQtt_l7xcGEYON5L9XuDi6L1kb-iyoZhGiLpQoV7viafzFaHL-Z-oATrTh8YVA9TqUFftaF8yebE889FwEcQh6zNvbuqN1UCdeT-s"
+              alt="Group member"
+            />
+          </div>
+
+          <div class="group-avatar-bottom">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNN_Ibj69egwjbQFh2H2DKU7rRnxCA01Au9lZ0gV_jGa6zMsvWfqFAeqwBcKRZ_C1rsrZq3nMYqAXdws9lCEAE3uHkQJD-DCKGtDglDLPOQliG4VNmZTS-jw2waSW6pQzcKdgPZGHXDIzDOJl2igZAFRgi4hrDWXUhCE8nqJH8qQ0669IUP9hGlRMUUyDoAXYUOmHoe08To5pyGgVCuf7Tqo3b-fyuUR6k5wNEvJBVvYADJ0XUgI24OBkjEj9cdnHcMtm8nwSU_wI"
+              alt="Group member"
+            />
+          </div>
+
+        </div>
+
+        <div class="message-content">
+
+          <div class="message-top-row">
+
+            <span class="message-name">
+              Design Team 🎨
+            </span>
+
+            <span class="message-time">
+              1h
+            </span>
+
+          </div>
+
+          <p class="message-preview">
+            <strong>Mika:</strong>
+            Sending the final assets over now.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="message-item">
+
+        <div class="message-avatar-wrapper">
+
+          <img
+            class="message-avatar"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVTeF7TjfroLxJtf5ZcdLFyrrScEMa_BUu9yNhagpmlR01VxHhloSZOl9AbAC5XqES4dh4z5cqeAQWWcT4h-jKNsOc0lDBzw13jnORed6Aaae5ecFnra_HRm8uAzPHDmMo43Lq2X33o9J0Tgtmf0N46tnMnS-Ul3kGi9QsZiLIVKiEKI9tIskxd-AMEIKPzF0FsBMuX3VKGk7zJZ91Ob_ndVAVldq-nKfx7KS6EAEKo_VNj8LktMa5gZWtRYki36D68M5f26gWeZY"
+            alt="Marcus Chen"
+          />
+
+        </div>
+
+        <div class="message-content">
+
+          <div class="message-top-row">
+
+            <span class="message-name">
+              Marcus Chen
+            </span>
+
+            <span class="message-time">
+              3h
+            </span>
+
+          </div>
+
+          <p class="message-preview">
+            Thanks for the feedback on the prototype!
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="message-item">
+
+        <div class="message-avatar-wrapper">
+
+          <img
+            class="message-avatar"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUYjRbGlzaSCVr3U1q0ZI6I5H9LNHzTroXnQzv2O0GghYnzdXsUtD2b5qkreny83yWqyj_qXK7EMx2dEhvmbY0huNbC-sW5FUn4tRnL8Lg_G860HvvqIKN86FRjivcY39dveuQpNe7Ypth9hRD4g2w0z9PPGd08UF6JTyvH9WOitwH7Zwjk0zswX-MaLZhlyKU5sGdsFlR5wJuRzs19Km6oFJN0Qtptz4skP0aVLhi85yuUA-64bPgc6FPHQVdOLSuIIj6k0Lopzk"
+            alt="Sarah Wilson"
+          />
+
+        </div>
+
+        <div class="message-content">
+
+          <div class="message-top-row">
+
+            <span class="message-name">
+              Sarah Wilson
+            </span>
+
+            <span class="message-time">
+              Yesterday
+            </span>
+
+          </div>
+
+          <p class="message-preview">
+            Sent a photo
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+</ion-content>

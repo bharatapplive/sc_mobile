@@ -13,4 +13,10 @@ export class SearchPage implements OnInit {
   ngOnInit() {
   }
 
+  selectedTrend: string = 'Trending';
+
+  selectTrend(trend: string) {
+    this.selectedTrend = trend;
+  }
+
 }

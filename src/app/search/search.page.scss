@@ -1,0 +1,555 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+ion-toolbar {
+  --background: rgba(var(--color-surface-rgb, 255, 255, 255), 0.8);
+  --border-color: rgba(123, 116, 134, 0.18);
+}
+
+.search-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-sm);
+  height: 64px;
+}
+
+.search-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background-clip: text;
+  color: transparent;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  &--small {
+    width: 28px;
+    height: 28px;
+    color: var(--color-on-surface-variant);
+  }
+
+  &--action {
+    width: 32px;
+    height: 32px;
+    color: var(--color-on-surface-variant);
+  }
+}
+
+.icon-filled {
+  font-variation-settings: "FILL" 1;
+}
+
+.header-favourite {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+}
+
+.heart-circle {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #6B38D4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-circle .material-symbols-outlined {
+  font-size: 18px;
+  color: #6B38D4;
+}
+
+.search-main {
+  width: 100%;
+  max-width: 672px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  padding-right: 16px;
+  padding-bottom: 96px;
+  padding-left: 16px;
+  box-sizing: border-box;
+}
+
+.search-section {
+  position: relative;
+  margin-top: 10px;
+
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-section input {
+  width: 100%;
+  padding: 8px 12px 8px 40px;
+  border-radius: 20px;
+  border: 1px solid var(--color-outline-variant);
+  background-color: var(--color-surface);
+  box-sizing: border-box;
+}
+
+.search-section input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 107, 56, 212), 0.2);
+}
+
+.search-section .material-symbols-outlined {
+  position: absolute;
+  left: 12px;
+  right: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--color-on-surface-variant);
+}
+
+/* ==============================
+   SEARCH PAGE
+================================ */
+
+.search-page {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+/* =========================
+   TRENDING HASHTAGS
+========================= */
+
+.trending-section {
+  display: flex;
+  gap: 12px;
+
+  width: 100%;
+
+  padding: 20px 0 20px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.trending-section::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================
+   NORMAL BUTTON
+========================= */
+
+.trending-button {
+  flex: 0 0 auto;
+
+  height: 38px;
+
+  padding: 0 20px;
+
+  border-radius: 22px;
+
+  border: 1px solid #cfcfcf;
+
+  background: #f4f4f4;
+
+  color: #555;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  outline: none;
+
+  /*
+   * Smooth transition when
+   * changing active button
+   */
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.trending-button:hover {
+  background: #e9e9e9;
+
+  border-color: #bdbdbd;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   CLICK
+========================= */
+
+.trending-button:active {
+  transform: scale(0.94);
+}
+
+
+/* =========================
+   ACTIVE
+========================= */
+
+.trending-button.active {
+
+  background: linear-gradient(
+    135deg,
+    #6d3bd7,
+    #8b5bd9
+  );
+
+  color: #ffffff;
+
+  border-color: transparent;
+
+  box-shadow:
+    0 5px 12px rgba(109, 59, 215, 0.25);
+
+  transform: translateY(0);
+}
+
+
+/* =========================
+   ACTIVE HOVER
+========================= */
+
+.trending-button.active:hover {
+
+  background: linear-gradient(
+    135deg,
+    #6432ce,
+    #7f4fd0
+  );
+
+  box-shadow:
+    0 7px 16px rgba(109, 59, 215, 0.3);
+}
+
+
+/* =========================
+   CLICK ANIMATION
+========================= */
+
+.trending-button.active:active {
+  transform: scale(0.94);
+}
+
+
+/* =========================
+   MASONRY GRID
+========================= */
+
+.masonry-grid {
+  column-count: 2;
+  column-gap: 12px;
+
+  width: 100%;
+}
+
+.masonry-item {
+  position: relative;
+
+  display: inline-block;
+
+  width: 100%;
+
+  margin-bottom: 12px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(100, 100, 100, 0.2);
+
+  cursor: pointer;
+
+  break-inside: avoid;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 20px rgba(109, 59, 215, 0.04);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.masonry-item:hover {
+  border-color: rgba(109, 59, 215, 0.3);
+}
+
+
+/* =========================
+   MAIN IMAGE
+========================= */
+
+.main-image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.masonry-item:hover .main-image {
+  transform: scale(1.1);
+}
+
+
+/* =========================
+   CARD BOTTOM CONTENT
+========================= */
+
+.card-bottom {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 16px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6),
+      transparent
+    );
+}
+
+.card-bottom p {
+  margin: 0;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================
+   USER INFO
+========================= */
+
+.user-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.user-info span {
+  font-size: 13px;
+}
+
+
+/* =========================
+   SMALL AVATAR
+========================= */
+
+.small-avatar {
+  width: 24px;
+  height: 24px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.small-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================
+   FAVORITE
+========================= */
+
+.favorite-icon {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  color: white;
+
+  font-size: 18px;
+
+  z-index: 2;
+}
+
+
+/* =========================
+   TRENDING NOW LABEL
+========================= */
+
+.trending-label {
+  position: absolute;
+
+  top: 8px;
+  left: 8px;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  color: #6d3bd7;
+
+  background: rgba(109, 59, 215, 0.2);
+
+  border: 1px solid rgba(109, 59, 215, 0.3);
+
+  backdrop-filter: blur(8px);
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   BOOKMARK
+========================= */
+
+.card-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.bookmark-icon {
+  font-size: 15px;
+}
+
+
+/* =========================
+   IMAGE OVERLAY
+========================= */
+
+.image-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.1);
+
+  transition: background 0.3s ease;
+}
+
+.masonry-item:hover .image-overlay {
+  background: rgba(0, 0, 0, 0);
+}
+
+
+/* =========================
+   CREATIVE PROCESS LABEL
+========================= */
+
+.creative-label {
+  position: absolute;
+
+  left: 16px;
+  bottom: 16px;
+
+  padding: 4px 12px;
+
+  border-radius: 999px;
+
+  color: #6d3bd7;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(109, 59, 215, 0.2);
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+
+  .masonry-grid {
+    column-count: 2;
+    column-gap: 8px;
+  }
+
+  .masonry-item {
+    margin-bottom: 8px;
+    border-radius: 10px;
+  }
+
+  .trending-section {
+    gap: 8px;
+  }
+
+  .trending-button {
+    padding: 7px 16px;
+    font-size: 13px;
+  }
+}

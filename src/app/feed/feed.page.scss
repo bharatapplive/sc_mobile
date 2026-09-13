@@ -17,12 +17,6 @@ ion-toolbar {
   height: 64px;
 }
 
-.feed-brand {
-  display: flex;
-  align-items: center;
-  gap: 58px;
-}
-
 .feed-title {
   margin: 0;
   font-size: 24px;
@@ -66,6 +60,27 @@ ion-toolbar {
 
 .icon-filled {
   font-variation-settings: "FILL" 1;
+}
+
+.header-favourite {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+}
+
+.heart-circle {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #6B38D4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-circle .material-symbols-outlined {
+  font-size: 18px;
+  color: #6B38D4;
 }
 
 .feed-main {
