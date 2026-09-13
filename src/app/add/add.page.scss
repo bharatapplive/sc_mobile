@@ -1,0 +1,108 @@
+.add-page {
+  --background: #ffffff;
+  background: #ffffff;
+}
+
+/* Create sheet */
+.create-sheet {
+  width: 100%;
+  min-height: 100%;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  color: #242424;
+
+  padding: 14px 24px 30px;
+
+  border-radius: 28px 28px 0 0;
+}
+
+/* Drag handle */
+.modal-handle {
+  width: 44px;
+  height: 5px;
+
+  margin: 0 auto 24px;
+
+  border-radius: 10px;
+
+  background: #d1d1d1;
+}
+
+/* Create title */
+.create-title {
+  margin: 0;
+
+  padding-bottom: 18px;
+
+  text-align: center;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  color: #242424;
+}
+
+/* Options container */
+.create-options {
+  width: 100%;
+}
+
+/* Each option */
+.create-option {
+  width: 100%;
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+
+  padding: 0;
+
+  border: none;
+  border-bottom: 1px solid #eeeeee;
+
+  background: transparent;
+
+  color: #242424;
+
+  font-size: 21px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.create-option:last-child {
+  border-bottom: none;
+}
+
+/* Hover */
+.create-option:hover {
+  background: #faf8ff;
+}
+
+/* Click animation */
+.create-option:active {
+  transform: scale(0.98);
+  background: #f1ebff;
+}
+
+/* Icons */
+.create-option ion-icon {
+  width: 32px;
+
+  font-size: 34px;
+
+  color: #4f2bbd;
+
+  flex-shrink: 0;
+}
+
