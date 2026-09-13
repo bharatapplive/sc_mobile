@@ -1,13 +1,149 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>favourite</ion-title>
+    <div class="notifications-toolbar">
+      <button
+        class="toolbar-button"
+        type="button"
+        aria-label="Go back"
+        (click)="goBack()"
+      >
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <h1>Notifications</h1>
+      <button
+        class="toolbar-button"
+        type="button"
+        aria-label="Filter notifications"
+      >
+        <span class="material-symbols-outlined">tune</span>
+      </button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favourite</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <main class="notifications-main">
+    <section class="notification-section">
+      <h2>Follow requests</h2>
+      <button class="follow-request" type="button">
+        <span class="stacked-avatars" aria-hidden="true">
+          <img
+            *ngFor="let user of followRequestAvatars"
+            [src]="user.image"
+            [alt]="user.username"
+          />
+        </span>
+        <span class="follow-copy">
+          <strong>Follow requests</strong>
+          <span>hu_confession + 49 others</span>
+        </span>
+        <span class="unread-dot" aria-label="Unread"></span>
+        <span class="material-symbols-outlined chevron">chevron_right</span>
+      </button>
+    </section>
+
+    <section class="notification-section stories-section">
+      <h2>Stories about you</h2>
+      <div class="story-mention">
+        <div class="avatar-wrap story-ring">
+          <img src="assets/profile.jpg" alt="prachi_developer" />
+        </div>
+        <div class="activity-copy">
+          <strong>Mentions</strong>
+          <span>1 story mentions you.</span>
+        </div>
+      </div>
+      <div class="caught-up">
+        <span class="check-circle material-symbols-outlined">check</span>
+        <div class="activity-copy">
+          <strong>You're all caught up</strong>
+          <button type="button" class="activity-link">
+            See new activity for prachi_developer
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="notification-section activity-section">
+      <h2>Yesterday</h2>
+      <div class="activity-list">
+        <article class="activity-item" *ngFor="let item of yesterday">
+          <div class="avatar-wrap">
+            <img [src]="item.avatar" [alt]="item.username" />
+            <span
+              *ngIf="item.badge"
+              class="activity-badge"
+              [class]="item.badge"
+            >
+              <span class="material-symbols-outlined"
+                >{{ item.badge === 'heart' ? 'favorite' : item.badge }}</span
+              >
+            </span>
+          </div>
+          <div class="activity-copy">
+            <p><strong>{{ item.username }}</strong> {{ item.text }}</p>
+            <span>{{ item.time }}</span>
+          </div>
+          <img
+            *ngIf="item.thumbnail"
+            class="activity-thumbnail"
+            [src]="item.thumbnail"
+            alt="Activity preview"
+          />
+        </article>
+      </div>
+    </section>
+
+    <section class="notification-section activity-section last-section">
+      <h2>Last 7 days</h2>
+      <div class="activity-list">
+        <article class="activity-item" *ngFor="let item of lastSevenDays">
+          <div class="avatar-wrap">
+            <img [src]="item.avatar" [alt]="item.username" />
+            <span
+              *ngIf="item.badge"
+              class="activity-badge"
+              [class]="item.badge"
+            >
+              <span class="material-symbols-outlined"
+                >{{ item.badge === 'heart' ? 'favorite' : item.badge }}</span
+              >
+            </span>
+          </div>
+          <div class="activity-copy">
+            <p><strong>{{ item.username }}</strong> {{ item.text }}</p>
+            <span>{{ item.time }}</span>
+          </div>
+          <img
+            *ngIf="item.thumbnail"
+            class="activity-thumbnail"
+            [src]="item.thumbnail"
+            alt="Activity preview"
+          />
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-tabs" aria-label="Primary navigation">
+    <a routerLink="/home/feed" aria-label="Feed"
+      ><ion-icon name="home-outline"></ion-icon
+    ></a>
+    <a routerLink="/home/search" aria-label="Search"
+      ><ion-icon name="search-outline"></ion-icon
+    ></a>
+    <a routerLink="/home/add" aria-label="Add"
+      ><ion-icon name="add-circle-outline"></ion-icon
+    ></a>
+    <a routerLink="/home/messages" aria-label="Messages"
+      ><ion-icon name="paper-plane-outline"></ion-icon
+    ></a>
+    <a
+      class="active"
+      routerLink="/favourite"
+      aria-label="Favorites"
+      aria-current="page"
+      ><img class="profile-tab-photo" src="assets/profile.jpg" alt="Profile"
+    /></a>
+  </nav>
 </ion-content>
