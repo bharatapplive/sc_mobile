@@ -48,19 +48,26 @@ export class LoginPage implements OnInit {
         mobile: this.mobile.trim(),
         password: this.password,
       })
-      .subscribe(
-        (response: any) => {
+      .subscribe({
+        next: (response: any) => {
           this.isSubmitting = false;
-          this.authService.setToken(response.access_token);
-          this.router.navigate(['/home']);
+
+          const token = response?.token || response?.access_token;
+
+          if (token) {
+            this.authService.saveSession(token, response.user ?? null);
+            // step 1 for auth gaurd-- if logged or mobile and password true
+            this.router.navigate(['/home']);
+          }
+
           console.log('Login successful', response);
         },
-        (error) => {
+        error: (error) => {
           this.isSubmitting = false;
           this.errorMessage =
             error?.error?.message || 'Invalid credentials. Please try again.';
           console.error('Login failed', error);
         },
-      );
+      });
   }
 }

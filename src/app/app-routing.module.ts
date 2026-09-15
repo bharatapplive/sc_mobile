@@ -5,7 +5,8 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
-    canActivate: [AuthGuard],
+    // step2 for aith gaurd-- if logged or mobile and password true then only home page will be visible
+    canActivate: [AuthGuard], //if logged in true/ it will show home page
     loadChildren: () => import('./home/home.module').then((m) => m.HomePageModule),
   },
   {
