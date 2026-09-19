@@ -2,15 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
-import { ProfileService } from 'src/app/core/authcontroller/profile-service';
+import { ProfileService } from './profile-service';
 import { PostService } from 'src/app/home/features/post/Post-service';
 import { ToastController } from '@ionic/angular';
-
-export interface UserProfile{
-  fullname: string;
-  username: string;
-  avatarUrl?: string;
-}
+import { UserProfile } from 'src/app/core/authcontroller/authInterface';
 
 @Component({
   selector: 'app-profile',
@@ -51,31 +46,44 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadUserProfile();
-    this.updatePost();
+
+    const session = this.authServe.getSession();
+    if(!session.isAuthenticated)
+    { 
+      return;
+    }
+    else
+    {
+      this.loadUserProfile();
+      this.updatePost();
+    }
   }
   
   // 1. USER DATA.....
   loadUserProfile(event?: any){
     this.profileServe.loadUserData().subscribe({
-      next: (userData: any) => {
-        this.user = userData;
-        this.currentUserId = userData?._id;
-      
+      next: (response: any) => {
+        this.user = response;
+        this.currentUserId = response?._id;
+
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
           event.target.complete();
-        }        
-      },
-      error: (err) => {
+        } 
+      },error(err){
         console.error('Failed to load user profile:', err);
       
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
           event.target.complete();
         }
-      },
-    });
+      }
+    })
+    
+    // Hide spinner if triggered by pull-to-refresh
+    if (event) {
+      event.target.complete();
+    } 
   }
   
   handleRefresh(event: any){

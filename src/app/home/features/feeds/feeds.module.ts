@@ -8,6 +8,7 @@ import { FeedsPageRoutingModule } from './feeds-routing.module';
 
 import { FeedsPage } from './feeds.page';
 import { TimeAgoPipe } from 'src/app/core/time-ago-pipe';
+import { ObserveVisibilityDirective } from 'src/app/directives/ObserveVisibilityDirective';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { TimeAgoPipe } from 'src/app/core/time-ago-pipe';
     FeedsPageRoutingModule,
     TimeAgoPipe
   ],
-  declarations: [FeedsPage]
+  declarations: [FeedsPage, ObserveVisibilityDirective]
 })
 export class FeedsPageModule {}

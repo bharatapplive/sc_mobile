@@ -1,4 +1,15 @@
 // Registeration Data....
+export interface UserProfile{
+  fullname: string;
+  username: string;
+  avatarUrl?: string;
+}
+
+export interface SessionState{
+  token: string | null;
+  isAuthenticated: boolean;
+}
+
 export interface User{
   _id?: string;
   email: string;
@@ -45,7 +56,7 @@ export interface ContentAuthor{
 }
 
 export interface CreatePostPayload {
-    _id?:                string;
+    _id?:             string;
     author:           ContentAuthor | null;
     username:         string;
     type:             'POST' | 'REEL' | 'STORY';
@@ -54,7 +65,7 @@ export interface CreatePostPayload {
     mediaType:        'image' | 'video'; // Use strict union types instead of plain string
     hashtags?:        string[];          // Changed to array of strings
     isLiked?:         boolean;
-    likesCount:      number;          // Optional for creation payload
+    likesCount:       number;          // Optional for creation payload
     commentsCount?:   number;       // Optional for creation payload
     sharesCount?:     number;
     audio?:           AudioTrack | null; // <-- Add this field
@@ -67,6 +78,50 @@ export interface PostResponse extends CreatePostPayload {
   commentsCount: number;        // Guaranteed number from DB
   createdDate: string;
   updatedAt: string;
+}
+
+export interface CommentResponse{
+  _id?:        string;
+  feedId:      string;
+  userID:      string;
+  parentID?:   string;
+  content?:    string;
+  likeCount?:  number;
+  replyCount?: number;
+}
+
+export interface ReelItem{
+
+  _id?:             string;
+  author:           ContentAuthor | null;
+  username:         string;
+  type:             'POST' | 'REEL' | 'STORY';
+  caption?:         string;
+  mediaUrl:         string;
+  duration:         number;
+  mediaType:        'image' | 'video'; // Use strict union types instead of plain string
+  hashtags?:        string[];          // Changed to array of strings
+  likedBy?:         string[];
+  likesCount:       number;          // Optional for creation payload
+  commentsCount?:   number;       // Optional for creation payload
+  sharesCount?:     number;
+  audio?:           AudioTrack | null; // <-- Add this field
+  isPlaying?:       boolean;
+}
+
+export interface StoryItem{
+  username:       string;
+  type:             'POST' | 'REEL' | 'STORY';
+  author:         ContentAuthor | null;
+  mediaUrl:       string;
+  mediaType:      'image' | 'video';
+  audio?:         AudioTrack | null;
+  viewers:        string[];
+  viewsCount:     number;
+  expiresAt?:     Date | null;
+  status:         string;
+  createdAt?:     Date;
+  updatedAt?:     Date;
 }
 
 //#endregion

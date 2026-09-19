@@ -44,7 +44,7 @@
       <div class="story-context" *ngFor="let item of highlights">
         <div class="height-light" [class.active]="true">
           <ion-avatar class="person">
-              <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
+              <ion-img [src]="item.author?.avatarUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
         </div>
         <span>{{item?.username}}</span>
@@ -53,27 +53,83 @@
     </section>
 
     <div class="post-panel">
-      <article class="card-board" *ngFor="let feed of postList" >
-        <div class="post-header">
-          <div class="divided">
-            <ion-avatar class="avatar-img">
-              <ion-img [src]="feed?.author?.avatarUrl" alt="User Avatar"></ion-img>  
-            </ion-avatar>
-            <div class="avatar-title">
-              <a><span>{{feed?.author?.authorName}}</span></a>
-              <span>{{feed?.audio?.artist}}</span>
+      <article class="card-board" *ngFor="let feed of postList; let i = index" #postCard>
+        <div class="main-container">
+          @if (feed.mediaType === 'video') {
+            <!-- Video Portion -->
+            <div class="video-content">
+              <div class="video-wrapper">
+                <video
+                  #videoPlayer
+                  appIntersectionObserver
+                  (isPercentVisible)="$event ? videoPlayer.play() : videoPlayer.pause()"
+                  [src]="feed.mediaUrl"
+                  autoplay
+                  muted
+                  preload="metadata"
+                  playsinline
+                  (play)="audioPlayer.play()"
+                  (pause)="audioPlayer.pause()">
+                </video>
+                <audio 
+                  #audioPlayer 
+                  [src]="feed.audio?.audioUrl">
+                </audio>
+              </div>
+              <div class="post-header-abs">
+                <div class="divided">
+                  <ion-avatar class="avatar-img">
+                    <ion-img [src]="feed?.author?.avatarUrl" alt="User Avatar"></ion-img>  
+                  </ion-avatar>
+                  <div class="avatar-title">
+                    <a><span>{{feed?.author?.authorName}}</span></a>
+                    <span>{{feed?.audio?.artist}}</span>
+                  </div>
+                </div>
+                <ion-button shape="round" fill="clear" size="small">
+                  <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+                </ion-button>
+              </div>
             </div>
-          </div>
-          <ion-button shape="round" fill="clear" size="small">
-            <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-          </ion-button>
-        </div>
+          } @else {
+            <!-- Image Portion -->
+            <div class="post-header">
+              <div class="divided">
+                <ion-avatar class="avatar-img">
+                  <ion-img [src]="feed?.author?.avatarUrl" alt="User Avatar"></ion-img>  
+                </ion-avatar>
+                <div class="avatar-title">
+                  <a><span>{{feed?.author?.authorName}}</span></a>
+                  <span>{{feed?.audio?.artist}}</span>
+                </div>
+              </div>
+              <ion-button shape="round" fill="clear" size="small">
+                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+            </div>
 
-        <div class="post-content">
-            <ion-img [src]="feed.mediaUrl" class="post-image"></ion-img>
-            <div size="small" fill="clear" slot="end" (click)="previewTrack(feed?.audio, $event)" class="btn-absolue">
-              <ion-icon [name]="isPlayingPreview && isAudioId === feed?.audio?.id ? 'volume-high' : 'volume-mute'"></ion-icon>
+            <div class="post-content">          
+              <ion-img
+                [src]="feed.mediaUrl" 
+                autoplay
+                muted
+                preload="metadata"
+                playsinline
+                class="post-image"
+                appIntersectionObserver
+                (isPercentVisible)="$event ? audioPlayer.play() : audioPlayer.pause()">
+              </ion-img>
+              <audio 
+                #audioPlayer 
+                [src]="feed.audio?.audioUrl">
+              </audio>
             </div>
+          }
+          @if (feed?.audio !== null) {
+            <div size="small" fill="clear" slot="end" (click)="toggleGlobalMute()" class="btn-absolue">
+              <ion-icon [name]="isPlayingPreview ? 'volume-mute' : 'volume-high'"></ion-icon>
+            </div>
+          }
         </div>
 
         <div class="post-bottom">
@@ -81,8 +137,8 @@
             <div class="left-toggle">
               <div class="likebtn">
                 <ion-icon slot="icon-only" 
-                  [name]="feed?.likedBy?.includes(this.currentUserId) ? 'heart' : 'heart-outline'" 
-                  [class.active]="feed?.likedBy?.includes(this.currentUserId)" 
+                  [name]="isLikedByCurrentUser(feed?.likedBy) ? 'heart' : 'heart-outline'" 
+                  [class.active]="isLikedByCurrentUser(feed?.likedBy)" 
                   (click)="toggleLikes(feed)">
                 </ion-icon>
                 <div class="likeTitle"(click)="openLikesModal(feed)"><span>{{feed?.likesCount}}</span></div>
@@ -165,32 +221,31 @@
     [handle]="true"
     class="bottom-modal commit-modal">
     <ng-template>
-      <ion-header>
+      <ion-header class="ion-no-border">
         <ion-toolbar>
           <ion-title>Comments</ion-title>
         </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
         <div class="user-conatin">
           <ion-avatar class="avatar">           
             <ion-img [src]="avatarUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
           <ion-item class="inputplace">
-            <ion-input type="text" name="searchbar" placeholder="Join the conversation..." required minlength="5">
+            <ion-input type="text" name="comment" #comment="ngModel" [(ngModel)]="commentPortal.message" placeholder="Join the conversation..." required minlength="500">
               <ion-icon slot="end" name="image-outline"></ion-icon>
             </ion-input>
           </ion-item>
-          <ion-icon name="send-outline"></ion-icon>
+          <ion-icon name="send-outline" (click)="onSubmitComment()" ></ion-icon>
         </div>
-        <div class="person-list" *ngFor="let user of likedByUsers">
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="person-list" *ngFor="let comment of commentList">
           <div class="avatar">
             <ion-avatar>           
-              <ion-img [src]="user.avatarUrl" alt="User Avatar"></ion-img>
+              <ion-img [src]="comment.userID?.avatarUrl" alt="User Avatar"></ion-img>
             </ion-avatar>
             <div class="title">
-              <h2>{{user?.username}}</h2>
-              <span>{{user?.fullname}}</span>
-              <a>Reply</a>
+              <h2>{{comment.userID?.username}}<span>{{comment?.createdAt | timeAgo }}</span></h2>
+              <p>{{ comment?.content }}</p>
             </div>
           </div>
           <div class="tabs">

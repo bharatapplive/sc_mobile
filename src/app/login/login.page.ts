@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Location } from '@angular/common';
 import { AuthService } from '../core/authcontroller/auth-service';
-import { ActionSheetController, NavController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, NavController, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
@@ -33,7 +33,8 @@ export class LoginPage implements OnInit {
     private readonly authServe: AuthService,
     private navCtrl: NavController, // 👈 Inject NavController
     private zone: NgZone,          // 👈 Inject NgZone
-    private readonly toastController: ToastController
+    private readonly toastController: ToastController,
+    private readonly alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
@@ -42,17 +43,22 @@ export class LoginPage implements OnInit {
   OnLoginHandler(form: any){
     if(form.valid){
       this.authServe.login(this.loginPortal.identity, this.loginPortal.password).subscribe({
-        next: () =>{
+        next: (response: any) =>{
           this.zone.run(() => {            
-            // Replaces router.navigate for robust root navigation in Ionic
-            this.presentSuccessToast('Logged in successfully!');
-            this.navCtrl.navigateRoot('/home');
+
+            if(response.user && response.jwt)
+              {
+                this.authServe.saveSession(response.jwt);
+                
+                // Replaces router.navigate for robust root navigation in Ionic
+                this.presentSuccessToast('Logged in successfully!');
+                this.navCtrl.navigateRoot('/home');
+              }
           });
         },
         error: (err) => {
           // Log the backend response message to get specific details
           console.error('Login error details:', err.error);
-          alert(err.error?.message || 'Invalid username or password');
         }
       })
     }
@@ -84,18 +90,28 @@ export class LoginPage implements OnInit {
       this.authServe.register(payload).subscribe({
         next: (user) => {
           this.step = 'OTP';
-
-          this.location.replaceState('/VerifyOTP');      
-          this.title = 'Verify the OTP';
-          this.subtitle= 'Verification is necessary to join the Social Circle.';
-
-          alert(`Please verify OTP sent to your ${user.phoneNumber}`);
+          this.loadAction();
+          this.presentSuccessToast(`Please verify OTP sent to your ${user.phoneNumber}`);
           localStorage.setItem('regUser', JSON.stringify(user._id));
         },
         error: (err) => {
           // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
           const serverError = err.error?.message || 'Registration failed. Please try again.';
-          alert(serverError);
+          this.alertCtrl.create({
+            header:'Register Error',
+            message: serverError,
+            buttons:[
+              {
+                text:'Register Again!',
+                handler: ()=> {
+                  this.isLogin =false;
+                  this.step === 'REGISTER';
+                  this.loadAction();
+                }
+              }
+            ],
+            backdropDismiss: false
+          });
         }
       });
     }
@@ -116,10 +132,7 @@ export class LoginPage implements OnInit {
 
       this.authServe.verifyOtp(request).subscribe({
         next: () =>{
-          this.upLoadImage();
-          //this.isLogin = true;
-          //this.step = 'REGISTER';
-          //this.registerPortal = { fullname: '', email: '', phone: '', password: '' };
+          this.isCreateModel = !this.isCreateModel
         },
         error: (err) => {
           const serverError = err.error?.message || 'Invalid or expired OTP. Please try again.';
@@ -131,24 +144,30 @@ export class LoginPage implements OnInit {
 
   toggleAuth(){
     this.isLogin = !this.isLogin;
+    this.loadAction();
+  }
+
+  loadAction(){
     if(this.isLogin){
       this.location.replaceState('/login');    
       this.title = 'Social Circle';
       this.subtitle= 'Connect with creators, share your story, and join the digital circle.';
     }else{
-      this.location.replaceState('/register');      
-      this.title = 'Join the circle';
-      this.subtitle= 'Where creators connect and the digital pulse comes alive.';
-    }
-    
+      if(this.step === 'REGISTER')
+      {
+        this.location.replaceState('/register');      
+        this.title = 'Join the circle';
+        this.subtitle= 'Where creators connect and the digital pulse comes alive.';
+      }else{
+        this.location.replaceState('/VerifyOTP');      
+        this.title = 'Verify the OTP';
+        this.subtitle= 'Verification is necessary to join the Social Circle.';
+      }
+    } 
   }
 
   cancelOtp(){
     this.step = 'REGISTER';
-  }
-
-  upLoadImage(){
-    this.isCreateModel = !this.isCreateModel
   }
 
   // 1. SELECT THE FILE
@@ -204,27 +223,44 @@ export class LoginPage implements OnInit {
   updateAvatar(){
     if (!this.selectedFile) return;
 
-        console.log(this.selectedFile);
     const rawId = localStorage.getItem('regUser');
     const userId = rawId ? JSON.parse(rawId) : '';
 
     this.authServe.uploadAnImage(userId, this.selectedFile).subscribe(
-      { next: (res: any) => {
-          console.log('Uploaded successfully!', res);
-          this.isCreateModel = false;
-          this.isLogin = true;
-          this.step = 'REGISTER';
-          this.registerPortal = { fullname: '', email: '', phone: '', password: '' };          
-          this.selectedFile = null;
-        },
-        error: (err) => console.error('Upload failed:', err)
-      });
+    { next: (res: any) => 
+      {
+        this.isCreateModel = false;
+        this.isLogin = true;
+        this.registerPortal = { fullname: '', email: '', phone: '', password: '' };          
+        this.selectedFile = null;
+        
+        this.loadAction();
+      },
+      error: (err) => {
+        console.error('Upload failed:', err)
+        this.alertCtrl.create({
+          header:'Register Error',
+          message: err,
+          buttons:[
+            {
+              text:'Register Again!',
+              handler: ()=> {
+                this.isLogin =false;
+                this.step === 'REGISTER';
+                this.loadAction();
+              }
+            }
+          ],
+          backdropDismiss: false
+        });
+      }
+    });
   }
 
   skipForNow(){
     this.isCreateModel=false;
     this.isLogin = true;
-    this.step = 'REGISTER';
+    this.loadAction();
     this.registerPortal = { fullname: '', email: '', phone: '', password: '' };
   }
 

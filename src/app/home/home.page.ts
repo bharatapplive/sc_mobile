@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { filter, Subscription } from 'rxjs';
-import { ProfileService } from '../core/authcontroller/profile-service';
+import { AuthService } from '../core/authcontroller/auth-service';
+import { ProfileService } from './features/profile/profile-service';
 
 
 @Component({
@@ -21,18 +22,19 @@ export class HomePage implements OnInit {
 
   constructor(
     private router: Router,
+    private readonly authServe: AuthService,
     private readonly profileServe: ProfileService,
     private navCtrl: NavController
   ) { }
 
   ngOnInit() {
+    const session = this.authServe.getSession();
+    if(!session.isAuthenticated) return;
+
     this.profileServe.loadUserData().subscribe({
-      next: (userData) => {
-        this.avatarUrl = userData?.avatarUrl?.trim();   
-      },
-      error: (err) => {
-        console.error('Failed to load user profile:', err);
-      },
+      next: (response: any) => {
+        this.avatarUrl = response?.avatarUrl?.trim();
+      }
     });
 
     // Clean subscription tracking

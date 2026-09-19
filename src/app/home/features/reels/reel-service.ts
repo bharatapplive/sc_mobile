@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CreatePostPayload, MediaComposerState, OverlayText, PostResponse, reelType } from '../../../core/authcontroller/authInterface';
+import { CreatePostPayload, MediaComposerState, OverlayText, PostResponse, ReelItem, reelType } from '../../../core/authcontroller/authInterface';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -16,8 +16,8 @@ export class ReelService {
   ){}
 
   // 1. CREATE THE POST
-  createNewPost(postData: CreatePostPayload): Observable<PostResponse>{
-    return this.http.post<PostResponse>(`${environment.apiUrl}/post`, postData).pipe(
+  createNewReel(reelData: ReelItem): Observable<ReelItem>{
+    return this.http.post<ReelItem>(`${environment.apiUrl}/post`, reelData).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Server side error during registration:', error);
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
@@ -86,7 +86,7 @@ export class ReelService {
 
   // 2. ALL FEEDS....
   loadReels(){
-    return this.http.get<PostResponse>(`${environment.apiUrl}/reel`).pipe(
+    return this.http.get<ReelItem>(`${environment.apiUrl}/reel`).pipe(
       map((user) => {
         if (user) {
           if (!user) return user;
@@ -118,7 +118,7 @@ export class ReelService {
 
   // 3. FEEDS DATA....
   loadReelData(){
-    return this.http.get<PostResponse>(`${environment.apiUrl}/reel/user`).pipe(
+    return this.http.get<ReelItem>(`${environment.apiUrl}/reel/user`).pipe(
       map((user) => {
         if (user) {
           if (!user) return [];
@@ -157,5 +157,10 @@ export class ReelService {
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
       })
     );
+  }
+
+  // 5. COMMENT UPDATE..
+  commentUpdate(id: string){
+    return this.http.patch(`${environment.apiUrl}/reel/${id}/comment`, {});
   }
 }

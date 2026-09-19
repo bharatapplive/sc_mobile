@@ -74,16 +74,6 @@ export class PostService {
   }
   //#endregion
 
-  // 2. DELETE POST..
-  deletePostfromUser(postId: string):Observable<PostResponse>{
-    return this.http.delete<PostResponse>(`${environment.apiUrl}/post/${postId}`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('Server side error during registration:', error);
-        return throwError(() => new Error(error.error?.message || 'Server error occurred'));
-      })
-    );
-  }
-
   // 2. ALL FEEDS....
   loadAllPost(){
     return this.http.get<PostResponse>(`${environment.apiUrl}/post`).pipe(
@@ -148,7 +138,17 @@ export class PostService {
     );
   }
 
-  // 4. UPDATE LIKES
+  // 4. DELETE POST..
+  deletePostfromUser(postId: string):Observable<PostResponse>{
+    return this.http.delete<PostResponse>(`${environment.apiUrl}/post/${postId}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Server side error during registration:', error);
+        return throwError(() => new Error(error.error?.message || 'Server error occurred'));
+      })
+    );
+  }
+
+  // 5. UPDATE LIKES
   updateLikes(postId: string): Observable<any>{
 
     return this.http.patch(`${environment.apiUrl}/post/${postId}/like`, {}).pipe(
@@ -157,5 +157,10 @@ export class PostService {
         return throwError(() => new Error(error.error?.message || 'Server error occurred'));
       })
     );
+  }
+
+  // 6. COMMENT UPDATE..
+  commentUpdate(id: string){
+    return this.http.patch(`${environment.apiUrl}/post/${id}/comment`, {});
   }
 }

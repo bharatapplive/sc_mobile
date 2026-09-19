@@ -21,9 +21,10 @@ export class AuthInterceptor implements HttpInterceptor {
     const endpoints = ['/auth/login', '/auth/register', '/auth/verify-otp'];
     const isExcluded = endpoints.some(url => req.url.includes(url));
 
-    let token = this.authService.getToken();
+    const session = this.authService.getSession();
+    let token = session.token;
     if (token) {
-      token = token.replace(/^"(.*)"$/, '$1'); // Strips potential quotes safely
+      token = token.replace(/^"(.*)"$/, '$1'); // Strips potential quotes safely);
     }
 
     let authReq = req;
@@ -42,7 +43,13 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 || error.status === 403) {
-          this.showSessionExpiredAlert();
+          if(isExcluded){
+            this.showLoginFailAlert();
+          }
+          else{
+            this.showSessionExpiredAlert();
+          }
+          
         }
         return throwError(() => error);
       })
@@ -51,7 +58,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   async showSessionExpiredAlert() {
     // Clear saved storage data
-    localStorage.clear();
+    this.authService.clearSession();
 
     const alert = await this.alertController.create({
       header: 'Session Expired',
@@ -60,6 +67,26 @@ export class AuthInterceptor implements HttpInterceptor {
         {
           text: 'Login',
           handler: () => {
+            this.authService.logout();
+          }
+        }
+      ],
+      backdropDismiss: false // Alert ko miss/dismiss hone se rokne ke liye
+    });
+
+    await alert.present();
+  }
+
+  async showLoginFailAlert(){
+    this.authService.clearSession();
+
+    const alert = await this.alertController.create({
+      header: 'Login Failed',
+      message: 'Invalid credentials',
+      buttons:[
+        {
+          text:'Ok',
+          handler: ()=> {
             this.authService.logout();
           }
         }

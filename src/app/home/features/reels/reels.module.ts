@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ReelsPageRoutingModule } from './reels-routing.module';
 
 import { ReelsPage } from './reels.page';
+import { TimeAgoPipe } from 'src/app/core/time-ago-pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReelsPageRoutingModule
+    ReelsPageRoutingModule,
+    TimeAgoPipe
   ],
   declarations: [ReelsPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] // <-- ADD THIS LINE
