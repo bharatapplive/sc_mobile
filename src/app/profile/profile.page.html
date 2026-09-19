@@ -11,13 +11,17 @@
     </div>
   </ion-toolbar>
 </ion-header>
-
+<!-- step 5  display all user  information--> 
 <ion-content [fullscreen]="true">
   <main class="profile-main">
     <section class="profile-info">
       <div class="profile-avatar">
-        <img class="w-full h-full media-cover" alt="A professional studio headshot of Alex Rivers"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwwkfs4vkISqMJ0vg3lbbeKaMY0qt0zolG5Wey86cYzAB60diLaSuiKo7tBJSfEsQuA5jgp4fE8wsVSs9nerLV2A9E8KyBYX36TnNiuD7MpaVzeF9e0sEf6KGy9kQAIfpEu5VYvkSCJxyX--Etv0dVK6zM3gyDFv55CvslAfPIlcJRvR2BJ4EYU60rLwsAebqOPQ-Im5-JXW9qNIEqUu6UfvwmQHatX-fMGqdAl_eHqXFVRfDtyRrj4L7VIvSw4Ehuseg_knT9080" />
+        <img class="w-full h-full media-cover" [src]="profileImage"
+          [alt]="firstName + ' ' + lastName + ' profile image'" />
+        <label class="profile-image-add" aria-label="Add profile image">
+          <span class="material-symbols-outlined">add</span>
+          <input type="file" accept="image/*" (change)="onProfileImageSelected($event)" />
+        </label>
       </div>
 
       <div class="profile-content">
