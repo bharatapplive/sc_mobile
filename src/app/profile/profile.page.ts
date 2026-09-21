@@ -29,12 +29,14 @@ export class ProfilePage implements OnInit {
     this.profileImage = image ? this.toImageUrl(image) : this.profileImage;
   }
 
+  // step-2 send image to BE
   onProfileImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
 
     if (file) {
       this.profileImage = URL.createObjectURL(file);
+      //step 3- call uploadProfileImage method to send the image to the backend and update the session with the new image URL.
       this.authService.uploadProfileImage(file).subscribe({
         next: (response) => {
           const image = response?.image || response?.profileImage || response?.user?.image;
