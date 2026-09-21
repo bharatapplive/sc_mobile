@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="story-toolbar">
+      <div>
+        <p class="eyebrow">Share something real</p>
+        <h1>New Story</h1>
+      </div>
+      <span class="material-symbols-outlined toolbar-icon" aria-hidden="true">auto_stories</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="story-main">
+    <section class="story-intro">
+      <div class="intro-mark">
+        <span class="material-symbols-outlined" aria-hidden="true">add_a_photo</span>
+      </div>
+      <div>
+        <h2>Tell your circle</h2>
+        <p>Add a moment and a little context. Your story can be up to 1,024 words.</p>
+      </div>
+    </section>
+
+    <form class="story-form glass-card" #storyForm="ngForm" (ngSubmit)="publishStoryHandler()">
+      <div class="image-picker">
+        <input
+          #imageInput
+          class="image-input"
+          type="file"
+          accept="image/*"
+          aria-label="Choose a story image"
+          (change)="onImageSelected($event)"
+        />
+
+        <div *ngIf="imagePreview; else imagePrompt" class="image-preview-wrap">
+          <img class="image-preview" [src]="imagePreview" alt="Selected story preview" />
+          <button class="change-image-button" type="button" (click)="imageInput.click()">
+            <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+            Change image
+          </button>
+        </div>
+
+        <ng-template #imagePrompt>
+          <button class="image-prompt" type="button" (click)="imageInput.click()">
+            <span class="prompt-icon material-symbols-outlined" aria-hidden="true">add_photo_alternate</span>
+            <span class="prompt-title">Choose an image</span>
+            <span class="prompt-help">JPG, PNG or WEBP</span>
+          </button>
+        </ng-template>
+      </div>
+
+      <div class="field-group">
+        <div class="field-heading">
+          <label for="storyText">Your story</label>
+          <span [class.limit-reached]="wordCount > maxWords">{{ wordCount }} / {{ maxWords }} words</span>
+        </div>
+        <textarea
+          id="storyText"
+          name="storyText"
+          [(ngModel)]="storyText"
+          #storyTextModel="ngModel"
+          required
+          rows="8"
+          placeholder="What is on your mind?"
+          (input)="enforceWordLimit()"
+        ></textarea>
+        <p class="field-error" *ngIf="storyTextModel.touched && !storyText.trim()">
+          Add a few words to your story.
+        </p>
+        <p class="field-error" *ngIf="wordCount > maxWords">
+          Keep your story within 1,024 words.
+        </p>
+      </div>
+
+      <p class="form-error" *ngIf="formError">{{ formError }}</p>
+
+      <button
+        class="publish-button"
+        type="submit"
+        [disabled]="storyForm.invalid || !imagePreview || wordCount > maxWords || isSubmitting"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true">{{ isSubmitting ? 'progress_activity' : 'send' }}</span>
+        {{ isSubmitting ? 'Sharing...' : 'Share story' }}
+      </button>
+    </form>
+  </main>
+</ion-content>

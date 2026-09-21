@@ -18,6 +18,11 @@ export const routes: Routes = [
           import('../feed/feed.module').then((m) => m.FeedPageModule),
       },
       {
+        path: 'story',
+        loadChildren: () =>
+          import('../story/story.module').then((m) => m.StoryPageModule),
+      },
+      {
         path: 'profile',
         loadChildren: () =>
           import('../profile/profile.module').then((m) => m.ProfilePageModule),
