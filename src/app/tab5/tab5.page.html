@@ -1,30 +1,123 @@
 <ion-content [fullscreen]="true">
 
-  <div class="profile-page">
+  <!-- EDIT PROFILE SCREEN -->
+  <div class="edit-profile-page" *ngIf="isEditing">
 
-    <!-- HEADER -->
+    <div class="edit-header">
+      <ion-button
+        fill="clear"
+        class="back-button"
+        (click)="cancelEdit()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+
+      <strong>Edit Profile</strong>
+
+      <ion-button
+        fill="clear"
+        class="save-top-button"
+        (click)="saveProfile()">
+        Save
+      </ion-button>
+    </div>
+
+    <div class="edit-avatar">
+      <div class="avatar-face">👨🏻‍💻</div>
+    </div>
+
+    <div class="change-photo">
+      Change profile photo
+    </div>
+
+    <div class="edit-form">
+
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input
+          [(ngModel)]="profileName"
+          placeholder="Enter your name">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Bio</ion-label>
+        <ion-input
+          [(ngModel)]="profileBio"
+          placeholder="Enter your bio">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Location</ion-label>
+        <ion-input
+          [(ngModel)]="profileLocation"
+          placeholder="Enter your location">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Profession</ion-label>
+        <ion-input
+          value="Full Stack Developer"
+          placeholder="Enter your profession">
+        </ion-input>
+      </ion-item>
+
+    </div>
+
+    <ion-button
+      expand="block"
+      class="save-profile-button"
+      (click)="saveProfile()">
+      Save Changes
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      fill="clear"
+      class="cancel-button"
+      (click)="cancelEdit()">
+      Cancel
+    </ion-button>
+
+  </div>
+
+
+  <!-- NORMAL PROFILE SCREEN -->
+  <div class="profile-page" *ngIf="!isEditing">
+
     <div class="profile-header">
+
+      <ion-button
+        fill="clear"
+        class="back-button"
+        routerLink="/home">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+
       <strong>deepanshu</strong>
 
       <div class="header-icons">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-icon name="menu-outline"></ion-icon>
+
+        <ion-button fill="clear" class="header-button">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" class="header-button">
+          <ion-icon name="menu-outline"></ion-icon>
+        </ion-button>
+
       </div>
+
     </div>
 
-    <!-- PROFILE -->
     <div class="profile-section">
 
-      <!-- Code se Avatar -->
       <div class="avatar">
-        <div class="avatar-face">
-          👨🏻‍💻
-        </div>
+        <div class="avatar-face">👨🏻‍💻</div>
       </div>
 
-      <!-- STATS -->
       <div class="stats">
-
         <div>
           <strong>12</strong>
           <span>Posts</span>
@@ -39,58 +132,77 @@
           <strong>180</strong>
           <span>Following</span>
         </div>
-
       </div>
 
     </div>
 
-    <!-- NAME + BIO -->
     <div class="bio">
-      <strong>Deepanshu Rana</strong>
-      <p>💻 Developer</p>
+      <strong>{{ profileName }}</strong>
+      <p>💻 {{ profileBio }}</p>
+      <p>📍 {{ profileLocation }}</p>
       <p>🚀 Building my dream project</p>
-      <p>📍 India</p>
     </div>
 
-    <!-- BUTTONS -->
     <div class="buttons">
 
-      <ion-button fill="outline">
+      <ion-button
+        fill="outline"
+        class="edit-button"
+        (click)="editProfile()">
+
+        <ion-icon
+          name="create-outline"
+          slot="start">
+        </ion-icon>
+
         Edit Profile
+
       </ion-button>
 
-      <ion-button fill="outline">
-        Share Profile
+      <ion-button
+        fill="outline"
+        class="share-button">
+
+        <ion-icon
+          name="share-social-outline"
+          slot="start">
+        </ion-icon>
+
+        Share
+
       </ion-button>
 
     </div>
 
-    <!-- HIGHLIGHTS -->
     <div class="highlights">
 
-      <div>
-        <div class="highlight">💻</div>
+      <div class="highlight-item">
+        <div class="highlight highlight-work">💻</div>
         <span>Work</span>
       </div>
 
-      <div>
-        <div class="highlight">🚀</div>
+      <div class="highlight-item">
+        <div class="highlight highlight-project">🚀</div>
         <span>Projects</span>
       </div>
 
-      <div>
-        <div class="highlight">🎓</div>
+      <div class="highlight-item">
+        <div class="highlight highlight-college">🎓</div>
         <span>College</span>
       </div>
 
-      <div>
-        <div class="highlight">❤️</div>
+      <div class="highlight-item">
+        <div class="highlight highlight-life">❤️</div>
         <span>Life</span>
+      </div>
+
+      <div class="highlight-item">
+        <div class="highlight add-highlight">+</div>
+        <span>New</span>
       </div>
 
     </div>
 
-    <!-- POST TABS -->
     <div class="post-tabs">
 
       <div class="active">
@@ -107,47 +219,22 @@
 
     </div>
 
-    <!-- POSTS -->
     <div class="posts">
 
-      <div class="post post1">
-        <span>💻</span>
-      </div>
-
-      <div class="post post2">
-        <span>🚀</span>
-      </div>
-
-      <div class="post post3">
-        <span>🎓</span>
-      </div>
-
-      <div class="post post4">
-        <span>☕</span>
-      </div>
-
-      <div class="post post5">
-        <span>🌆</span>
-      </div>
-
-      <div class="post post6">
-        <span>🔥</span>
-      </div>
-
-      <div class="post post7">
-        <span>📱</span>
-      </div>
-
-      <div class="post post8">
-        <span>💡</span>
-      </div>
-
-      <div class="post post9">
-        <span>🌄</span>
-      </div>
+      <div class="post post1"><span>💻</span></div>
+      <div class="post post2"><span>🚀</span></div>
+      <div class="post post3"><span>🎓</span></div>
+      <div class="post post4"><span>☕</span></div>
+      <div class="post post5"><span>🌆</span></div>
+      <div class="post post6"><span>🔥</span></div>
+      <div class="post post7"><span>📱</span></div>
+      <div class="post post8"><span>💡</span></div>
+      <div class="post post9"><span>🌄</span></div>
 
     </div>
 
   </div>
 
 </ion-content>
+
+<app-bottom-nav *ngIf="!isEditing"></app-bottom-nav>

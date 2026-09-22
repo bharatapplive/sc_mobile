@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -47,7 +48,10 @@ export class RegisterComponent {
     }
   );
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {}
 
   passwordMatchValidator(
     control: AbstractControl
@@ -70,8 +74,25 @@ export class RegisterComponent {
       return;
     }
 
-    console.log('Registration Data:', this.registerForm.value);
+    const data = {
+      emailOrMobile: this.registerForm.value.emailOrMobile,
+      password: this.registerForm.value.password
+    };
 
-    alert('Account created successfully!');
+    this.http.post(
+      'http://localhost:3000/auth/register',
+      data
+    ).subscribe({
+      next: (response) => {
+        console.log('Registration successful:', response);
+        alert('Account created successfully!');
+        this.registerForm.reset();
+      },
+
+      error: (error) => {
+        console.error('Registration error:', error);
+        alert(error.error?.message || 'Registration failed');
+      }
+    });
   }
 }

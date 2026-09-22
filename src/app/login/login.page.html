@@ -1,65 +1,354 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar> 
-</ion-header>-->
-<ion-content [fullscreen]="true" class="page">
-  <main class="box">
-    <!-- <div class="toggle" role="group" aria-label="Theme switcher">
-      <button type="button" [class.active]="theme === 'light'" (click)="setTheme('light')">Light</button>
-      <button type="button" [class.active]="theme === 'dark'" (click)="setTheme('dark')">Dark</button>
-    </div> -->
+<ion-content [fullscreen]="true">
 
-    <header class="head">
-      <div class="icon vibrant-gradient">
-        <span class="material-symbols-outlined">group</span>
+  <div class="home-page">
+
+    <!-- Header -->
+    <div class="top-header">
+
+      <div class="brand">
+        <div class="brand-icon">
+          <ion-icon name="people-outline"></ion-icon>
+        </div>
+
+        <div>
+          <h1>Social Circle</h1>
+          <p>Stay connected</p>
+        </div>
       </div>
-      <h1>Social Circle</h1>
-      <p>Connect with creators, share your story, and join the digital circle.</p>
-    </header>
 
-    <div class="card">
-      <form class="form" action="#" method="POST">
-        <div class="field">
-          <label for="identity">Mobile Number or Email</label>
-          <div class="input">
-            <span class="material-symbols-outlined">phone</span>
-            <input id="identity" name="identity" placeholder="+1 (555) 000-0000 or email@address.com" required type="text" />
-          </div>
-        </div>
+      <div class="header-actions">
 
-        <div class="field">
-          <div class="row flex justify-content-between">
-            <label for="password">Password</label>
-            <a href="#">Forgot Password?</a>
-          </div>
-          <div class="input">
-            <span class="material-symbols-outlined">lock</span>
-            <input id="password" name="password" placeholder="••••••••" required type="password" />
-            <button type="button" aria-label="Show password">
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-          </div>
-        </div>
+        <button class="icon-button">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
 
-        <button class="btn vibrant-gradient" type="submit">Log In</button>
-      </form>
+        <button class="icon-button">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span class="notification-dot"></span>
+        </button>
 
+      </div>
 
-
-    
     </div>
 
-    <footer class="foot">
-      <p>
-        Don't have an account?
-        <a href="#">Sign Up</a>
-      </p>
-      <div class="links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Help</a>
+
+    <!-- Stories -->
+    <section class="stories-section">
+
+      <div class="section-header">
+        <h2>Stories</h2>
+        <span>See all</span>
       </div>
-    </footer>
-  </main>
+
+      <div class="stories">
+
+        <!-- Your Story -->
+        <div class="story">
+
+          <div class="story-avatar add-story">
+            <div class="avatar-placeholder">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+
+            <div class="plus-icon">
+              <ion-icon name="add"></ion-icon>
+            </div>
+          </div>
+
+          <p>Your Story</p>
+
+        </div>
+
+
+        <!-- Story 1 -->
+        <div class="story">
+
+          <div class="story-avatar story-gradient">
+            <div class="avatar-placeholder">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+          </div>
+
+          <p>Rahul</p>
+
+        </div>
+
+
+        <!-- Story 2 -->
+        <div class="story">
+
+          <div class="story-avatar story-gradient">
+            <div class="avatar-placeholder">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+          </div>
+
+          <p>Priya</p>
+
+        </div>
+
+
+        <!-- Story 3 -->
+        <div class="story">
+
+          <div class="story-avatar story-gradient">
+            <div class="avatar-placeholder">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+          </div>
+
+          <p>Ankit</p>
+
+        </div>
+
+
+        <!-- Story 4 -->
+        <div class="story">
+
+          <div class="story-avatar story-gradient">
+            <div class="avatar-placeholder">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+          </div>
+
+          <p>Neha</p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Feed -->
+    <section class="feed-section">
+
+      <div class="section-header">
+        <h2>Feed</h2>
+
+        <button class="filter-button">
+          <ion-icon name="options-outline"></ion-icon>
+        </button>
+      </div>
+
+
+      <!-- Post -->
+      <div class="post-card">
+
+        <!-- Post Header -->
+        <div class="post-header">
+
+          <div class="user-info">
+
+            <div class="post-avatar">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+
+            <div>
+              <h3>Deepanshu Rana</h3>
+              <p>Just now · 🌎</p>
+            </div>
+
+          </div>
+
+          <button class="more-button">
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
+          </button>
+
+        </div>
+
+
+        <!-- Post Text -->
+        <div class="post-content">
+
+          <p>
+            Welcome to <strong>Social Circle</strong>! 🎉
+          </p>
+
+          <p>
+            Connect with friends, share your moments
+            and discover something new every day.
+          </p>
+
+        </div>
+
+
+        <!-- Post Image Placeholder -->
+        <div class="post-image">
+
+          <div class="post-image-content">
+
+            <div class="large-logo">
+              <ion-icon name="people-outline"></ion-icon>
+            </div>
+
+            <h2>Social Circle</h2>
+
+            <p>Connect • Share • Discover</p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Post Actions -->
+        <div class="post-actions">
+
+          <div class="left-actions">
+
+            <button>
+              <ion-icon name="heart-outline"></ion-icon>
+            </button>
+
+            <button>
+              <ion-icon name="chatbubble-outline"></ion-icon>
+            </button>
+
+            <button>
+              <ion-icon name="paper-plane-outline"></ion-icon>
+            </button>
+
+          </div>
+
+          <button>
+            <ion-icon name="bookmark-outline"></ion-icon>
+          </button>
+
+        </div>
+
+
+        <!-- Likes -->
+        <div class="likes">
+          <strong>128 likes</strong>
+        </div>
+
+
+        <!-- Caption -->
+        <div class="caption">
+
+          <strong>Deepanshu Rana</strong>
+
+          Welcome everyone to our Social Circle community! 🚀
+
+        </div>
+
+
+        <div class="comments">
+          View all 12 comments
+        </div>
+
+      </div>
+
+
+      <!-- Second Post -->
+      <div class="post-card">
+
+        <div class="post-header">
+
+          <div class="user-info">
+
+            <div class="post-avatar second-avatar">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+
+            <div>
+              <h3>Social Circle</h3>
+              <p>2 hours ago · 🌎</p>
+            </div>
+
+          </div>
+
+          <button class="more-button">
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
+          </button>
+
+        </div>
+
+
+        <div class="post-content">
+
+          <p>
+            What's happening in your circle today? 💙
+          </p>
+
+        </div>
+
+
+        <div class="quote-card">
+
+          <ion-icon name="chatbubbles-outline"></ion-icon>
+
+          <h2>Share your story</h2>
+
+          <p>
+            Your voice matters. Let your circle know what's happening.
+          </p>
+
+        </div>
+
+
+        <div class="post-actions">
+
+          <div class="left-actions">
+
+            <button>
+              <ion-icon name="heart-outline"></ion-icon>
+            </button>
+
+            <button>
+              <ion-icon name="chatbubble-outline"></ion-icon>
+            </button>
+
+            <button>
+              <ion-icon name="paper-plane-outline"></ion-icon>
+            </button>
+
+          </div>
+
+          <button>
+            <ion-icon name="bookmark-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <div class="likes">
+          <strong>64 likes</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+
+    <button class="nav-item active" routerLink="/home">
+      <ion-icon name="home"></ion-icon>
+      <span>Home</span>
+    </button>
+
+    <button class="nav-item" routerLink="/tab1">
+      <ion-icon name="compass-outline"></ion-icon>
+      <span>Explore</span>
+    </button>
+
+    <button class="create-button" routerLink="/tab2">
+      <ion-icon name="add"></ion-icon>
+    </button>
+
+    <button class="nav-item" routerLink="/tab3">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      <span>Messages</span>
+    </button>
+
+    <button class="nav-item" routerLink="/tab4">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>Profile</span>
+    </button>
+
+  </div>
+
 </ion-content>

@@ -1,35 +1,108 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Reels</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
 
-  <div class="reels-container">
+  <!-- Top Reels Navigation -->
+  <div class="reels-top">
 
-    <div class="reel">
-      <div class="reel-content">
-        <h2>🎬 Reel</h2>
-        <p>Your reel will appear here</p>
+    <div class="top-title">
+      <span class="active">Reels</span>
+      <span>Friends</span>
+    </div>
+
+    <ion-button fill="clear">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
+
+  </div>
+
+  <!-- Reel -->
+  <div class="reel">
+
+    <!-- Video -->
+    <video
+      class="reel-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      controls="false">
+
+      <source
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        type="video/mp4">
+
+    </video>
+
+    <!-- Dark gradient -->
+    <div class="reel-gradient"></div>
+
+    <!-- Reel information -->
+    <div class="reel-info">
+
+      <div class="profile-row">
+
+        <div class="avatar">
+          D
+        </div>
+
+        <strong>deepanshu</strong>
+
+        <button>Follow</button>
+
       </div>
 
-      <div class="reel-actions">
+      <p class="caption">
+        Enjoying this beautiful moment ✨
+        <br>
+        Follow for more reels!
+      </p>
+
+      <p class="music">
+        🎵 Original audio · deepanshu
+      </p>
+
+    </div>
+
+    <!-- Right side actions -->
+    <div class="reel-actions">
+
+      <div class="action">
         <ion-button fill="clear">
           <ion-icon name="heart-outline"></ion-icon>
         </ion-button>
+        <span>1.2K</span>
+      </div>
 
+      <div class="action">
         <ion-button fill="clear">
           <ion-icon name="chatbubble-outline"></ion-icon>
         </ion-button>
+        <span>128</span>
+      </div>
 
+      <div class="action">
         <ion-button fill="clear">
           <ion-icon name="paper-plane-outline"></ion-icon>
         </ion-button>
+        <span>Share</span>
       </div>
+
+      <div class="action">
+        <ion-button fill="clear">
+          <ion-icon name="bookmark-outline"></ion-icon>
+        </ion-button>
+        <span>Save</span>
+      </div>
+
+      <div class="action">
+        <ion-button fill="clear">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </div>
+
     </div>
 
   </div>
 
 </ion-content>
+
 <app-bottom-nav></app-bottom-nav>

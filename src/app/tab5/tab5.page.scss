@@ -1,74 +1,177 @@
-.profile-page {
-  background: white;
-  min-height: 100%;
-  padding-bottom: 65px;
+:host {
+  display: block;
 }
 
-/* HEADER */
+
+/* ================= PAGE ================= */
+
+.profile-page {
+  min-height: 100%;
+  padding-bottom: 80px;
+
+  background: #ffffff;
+
+  color: #172554;
+}
+
+
+/* ================= HEADER ================= */
+
+
 
 .profile-header {
-  height: 55px;
-  padding: 0 16px;
+  height: 60px;
+  width: 100%;
+  padding: 0 6px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   border-bottom: 1px solid #eeeeee;
-  font-size: 19px;
+  background: #ffffff;
+
+  position: relative;
+  z-index: 10;
 }
+
+/* Username */
+
+.profile-header > strong {
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 20px;
+  font-weight: 600;
+
+  color: #111111;
+
+  white-space: nowrap;
+}
+
+
+/* ================= BACK BUTTON ================= */
+
+.back-button {
+  --color: #111111;
+
+  width: 50px !important;
+  height: 50px !important;
+
+  min-width: 50px !important;
+  min-height: 50px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+}
+
+.back-button ion-icon {
+  width: 32px;
+  height: 32px;
+
+  font-size: 32px;
+}
+
+
+/* ================= RIGHT ICONS ================= */
 
 .header-icons {
+  margin-left: auto;
+
   display: flex;
-  gap: 22px;
+  align-items: center;
+
+  gap: 2px;
 }
 
-.header-icons ion-icon {
-  font-size: 25px;
+.header-button {
+  --color: #111111;
+
+  width: 50px !important;
+  height: 50px !important;
+
+  min-width: 50px !important;
+  min-height: 50px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
 }
 
+.header-button ion-icon {
+  width: 32px;
+  height: 32px;
 
-/* PROFILE SECTION */
+  font-size: 32px;
+}
+
+/* ================= PROFILE ================= */
 
 .profile-section {
   display: flex;
   align-items: center;
-  padding: 18px 16px 8px;
+
+  padding: 20px 16px 10px;
 }
 
 
-/* AVATAR */
+/* ================= AVATAR ================= */
 
 .avatar {
-  width: 90px;
-  height: 90px;
+  width: 94px;
+  height: 94px;
 
-  border-radius: 50%;
+  padding: 3px;
+
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #1685ff,
+    #7447ff,
+    #f04d7a
+  );
+
+  box-shadow:
+    0 7px 18px rgba(66, 82, 190, 0.2);
 }
 
 .avatar-face {
-  width: 82px;
-  height: 82px;
-
-  border-radius: 50%;
+  width: 88px;
+  height: 88px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  border-radius: 50%;
+
   background: #f5d0b5;
+
+  border: 3px solid white;
 
   font-size: 43px;
 }
 
 
-/* STATS */
+/* ================= STATS ================= */
 
 .stats {
   flex: 1;
@@ -84,123 +187,218 @@
 .stats div {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .stats strong {
   font-size: 18px;
+  font-weight: 800;
+
+  color: #172554;
 }
 
 .stats span {
-  font-size: 13px;
-  margin-top: 3px;
+  margin-top: 4px;
+
+  font-size: 12px;
+
+  color: #718096;
 }
 
 
-/* BIO */
+/* ================= BIO ================= */
 
 .bio {
-  padding: 5px 16px;
+  padding: 5px 16px 2px;
 }
 
 .bio strong {
+  display: block;
+
   font-size: 15px;
+  font-weight: 750;
+
+  color: #172554;
 }
 
 .bio p {
-  margin: 3px 0;
-  font-size: 14px;
+  margin: 4px 0;
+
+  font-size: 13px;
+
+  color: #52617a;
 }
 
 
-/* BUTTONS */
+/* ================= BUTTONS ================= */
 
 .buttons {
   display: flex;
-  gap: 8px;
-  padding: 10px 16px;
+
+  gap: 9px;
+
+  padding: 12px 16px 10px;
 }
 
 .buttons ion-button {
   flex: 1;
 
-  height: 35px;
+  height: 38px;
+
   margin: 0;
 
-  --border-radius: 8px;
+  --border-radius: 10px;
+
+  --border-color: #d7dfeb;
+
+  --color: #263653;
 
   font-size: 13px;
+
+  font-weight: 650;
+
+  text-transform: none;
+}
+
+.buttons ion-icon {
+  font-size: 17px;
 }
 
 
-/* HIGHLIGHTS */
+/* ================= HIGHLIGHTS ================= */
 
 .highlights {
   display: flex;
-  gap: 17px;
 
-  padding: 10px 16px 15px;
+  gap: 16px;
+
+  padding: 12px 16px 18px;
 
   overflow-x: auto;
+
+  scrollbar-width: none;
 }
 
-.highlights > div {
+.highlights::-webkit-scrollbar {
+  display: none;
+}
+
+.highlight-item {
+  min-width: 62px;
+
   text-align: center;
-  min-width: 60px;
 }
 
 .highlight {
-  width: 58px;
-  height: 58px;
+  width: 60px;
+  height: 60px;
 
-  border-radius: 50%;
+  margin: 0 auto;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #f2f2f2;
+  border-radius: 50%;
 
-  border: 1px solid #dddddd;
+  border: 2px solid #edf0f5;
 
   font-size: 25px;
+
+  background: #f8fafc;
 }
 
-.highlights span {
+.highlight-work {
+  background: #eef6ff;
+}
+
+.highlight-project {
+  background: #f2edff;
+}
+
+.highlight-college {
+  background: #fff5df;
+}
+
+.highlight-life {
+  background: #fff0f3;
+}
+
+.add-highlight {
+  background: white;
+
+  border: 1.5px solid #ccd5e3;
+
+  font-size: 27px;
+
+  color: #64748b;
+}
+
+.highlight-item span {
   display: block;
-  margin-top: 5px;
+
+  margin-top: 6px;
+
   font-size: 11px;
+
+  color: #64748b;
 }
 
 
-/* POST TABS */
+/* ================= POST TABS ================= */
 
 .post-tabs {
-  height: 48px;
+  height: 49px;
 
   display: flex;
 
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #eeeeee;
+  border-top: 1px solid #edf0f5;
+
+  border-bottom: 1px solid #edf0f5;
+
+  background: white;
 }
 
 .post-tabs div {
   flex: 1;
 
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  color: #9aa6b8;
 }
 
 .post-tabs ion-icon {
-  font-size: 23px;
+  font-size: 22px;
 }
 
 .post-tabs .active {
-  border-bottom: 2px solid black;
+  color: #172554;
+}
+
+.post-tabs .active::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 25%;
+
+  width: 50%;
+
+  height: 2px;
+
+  border-radius: 5px;
+
+  background: #172554;
 }
 
 
-/* POSTS GRID */
+/* ================= POSTS ================= */
 
 .posts {
   display: grid;
@@ -208,6 +406,8 @@
   grid-template-columns: repeat(3, 1fr);
 
   gap: 2px;
+
+  background: #ffffff;
 }
 
 .post {
@@ -217,41 +417,128 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 45px;
+  overflow: hidden;
+
+  font-size: 43px;
+
+  transition: transform 0.2s ease;
 }
 
+.post:active {
+  transform: scale(0.97);
+}
+
+
+/* Post backgrounds */
+
 .post1 {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(
+    135deg,
+    #667eea,
+    #764ba2
+  );
 }
 
 .post2 {
-  background: linear-gradient(135deg, #f093fb, #f5576c);
+  background: linear-gradient(
+    135deg,
+    #f093fb,
+    #f5576c
+  );
 }
 
 .post3 {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  background: linear-gradient(
+    135deg,
+    #4facfe,
+    #00f2fe
+  );
 }
 
 .post4 {
-  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  background: linear-gradient(
+    135deg,
+    #43e97b,
+    #38f9d7
+  );
 }
 
 .post5 {
-  background: linear-gradient(135deg, #fa709a, #fee140);
+  background: linear-gradient(
+    135deg,
+    #fa709a,
+    #fee140
+  );
 }
 
 .post6 {
-  background: linear-gradient(135deg, #30cfd0, #330867);
+  background: linear-gradient(
+    135deg,
+    #30cfd0,
+    #330867
+  );
 }
 
 .post7 {
-  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  background: linear-gradient(
+    135deg,
+    #a8edea,
+    #fed6e3
+  );
 }
 
 .post8 {
-  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  background: linear-gradient(
+    135deg,
+    #ffecd2,
+    #fcb69f
+  );
 }
 
 .post9 {
-  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  background: linear-gradient(
+    135deg,
+    #89f7fe,
+    #66a6ff
+  );
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 380px) {
+
+  .profile-section {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .avatar {
+    width: 82px;
+    height: 82px;
+  }
+
+  .avatar-face {
+    width: 76px;
+    height: 76px;
+
+    font-size: 37px;
+  }
+
+  .stats {
+    margin-left: 10px;
+  }
+
+  .stats strong {
+    font-size: 16px;
+  }
+
+  .stats span {
+    font-size: 11px;
+  }
+
+  .highlights {
+    gap: 12px;
+  }
+
 }

@@ -1,20 +1,226 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="home-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="home-header">
+
+      <div class="app-logo">
+        <ion-icon name="camera-outline"></ion-icon>
+        <span>Social Circle</span>
+      </div>
+
+      <div class="header-actions">
+        <ion-button fill="clear">
+          <ion-icon name="heart-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear">
+          <ion-icon name="chatbubble-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+    </div>
+
+
+    <!-- ================= STORIES ================= -->
+
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-avatar add-story">
+          <ion-icon name="add"></ion-icon>
+        </div>
+        <span>Your Story</span>
+      </div>
+
+      <div class="story">
+        <div class="story-avatar">👨🏻‍💻</div>
+        <span>Deepanshu</span>
+      </div>
+
+      <div class="story">
+        <div class="story-avatar">👩🏻‍💻</div>
+        <span>Priya</span>
+      </div>
+
+      <div class="story">
+        <div class="story-avatar">👨🏻‍🎓</div>
+        <span>Rahul</span>
+      </div>
+
+      <div class="story">
+        <div class="story-avatar">👩🏻‍🎨</div>
+        <span>Anjali</span>
+      </div>
+
+    </div>
+
+
+    <!-- ================= POST 1 ================= -->
+
+    <div class="post-card">
+
+      <div class="post-header">
+
+        <div class="post-user">
+          <div class="user-avatar">👨🏻‍💻</div>
+
+          <div>
+            <strong>Deepanshu Rana</strong>
+            <span>India</span>
+          </div>
+        </div>
+
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+
+      </div>
+
+
+      <div class="post-image post-one">
+        💻
+      </div>
+
+
+      <div class="post-actions">
+
+        <div>
+          <ion-icon name="heart-outline"></ion-icon>
+          <ion-icon name="chatbubble-outline"></ion-icon>
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </div>
+
+        <ion-icon name="bookmark-outline"></ion-icon>
+
+      </div>
+
+
+      <div class="post-content">
+
+        <strong>245 likes</strong>
+
+        <p>
+          Building my first Social Circle project 🚀
+        </p>
+
+        <span>View all comments</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= POST 2 ================= -->
+
+    <div class="post-card">
+
+      <div class="post-header">
+
+        <div class="post-user">
+          <div class="user-avatar">👨🏻‍🎓</div>
+
+          <div>
+            <strong>Rahul Sharma</strong>
+            <span>Haridwar</span>
+          </div>
+        </div>
+
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+
+      </div>
+
+
+      <div class="post-image post-two">
+        🚀
+      </div>
+
+
+      <div class="post-actions">
+
+        <div>
+          <ion-icon name="heart-outline"></ion-icon>
+          <ion-icon name="chatbubble-outline"></ion-icon>
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </div>
+
+        <ion-icon name="bookmark-outline"></ion-icon>
+
+      </div>
+
+
+      <div class="post-content">
+
+        <strong>180 likes</strong>
+
+        <p>
+          Working on something exciting 🔥
+        </p>
+
+        <span>View all comments</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= POST 3 ================= -->
+
+    <div class="post-card">
+
+      <div class="post-header">
+
+        <div class="post-user">
+          <div class="user-avatar">👩🏻‍💻</div>
+
+          <div>
+            <strong>Priya Singh</strong>
+            <span>Delhi</span>
+          </div>
+        </div>
+
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+
+      </div>
+
+
+      <div class="post-image post-three">
+        🎓
+      </div>
+
+
+      <div class="post-actions">
+
+        <div>
+          <ion-icon name="heart-outline"></ion-icon>
+          <ion-icon name="chatbubble-outline"></ion-icon>
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </div>
+
+        <ion-icon name="bookmark-outline"></ion-icon>
+
+      </div>
+
+
+      <div class="post-content">
+
+        <strong>320 likes</strong>
+
+        <p>
+          Learning and growing every day 💙
+        </p>
+
+        <span>View all comments</span>
+
+      </div>
+
+    </div>
+
   </div>
+
 </ion-content>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<app-bottom-nav></app-bottom-nav>

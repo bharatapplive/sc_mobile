@@ -8,11 +8,16 @@
 
   <div class="messages-container">
 
-    <ion-searchbar placeholder="Search messages"></ion-searchbar>
+    <h2 class="inbox-title">Messages</h2>
+
+    <ion-searchbar
+      placeholder="Search"
+      [(ngModel)]="searchText">
+    </ion-searchbar>
 
     <!-- Message 1 -->
-    <div class="message">
-      <div class="profile-circle">A</div>
+    <div class="message" *ngIf="showMessage('Akash')" (click)="openChat('Akash')">
+      <div class="profile-circle akash">A</div>
 
       <div class="message-info">
         <h3>Akash</h3>
@@ -23,8 +28,8 @@
     </div>
 
     <!-- Message 2 -->
-    <div class="message">
-      <div class="profile-circle">R</div>
+    <div class="message" *ngIf="showMessage('Riya')" (click)="openChat('Riya')">
+      <div class="profile-circle riya">R</div>
 
       <div class="message-info">
         <h3>Riya</h3>
@@ -35,8 +40,8 @@
     </div>
 
     <!-- Message 3 -->
-    <div class="message">
-      <div class="profile-circle">S</div>
+    <div class="message" *ngIf="showMessage('Saurabh')" (click)="openChat('Saurabh')">
+      <div class="profile-circle saurabh">S</div>
 
       <div class="message-info">
         <h3>Saurabh</h3>
@@ -47,8 +52,8 @@
     </div>
 
     <!-- Message 4 -->
-    <div class="message">
-      <div class="profile-circle">P</div>
+    <div class="message" *ngIf="showMessage('Prakash')" (click)="openChat('Prakash')">
+      <div class="profile-circle prakash">P</div>
 
       <div class="message-info">
         <h3>Prakash</h3>
@@ -61,4 +66,5 @@
   </div>
 
 </ion-content>
+
 <app-bottom-nav></app-bottom-nav>
