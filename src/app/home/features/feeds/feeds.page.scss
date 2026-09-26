@@ -41,3 +41,87 @@
     }
 }
 
+.story-model{
+    width: 100%;
+
+    .story-show{
+        position: relative;
+        width: 100%;
+        height: 800px;
+
+        .relative-img{
+            width: 100%;
+            height: 100%;
+
+            ion-img{
+                width: 100%;
+                height: 100%;
+            }
+
+        }
+
+        .absolute-left{
+            position: absolute;
+            top: 13px;
+            right: 8px;
+            color: black;
+
+            ion-icon{
+                font-size: 25px;
+            }
+        }
+
+        .absolute-content{
+            position: absolute;
+            display: flex;
+            top: 13px;
+            left: 8px;
+            gap: 8px;
+
+            .person-abs{
+                width: 40px;
+                height: 40px;
+            }
+
+            .title{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        .slider{
+            position: absolute;
+            top: 0;
+            background: black;
+        }
+    }
+
+    .reply-card{
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding:10px;
+        
+        .inputplace{
+            width: 90%;
+            height: auto;
+            max-height: 40px;
+            border: 1px solid gray;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+
+            ion-input{            
+                height: auto;
+                overflow: auto;
+            }
+        }
+        
+        ion-icon{
+            color: #49525f; 
+            font-size: 21px;
+        }
+
+    }
+}

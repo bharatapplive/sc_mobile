@@ -33,11 +33,10 @@ const routes: Routes = [
       },
       {
         path: 'post',
-        loadChildren: () => import('./features/post/post.module').then( m => m.PostPageModule)
+        loadChildren: () => import('./other-features/post/post.module').then( m => m.PostPageModule)
       }
     ]
   }
-
 ];
 
 @NgModule({

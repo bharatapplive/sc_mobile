@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { AudioTrack, ContentAuthor, CreatePostPayload } from 'src/app/core/authcontroller/authInterface';
 import { ProfileService } from 'src/app/home/features/profile/profile-service';
-import { PostService } from 'src/app/home/features/post/Post-service';
+import { PostService } from 'src/app/home/other-features/post/Post-service';
 import { PreviousRouteServe } from 'src/app/core/previous-route-serve';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
 
@@ -102,7 +102,7 @@ export class PostPage implements OnInit {
     private readonly postServe: PostService,
     private readonly previousRoute: PreviousRouteServe,
     private readonly toastController: ToastController,
-        private readonly authServe: AuthService
+    private readonly authServe: AuthService
   ) { }
 
   ngOnInit() {
@@ -199,6 +199,7 @@ export class PostPage implements OnInit {
   }
 //#endregion
 
+  //#region Post..
   onCreatePost(){
 
     // 1. get the fullname and change to lower..
@@ -213,7 +214,6 @@ export class PostPage implements OnInit {
     const uniqueSuffix = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
     const generatedUsername = `@${lastName}_${uniqueSuffix}`;
     
-        console.log(`generatedUsername + ${parts} + ${lastName}`)
     // Helper to extract #hashtags into an array
     const extractedHashtags = this.caption? (this.caption.match(/#[\w]+/g)?.map(tag => tag.substring(1)) || []) : [];
 
@@ -232,27 +232,28 @@ export class PostPage implements OnInit {
     };
 
     this.postServe.createNewPost(payload).subscribe({
-        next: () => {
-          
-          this.presentSuccessToast('Post successfully updated');
-          // Reset post creation portal values
-          this.isSelected = false;
-          this.selectedAudio = null;
-          this.stopAudioPreview();
-          
-          this.navCtrl.navigateBack('/home/feeds');
-        },
-        error: (err) => {
-          // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
-          const serverError = err.error?.message || 'Registration failed. Please try again.';
-          alert(serverError);
-        }
-      });
+      next: () => {
+        
+        this.presentSuccessToast('Post successfully updated');
+        // Reset post creation portal values
+        this.isSelected = false;
+        this.selectedAudio = null;
+        this.stopAudioPreview();
+        
+        this.navCtrl.navigateBack('/home/feeds');
+      },
+      error: (err) => {
+        // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
+        const serverError = err.error?.message || 'Registration failed. Please try again.';
+        alert(serverError);
+      }
+    });
   }
 
   openModal(){
     this.isCreateModel = !this.isCreateModel;
   }
+  //#endregion
 
   goBack(){
     const prevUrl = this.previousRoute.getPreviousUrl();
@@ -270,6 +271,7 @@ export class PostPage implements OnInit {
 
   onChangeContentType(tab: any){
     this.activeTab = tab;
+    console.log(this.activeTab);
   }
 
   async presentSuccessToast(messageText: string) {

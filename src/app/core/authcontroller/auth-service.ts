@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, finalize, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, map, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginResponse, SessionState, User } from './authInterface';
 
@@ -24,7 +24,7 @@ export class AuthService {
   // Session 2.make sessonSubject observable so that other pages can subscribe.. 
   readonly session$ = this.sessionSubject.asObservable();
   
-  //1. REGISTER...
+  //1. REGISTER  NEW USER...
   register(userData: User): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/register`, userData).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -34,12 +34,12 @@ export class AuthService {
     );
   }
 
-  // 2. VERIFICATION...
+  // 2. USER VERIFICATION...
   verifyOtp(payload: { userId: string; otpCode: string }): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/verify-otp`, payload);
   }
 
-  // 3. Upload Image...
+  // 3. PROFILE PHOTO OF USER...
   uploadAnImage(userid: string, file: File){
     
     const formData = new FormData();
@@ -100,4 +100,32 @@ export class AuthService {
     });
   }
 
+  // 10. Get All users
+  allUsers(): Observable<User[]> {
+    const backendUrl = environment.apiUrl.replace(/\/auth\/?$/, '') || 'http://localhost:3000';
+
+    return this.http.get<User[]>(`${environment.apiUrl}/auth`).pipe(
+      map((users: User[]) => {
+        if (!Array.isArray(users)) return [];
+
+        return users.map((user) => {
+          const avatar = user.avatarUrl?.trim();
+          let formattedAvatar = 'assets/images/default-avatar.png';
+
+          if (avatar) {
+            if (avatar.startsWith('http://') || avatar.startsWith('https://')) {
+              formattedAvatar = avatar;
+            } else {
+              formattedAvatar = `${backendUrl}${avatar.startsWith('/') ? '' : '/'}${avatar}`;
+            }
+          }
+
+          return {
+            ...user,
+            avatarUrl: formattedAvatar
+          };
+        });
+      })
+    );
+  }
 }

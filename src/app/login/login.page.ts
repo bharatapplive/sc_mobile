@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { AuthService } from '../core/authcontroller/auth-service';
 import { ActionSheetController, AlertController, NavController, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { User } from '../core/authcontroller/authInterface';
 
 @Component({
   selector: 'app-login',
@@ -79,12 +80,13 @@ export class LoginPage implements OnInit {
       const uniqueSuffix = Math.floor(100 + Math.random() * 900); // 3-digit random number
       const generatedUsername = `@${firstName}_${lastName}.${uniqueSuffix}`;
 
-      const payload = {
+      const payload: User = {
         fullname: this.registerPortal.fullname?.trim() || '',
         username: generatedUsername, // 👈 Included username
         email: this.registerPortal.email?.trim() || '',
         phoneNumber: (this.registerPortal.phone || '').toString().trim(),
-        password: this.registerPortal.password
+        password: this.registerPortal.password,
+        gender: ''
       };
 
       this.authServe.register(payload).subscribe({
@@ -94,10 +96,10 @@ export class LoginPage implements OnInit {
           this.presentSuccessToast(`Please verify OTP sent to your ${user.phoneNumber}`);
           localStorage.setItem('regUser', JSON.stringify(user._id));
         },
-        error: (err) => {
+        error: async (err) => {
           // Shows the exact error message from NestJS (e.g. "Username or Email already exists.")
           const serverError = err.error?.message || 'Registration failed. Please try again.';
-          this.alertCtrl.create({
+          const alert = this.alertCtrl.create({
             header:'Register Error',
             message: serverError,
             buttons:[
@@ -112,6 +114,7 @@ export class LoginPage implements OnInit {
             ],
             backdropDismiss: false
           });
+          (await alert).present();
         }
       });
     }
@@ -158,6 +161,7 @@ export class LoginPage implements OnInit {
         this.location.replaceState('/register');      
         this.title = 'Join the circle';
         this.subtitle= 'Where creators connect and the digital pulse comes alive.';
+        this.registerPortal = {fullname:'', email:'', phone:'', password:''};
       }else{
         this.location.replaceState('/VerifyOTP');      
         this.title = 'Verify the OTP';
@@ -170,7 +174,7 @@ export class LoginPage implements OnInit {
     this.step = 'REGISTER';
   }
 
-  // 1. SELECT THE FILE
+  //#region  UPLOAD PROFILE PHOTO...
   async pickPhotoFromGallery(){
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Select Avatar Source',
@@ -256,6 +260,7 @@ export class LoginPage implements OnInit {
       }
     });
   }
+  //#endregion
 
   skipForNow(){
     this.isCreateModel=false;
@@ -267,7 +272,7 @@ export class LoginPage implements OnInit {
   async presentSuccessToast(messageText: string) {
     const toast = await this.toastController.create({
       message: messageText,
-      duration: 2500,
+      duration: 1000,
       position: 'bottom',
       color: 'success',
       icon: 'checkmark-circle-outline', // Optional icon

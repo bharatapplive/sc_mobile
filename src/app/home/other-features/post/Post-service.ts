@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CreatePostPayload, MediaComposerState, OverlayText, PostResponse, PostType } from '../../../core/authcontroller/authInterface';
+import { CreatePostPayload, MediaComposerState, OverlayText, PostResponse, PostType, ContentAuthor } from '../../../core/authcontroller/authInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -76,7 +76,7 @@ export class PostService {
 
   // 2. ALL FEEDS....
   loadAllPost(){
-    return this.http.get<PostResponse>(`${environment.apiUrl}/post`).pipe(
+    return this.http.get<PostResponse>(`${environment.apiUrl}/post/user-post`).pipe(
       map((user) => {
         if (user) {
           if (!user) return user;
@@ -162,5 +162,42 @@ export class PostService {
   // 6. COMMENT UPDATE..
   commentUpdate(id: string){
     return this.http.patch(`${environment.apiUrl}/post/${id}/comment`, {});
+  }
+
+  // 7. Update Profile..
+  updatePostProfile(data: ContentAuthor):Observable<any>{
+    return this.http.patch(`${environment.apiUrl}/post/author`,data);
+  }
+
+  // 8.Create Story..
+ loadAllStory(){
+    return this.http.get<PostResponse>(`${environment.apiUrl}/post/story`).pipe(
+      map((user) => {
+        if (user) {
+          if (!user) return user;
+
+          // Clean base origin URL regardless of trailing paths like /auth or /post
+          const baseUrl = environment.apiUrl.replace(/\/(auth|post)\/?$/, '') || 'http://localhost:3000';
+          
+          const formatUrl = (path?: string): string => {
+            const trimmed = path?.trim();
+            if (!trimmed) return 'assets/images/default-avatar.png';
+            if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+            return `${baseUrl}${trimmed.startsWith('/') ? '' : '/'}${trimmed}`;
+          };
+
+          // Return updated user object with fully formatted avatarUrl
+          if (Array.isArray(user)) {
+            return user.map((post) => ({
+              ...post,
+              author: post.author
+                ? { ...post.author, avatarUrl: formatUrl(post.author.avatarUrl) }
+                : post.author
+            }));
+          }
+        }
+        return user;
+      })
+    );
   }
 }

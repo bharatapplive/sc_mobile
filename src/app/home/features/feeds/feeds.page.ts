@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { CommentResponse, User } from 'src/app/core/authcontroller/authInterface';
-import { IonModal, ToastController } from '@ionic/angular';
+import { CommentResponse, Followers, User } from 'src/app/core/authcontroller/authInterface';
+import { ActionSheetController, AlertController, IonModal, ToastController } from '@ionic/angular';
 import { EMPTY, forkJoin, switchMap, tap } from 'rxjs';
-import { PostService } from 'src/app/home/features/post/Post-service';
+import { PostService } from 'src/app/home/other-features/post/Post-service';
 import { ProfileService } from 'src/app/home/features/profile/profile-service';
 import { ReelService } from '../reels/reel-service';
 import { FeedService } from './feed.service';
@@ -19,19 +19,21 @@ export class FeedsPage implements OnInit{
   
   @ViewChild(IonModal) modal!: IonModal;
   @ViewChildren('audioPlayer') audioPlayers!: QueryList<ElementRef<HTMLAudioElement>>;
-  
+  noop = () => {};
   user: User | null = null;
   // Boolean content
   isLikesModalOpen = false;
   isCommitModalOpen = false;
+  isStoryModalOpen = false;
   isPlayingPreview: boolean = false;
+  isActiveStory: boolean = false;
 
   selectedFeedForLikes: any = null;
   selectedFeedId: string | null = null;
   commentPortal={message:''};
   
   // User content...
-  avatarUrl?: string = '';
+  avatarUrl?: string = 'assets/icon/favicon.png';
   username: string = '';
   currentUserId: string | null = null; // Declare property here
 
@@ -40,8 +42,10 @@ export class FeedsPage implements OnInit{
   // List / Array / Collection....
   postList: any[] = [];
   likedByUsers: any[] = [];
-  highlights: any[] = []
+  highlights: any[] = [];
+  showHighLight: any[] = [];
   commentList: any[] = [];
+  followList: any[] = [];
 
   constructor(
     private readonly postServe: PostService,
@@ -49,23 +53,12 @@ export class FeedsPage implements OnInit{
     private readonly profileServe: ProfileService,
     private readonly authServe: AuthService,
     private readonly feedServe: FeedService,
-    private readonly toastController: ToastController
+    private readonly toastController: ToastController,
+    private readonly actionSheetCtrl: ActionSheetController
   ) { }
 
   ngOnInit() {
-    const session = this.authServe.getSession();
-    if(!session.isAuthenticated)
-    { 
-      return;
-    }
-    else
-    {
-      this.feedServe.loadStory().subscribe({
-        next: ((story: any)=>{
-          this.highlights = [...story];
-        })
-      })
-    }    
+      
   }
 
   ionViewWillEnter() {
@@ -78,6 +71,17 @@ export class FeedsPage implements OnInit{
     {
       this.loadUserProfile();
       this.loadPost();
+      this.updateFollower();
+
+      this.postServe.loadAllStory().subscribe({
+        next: ((story: any)=>{
+          const storyList = [...story];
+          
+          this.isActiveStory = storyList.find(item => item.author?.userId === this.user?._id);
+          
+          this.highlights = storyList.filter(item => item.author?.userId !== this.user?._id);
+        })
+      });
     }
   }
 
@@ -95,6 +99,7 @@ export class FeedsPage implements OnInit{
           this.postList = combined.sort((a, b) => 
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
+
           // Hide spinner if triggered by pull-to-refresh
           if (event) {
             event.target.complete();
@@ -108,18 +113,18 @@ export class FeedsPage implements OnInit{
             event.target.complete();
           }
         }
-    })
+    });
   }
   
   private loadUserProfile(event?: any){
             
     this.profileServe.loadUserData().subscribe({
       next: (userData: any) => {
+        this.user = userData;
         this.username = userData.username;
         this.avatarUrl = userData.avatarUrl?.trim(); 
         this.currentUserId = userData._id;
-        console.log(this.avatarUrl);
-                
+
         // Hide spinner if triggered by pull-to-refresh
         if (event) {
           event.target.complete();
@@ -133,7 +138,7 @@ export class FeedsPage implements OnInit{
           event.target.complete();
         }
       },
-    });
+    });    
   }
   
   handleRefresh(event: any){
@@ -269,6 +274,95 @@ export class FeedsPage implements OnInit{
   }
   //#endregion
   
+  //#region STORY Panel...
+  openSelfStory(id: any){
+    if(!this.isActiveStory){
+      return;
+    }
+    else{
+      this.isStoryModalOpen = true;
+      this.loadStory(id);
+    }
+  }
+
+  openStoryPanel(id: any){
+    if(!this.highlights)
+    { 
+      return;
+    }
+    else{
+      this.isStoryModalOpen = true;
+      this.loadStory(id);
+    }
+  }
+
+  loadStory(id: any){
+    this.postServe.loadAllStory().subscribe({
+      next: ((storys: any) =>{
+        const allStory = [...storys];
+        this.showHighLight = allStory.filter(item => item.author?.userId === id);
+      })
+    })
+  }
+
+  async otherStoryController(){
+    const ActionSheet = await this.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: 'Report',
+        },
+        {
+          text: 'Mute',
+        },
+      ],
+    });
+    await ActionSheet.present();
+  }
+  
+  //#endregion
+  
+  //#region Follower...
+
+  onClickFollow(item: any){
+
+    const otherUserID = item.author?.userId;
+
+    const payLoad: Followers = {
+      followerId: this.user?._id ?? '',
+      followingId: otherUserID
+    }
+
+    this.profileServe.createNewFollower(payLoad).subscribe({
+      next:()=>{
+        this.updateFollower();
+      },
+      error(er){
+        console.log(er);
+      }
+    })
+  }
+
+  updateFollower(){
+    this.profileServe.callAllFollowers().subscribe({
+      next: (result: any)=>{
+        this.followList = [...result];
+      },
+      error(err) {
+        console.log(err);
+      }
+    });
+  }
+
+  isFollowing(id?: string): boolean{
+    if(id === this.user?._id){
+      return true;
+    }else{
+      return this.followList.some((item) => item.followerId === this.user?._id && item.followingId === id);
+    }
+  }
+
+  //#endregion
+
   toggleGlobalMute(): void {
     
     this.isPlayingPreview = !this.isPlayingPreview;

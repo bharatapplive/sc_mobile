@@ -316,3 +316,200 @@
 .post-panel{
   padding-top: 0px;
 }
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+
+    .main-avatar{
+      display: flex;
+
+      .person{
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+      }
+    }
+
+    .edit-card-board{
+      padding: 0px 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .edit-title, .edit-gender{
+        width: 100%;
+        border: 1px solid gray;
+        border-radius: 8px;
+        padding:0px 10px;
+      }
+
+      .edit-gender{
+        select{
+          width: 100%;
+          background: none;
+          border: none;
+          font-size: 18px;
+        }
+
+        span{
+          color: gray;
+        }
+      }
+    }
+
+    .link{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .add-links, .banners{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+
+        h5{
+          margin: 0;
+          color: black;
+          font-size: 15px;
+        }
+
+        span{
+          font-size: 14px;
+          color: gray;
+        }
+      }
+    }
+
+    .pro-info{
+      width: 100%;
+      border: {
+        top: 1px solid #000;
+        bottom: 1px solid #000;
+      }
+
+      .container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+        gap: 10px;
+        padding: 0 10px;
+      
+        h5{
+          width: 100%;
+          margin: 0;
+          font-size: 16px;
+          font-weight: 400;
+          color: black;
+        }
+
+        .title-info{
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          span{
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 4px;
+            font-size: 14px;
+            font-weight: 300;
+            color: gray;
+
+            ion-icon {
+              text-align: right;
+              font-size: 16px;   // Scales the Ionic icon cleanly
+            }
+          }
+        }
+      }
+    }
+}
+
+.follower-class{
+  .header-class{
+    ion-label{
+      color: black;
+      text-transform: none;
+    }
+
+    ion-icon{
+      font-size: 20px;
+      color: black;
+    }
+  }
+
+  .follow-list{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+      padding: 0 10px;
+
+      .header-bar{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          ion-button{
+              font-size: 13px;
+              text-transform: none;
+          }
+      }
+
+      .person-list{
+          display: flex;
+          justify-content: space-between;
+          margin: 15px 8px;
+
+          .avatar{
+              width: 50%;
+              display: flex;
+              gap: 15px;
+
+              .title{
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  gap: 2px;
+
+                  h2{
+                      font-size: 16px;
+                      margin: 0;
+                  }
+                  span{
+                      font-size: 12px;
+                  }
+              }
+
+              ion-avatar{
+                  width: 52px;
+                  height: 52px;
+                  border-radius: 50%;
+              }
+          }
+
+          .tabs{
+              display: flex;
+              align-items: center;
+
+              ion-button{
+                  background: linear-gradient(135deg, #0091ff, #8fbff5);
+                  color: white;
+                  border-radius: 10px;
+                  margin-right: 5px;
+                  width: auto;
+                  height: auto;
+                  text-transform: none;
+              }
+          }
+      }
+  }
+}

@@ -23,15 +23,15 @@
     <section class="story-panel">
       <div class="story-context">
         <ion-avatar class="person">
-          <ion-img [src]="getUserAvatar()" alt="User Avatar"></ion-img>  
+          <ion-img [src]="user?.avatarUrl" alt="User Avatar"></ion-img>  
         </ion-avatar>
         <span>Your note</span>
       </div>
       
-      <div class="story-context" *ngFor="let item of onlineFriend">
+      <div class="story-context" *ngFor="let item of followingList">
         <div class="online-relative">
           <ion-avatar class="person">
-            <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
+            <ion-img [src]="item.avatarUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
           <ion-icon class="story-add-absolute" name="online"></ion-icon>
         </div>
@@ -143,7 +143,7 @@
       <div class="person-list" *ngFor="let item of follows">
         <div class="avatar">
           <ion-avatar>           
-            <ion-img [src]="item.imgUrl" alt="User Avatar"></ion-img>
+            <ion-img [src]="item.avatarUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
           <div class="title">
             <h2>{{item?.username}}</h2>
@@ -151,8 +151,11 @@
           </div>
         </div>
         <div class="tabs">
-          <ion-button shape="round" size="small" fill="clear">{{item?.status}}</ion-button>
-          <ion-icon name="close-outline"></ion-icon>
+          @if(isFollower(item)){
+            <ion-button shape="round" size="small" fill="clear">Follow Back</ion-button>
+          }@else{
+            <ion-button shape="round" size="small" fill="clear" (click)="onClickFollow(item)">Follow</ion-button>
+          }
         </div>
       </div>
     </section>

@@ -30,6 +30,20 @@
         </div>
       </div>
     </div>
+
+    <div class="post-panel" [style.display]="activeTab === 'STORY' ? 'flex' : 'none'">
+     <div class="upper-container">
+        <ion-img [src]="postUrl" class="post-image"></ion-img>
+      </div>
+      <div class="lower-conatiner">
+        <div class="grid">
+          <ion-icon name="camera"></ion-icon>
+          <div *ngFor="let post of posts">
+            <ion-img [src]="post.url" (click)="onChangePost(post.id)"></ion-img>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- <div class="post-panel" [style.display]="activeTab === 'Post' ? 'flex' : 'none'">
       <div class="upper-container" [class.has-preview]="mediaUrl !== null" (click)="openModal()">
         
@@ -251,7 +265,86 @@
               <ion-icon slot="icon-only" name="paper-plane"></ion-icon>
               <span> Share</span>
             </ion-button>
-          </div>          
+          </div>  
+          
+          <div class="post-section" [style.display]="activeTab === 'STORY' ? 'flex' : 'none'">
+            <div class="selected-image">
+              <ion-img [src]="postUrl" class="post-image"></ion-img>            
+            </div>
+
+            <div class="caption-card">
+              <ion-avatar>           
+                <ion-img [src]="'assets/images/Cutipie.jpg'" alt="User Avatar"></ion-img>
+              </ion-avatar>
+
+              <ion-textarea 
+                id="caption-input" 
+                placeholder="Write a caption" 
+                [maxlength]="maxLength" 
+                [rows]="5"
+                [autoGrow]="true"
+                [(ngModel)]="captionText"
+                (ionInput)="onTextChange()"
+                class="caption-textarea">
+              </ion-textarea>
+
+              <!-- Dynamic Character Count -->
+              <div class="char-count">
+                <span id="char-count">{{ captionText.length }}/{{ maxLength }}</span>
+              </div>
+            </div>
+
+            <div class="add-on-section">
+              <ion-button fill="clear" (click)="isMusicModalOpen = !isMusicModalOpen">
+                <div class="btn-controls">
+                  <div class="bar">
+                    <div class="icon-btn">
+                      <ion-icon slot="icon-only" name="musical-note"></ion-icon>
+                    </div>
+                    <div class="title">
+                      <h2>{{ selectedAudio ? selectedAudio.title : 'Add Music' }}</h2>
+                      <span>{{ selectedAudio ? selectedAudio.artist : 'Select a track' }}</span>
+                    </div>
+                  </div>
+                  <ion-icon slot="icon-only" name="close-circle-outline" *ngIf="selectedAudio" (click)="removeSelectedMusic($event)"></ion-icon>
+                  <ion-icon *ngIf="!selectedAudio" slot="icon-only" name="chevron-forward-outline"></ion-icon>
+                </div>
+              </ion-button>
+
+              <ion-button fill="clear">
+                <div class="btn-controls">
+                  <div class="bar">
+                    <div class="icon-btn">
+                      <ion-icon slot="icon-only" name="person-add"></ion-icon>
+                    </div>
+                    <div class="title">
+                      <h2>Tag People</h2>
+                    </div>
+                  </div>
+                  <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+                </div>
+              </ion-button>
+
+              <ion-button fill="clear">
+                <div class="btn-controls">
+                  <div class="bar">
+                    <div class="icon-btn">
+                      <ion-icon slot="icon-only" name="person-add"></ion-icon>
+                    </div>
+                    <div class="title">
+                      <h2>Add Location</h2>
+                    </div>
+                  </div>
+                  <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+                </div>
+              </ion-button>
+            </div>
+
+            <ion-button fill="clear" (click)="onCreatePost()">
+              <ion-icon slot="icon-only" name="paper-plane"></ion-icon>
+              <span> Share</span>
+            </ion-button>
+          </div>  
         </div>
       </ion-content>
     </ng-template>

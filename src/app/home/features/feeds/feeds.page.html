@@ -28,9 +28,9 @@
     
     <section class="story-panel">
       <div class="story-context">
-        <div class="height-light" [class.active]="false">
+        <div class="height-light" [class.active]="isActiveStory">
           <div class="story-relative">
-            <ion-avatar class="person">
+            <ion-avatar class="person" (click)="openSelfStory(user?._id)">
               <ion-img [src]="avatarUrl" alt="User Avatar"></ion-img>
             </ion-avatar>
             <ion-button class="story-add-absolute" fill="clear" shape="round" size="small">
@@ -43,7 +43,7 @@
       
       <div class="story-context" *ngFor="let item of highlights">
         <div class="height-light" [class.active]="true">
-          <ion-avatar class="person">
+          <ion-avatar class="person" (click)="openStoryPanel(item.author?.userId)">
               <ion-img [src]="item.author?.avatarUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
         </div>
@@ -62,7 +62,7 @@
                 <video
                   #videoPlayer
                   appIntersectionObserver
-                  (isPercentVisible)="$event ? videoPlayer.play() : videoPlayer.pause()"
+                  (isPercentVisible)="$event ? videoPlayer.play().catch(noop) : videoPlayer.pause()"
                   [src]="feed.mediaUrl"
                   autoplay
                   muted
@@ -71,9 +71,9 @@
                   (play)="audioPlayer.play()"
                   (pause)="audioPlayer.pause()">
                 </video>
-                <audio 
-                  #audioPlayer 
-                  [src]="feed.audio?.audioUrl">
+                <audio #audioPlayer 
+                  [src]="feed.audio?.audioUrl" 
+                  [muted]="isPlayingPreview">
                 </audio>
               </div>
               <div class="post-header-abs">
@@ -86,9 +86,15 @@
                     <span>{{feed?.audio?.artist}}</span>
                   </div>
                 </div>
-                <ion-button shape="round" fill="clear" size="small">
-                  <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-                </ion-button>
+                <div>
+                  @if(!isFollowing(feed.author?.userId))
+                  {
+                    <ion-button class="follow-btn" shape="round" size="small" fill="clear" (click)="onClickFollow(feed)">Follow</ion-button>
+                  }
+                  <ion-button shape="round" fill="clear" size="small">
+                    <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+                  </ion-button>
+                </div>
               </div>
             </div>
           } @else {
@@ -103,9 +109,15 @@
                   <span>{{feed?.audio?.artist}}</span>
                 </div>
               </div>
-              <ion-button shape="round" fill="clear" size="small">
-                <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-              </ion-button>
+              <div>
+                  @if(!isFollowing(feed.author?.userId))
+                  {
+                    <ion-button class="follow-btn" shape="round" size="small" fill="clear" (click)="onClickFollow(feed)">Follow</ion-button>
+                  }
+                  <ion-button shape="round" fill="clear" size="small">
+                    <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+                  </ion-button>
+                </div>
             </div>
 
             <div class="post-content">          
@@ -117,11 +129,11 @@
                 playsinline
                 class="post-image"
                 appIntersectionObserver
-                (isPercentVisible)="$event ? audioPlayer.play() : audioPlayer.pause()">
+                (isPercentVisible)="$event ? audioPlayer.play().catch(noop) : audioPlayer.pause()">
               </ion-img>
-              <audio 
-                #audioPlayer 
-                [src]="feed.audio?.audioUrl">
+              <audio #audioPlayer 
+                [src]="feed.audio?.audioUrl" 
+                [muted]="isPlayingPreview">
               </audio>
             </div>
           }
@@ -251,6 +263,55 @@
           <div class="tabs">
             <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
           </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="isStoryModalOpen" (didDismiss)="isStoryModalOpen = false" class="story-model">
+    <ng-template>
+      <ion-content *ngFor="let item of showHighLight">
+        <div class="story-show">
+          <div class="relative-img">
+            <ion-img
+              [src]="item.mediaUrl"
+              autoplay
+              muted
+              preload="metadata"
+              playsinline
+              class="post-image"
+              appIntersectionObserver
+              (isPercentVisible)="$event ? audioPlayer.play().catch(noop) : audioPlayer.pause()">
+            </ion-img>
+            <audio #audioPlayer 
+              [src]="item.audio?.audioUrl" 
+              [muted]="isPlayingPreview">
+            </audio>
+          </div>
+          <div class="slider">
+            <ion-range labelPlacement="stacked" ></ion-range>
+          </div>
+          <div class="absolute-content">
+            <ion-avatar class="person-abs">
+              <ion-img [src]="item.author?.avatarUrl"></ion-img>
+            </ion-avatar>
+            <div class="title">
+              <span>{{item.author?.authorName}}</span>
+              <span>{{item.audio.title}}</span>
+            </div>
+            <span>{{(item?.time || item?.createdAt) | timeAgo}}</span>
+          </div>
+          <div class="absolute-left" [class.active]="isActiveStory">
+              <ion-icon slot="icon-only" name="ellipsis-vertical-outline" (click)="isActiveStory"></ion-icon>
+          </div>
+        </div>
+        <div class="reply-card">
+          <ion-item class="inputplace">
+            <ion-input type="text" name="comment" #comment="ngModel" [(ngModel)]="commentPortal.message" placeholder="Join the conversation..." required minlength="500">
+              <ion-icon slot="end" name="image-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-icon name="send-outline" (click)="onSubmitComment()" ></ion-icon>
         </div>
       </ion-content>
     </ng-template>

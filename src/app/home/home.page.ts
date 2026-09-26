@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { filter, Subscription } from 'rxjs';
 import { AuthService } from '../core/authcontroller/auth-service';
 import { ProfileService } from './features/profile/profile-service';
+import { User } from '../core/authcontroller/authInterface';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ProfileService } from './features/profile/profile-service';
 })
 export class HomePage implements OnInit {
 
-  avatarUrl?: string = '';
+  user: User | null = null;
 
   activeTab: string = '/feeds';
   showTabs = true;
@@ -33,7 +34,7 @@ export class HomePage implements OnInit {
 
     this.profileServe.loadUserData().subscribe({
       next: (response: any) => {
-        this.avatarUrl = response?.avatarUrl?.trim();
+        this.user = response;
       }
     });
 
