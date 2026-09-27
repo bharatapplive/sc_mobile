@@ -22,6 +22,13 @@ export const routes: Routes = [
         loadChildren: () =>
           import('../story/story.module').then((m) => m.StoryPageModule),
       },
+      // step 1: create route name -> message
+      {
+        path: 'message',
+        loadChildren: () =>
+          // step 3:- create message module and page
+          import('../message/message.module').then((m) => m.MessagePageModule),
+      },
       {
         path: 'profile',
         loadChildren: () =>
