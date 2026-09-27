@@ -1,0 +1,707 @@
+/* =========================================================
+   SOCIAL CIRCLE — REELS
+   Premium Vertical Reels UI
+   ========================================================= */
+
+.reels-page {
+  --background: #000;
+
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+
+  background: #000;
+
+  color: #fff;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.reels-header {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 100;
+
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.65),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+.reels-title {
+  font-size: 22px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.camera-btn {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  backdrop-filter: blur(12px);
+
+  color: #fff;
+
+  pointer-events: auto;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.camera-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+
+  transform: scale(1.05);
+}
+
+.camera-btn .material-symbols-outlined {
+  font-size: 21px;
+}
+
+
+/* =========================================================
+   REEL CONTAINER
+   ========================================================= */
+
+.reel {
+  position: relative;
+
+  width: 100%;
+
+  height: 100vh;
+
+  min-height: 600px;
+
+  overflow: hidden;
+
+  background: #050505;
+}
+
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+
+.reel-video {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   VIDEO OVERLAY
+   ========================================================= */
+
+.reel-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.28) 0%,
+      transparent 25%,
+      transparent 48%,
+      rgba(0, 0, 0, 0.15) 62%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
+}
+
+
+/* =========================================================
+   RIGHT ACTIONS
+   ========================================================= */
+
+.reel-actions {
+  position: absolute;
+
+  z-index: 10;
+
+  right: 15px;
+  bottom: 110px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 18px;
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+   ========================================================= */
+
+.reel-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5);
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.reel-action:hover {
+  transform: scale(1.1);
+}
+
+.reel-action:active {
+  transform: scale(0.88);
+}
+
+.reel-action .material-symbols-outlined {
+  font-size: 29px;
+
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 500,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.reel-action:first-child
+.material-symbols-outlined {
+  font-size: 31px;
+}
+
+.reel-action span:last-child {
+  font-size: 10px;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   LIKE BUTTON
+   ========================================================= */
+
+.reel-action:first-child
+.material-symbols-outlined {
+  color: #fff;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.reel-action:first-child:hover
+.material-symbols-outlined {
+  color: #ff4d7d;
+
+  transform: scale(1.12);
+}
+
+
+/* =========================================================
+   BOTTOM INFORMATION
+   ========================================================= */
+
+.reel-info {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 18px;
+  right: 85px;
+  bottom: 24px;
+
+  max-width: 650px;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   USER
+   ========================================================= */
+
+.reel-user {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 13px;
+}
+
+.reel-user img {
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 auto;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================================
+   USER DETAILS
+   ========================================================= */
+
+.user-details {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.user-details h3 {
+  margin: 0;
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  line-height: 1.2;
+}
+
+.user-details span {
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  opacity: 0.72;
+}
+
+
+/* =========================================================
+   FOLLOW BUTTON
+   ========================================================= */
+
+.follow-btn {
+  margin-left: 6px;
+
+  padding: 7px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.10);
+
+  backdrop-filter: blur(10px);
+
+  color: #fff;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.follow-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.reel-description {
+  margin: 0 0 7px;
+
+  max-width: 500px;
+
+  font-size: 13px;
+
+  line-height: 1.45;
+
+  font-weight: 500;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   HASHTAGS
+   ========================================================= */
+
+.hashtags {
+  margin-bottom: 9px;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  font-weight: 650;
+
+  opacity: 0.95;
+}
+
+
+/* =========================================================
+   MUSIC
+   ========================================================= */
+
+.music-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  max-width: 300px;
+
+  overflow: hidden;
+
+  font-size: 11px;
+
+  opacity: 0.85;
+}
+
+.music-info .material-symbols-outlined {
+  flex: 0 0 auto;
+
+  font-size: 16px;
+
+  animation: musicPulse 1.5s ease-in-out infinite;
+}
+
+.music-info span:last-child {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   MUSIC DISC
+   ========================================================= */
+
+.music-disc {
+  position: absolute;
+
+  z-index: 12;
+
+  right: 18px;
+  bottom: 24px;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 3px;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #fff,
+      #777,
+      #fff,
+      #444,
+      #fff
+    );
+
+  animation:
+    rotateDisc 4s linear infinite;
+}
+
+.music-disc img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 2px solid #111;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes rotateDisc {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes musicPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  .reel {
+    width: min(100%, 520px);
+
+    margin: 0 auto;
+
+    border-left:
+      1px solid rgba(255, 255, 255, 0.05);
+
+    border-right:
+      1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .reels-header {
+    left: 50%;
+
+    width: min(100%, 520px);
+
+    transform: translateX(-50%);
+  }
+
+  .reel-actions {
+    right: 18px;
+  }
+
+  .reel-info {
+    left: 20px;
+    right: 85px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .reels-header {
+    height: 62px;
+
+    padding: 0 15px;
+  }
+
+  .reels-title {
+    font-size: 21px;
+  }
+
+  .camera-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .reel-actions {
+    right: 12px;
+
+    bottom: 112px;
+
+    gap: 17px;
+  }
+
+  .reel-action .material-symbols-outlined {
+    font-size: 27px;
+  }
+
+  .reel-action:first-child
+  .material-symbols-outlined {
+    font-size: 29px;
+  }
+
+  .reel-info {
+    left: 14px;
+
+    right: 72px;
+
+    bottom: 21px;
+  }
+
+  .reel-user {
+    margin-bottom: 10px;
+  }
+
+  .reel-user img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .user-details h3 {
+    font-size: 13px;
+  }
+
+  .user-details span {
+    font-size: 9px;
+  }
+
+  .follow-btn {
+    padding: 6px 10px;
+
+    font-size: 10px;
+  }
+
+  .reel-description {
+    font-size: 12px;
+  }
+
+  .hashtags {
+    font-size: 11px;
+  }
+
+  .music-info {
+    font-size: 10px;
+  }
+
+  .music-disc {
+    right: 12px;
+
+    bottom: 24px;
+
+    width: 38px;
+    height: 38px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .reel-actions {
+    right: 9px;
+
+    gap: 14px;
+  }
+
+  .reel-action .material-symbols-outlined {
+    font-size: 25px;
+  }
+
+  .reel-info {
+    left: 12px;
+
+    right: 67px;
+  }
+
+  .reel-description {
+    font-size: 11px;
+  }
+
+  .hashtags {
+    font-size: 10px;
+  }
+
+  .follow-btn {
+    padding: 5px 8px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}

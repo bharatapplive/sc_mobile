@@ -1,20 +1,386 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="home-page">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- ================= HEADER ================= -->
+  <header class="home-header">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="brand">
+      <h1>Social Circle</h1>
+    </div>
+
+    <div class="header-actions">
+
+      <button class="icon-btn">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+
+      <button class="icon-btn notification-btn">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="notification-count">3</span>
+      </button>
+
+      <button class="profile-mini">
+        <img src="assets/avatar1.jpg" alt="Profile">
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= NOTIFICATION POPUP ================= -->
+
+  <div class="notification-popup">
+
+    <div class="popup-avatar">
+      <img src="assets/avatar2.jpg" alt="Alex">
+    </div>
+
+    <div class="popup-text">
+      <strong>Alex</strong>
+      <span>accepted<br>your request!</span>
+    </div>
+
   </div>
+
+
+  <!-- ================= STORIES ================= -->
+
+  <section class="stories-section">
+
+    <div class="section-title">
+      <h2>Stories</h2>
+    </div>
+
+    <div class="stories-container">
+
+      <!-- ADD STORY -->
+      <div class="story add-story-card">
+
+        <div class="add-story-circle">
+          <span class="material-symbols-outlined">
+            add
+          </span>
+        </div>
+
+        <div class="story-plus">
+          +
+        </div>
+
+        <span>Add story</span>
+
+      </div>
+
+
+      <!-- STORY 1 -->
+      <div class="story">
+
+        <div class="story-ring">
+          <img src="assets/avatar2.jpg" alt="TravelJan">
+        </div>
+
+        <span>TravelJan</span>
+
+      </div>
+
+
+      <!-- STORY 2 -->
+      <div class="story">
+
+        <div class="story-ring">
+          <img src="assets/avatar3.jpg" alt="CityLife">
+        </div>
+
+        <span>CityLife</span>
+
+      </div>
+
+
+      <!-- STORY 3 -->
+      <div class="story">
+
+        <div class="story-ring">
+          <img src="assets/avatar4.jpg" alt="DevArt">
+        </div>
+
+        <span>DevArt</span>
+
+      </div>
+
+
+      <!-- STORY 4 -->
+      <div class="story">
+
+        <div class="story-ring">
+          <img src="assets/avatar5.jpg" alt="TechT">
+        </div>
+
+        <span>TechT</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= CREATE POST ================= -->
+
+  <section class="create-post">
+
+    <img
+      class="create-avatar"
+      src="assets/avatar1.jpg"
+      alt="Akash"
+    >
+
+    <button class="post-placeholder">
+      Share something with the circle...
+    </button>
+
+    <div class="create-actions">
+
+      <button>
+        <span class="material-symbols-outlined">
+          image
+        </span>
+      </button>
+
+      <button>
+        <span class="material-symbols-outlined">
+          videocam
+        </span>
+      </button>
+
+      <button>
+        <span class="material-symbols-outlined">
+          title
+        </span>
+      </button>
+
+    </div>
+
+    <button class="create-post-btn">
+      <span class="material-symbols-outlined">
+        add
+      </span>
+    </button>
+
+  </section>
+
+
+
+  <!-- ================= FEED ================= -->
+
+  <article class="post-card">
+
+    <!-- POST HEADER -->
+
+    <div class="post-header">
+
+      <div class="post-user">
+
+        <div class="post-avatar-ring">
+
+          <img
+            src="assets/avatar3.jpg"
+            alt="CityLife"
+          >
+
+        </div>
+
+        <div class="user-details">
+
+          <h3>CityLife</h3>
+
+          <span>1h ago</span>
+
+        </div>
+
+      </div>
+
+
+      <button class="more-button">
+
+        <span class="material-symbols-outlined">
+          more_horiz
+        </span>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- POST IMAGE -->
+
+    <div class="post-image">
+
+      <img
+        src="assets/post1.jpg"
+        alt="City"
+      >
+
+    </div>
+
+
+
+    <!-- POST STATS -->
+
+    <div class="post-stats">
+
+      <div class="stat liked">
+
+        <span class="material-symbols-outlined">
+          favorite
+        </span>
+
+        <strong>1.2k</strong>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span class="material-symbols-outlined">
+          chat_bubble_outline
+        </span>
+
+        <strong>114</strong>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span class="material-symbols-outlined">
+          reply
+        </span>
+
+      </div>
+
+
+      <div class="stat bookmark">
+
+        <span class="material-symbols-outlined">
+          bookmark_border
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- LIKED BY -->
+
+    <div class="liked-by">
+
+      <div class="liked-avatars">
+
+        <img src="assets/avatar1.jpg" alt="User">
+        <img src="assets/avatar2.jpg" alt="User">
+
+      </div>
+
+      <span>
+        Liked by you and
+        <strong>1,234 others</strong>
+      </span>
+
+    </div>
+
+
+
+    <!-- CAPTION -->
+
+    <div class="caption">
+
+      Created this new recipe today!
+      <strong>#food</strong>
+      <strong>#newpost</strong>
+
+    </div>
+
+  </article>
+
+
+
+  <!-- ================= BOTTOM NAVIGATION ================= -->
+
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
+
+    <!-- HOME -->
+
+    <ion-tab-button
+      tab="home"
+      href="/tabs/home"
+      class="active-tab"
+    >
+
+      <span class="material-symbols-outlined">
+        home
+      </span>
+
+    </ion-tab-button>
+
+
+    <!-- SEARCH -->
+
+    <ion-tab-button
+      tab="search"
+      href="/tabs/search"
+    >
+
+      <span class="material-symbols-outlined">
+        search
+      </span>
+
+    </ion-tab-button>
+
+
+    <!-- CREATE -->
+
+    <ion-tab-button class="create-tab">
+
+      <div class="create-tab-circle">
+
+        <span class="material-symbols-outlined">
+          add
+        </span>
+
+      </div>
+
+    </ion-tab-button>
+
+
+    <!-- REELS -->
+
+    <ion-tab-button
+      tab="reels"
+      href="/tabs/reels"
+    >
+
+      <span class="material-symbols-outlined">
+        video_library
+      </span>
+
+    </ion-tab-button>
+
+
+    <!-- PROFILE -->
+
+    <ion-tab-button
+      tab="profile"
+      href="/tabs/profile"
+    >
+
+      <span class="material-symbols-outlined">
+        account_circle
+      </span>
+
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
 </ion-content>

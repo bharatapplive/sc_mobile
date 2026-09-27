@@ -16,7 +16,35 @@ const routes: Routes = [
         loadChildren: () =>
           import('../home/home.module').then(m => m.HomePageModule)
       },
-
+       // PROFILE
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('../profile/profile.module')
+            .then(m => m.ProfilePageModule)
+      },
+        
+    {
+  path: 'message',
+  loadChildren: () =>
+    import('../message/message.module').then(
+      m => m.MessagePageModule
+    )
+},
+ {
+  path: 'search',
+  loadChildren: () =>
+    import('../search/search.module').then(
+      m => m.SearchPageModule
+    )
+},
+  {
+    path:'reel',
+    loadChildren: () =>
+      import('../reel/reel.module').then(
+        m => m.ReelPageModule
+      )
+    },
       {
         path: '',
         redirectTo: 'home',

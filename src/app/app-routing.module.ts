@@ -33,11 +33,34 @@ const routes: Routes = [
     loadChildren: () =>
       import('./profile/profile.module').then(m => m.ProfilePageModule)
   },
-
+     // HOME — OUTSIDE TABS
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./home/home.module')
+        .then(m => m.HomePageModule)
+  },
+  {
+    path: 'message',
+    loadChildren: () => import('./message/message.module').then( m => m.MessagePageModule)
+  },
+   {
+    path: 'reel',
+    loadChildren: () => import('./reel/reel.module').then( m => m.ReelPageModule)
+  },
+   {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+  },
   {
     path: '**',
     redirectTo: 'login'
-  }
+  },
+ 
+ 
+
+  
+
 
 ];
 

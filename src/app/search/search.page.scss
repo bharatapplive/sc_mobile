@@ -1,0 +1,965 @@
+/* =========================================================
+   SOCIAL CIRCLE — SEARCH / EXPLORE
+   Premium Modern UI
+   ========================================================= */
+
+.search-page {
+  --background: var(--color-background);
+
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 30px;
+
+  background: var(--color-background);
+
+  color: var(--color-on-surface);
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   COMMON WIDTH
+   ========================================================= */
+
+.search-header,
+.search-box,
+.section {
+  width: min(calc(100% - 32px), 720px);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.search-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 27px;
+  padding-bottom: 18px;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  color: var(--color-primary);
+}
+
+.search-header h1 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: 800;
+
+  letter-spacing: -0.8px;
+
+  color: var(--color-on-surface);
+}
+
+.search-header p {
+  margin: 5px 0 0;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+/* =========================================================
+   FILTER BUTTON
+   ========================================================= */
+
+.filter-btn {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--color-surface-variant);
+
+  border-radius: 15px;
+
+  background: var(--color-surface);
+
+  color: var(--color-on-surface);
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--color-primary);
+
+  color: var(--color-primary);
+}
+
+.filter-btn .material-symbols-outlined {
+  font-size: 21px;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+   ========================================================= */
+
+.search-box {
+  height: 53px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 8px 0 16px;
+
+  margin-bottom: 30px;
+
+  border-radius: 17px;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-surface-variant);
+
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.045);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.search-box:focus-within {
+  border-color: var(--color-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(108, 92, 231, 0.10);
+}
+
+.search-icon {
+  margin-right: 10px;
+
+  font-size: 22px;
+
+  color: var(--color-on-surface-variant);
+}
+
+.search-box input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: var(--color-on-surface);
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.search-box input::placeholder {
+  color: var(--color-on-surface-variant);
+
+  opacity: 0.7;
+}
+
+
+/* =========================================================
+   VOICE BUTTON
+   ========================================================= */
+
+.voice-btn {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: var(--color-surface-variant);
+
+  color: var(--color-on-surface-variant);
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.voice-btn:hover {
+  background: var(--color-primary);
+
+  color: #fff;
+}
+
+.voice-btn .material-symbols-outlined {
+  font-size: 19px;
+}
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.section {
+  margin-bottom: 34px;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 16px;
+}
+
+.section-title h2 {
+  margin: 0;
+
+  font-size: 17px;
+  font-weight: 750;
+
+  letter-spacing: -0.25px;
+
+  color: var(--color-on-surface);
+}
+
+.section-title p {
+  margin: 4px 0 0;
+
+  font-size: 11px;
+
+  color: var(--color-on-surface-variant);
+}
+
+.clear-btn,
+.see-all-btn {
+  padding: 5px 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--color-primary);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   RECENT SEARCHES
+   ========================================================= */
+
+.recent-searches {
+  display: flex;
+
+  gap: 9px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.recent-searches::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-item {
+  flex: 0 0 auto;
+
+  height: 37px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 9px 0 12px;
+
+  border-radius: 11px;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-surface-variant);
+
+  color: var(--color-on-surface-variant);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.recent-item > .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.recent-item button {
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--color-on-surface-variant);
+
+  cursor: pointer;
+}
+
+.recent-item button .material-symbols-outlined {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   TRENDING HEADER ICON
+   ========================================================= */
+
+.trending-icon {
+  width: 37px;
+  height: 37px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: rgba(108, 92, 231, 0.10);
+
+  color: var(--color-primary);
+}
+
+.trending-icon .material-symbols-outlined {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   TRENDING GRID
+   ========================================================= */
+
+.trending-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 11px;
+}
+
+
+/* =========================================================
+   TREND CARD
+   ========================================================= */
+
+.trend-card {
+  position: relative;
+
+  min-height: 145px;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-surface-variant);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.035);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.trend-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.trend-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 80px;
+  height: 80px;
+
+  right: -30px;
+  bottom: -30px;
+
+  border-radius: 50%;
+
+  background: var(--vibrant-gradient);
+
+  opacity: 0.07;
+}
+
+
+/* =========================================================
+   TREND TOP
+   ========================================================= */
+
+.trend-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trend-number {
+  font-size: 10px;
+
+  font-weight: 800;
+
+  color: var(--color-primary);
+}
+
+.trend-top > .material-symbols-outlined {
+  font-size: 18px;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+/* =========================================================
+   TREND TEXT
+   ========================================================= */
+
+.trend-card h3 {
+  margin: 17px 0 3px;
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  color: var(--color-on-surface);
+}
+
+.trend-card p {
+  margin: 0 0 13px;
+
+  font-size: 10px;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+/* =========================================================
+   TREND AVATARS
+   ========================================================= */
+
+.trend-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.trend-avatars img {
+  width: 24px;
+  height: 24px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 2px solid var(--color-surface);
+
+  margin-left: -6px;
+}
+
+.trend-avatars img:first-child {
+  margin-left: 0;
+}
+
+.trend-avatars span {
+  margin-left: 6px;
+
+  font-size: 9px;
+
+  font-weight: 650;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+/* =========================================================
+   PEOPLE LIST
+   ========================================================= */
+
+.people-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.person-card {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 9px 6px;
+
+  border-radius: 15px;
+
+  transition:
+    background 0.2s ease;
+}
+
+.person-card:hover {
+  background: var(--color-surface);
+}
+
+
+/* =========================================================
+   PERSON AVATAR
+   ========================================================= */
+
+.person-avatar {
+  position: relative;
+
+  width: 49px;
+  height: 49px;
+
+  flex: 0 0 auto;
+}
+
+.person-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+.person-avatar .online-dot {
+  position: absolute;
+
+  right: 0;
+  bottom: 1px;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  border: 2px solid var(--color-background);
+}
+
+
+/* =========================================================
+   PERSON INFO
+   ========================================================= */
+
+.person-info {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.person-info h3 {
+  margin: 0 0 2px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  color: var(--color-on-surface);
+}
+
+.person-info p {
+  margin: 0 0 3px;
+
+  font-size: 10px;
+
+  color: var(--color-on-surface-variant);
+}
+
+.person-info > span {
+  font-size: 9px;
+
+  color: var(--color-on-surface-variant);
+}
+
+
+/* =========================================================
+   FOLLOW BUTTON
+   ========================================================= */
+
+.follow-btn {
+  flex: 0 0 auto;
+
+  min-width: 65px;
+
+  height: 32px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: var(--vibrant-gradient);
+
+  color: #fff;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 12px rgba(108, 92, 231, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.follow-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 16px rgba(108, 92, 231, 0.25);
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+   ========================================================= */
+
+.view-btn {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--color-surface-variant);
+
+  border-radius: 11px;
+
+  background: var(--color-surface);
+
+  color: var(--color-on-surface-variant);
+
+  cursor: pointer;
+}
+
+.view-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   EXPLORE GRID
+   ========================================================= */
+
+.explore-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 5px;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+}
+
+.explore-post {
+  position: relative;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background: var(--color-surface-variant);
+
+  cursor: pointer;
+}
+
+.explore-post img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.35s ease;
+}
+
+.explore-post:hover img {
+  transform: scale(1.07);
+}
+
+
+/* =========================================================
+   POST OVERLAY
+   ========================================================= */
+
+.post-overlay {
+  position: absolute;
+
+  inset: auto 0 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 18px 8px 7px;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65),
+      transparent
+    );
+
+  color: #fff;
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+}
+
+.explore-post:hover .post-overlay {
+  opacity: 1;
+}
+
+.post-overlay > span {
+  display: flex;
+  align-items: center;
+
+  gap: 3px;
+
+  font-size: 9px;
+
+  font-weight: 650;
+}
+
+.post-overlay .material-symbols-outlined {
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   TABLET / DESKTOP
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  .search-header {
+    padding-top: 35px;
+  }
+
+  .search-header h1 {
+    font-size: 32px;
+  }
+
+  .trending-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .trend-card {
+    min-height: 155px;
+  }
+
+  .person-card {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .search-header,
+  .search-box,
+  .section {
+    width: calc(100% - 24px);
+  }
+
+  .search-header {
+    padding-top: 20px;
+  }
+
+  .search-header h1 {
+    font-size: 27px;
+  }
+
+  .search-header p {
+    font-size: 12px;
+  }
+
+  .filter-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .search-box {
+    height: 49px;
+
+    border-radius: 15px;
+  }
+
+  .section {
+    margin-bottom: 29px;
+  }
+
+  .trending-grid {
+    gap: 9px;
+  }
+
+  .trend-card {
+    min-height: 135px;
+
+    padding: 12px;
+  }
+
+  .trend-card h3 {
+    font-size: 13px;
+
+    margin-top: 15px;
+  }
+
+  .person-card {
+    gap: 10px;
+  }
+
+  .person-avatar {
+    width: 47px;
+    height: 47px;
+  }
+
+  .person-info h3 {
+    font-size: 12.5px;
+  }
+
+  .follow-btn {
+    min-width: 62px;
+
+    height: 30px;
+  }
+
+  .explore-grid {
+    gap: 3px;
+
+    border-radius: 12px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .search-header,
+  .search-box,
+  .section {
+    width: calc(100% - 20px);
+  }
+
+  .trending-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trend-card {
+    min-height: 130px;
+  }
+
+  .person-info > span {
+    display: none;
+  }
+
+  .person-info h3 {
+    font-size: 12px;
+  }
+
+  .follow-btn {
+    min-width: 58px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}

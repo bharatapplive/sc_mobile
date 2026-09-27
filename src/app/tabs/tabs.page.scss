@@ -1,68 +1,130 @@
-:host {
-  display: block;
-}
+/* =========================================
+   BOTTOM TAB BAR
+   ========================================= */
 
-/* Bottom navigation */
 ion-tab-bar {
-  --background: #ffffff;
+  --background: var(--color-surface);
   --border: none;
 
-  height: 72px;
-  padding: 6px 8px 8px;
+  height: 68px;
 
-  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.08);
+  padding: 7px 8px 8px;
+
+  border-top: 1px solid var(--color-surface-variant);
+
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+
+  border-radius: 20px 20px 0 0;
 }
 
-/* Tab buttons */
-ion-tab-button {
-  --color: #777b8a;
-  --color-selected: #4267ff;
 
-  font-size: 11px;
-  font-weight: 600;
+/* =========================================
+   TAB BUTTON
+   ========================================= */
+
+ion-tab-button {
+  --color: var(--color-on-surface-variant);
+  --color-selected: var(--color-primary);
+
+  min-height: 55px;
 
   border-radius: 14px;
-  margin: 4px;
+
+  margin: 0 3px;
+
+  transition: all 0.2s ease;
 }
 
-/* Icons */
+
+/* =========================================
+   ICON
+   ========================================= */
+
 ion-tab-button ion-icon {
   font-size: 24px;
+
   margin-bottom: 3px;
+
+  transition: transform 0.2s ease;
 }
 
-/* Selected tab */
+
+/* =========================================
+   LABEL
+   ========================================= */
+
+ion-tab-button ion-label {
+  font-size: 11px;
+
+  font-weight: 600;
+
+  margin-top: 1px;
+}
+
+
+/* =========================================
+   ACTIVE TAB
+   ========================================= */
+
 ion-tab-button.tab-selected {
-  --color: #4267ff;
+  --color: var(--color-primary);
 
-  background: linear-gradient(
-    135deg,
-    rgba(66, 103, 255, 0.12),
-    rgba(147, 70, 255, 0.12)
-  );
+  background: rgba(0, 0, 0, 0.04);
 }
 
-/* Selected icon */
+
+/* Active icon */
+
 ion-tab-button.tab-selected ion-icon {
-  color: #4267ff;
+  transform: translateY(-2px);
+
+  font-size: 25px;
 }
 
-/* Dark mode */
-html.dark ion-tab-bar {
-  --background: #15151f;
 
-  box-shadow: 0 -6px 25px rgba(138, 43, 226, 0.2);
+/* =========================================
+   HOVER
+   ========================================= */
+
+ion-tab-button:hover {
+  --color: var(--color-primary);
 }
 
-html.dark ion-tab-button {
-  --color: #999aaa;
-  --color-selected: #8b6cff;
+
+/* =========================================
+   MESSAGE TAB
+   ========================================= */
+
+ion-tab-button[tab="messages"] ion-icon {
+  font-size: 23px;
 }
 
-html.dark ion-tab-button.tab-selected {
-  background: linear-gradient(
-    135deg,
-    rgba(66, 103, 255, 0.18),
-    rgba(147, 70, 255, 0.18)
-  );
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+  ion-tab-bar {
+    height: 65px;
+
+    padding: 5px 5px 6px;
+
+    border-radius: 18px 18px 0 0;
+  }
+
+  ion-tab-button {
+    margin: 0 1px;
+
+    min-height: 52px;
+  }
+
+  ion-tab-button ion-icon {
+    font-size: 23px;
+  }
+
+  ion-tab-button ion-label {
+    font-size: 10px;
+  }
 }
