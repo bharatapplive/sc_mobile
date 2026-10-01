@@ -5,7 +5,9 @@
         <p class="eyebrow">Stay connected</p>
         <h1>Messages</h1>
       </div>
-      <span class="material-symbols-outlined toolbar-icon" aria-hidden="true">forum</span>
+      <span class="material-symbols-outlined toolbar-icon" aria-hidden="true"
+        >forum</span
+      >
     </div>
   </ion-toolbar>
 </ion-header>
@@ -18,7 +20,9 @@
         <div
           class="absolute inset-y-0 left-4 flex items-center pointer-events-none"
         >
-          <span class="material-symbols-outlined text-outline text-[20px]">search</span>
+          <span class="material-symbols-outlined text-outline text-[20px]"
+            >search</span
+          >
         </div>
         <input
           class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md text-on-surface focus:ring-2 focus:ring-primary/30 transition-all placeholder:text-outline/60"
@@ -107,83 +111,41 @@
     </section>
 
     <!-- Message List -->
-    <section class="space-y-4">
+    <section id="user-list" class="space-y-4">
       <div class="flex justify-between items-center mb-4">
         <h2 class="font-headline-md text-on-surface">Messages</h2>
-        <button class="text-primary font-label-lg hover:opacity-80 transition-opacity">
+        <button
+          class="text-primary font-label-lg hover:opacity-80 transition-opacity"
+        >
           Requests (2)
         </button>
       </div>
-      <div class="group flex items-center gap-4 p-4 bg-white rounded-xl shadow-[0_4px_20px_rgba(109,59,215,0.04)] border border-primary/10 hover:border-primary/30 transition-all cursor-pointer active:scale-[0.98]">
+      <div
+        *ngFor="let user of users; let index = index"
+        class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all cursor-pointer active:scale-[0.98]"
+        (click)="navigateToMessageDetail(user)"
+      >
+      <!-- step 1 establish a method to go to the message detail page and pass the selected user data to it. This can be done using Angular's router and state management. In the navigateToMessageDetail method, we can use the router to navigate to the message detail page and pass the selected user as state. -->
         <div class="relative shrink-0">
           <img
-            class="w-14 h-14 rounded-full object-cover"
-            data-alt="A portrait of a male creative director wearing a stylish beanie, urban concrete background with soft purple lighting, high-end editorial photography style, sharp focus, premium digital aesthetic."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD07_S3eQPzzP91tFtSaiWi4xJecJ8e4WaVQUglCM5PjQQju0YX6FGLgs_p0jnX-pRVrG34BJ0bfjtNuq7UwENDhbQUjRFrt8zxueW-ADrqtHh-e5C-KU2KXRFtdrm6raLZIDLq7e3Nc4MP2bFkDgOT8zpSdNHlrBrRCk3CmJNx6qgpEXKDUpR7Lq7THYwxSUjzU3RlnyrSw0cljE44ydlASvRXU4syi-sQnAXpQWVT4z3V_s4-mMdGyOw8TOQMOU5myrbTl1Fwz_o"
+            class="user-profile-avatar w-14 h-14 rounded-full object-cover"
+            [src]="user.profileImage || user.image || user.avatar || 'assets/default-avatar.svg'"
+            [alt]="(user.name || user.username || user.mobile || 'User') + ' profile photo'"
           />
-          <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full active-glow"></div>
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex justify-between items-center mb-0.5">
-            <span class="font-label-lg text-on-surface">Alex Rivera</span>
-            <span class="font-label-sm text-primary">Now</span>
+            <div class="flex flex-col items-start min-w-0">
+              <span class="font-label-lg text-on-surface">
+                {{ user.firstName + ' ' + user.lastName }}
+              </span>
+              <span class="font-label-sm text-on-surface-variant">
+                {{ user.userName}}
+              </span>
+            </div>
+            <!-- <span class="font-label-sm text-outline"></span>
+              hello{{ user.lastMessageAt || '' }}</span> -->
           </div>
-          <p class="font-body-md text-on-surface font-bold truncate">Are you coming to the creative mixer tonight?</p>
-        </div>
-        <div class="w-2.5 h-2.5 bg-primary rounded-full shrink-0"></div>
-      </div>
-      <div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all cursor-pointer active:scale-[0.98]">
-        <div class="relative shrink-0">
-          <img
-            class="w-14 h-14 rounded-full object-cover grayscale-[0.2]"
-            data-alt="A young woman with braided hair looking at the camera, soft lighting, pastel violet studio background, minimalist fashion, high-quality portrait photography for social app."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM_yfzjQYPRrh5pfGistHa-YLXlSLsALZOXKONJ3grBFFqnrutKo3oHWRotqMI34Rom_atqrhl_odg_06m2ga_S0WUhVRvetcPTvp2iM-cyzvw0vfb46QJpBN2JsXFrusDM53BOHQ091mMlWEYtU2vVQonrY4rDpJFzNtZt-jsQADz6iyyGYLEQQQs7JBdH2wbfLkDcVPp0dVr_vxa51Wo2m7if3KtgYGLoR1XdSg7-LXGGlMnaBctIe56vEa9HCPJVQdMH3MPt1Q"
-          />
-          <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-outline-variant border-2 border-white rounded-full"></div>
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="flex justify-between items-center mb-0.5">
-            <span class="font-label-lg text-on-surface">Jordan Smith</span>
-            <span class="font-label-sm text-outline">12m</span>
-          </div>
-          <p class="font-body-md text-on-surface-variant truncate">That design you posted is absolutely fire!</p>
-        </div>
-      </div>
-      <div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all cursor-pointer active:scale-[0.98]">
-        <div class="relative shrink-0 w-14 h-14">
-          <div class="absolute top-0 right-0 w-9 h-9 rounded-full overflow-hidden border-2 border-white z-10">
-            <img class="w-full h-full object-cover" data-alt="Portrait of a person with bright blue hair, artistic and vibrant, high-key white lighting, modern creative aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArIbDwpvym7pD31bc9FA1PMQI3hM35HT-As8RXEJp5cY2MSv-HbVmhGdA4uKIRqL9QOMi4D5NzObaowzjARpGQ0dWVMyHRyY8Bzq3eWTp9kC6aGpekiA_fNCYABqirSjxgtG-6bXJqqQZQCywuyXQngh829Z2VKsCXX4Nn20NQtt_l7xcGEYON5L9XuDi6L1kb-iyoZhGiLpQoV7viafzFaHL-Z-oATrTh8YVA9TqUFftaF8yebE889FwEcQh6zNvbuqN1UCdeT-s" />
-          </div>
-          <div class="absolute bottom-0 left-0 w-9 h-9 rounded-full overflow-hidden border-2 border-white">
-            <img class="w-full h-full object-cover" data-alt="Close up portrait of a smiling man with curly hair, natural outdoor lighting, garden background, professional social media style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNN_Ibj69egwjbQFh2H2DKU7rRnxCA01Au9lZ0gV_jGa6zMsvWfqFAeqwBcKRZ_C1rsrZq3nMYqAXdws9lCEAE3uHkQJD-DCKGtDglDLPOQliG4VNmZTS-jw2waSW6pQzcKdgPZGHXDIzDOJl2igZAFRgi4hrDWXUhCE8nqJH8qQ0669IUP9hGlRMUUyDoAXYUOmHoe08To5pyGgVCuf7Tqo3b-fyuUR6k5wNEvJBVvYADJ0XUgI24OBkjEj9cdnHcMtm8nwSU_wI" />
-          </div>
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="flex justify-between items-center mb-0.5">
-            <span class="font-label-lg text-on-surface">Design Team</span>
-            <span class="font-label-sm text-outline">1h</span>
-          </div>
-          <p class="font-body-md text-on-surface-variant truncate"><span class="font-bold">Mika:</span> Sending the final assets over now.</p>
-        </div>
-      </div>
-      <div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all cursor-pointer active:scale-[0.98]">
-        <img class="w-14 h-14 rounded-full object-cover" data-alt="Headshot of a man with minimalist glasses and a clean shave, soft gray background, high-end professional lighting, elegant and modern look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVTeF7TjfroLxJtf5ZcdLFyrrScEMa_BUu9yNhagpmlR01VxHhloSZOl9AbAC5XqES4dh4z5cqeAQWWcT4h-jKNsOc0lDBzw13jnORed6Aaae5ecFnra_HRm8uAzPHDmMo43Lq2X33o9J0Tgtmf0N46tnMnS-Ul3kGi9QsZiLIVKiEKI9tIskxd-AMEIKPzF0FsBMuX3VKGk7zJZ91Ob_ndVAVldq-nKfx7KS6EAEKo_VNj8LktMa5gZWtRYki36D68M5f26gWeZY" />
-        <div class="flex-1 min-w-0">
-          <div class="flex justify-between items-center mb-0.5">
-            <span class="font-label-lg text-on-surface">Marcus Chen</span>
-            <span class="font-label-sm text-outline">3h</span>
-          </div>
-          <p class="font-body-md text-on-surface-variant truncate">Thanks for the feedback on the prototype!</p>
-        </div>
-      </div>
-      <div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10 hover:border-primary/20 transition-all cursor-pointer active:scale-[0.98]">
-        <img class="w-14 h-14 rounded-full object-cover" data-alt="Portrait of a cheerful woman wearing a yellow sweater, soft morning light, bright white indoor setting, high-quality digital photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUYjRbGlzaSCVr3U1q0ZI6I5H9LNHzTroXnQzv2O0GghYnzdXsUtD2b5qkreny83yWqyj_qXK7EMx2dEhvmbY0huNbC-sW5FUn4tRnL8Lg_G860HvvqIKN86FRjivcY39dveuQpNe7Ypth9hRD4g2w0z9PPGd08UF6JTyvH9WOitwH7Zwjk0zswX-MaLZhlyKU5sGdsFlR5wJuRzs19Km6oFJN0Qtptz4skP0aVLhi85yuUA-64bPgc6FPHQVdOLSuIIj6k0Lopzk" />
-        <div class="flex-1 min-w-0">
-          <div class="flex justify-between items-center mb-0.5">
-            <span class="font-label-lg text-on-surface">Sarah Wilson</span>
-            <span class="font-label-sm text-outline">Yesterday</span>
-          </div>
-          <p class="font-body-md text-on-surface-variant truncate">Sent a photo</p>
         </div>
       </div>
     </section>

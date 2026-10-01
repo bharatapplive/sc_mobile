@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar class="chat-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/message"></ion-back-button>
+    </ion-buttons>
+    <div class="contact-summary">
+      <!-- <div class="contact-avatar" aria-hidden="true">MC</div> -->
+      <div class="contact-copy">
+        <ion-title>{{ session.user?.userName || 'Maya Chen' }}</ion-title>
+        <span class="contact-status"
+          ><span class="status-dot"></span>Active now</span
+        >
+      </div>
+    </div>
+    <ion-buttons slot="end" class="header-actions">
+      <ion-button aria-label="Start a voice call">
+        <ion-icon name="call-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button aria-label="More conversation options">
+        <ion-icon name="ellipsis-vertical" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #chatContent class="chat-content" [fullscreen]="true">
+  <main class="conversation" aria-label="Chat conversation with Maya Chen">
+    <div class="date-divider"><span>Yesterday</span></div>
+    <!-- <div class="message-row received">
+      <div class="message-avatar" aria-hidden="true">MC</div>
+      <div class="message-content">
+        <div class="message-bubble">
+          Hey! It was so nice catching up earlier 😊
+        </div>
+        <span class="message-time">Yesterday, 6:42 PM</span>
+      </div>
+    </div> -->
+    <div class="message-row sent">
+      <div class="message-content">
+        <div class="message-bubble">
+          Same here! We should make it a regular thing.
+        </div>
+        <span class="message-time"
+          >Yesterday, 6:45 PM
+          <ion-icon name="checkmark-done-outline" aria-label="Read"></ion-icon
+        ></span>
+      </div>
+    </div>
+
+    <!-- <div class="date-divider"><span>Today</span></div> -->
+    <!-- <div class="message-row received">
+      <div class="message-avatar" aria-hidden="true">MC</div>
+      <div class="message-content">
+        <div class="message-bubble">Good morning! ☀️</div>
+        <span class="message-time">9:12 AM</span>
+      </div>
+    </div>
+    <div class="message-row received">
+      <div class="message-avatar avatar-spacer" aria-hidden="true"></div>
+      <div class="message-content">
+        <div class="message-bubble">
+          I found that little coffee place you were telling me about. Want to
+          check it out this weekend?
+        </div>
+        <span class="message-time">9:13 AM</span>
+      </div>
+    </div>
+    <div class="message-row sent">
+      <div class="message-content">
+        <div class="message-bubble">Morning! Definitely, I’m in 🙌</div>
+        <span class="message-time"
+          >9:18 AM
+          <ion-icon name="checkmark-done-outline" aria-label="Read"></ion-icon
+        ></span>
+      </div>
+    </div>
+    <div class="message-row sent">
+      <div class="message-content">
+        <div class="message-bubble">
+          Saturday works perfectly. What time were you thinking?
+        </div>
+        <span class="message-time"
+          >9:19 AM
+          <ion-icon name="checkmark-done-outline" aria-label="Read"></ion-icon
+        ></span>
+      </div>
+    </div>
+    <div class="message-row received">
+      <div class="message-avatar" aria-hidden="true">MC</div>
+      <div class="message-content">
+        <div class="message-bubble">
+          How about 10:30? I hear their pastries are amazing.
+        </div>
+        <span class="message-time">9:24 AM</span>
+      </div>
+    </div>
+    <div class="message-row sent">
+      <div class="message-content">
+        <div class="message-bubble">
+          10:30 it is! Save me one of those pastries 😄
+        </div>
+        <span class="message-time"
+          >9:27 AM
+          <ion-icon name="checkmark-done-outline" aria-label="Read"></ion-icon
+        ></span>
+      </div>
+    </div>
+    <div class="message-row received">
+      <div class="message-avatar" aria-hidden="true">MC</div>
+      <div class="message-content">
+        <div class="message-bubble">
+          Deal! I’ll send you the address in a bit.
+        </div>
+        <span class="message-time">9:29 AM</span>
+      </div>
+    </div>
+    <div class="message-row sent">
+      <div class="message-content">
+        <div class="message-bubble">Perfect, see you then!</div>
+        <span class="message-time"
+          >9:31 AM
+          <ion-icon name="checkmark-done-outline" aria-label="Read"></ion-icon
+        ></span>
+      </div>
+    </div> -->
+
+    <form class="composer" #messageForm="ngForm" (ngSubmit)="sendMessageHandler()">
+      <div class="composer-input-wrap">
+        <input
+          type="text"
+          aria-label="Message"
+          placeholder="Write a message…"
+          name="message"
+          [(ngModel)]="messageText"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="send-button"
+        aria-label="Send message"
+        [disabled]="messageForm.invalid"
+      >
+        <ion-icon name="send" aria-hidden="true"></ion-icon>
+      </button>
+    </form>
+  </main>
+</ion-content>

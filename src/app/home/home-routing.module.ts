@@ -30,6 +30,13 @@ export const routes: Routes = [
           import('../message/message.module').then((m) => m.MessagePageModule),
       },
       {
+        path: 'message-detail',
+        loadChildren: () =>
+          import('../message-detail/message-detail.module').then(
+            (m) => m.MessageDetailPageModule,
+          ),
+      },
+      {
         path: 'profile',
         loadChildren: () =>
           import('../profile/profile.module').then((m) => m.ProfilePageModule),
