@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2>Hi, {{ user?.firstName }} 👋</h2>
-  <p>&#64;{{ user?.userName }}</p>
+  <h2>Hi, {{ user()?.firstName }} 👋</h2>
+  <p>&#64;{{ user()?.userName }}</p>
 
   <ion-button expand="block" color="danger" (click)="logout()">Logout</ion-button>
 </ion-content>

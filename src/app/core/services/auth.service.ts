@@ -58,7 +58,14 @@ export class AuthService {
         localStorage.removeItem(USER_KEY);
         this.userSubject.next(null);
     }
-
+    refreshMe(): Observable<User> {
+        return this.http.get<User>(`${environment.apiUrl}/users/me`).pipe(
+            tap((user) => {
+                localStorage.setItem(USER_KEY, JSON.stringify(user));
+                this.userSubject.next(user);
+            }),
+        );
+    }
     getToken(): string | null {
         return localStorage.getItem(TOKEN_KEY);
     }
