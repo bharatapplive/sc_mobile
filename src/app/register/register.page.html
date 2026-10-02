@@ -1,0 +1,47 @@
+<ion-content class="ion-padding">
+  <div class="auth-wrap">
+    <h1>Create account</h1>
+    <p class="sub">Join Social Circle</p>
+
+    <form (ngSubmit)="register()">
+      <ion-item>
+        <ion-input label="First name *" labelPlacement="floating" name="firstName"
+          [(ngModel)]="form.firstName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Last name" labelPlacement="floating" name="lastName" [(ngModel)]="form.lastName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Username *" labelPlacement="floating" name="userName" [(ngModel)]="form.userName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Email *" labelPlacement="floating" type="email" name="email"
+          [(ngModel)]="form.email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Mobile *" labelPlacement="floating" type="tel" maxlength="10" name="mobile"
+          [(ngModel)]="form.mobile"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Password *" labelPlacement="floating" type="password" name="password"
+          [(ngModel)]="form.password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Confirm password *" labelPlacement="floating" type="password" name="confirmPassword"
+          [(ngModel)]="form.confirmPassword"></ion-input>
+      </ion-item>
+
+            @if (error()) {
+            <ion-text color="danger">
+              <p>{{ error() }}</p>
+            </ion-text>
+            }
+            
+            <ion-button expand="block" type="submit" [disabled]="loading()">
+              {{ loading() ? 'Creating...' : 'Sign up' }}
+            </ion-button>
+    </form>
+
+    <p class="switch">Already have an account? <a routerLink="/login">Login</a></p>
+  </div>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-content class="ion-padding">
+  <div class="auth-wrap">
+    <h1>Social Circle</h1>
+    <p class="sub">Login to your account</p>
+
+    <form (ngSubmit)="login()">
+      <ion-item>
+        <ion-input label="Email, mobile or username" labelPlacement="floating" name="identifier"
+          [(ngModel)]="identifier"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Password" labelPlacement="floating" name="password"
+          [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password"></ion-input>
+        <ion-button fill="clear" slot="end" (click)="showPassword = !showPassword">
+          <ion-icon slot="icon-only" [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+            @if (error()) {
+            <ion-text color="danger">
+              <p>{{ error() }}</p>
+            </ion-text>
+            }
+            
+            <ion-button expand="block" type="submit" [disabled]="loading()">
+              {{ loading() ? 'Logging in...' : 'Login' }}
+            </ion-button>
+    </form>
+
+    <p class="switch">New here? <a routerLink="/register">Create an account</a></p>
+  </div>
+</ion-content>
