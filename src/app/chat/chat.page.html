@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+    <div class="head-user">
+      <div class="avatar">
+        @if (other()?.image) {
+        <img [src]="mediaUrl(other()?.image)" alt="" />
+        } @else {
+        <span>{{ other()?.firstName?.[0] }}</span>
+        }
+      </div>
+      <div class="head-text">
+        <strong>{{ other()?.firstName }} {{ other()?.lastName }}</strong>
+        <span>&#64;{{ other()?.userName }}</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="messages">
+    @if (hasOlder()) {
+    <div class="center">
+      <ion-button fill="clear" size="small" [disabled]="loadingOlder()" (click)="loadOlder()">
+        {{ loadingOlder() ? 'Loading...' : 'Load older messages' }}
+      </ion-button>
+    </div>
+    }
+
+    @if (loading()) {
+    <div class="center"><ion-spinner></ion-spinner></div>
+    }
+    @if (!loading() && messages().length === 0) {
+    <p class="center muted">Say hi to {{ other()?.firstName }} 👋</p>
+    }
+
+    @for (m of messages(); track m._id; let i = $index) {
+    @if (showDay(i)) {
+    <div class="day">{{ dayLabel(m.createdAt) }}</div>
+    }
+    <div class="row" [class.mine]="isMine(m)">
+      <div class="bubble">
+        <span class="text">{{ m.text }}</span>
+        <span class="time">
+          {{ time(m.createdAt) }}
+          @if (isMine(m)) {
+          <span class="ticks">{{ m.read ? '✓✓' : '✓' }}</span>
+          }
+        </span>
+      </div>
+    </div>
+    }
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    @if (error()) {
+    <p class="error">{{ error() }}</p>
+    }
+    <div class="composer">
+      <ion-input placeholder="Message..." maxlength="2000" enterkeyhint="send" [ngModel]="newText()"
+        (ngModelChange)="newText.set($event)" (keyup.enter)="send()"></ion-input>
+      <ion-button shape="round" [disabled]="!newText().trim() || sending()" (click)="send()">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

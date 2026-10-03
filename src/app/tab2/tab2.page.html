@@ -1,17 +1,95 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Messages</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openSearch()">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="load($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  @if (loading()) {
+  <div class="center"><ion-spinner></ion-spinner></div>
+  }
+  @if (error()) {
+  <p class="center muted">{{ error() }}</p>
+  }
+  @if (!loading() && !error() && conversations().length === 0) {
+  <p class="center muted">No chats yet. Tap ✏️ above to start one.</p>
+  }
+
+  <ion-list lines="full" class="list">
+    @for (c of conversations(); track c.user._id) {
+    <ion-item button detail="false" (click)="openChat(c.user._id)">
+      <div class="avatar" slot="start">
+        @if (c.user.image) {
+        <img [src]="mediaUrl(c.user.image)" alt="" />
+        } @else {
+        <span>{{ c.user.firstName[0] }}</span>
+        }
+      </div>
+      <ion-label>
+        <h2>{{ c.user.firstName }} {{ c.user.lastName }}</h2>
+        <p [class.unread-text]="c.unread > 0">{{ c.lastFromMe ? 'You: ' : '' }}{{ c.lastMessage }}</p>
+      </ion-label>
+      <div slot="end" class="meta">
+        <span class="time">{{ timeAgo(c.lastAt) }}</span>
+        @if (c.unread > 0) {
+        <span class="badge">{{ c.unread }}</span>
+        }
+      </div>
+    </ion-item>
+    }
+  </ion-list>
+
+  <!-- naya chat: user dhoondo -->
+  <ion-modal [isOpen]="searchOpen()" (didDismiss)="searchOpen.set(false)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>New chat</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="searchOpen.set(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-toolbar>
+          <ion-searchbar placeholder="Search by name or username" [debounce]="300"
+            (ionInput)="onSearch($event)"></ion-searchbar>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        @if (searching()) {
+        <div class="center"><ion-spinner></ion-spinner></div>
+        }
+        <ion-list lines="full">
+          @for (u of searchResults(); track u._id) {
+          <ion-item button detail="false" (click)="openChat(u._id)">
+            <div class="avatar" slot="start">
+              @if (u.image) {
+              <img [src]="mediaUrl(u.image)" alt="" />
+              } @else {
+              <span>{{ u.firstName[0] }}</span>
+              }
+            </div>
+            <ion-label>
+              <h2>{{ u.firstName }} {{ u.lastName }}</h2>
+              <p>&#64;{{ u.userName }}</p>
+            </ion-label>
+          </ion-item>
+          } @empty {
+          @if (!searching()) {
+          <p class="center muted">No users found</p>
+          }
+          }
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

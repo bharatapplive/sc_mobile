@@ -8,6 +8,9 @@
     <ion-tab-button tab="tab2" href="/tabs/tab2">
       <ion-icon aria-hidden="true" name="chatbubbles-outline"></ion-icon>
       <ion-label>Messages</ion-label>
+      @if (socket.unreadCount() > 0) {
+      <ion-badge color="danger">{{ socket.unreadCount() }}</ion-badge>
+      }
     </ion-tab-button>
 
     <ion-tab-button tab="tab3" href="/tabs/tab3">
