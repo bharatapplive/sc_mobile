@@ -1,17 +1,111 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Social Circle</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="loadFirst($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  @if (loading()) {
+  <div class="center"><ion-spinner></ion-spinner></div>
+  }
+  @if (error()) {
+  <p class="center muted">{{ error() }}</p>
+  }
+  @if (!loading() && !error() && posts().length === 0) {
+  <p class="center muted">No posts yet. Be the first to post!</p>
+  }
+
+  <div class="feed">
+    @for (post of posts(); track post._id) {
+    <article class="post">
+      <header class="post-head">
+        <div class="avatar">
+          @if (post.author.image) {
+          <img [src]="mediaUrl(post.author.image)" alt="" />
+          } @else {
+          <span>{{ post.author.firstName[0] }}</span>
+          }
+        </div>
+        <div class="who">
+          <strong>{{ post.author.firstName }} {{ post.author.lastName }}</strong>
+          <span class="muted">&#64;{{ post.author.userName }} · {{ timeAgo(post.createdAt) }}</span>
+        </div>
+        @if (post.author._id === myId) {
+        <ion-button fill="clear" size="small" color="medium" (click)="confirmDelete(post)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+        }
+      </header>
+
+      @if (post.text) {
+      <p class="post-text">{{ post.text }}</p>
+      }
+      @if (post.image) {
+      <img class="post-image" [src]="mediaUrl(post.image)" alt="" loading="lazy" />
+      }
+
+      <footer class="post-actions">
+        <button class="like-btn" [class.liked]="isLiked(post)" (click)="toggleLike(post)">
+          <ion-icon [name]="isLiked(post) ? 'heart' : 'heart-outline'"></ion-icon>
+          <span>{{ post.likes.length }}</span>
+        </button>
+      </footer>
+    </article>
+    }
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [disabled]="!hasMore()">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- + button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openComposer()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- post likhne wali screen -->
+  <ion-modal [isOpen]="composerOpen()" (didDismiss)="composerOpen.set(false)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="composerOpen.set(false)">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>New post</ion-title>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true" [disabled]="posting()" (click)="submitPost()">
+              {{ posting() ? 'Posting...' : 'Post' }}
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-textarea placeholder="What's on your mind?" [autoGrow]="true" maxlength="2000" [counter]="true"
+          [(ngModel)]="newText"></ion-textarea>
+
+        @if (newImagePreview()) {
+        <div class="preview">
+          <img [src]="newImagePreview()" alt="" />
+          <ion-button size="small" color="dark" class="remove" (click)="clearImage()">✕</ion-button>
+        </div>
+        }
+
+        <ion-button fill="outline" (click)="imageInput.click()">📷 Add photo</ion-button>
+        <input #imageInput type="file" accept="image/*" hidden (change)="onImagePicked($event)" />
+
+        @if (postError()) {
+        <ion-text color="danger">
+          <p>{{ postError() }}</p>
+        </ion-text>
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -1,0 +1,111 @@
+.feed {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 4px 0;
+}
+
+.post {
+    background: var(--ion-background-color-step-50, var(--ion-color-step-50, #f4f4f4));
+    border-radius: 12px;
+    margin: 12px;
+    padding: 12px;
+}
+
+.post-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--ion-color-primary);
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.who {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.muted {
+    color: var(--ion-color-medium);
+    font-size: 13px;
+}
+
+.post-text {
+    margin: 10px 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.post-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 4px;
+}
+
+.post-actions {
+    margin-top: 8px;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    color: var(--ion-text-color);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    padding: 6px;
+}
+
+.like-btn ion-icon {
+    font-size: 22px;
+}
+
+.like-btn.liked {
+    color: var(--ion-color-danger);
+}
+
+.center {
+    text-align: center;
+    padding: 24px;
+}
+.preview {
+    position: relative;
+    margin: 12px 0;
+}
+
+.preview img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.preview .remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
