@@ -66,6 +66,21 @@ export class AuthService {
             }),
         );
     }
+    // naam, username, bio update
+    updateProfile(data: { firstName: string; lastName: string; userName: string; bio: string }): Observable<User> {
+        return this.http
+            .patch<User>(`${environment.apiUrl}/users/me`, data)
+            .pipe(tap((user) => this.saveUser(user)));
+    }
+
+    // profile photo upload
+    uploadPhoto(file: File): Observable<User> {
+        const form = new FormData();
+        form.append('photo', file); // backend isi naam se file dhoondhta hai
+        return this.http
+            .post<User>(`${environment.apiUrl}/users/me/photo`, form)
+            .pipe(tap((user) => this.saveUser(user)));
+    }
     getToken(): string | null {
         return localStorage.getItem(TOKEN_KEY);
     }
@@ -90,5 +105,9 @@ export class AuthService {
         } catch {
             return null;
         }
+    }
+    private saveUser(user: User): void {
+        localStorage.setItem(USER_KEY, JSON.stringify(user));
+        this.userSubject.next(user);
     }
 }

@@ -5,8 +5,57 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2>Hi, {{ user()?.firstName }} 👋</h2>
-  <p>&#64;{{ user()?.userName }}</p>
+  <div class="profile-head">
+    <div class="avatar" (click)="photoInput.click()">
+      @if (photoUrl()) {
+      <img [src]="photoUrl()" alt="Profile photo" />
+      } @else {
+      <span>{{ initials() }}</span>
+      }
+      <div class="avatar-badge">📷</div>
+    </div>
+    <input #photoInput type="file" accept="image/*" hidden (change)="onPhotoSelected($event)" />
+    @if (uploading()) {
+    <p class="muted">Uploading...</p>
+    }
 
-  <ion-button expand="block" color="danger" (click)="logout()">Logout</ion-button>
+    @if (!editing()) {
+    <h2>{{ user()?.firstName }} {{ user()?.lastName }}</h2>
+    <p class="muted">&#64;{{ user()?.userName }}</p>
+    <p class="bio">{{ user()?.bio || 'No bio yet' }}</p>
+    <ion-button fill="outline" (click)="startEdit()">Edit profile</ion-button>
+    }
+  </div>
+
+  @if (editing()) {
+  <form (ngSubmit)="save()">
+    <ion-item>
+      <ion-input label="First name *" labelPlacement="floating" name="firstName"
+        [(ngModel)]="form.firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Last name" labelPlacement="floating" name="lastName" [(ngModel)]="form.lastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Username *" labelPlacement="floating" name="userName" [(ngModel)]="form.userName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea label="Bio" labelPlacement="floating" name="bio" maxlength="150" [autoGrow]="true"
+        [(ngModel)]="form.bio"></ion-textarea>
+    </ion-item>
+
+    <div class="actions">
+      <ion-button fill="outline" (click)="cancelEdit()">Cancel</ion-button>
+      <ion-button type="submit" [disabled]="saving()">{{ saving() ? 'Saving...' : 'Save' }}</ion-button>
+    </div>
+  </form>
+  }
+
+  @if (error()) {
+  <ion-text color="danger">
+    <p class="center">{{ error() }}</p>
+  </ion-text>
+  }
+
+  <ion-button expand="block" color="danger" fill="clear" (click)="logout()">Logout</ion-button>
 </ion-content>

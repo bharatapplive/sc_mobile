@@ -1,0 +1,70 @@
+.profile-head {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.avatar {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: var(--ion-color-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-badge {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--ion-background-color, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+    margin: 8px 0 2px;
+    font-weight: 700;
+}
+
+.muted {
+    color: var(--ion-color-medium);
+    margin: 0;
+}
+
+.bio {
+    margin: 12px 0 16px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.actions ion-button {
+    flex: 1;
+}
+
+.center {
+    text-align: center;
+}
