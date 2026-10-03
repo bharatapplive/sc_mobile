@@ -1,0 +1,82 @@
+<div class="stories-bar">
+    <!-- apni story daalo -->
+    <button class="story" (click)="fileInput.click()" [disabled]="uploading()">
+        <div class="ring add">
+            <div class="avatar">
+                @if (me?.image) {
+                <img [src]="mediaUrl(me.image)" alt="" />
+                } @else {
+                <span>{{ me?.firstName?.[0] }}</span>
+                }
+            </div>
+            <span class="plus">+</span>
+        </div>
+        <span class="name">{{ uploading() ? 'Uploading...' : 'Add story' }}</span>
+    </button>
+    <input #fileInput type="file" accept="image/*" hidden (change)="onFilePicked($event)" />
+
+    <!-- sabki stories -->
+    @for (group of groups(); track group.author._id; let i = $index) {
+    <button class="story" (click)="open(i)">
+        <div class="ring">
+            <div class="avatar">
+                @if (group.author.image) {
+                <img [src]="mediaUrl(group.author.image)" alt="" />
+                } @else {
+                <span>{{ group.author.firstName[0] }}</span>
+                }
+            </div>
+        </div>
+        <span class="name">{{ isMine(group.author._id) ? 'You' : group.author.firstName }}</span>
+    </button>
+    }
+</div>
+
+@if (error()) {
+<p class="error">{{ error() }}</p>
+}
+
+<!-- full-screen story viewer -->
+<ion-modal class="story-modal" [isOpen]="viewerOpen()" (didDismiss)="close()">
+    <ng-template>
+        <div class="viewer">
+            @if (currentGroup(); as group) {
+            <div class="bars">
+                @for (s of group.stories; track s._id; let i = $index) {
+                <div class="bar">
+                    <div class="fill" [class.done]="i < storyIndex()" [class.active]="i === storyIndex()"></div>
+                </div>
+                }
+            </div>
+
+            <div class="viewer-head">
+                <div class="avatar small">
+                    @if (group.author.image) {
+                    <img [src]="mediaUrl(group.author.image)" alt="" />
+                    } @else {
+                    <span>{{ group.author.firstName[0] }}</span>
+                    }
+                </div>
+                <strong>{{ group.author.firstName }}</strong>
+                <span class="time">{{ currentStory() ? timeAgo(currentStory()!.createdAt) : '' }}</span>
+                <span class="spacer"></span>
+                @if (isMine(group.author._id)) {
+                <button class="icon-btn" (click)="deleteCurrent()">🗑️</button>
+                }
+                <button class="icon-btn" (click)="close()">✕</button>
+            </div>
+
+            @if (currentStory(); as story) {
+            <img class="story-img" [src]="mediaUrl(story.image)" alt="" />
+            @if (story.caption) {
+            <p class="caption">{{ story.caption }}</p>
+            }
+            }
+
+            <!-- left tap = pichli, right tap = agli -->
+            <div class="tap left" (click)="prev()"></div>
+            <div class="tap right" (click)="next()"></div>
+            }
+        </div>
+    </ng-template>
+</ion-modal>

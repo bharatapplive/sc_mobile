@@ -8,6 +8,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="loadFirst($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+    <app-stories-bar></app-stories-bar>
 
   @if (loading()) {
   <div class="center"><ion-spinner></ion-spinner></div>

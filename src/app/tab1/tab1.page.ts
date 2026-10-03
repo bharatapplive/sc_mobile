@@ -1,9 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, ViewChild, signal } from '@angular/core';
 import { AlertController } from '@ionic/angular/lazy';
 import { Post, PostService } from '../core/services/post.service';
 import { AuthService } from '../core/services/auth.service';
 import { mediaUrl } from '../core/utils/media-url';
-
+import { StoriesBarComponent } from '../stories-bar/stories-bar.component';
 const PAGE_SIZE = 10;
 
 @Component({
@@ -20,6 +20,7 @@ export class Tab1Page {
   page = 1;
   myId = '';
   mediaUrl = mediaUrl;
+  @ViewChild(StoriesBarComponent) storiesBar?: StoriesBarComponent;
 
   // naya post likhne wali screen
   composerOpen = signal(false);
@@ -41,6 +42,7 @@ export class Tab1Page {
   }
 
   loadFirst(event?: any) {
+    this.storiesBar?.load();
     this.page = 1;
     this.loading.set(!event);
     this.error.set('');
