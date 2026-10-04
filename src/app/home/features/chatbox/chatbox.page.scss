@@ -113,11 +113,26 @@
 
                         span{
                             font-size: 15px;
+                            &.seen{
+                                font-weight: 400;
+                            }
+
+                            &.unseen{
+                                font-weight: bold;
+                            }
                         }
 
                         h6{
                             margin: 0px;
                             font-size: 10px;
+                            
+                            &.seen{
+                                font-weight: 400;
+                            }
+
+                            &.unseen{
+                                font-weight: bold;
+                            }
                         }
                     }
                     
@@ -131,8 +146,6 @@
                         overflow: hidden;
                         white-space: nowrap; // Keeps text on one line
                         text-overflow: ellipsis; // Adds "..." at the right edge
-
-                        
                     }
                 }
             }
@@ -205,9 +218,6 @@
             }
         }
     }
-
-    // #Important...
-    
 
     // #Important...
     .msg-person{

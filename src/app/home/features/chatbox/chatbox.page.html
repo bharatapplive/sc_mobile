@@ -13,6 +13,15 @@
 
 <ion-content [fullscreen]="true">
   <div class="container">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content 
+        pullingIcon="chevron-down-circle-outline" 
+        pullingText="Pull down to refresh" 
+        refreshingSpinner="circles" 
+        refreshingText="Fetching profile...">
+      </ion-refresher-content>
+    </ion-refresher>
+    
     <section class="search-Bar-container">
       <ion-item lines="none" class="place-holder">
           <ion-icon slot="start" name="search-outline"></ion-icon>
@@ -28,9 +37,9 @@
         <span>Your note</span>
       </div>
       
-      <div class="story-context" *ngFor="let item of followingList">
+      <div class="story-context" *ngFor="let item of followingList" (click)="openPrivateChat(item)">
         <div class="online-relative">
-          <ion-avatar class="person">
+          <ion-avatar class="person" >
             <ion-img [src]="item.avatarUrl" alt="User Avatar"></ion-img>
           </ion-avatar>
           <ion-icon class="story-add-absolute" name="online"></ion-icon>
@@ -51,86 +60,21 @@
       </div>
 
       <div class="list-msg">
-        <div class="card-board" >
+        <div class="card-board" *ngFor="let person of messages" (click)="openGroupChat(person)">
           <div class="online-relative">
             <ion-avatar class="msg-person">
-              <ion-img [src]="'assets/images/luna_art.jpg'" alt="User Avatar"></ion-img>
+              <ion-img [src]="getSenderAvatar(person.senderId)" alt="User Avatar"></ion-img>
             </ion-avatar>
-            <ion-icon class="story-add-absolute" name="online"></ion-icon>
+            <ion-icon class="story-add-absolute" name="ellipse" color="success"></ion-icon>
           </div>
-          <div class="card-title-msg" [class.seen]="isSeen" [class.unseen]="!isSeen">
-            <div class="person-name-time" [class.seen]="isSeen" [class.unseen]="!isSeen">
-              <span>Luna Art</span>
-              <h6>Now</h6>
-            </div>
-            <p>Helo! Ranaji How are you. Where are you now a days</p>
-          </div>
-        </div>
-
-        <div class="card-board">
-          <div class="online-relative">
-            <ion-avatar class="msg-person">
-              <ion-img [src]="'assets/images/neo_pixel.jpg'" alt="User Avatar"></ion-img>
-            </ion-avatar>
-            <ion-icon class="story-add-absolute" name="online"></ion-icon>
-          </div>
-          <div class="card-title-msg">
+          <div class="card-title-msg" [class.seen]="isMessageRead(person)" [class.unseen]="!isMessageRead(person)">
             <div class="person-name-time">
-              <span>Neo Pixel</span>
-              <h6>02mins ago</h6>
+              <span>{{getSenderName(person.senderId)}}</span>
+              <h6>{{(person.createdAt) | timeAgo}}</h6>
             </div>
-            <p>Helo! Ranaji..</p>
+            <p>{{person.text}}</p>
           </div>
         </div>
-
-        <div class="card-board">
-          <div class="online-relative">
-            <ion-avatar class="msg-person">
-              <ion-img [src]="'assets/images/travel_joy.jpg'" alt="User Avatar"></ion-img>
-            </ion-avatar>
-            <ion-icon class="story-add-absolute" name="online"></ion-icon>
-          </div>
-          <div class="card-title-msg">
-            <div class="person-name-time">
-              <span>Travel Joy</span>
-              <h6>15mins ago</h6>
-            </div>
-            <p>Congratulation! ranaji, you got travel tour at 50% off</p>
-          </div>
-        </div>
-
-        <div class="card-board">
-          <div class="online-relative">
-            <ion-avatar class="msg-person">
-              <ion-img [src]="'assets/images/Post2.jpg'" alt="User Avatar"></ion-img>
-            </ion-avatar>
-            <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
-          </div>
-          <div class="card-title-msg">
-            <div class="person-name-time">
-              <span>Rok Joyi</span>
-              <h6>1days ago</h6>
-            </div>
-            <p>Hello..</p>
-          </div>
-        </div>
-
-        <div class="card-board">
-          <div class="online-relative">
-            <ion-avatar class="msg-person">
-              <ion-img [src]="'assets/images/Slex.jpg'" alt="User Avatar"></ion-img>
-            </ion-avatar>
-            <!-- <ion-icon class="story-add-absolute" name="online"></ion-icon> -->
-          </div>
-          <div class="card-title-msg">
-            <div class="person-name-time">
-              <span>Slex Vibe</span>
-              <h6>3days ago</h6>
-            </div>
-            <p>Congratulation! ranaji, you got an anti piece price on our brand</p>
-          </div>
-        </div>
-            
       </div>
     </section>
     
@@ -152,7 +96,7 @@
         </div>
         <div class="tabs">
           @if(isFollower(item)){
-            <ion-button shape="round" size="small" fill="clear">Follow Back</ion-button>
+            <ion-button shape="round" size="small" fill="clear" (click)="onClickFollow(item)">Follow Back</ion-button>
           }@else{
             <ion-button shape="round" size="small" fill="clear" (click)="onClickFollow(item)">Follow</ion-button>
           }

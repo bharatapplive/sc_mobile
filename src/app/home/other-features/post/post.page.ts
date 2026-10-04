@@ -5,6 +5,8 @@ import { ProfileService } from 'src/app/home/features/profile/profile-service';
 import { PostService } from 'src/app/home/other-features/post/Post-service';
 import { PreviousRouteServe } from 'src/app/core/previous-route-serve';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
+import { createButtonCollapseAnimation } from 'src/app/animation/button-collapse.animation';
+import { slideRightToLeftAnimation } from 'src/app/animation/rightToleft.animation';
 
 @Component({
   selector: 'app-post',
@@ -95,6 +97,7 @@ export class PostPage implements OnInit {
   @Input() captionText: string = '';
   @Input() maxLength: number = 2200;
   @Output() captionChange = new EventEmitter<string>();
+  private prevUrl: string | null = null;
 
   constructor(    
     private navCtrl: NavController,
@@ -103,7 +106,7 @@ export class PostPage implements OnInit {
     private readonly previousRoute: PreviousRouteServe,
     private readonly toastController: ToastController,
     private readonly authServe: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const session = this.authServe.getSession();
@@ -113,6 +116,12 @@ export class PostPage implements OnInit {
     }
 
     this.loadUser();
+  }
+
+  ionViewWillEnter(){
+    
+    this.prevUrl = this.previousRoute.getPreviousUrl();
+    console.log(this.prevUrl);
   }
 
   loadUser(){
@@ -256,12 +265,15 @@ export class PostPage implements OnInit {
   //#endregion
 
   goBack(){
-    const prevUrl = this.previousRoute.getPreviousUrl();
 
-    if(prevUrl){
-      this.navCtrl.navigateBack(prevUrl);
+    if(this.prevUrl){
+      this.navCtrl.navigateBack(this.prevUrl, {
+        animation: slideRightToLeftAnimation
+      });
     }else{
-      this.navCtrl.navigateBack('/home');
+      this.navCtrl.navigateBack('/home', {
+        animation: slideRightToLeftAnimation
+      });
     }
   }
 

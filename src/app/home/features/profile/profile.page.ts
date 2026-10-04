@@ -4,8 +4,10 @@ import { AuthService } from 'src/app/core/authcontroller/auth-service';
 import { ProfileService } from './profile-service';
 import { PostService } from 'src/app/home/other-features/post/Post-service';
 import { ActionSheetController, NavController, ToastController } from '@ionic/angular';
-import { ContentAuthor, Followers, User } from 'src/app/core/authcontroller/authInterface';
-import { forkJoin } from 'rxjs';
+import { Followers, User } from 'src/app/core/authcontroller/authInterface';
+import { createButtonExpandAnimation } from 'src/app/animation/button-expand.animation';
+import { slideLeftToRightAnimation } from 'src/app/animation/leftToright.animation';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -64,7 +66,9 @@ export class ProfilePage implements OnInit {
     private readonly authServe: AuthService,
     private readonly postServe: PostService,
     private readonly profileServe: ProfileService,
-    private readonly toastController: ToastController
+    private readonly toastController: ToastController,
+    private readonly navCtrl: NavController,
+    private readonly router: Router
   ) {}
 
   ngOnInit() {
@@ -440,5 +444,11 @@ export class ProfilePage implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  openPostPage(){
+    this.navCtrl.navigateForward('/home/post', {
+      animation: slideLeftToRightAnimation
+    });
   }
 }

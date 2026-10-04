@@ -4,7 +4,7 @@
       <ion-label>{{user?.username}}</ion-label>
     </ion-button>
     <div>
-      <ion-button fill="clear" routerLink="/home/post">
+      <ion-button fill="clear" (click)="openPostPage()">
         <ion-icon name="add"></ion-icon>
       </ion-button>
       <ion-button fill="clear" (click)="onLogout()">

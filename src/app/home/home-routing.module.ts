@@ -34,9 +34,15 @@ const routes: Routes = [
       {
         path: 'post',
         loadChildren: () => import('./other-features/post/post.module').then( m => m.PostPageModule)
+      },
+      {
+        path: 'directmessage',
+        loadChildren: () => import('./other-features/directmessage/directmessage.module').then( m => m.DirectmessagePageModule),
       }
     ]
   }
+
+
 ];
 
 @NgModule({

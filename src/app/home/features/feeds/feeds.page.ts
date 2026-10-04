@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CommentResponse, Followers, User } from 'src/app/core/authcontroller/authInterface';
-import { ActionSheetController, AlertController, IonModal, ToastController } from '@ionic/angular';
+import { ActionSheetController, NavController, IonModal, ToastController } from '@ionic/angular';
 import { EMPTY, forkJoin, switchMap, tap } from 'rxjs';
 import { PostService } from 'src/app/home/other-features/post/Post-service';
 import { ProfileService } from 'src/app/home/features/profile/profile-service';
 import { ReelService } from '../reels/reel-service';
 import { FeedService } from './feed.service';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
+import { createButtonExpandAnimation } from 'src/app/animation/button-expand.animation';
+import { slideLeftToRightAnimation } from 'src/app/animation/leftToright.animation';
 
 @Component({
   selector: 'app-feeds',
@@ -54,7 +56,8 @@ export class FeedsPage implements OnInit{
     private readonly authServe: AuthService,
     private readonly feedServe: FeedService,
     private readonly toastController: ToastController,
-    private readonly actionSheetCtrl: ActionSheetController
+    private readonly actionSheetCtrl: ActionSheetController,
+    private readonly navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -317,8 +320,7 @@ export class FeedsPage implements OnInit{
       ],
     });
     await ActionSheet.present();
-  }
-  
+  }  
   //#endregion
   
   //#region Follower...
@@ -387,5 +389,26 @@ export class FeedsPage implements OnInit{
     });
 
     await toast.present();
+  }
+
+  openPostPage(){
+    this.navCtrl.navigateForward('/home/post', {
+      animation: slideLeftToRightAnimation
+    });
+  }
+
+  openStoryPage(event: MouseEvent){
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    this.navCtrl.navigateForward('/home/post', {
+      animation: (baseEl, opts) => createButtonExpandAnimation(baseEl, {
+        ...opts,
+        animationBuilderOpts: { x, y }
+      }),
+      // Pass coordinates via NavigationExtras state
+      state: { originX: x, originY: y }
+    });
   }
 }

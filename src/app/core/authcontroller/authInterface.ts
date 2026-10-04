@@ -146,3 +146,28 @@ export interface MediaComposerState {
   overlayTexts:   OverlayText[];
   aspectRatio:    '1:1' | '9:16' | '4:5';
 }
+
+export interface DirectMessage {
+  _id?: string;
+  roomId: string;
+  senderId: ContentAuthor | string;
+  text: string;
+  messageType?: 'text' | 'image' | 'file';
+  mediaUrl?: string;
+  readBy?: string[];
+  createdAt?: string;
+}
+
+export interface ChatList{
+  _id?: string;
+  roomId: string;
+  text: string;
+  mediaUrl?: string;
+  readBy?: string[];
+  createdAt?: string;
+  username:string;
+  fullname:string;
+  avatarUrl?: string;
+  lastMessage: string;
+  lastMessageTime: string | Date;
+}
