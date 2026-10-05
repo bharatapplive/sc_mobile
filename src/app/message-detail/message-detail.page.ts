@@ -32,6 +32,7 @@ export class MessageDetailPage implements OnInit {
   user: any = null;
   messagePayload: DirectMessagePayload | null = null;
   messageText = '';
+  messages: any[] =[];
   //step 4
 // dependency inject of activated route and 
 // auth service to get the current user or session state 
@@ -54,6 +55,15 @@ export class MessageDetailPage implements OnInit {
     // sender information (current logged in user)
     this.session = this.authService.getSession();
     console.log('session user:', this.session.user?.userName);
+
+    this.messageServic.recivedMessages().subscribe({
+      next:(res: any)=> {
+        if(res.receivedId === this.user._id)
+        {
+          this.messages = res
+        }
+      }
+    })
   }
 
   sendMessageHandler(): void {   

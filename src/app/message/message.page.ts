@@ -41,7 +41,13 @@ export class MessagePage implements OnInit {
         console.error('Failed to load messages:', error);
       },
     });
+
+    //Recevier msg here....
+    this.messageService.recivedMessages().subscribe({
+      next: (res: any)=> this.messages = res
+    })
   }
+
   navigateToMessageDetail(user: any): void {
     console.log('Navigating to message detail for user:', user);
     //step 2 save selected user in localstorage

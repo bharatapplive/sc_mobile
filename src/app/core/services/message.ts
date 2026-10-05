@@ -72,6 +72,10 @@ export class MessageService {
     }
   }
 
+  recivedMessages(): Observable<DirectMessagePayload> {
+    return this.messageSubject.asObservable();
+  }
+
   getMessages(): Observable<any[]> {
     if (!this.authService.getSession().isAuthenticated) {
       return of([]);
