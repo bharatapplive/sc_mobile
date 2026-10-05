@@ -3,8 +3,10 @@ import { IonContent } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { MessageService } from '../core/services/message';
+import { Subscription } from 'rxjs';
 
 interface DirectMessagePayload {
+  roomId:   string;
   senderId: string | number | null;
   senderFirstName: string | null;
   senderLastName: string | null;
@@ -27,6 +29,9 @@ interface DirectMessagePayload {
 export class MessageDetailPage implements OnInit {
   @ViewChild('chatContent') private chatContent?: IonContent;
 
+  private messageSub?: Subscription;
+
+  roomId = '';
   userId: string | null = null;
   session: any = {};
   user: any = null;
@@ -56,20 +61,62 @@ export class MessageDetailPage implements OnInit {
     this.session = this.authService.getSession();
     console.log('session user:', this.session.user?.userName);
 
-    this.messageServic.recivedMessages().subscribe({
-      next:(res: any)=> {
-        if(res.receivedId === this.user._id)
-        {
-          this.messages = res
+    // Create roomId..
+    //#region Himanshu Code...
+    this.roomId = [this.session.user?._id, this.userId].sort().join('_');
+    
+    // 5. Clean subscription before creating new one
+    this.unsubscribe();
+
+    // 6. Listen for live incoming messages for this room
+    this.messageSub = this.messageServic.recivedMessages().subscribe({
+      next: (message: any) => {
+        if (message && message.roomId === this.roomId) {
+          this.messages.push(message);
         }
-      }
-    })
+      },
+      error: (err) => console.error('Error in direct message stream:', err)
+    });
+    
+    
+    this.loadHistory(this.roomId);
+    //#endregion
   }
+
+  //#region Himanshu Code..
+  ionViewWillLeave() {
+    this.unsubscribe();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe();
+  }
+
+  private unsubscribe() {
+    if (this.messageSub) {
+      this.messageSub.unsubscribe();
+      this.messageSub = undefined;
+    }
+  }
+
+  loadHistory(roomId?: string) {
+    if (!roomId) return;
+
+    this.messageServic.getRoomHistory(roomId).subscribe({
+      next: (res: DirectMessagePayload[]) => {
+        // Filter out messages sent by the logged-in user
+        this.messages = res;
+      },
+      error: (err) => console.error('Error fetching chat history:', err)
+    });
+  }
+  //#endregion
 
   sendMessageHandler(): void {   
     if (!this.messageText.trim()) return;    
 
     this.messagePayload = {
+      roomId: this.roomId,
       senderId: this.session?.user._id,
       senderFirstName: this.session?.user.firstName ?? null,
       senderLastName: this.session?.user.lastName ?? null,

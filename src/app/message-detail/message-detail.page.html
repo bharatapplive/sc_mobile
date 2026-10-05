@@ -36,12 +36,12 @@
       </div>
     </div> -->
     <div class="message-row sent">
-      <div class="message-content">
+      <div class="message-content" *ngFor="let msg of messages">
         <div class="message-bubble">
-          Same here! We should make it a regular thing.
+          {{msg.message}}
         </div>
         <span class="message-time"
-          >Yesterday, 6:45 PM
+          >{{msg.createdAt}}
           <ion-icon name="checkmark-done-outline" aria-label="Read"></ion-icon
         ></span>
       </div>

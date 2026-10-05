@@ -34,7 +34,7 @@ export class MessageService {
 
   connectSocket(jwtToken: string): void {
     if (!this.socket) {
-      this.socket = io('http://localhost:3000/direct-message', {
+      this.socket = io(this.messageUrl, {
         auth: { token: jwtToken },
         autoConnect: true,
         transports: ['websocket'],
@@ -54,6 +54,12 @@ export class MessageService {
     }
   }
   
+  joinRoom(roomId: string, userId: string){
+    if (this.socket && roomId) {
+      this.socket.emit('joinRoom', { roomId, userId });
+    }
+  }
+
   // mobile will have vinay shankar's mobile number and then we will send it to backend to get all users with whom vinay shankar has chat history
   getUsers(mobile: string): Observable<any[]> {
     if (!this.authService.getSession().isAuthenticated) {
@@ -82,5 +88,29 @@ export class MessageService {
     }
 
     return this.http.get<any[]>(this.messageUrl);
+  }
+
+  // --- HTTP REST APIs (from Controller) ---
+
+  getRoomHistory(roomId: string): Observable<any> {
+    return this.http.get<any>(`${this.messageUrl}/room/${roomId}`);
+  }
+
+  markMessagesAsRead(roomId: string, userId: string): Observable<any> {
+    return this.http.patch(`${this.messageUrl}/rooms/${roomId}/read`, { userId });
+  }
+  
+  getAllRooms(){
+    return this.http.get<any>(`${this.messageUrl}/rooms`);
+  }
+
+  deleteMsg(roomId: string): Observable<any>{
+    return this.http.delete<any>(`${this.messageUrl}/rooms/${roomId}`);
+  }
+  
+  disconnect() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
   }
 }

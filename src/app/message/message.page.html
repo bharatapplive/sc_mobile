@@ -143,6 +143,9 @@
                 {{ user.userName}}
               </span>
             </div>
+            <div *ngFor="let msg of messages">
+              <span>{{msg.message}}</span>
+            </div>
             <!-- <span class="font-label-sm text-outline"></span>
               hello{{ user.lastMessageAt || '' }}</span> -->
           </div>
