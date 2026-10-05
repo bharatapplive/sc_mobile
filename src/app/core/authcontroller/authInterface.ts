@@ -173,6 +173,7 @@ export interface ChatList{
 }
 
 export interface DirectMessagePayload {
+  roomId: string;
   senderId: string | number | null;
   senderFirstName: string | null;
   senderLastName: string | null;

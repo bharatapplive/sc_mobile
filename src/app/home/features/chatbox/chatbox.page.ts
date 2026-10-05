@@ -114,21 +114,32 @@ export class ChatboxPage implements OnInit, OnDestroy {
   callAllRooms(event?: any){
     this.chatServe.getAllRooms().subscribe({
       next: (res)=>{
-        console.log(res)
-        this.messages = res
-        this.loadHistory(res.receiverId);
+        const ids = res.map((room: any)=> room.roomId);
+        
+        if(ids.length > 0){
+          ids.forEach((id:any)=>{
+            const userIds = id.split('_');
+            const otherUserId = userIds.filter((uid: string) => uid === this.user?._id);
+            if(!otherUserId) return;
+            this.loadHistory([id]);
+          });
+        }
+        if (event) {
+          event.target.complete();
+        }
       }
     });
   }
 
   // Load Whole room history...
-  loadHistory(recID?: string[]) {
-    if (!recID || recID.length === 0) return;
+  loadHistory(roomID?: string[]) {
+    if (!roomID || roomID.length === 0) return;
 
-    recID?.forEach(id=>{
+    roomID?.forEach(id=>{
       this.chatServe.getRoomHistory(id).subscribe({
         next: (res: DirectMessagePayload[]) => {
           const list = Array.isArray(res) ? res : [];
+          
           if (list.length === 0) return;
 
           // 1. Get the most recent message in this specific room
@@ -136,6 +147,7 @@ export class ChatboxPage implements OnInit, OnDestroy {
 
           // 2. Find the message sent by the other participant
           const filteredMessages = list.filter(item => item.senderId !== this.user?._id);
+          console.log(filteredMessages)
 
           // 3. Ignore if no incoming msg from otheruser
           if(filteredMessages.length === 0) return;

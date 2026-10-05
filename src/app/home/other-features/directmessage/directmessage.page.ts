@@ -112,6 +112,7 @@ export class DirectmessagePage implements OnInit, OnDestroy {
     if(!this.newMessageText.trim() || !this.roomId || !this.profile) return;
 
     const payload: DirectMessagePayload = {
+      roomId: this.roomId,
       senderId: this.profile?.userId ?? '',
       senderFirstName: this.profile?.authorName ?? null,
       senderLastName: this.profile?.authorName ?? null,
@@ -144,10 +145,10 @@ export class DirectmessagePage implements OnInit, OnDestroy {
     });
   }
 
-  isMyMessage(senderId: DirectMessage['senderId']): boolean {
+  isMyMessage(senderId: DirectMessagePayload['senderId']): boolean {
     if(!this.profile?.userId || !senderId) return false;
-    const id = typeof senderId === 'object' ? senderId.userId : senderId;
-    return id === this.profile.userId;
+   
+    return senderId === this.profile.userId;
   }
 
   getSenderName(senderId: DirectMessage['senderId']): string {
