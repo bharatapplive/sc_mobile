@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
+import { MessageService } from '../core/services/message';
 
 interface DirectMessagePayload {
   senderId: string | number | null;
@@ -37,6 +38,7 @@ export class MessageDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService, // this is for session state
+    private messageServic: MessageService
   ) {}
 
   // step 5 ngOnInit method 
@@ -71,6 +73,9 @@ export class MessageDetailPage implements OnInit {
 
       message: this.messageText.trim(),
     };
+
+    this.messageServic.sendMessage(this.messagePayload);
+    this.messageText = '';
 
     //step 9-> component->service-> API (controller-> service-> db)
     console.log('Direct message payload:', this.messagePayload);
