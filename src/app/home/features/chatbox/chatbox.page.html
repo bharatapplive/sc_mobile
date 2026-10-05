@@ -61,19 +61,7 @@
 
       <div class="list-msg">
         <div class="card-board" *ngFor="let person of messages" (click)="openGroupChat(person)">
-          <div class="online-relative">
-            <ion-avatar class="msg-person">
-              <ion-img [src]="getSenderAvatar(person.senderId)" alt="User Avatar"></ion-img>
-            </ion-avatar>
-            <ion-icon class="story-add-absolute" name="ellipse" color="success"></ion-icon>
-          </div>
-          <div class="card-title-msg" [class.seen]="isMessageRead(person)" [class.unseen]="!isMessageRead(person)">
-            <div class="person-name-time">
-              <span>{{getSenderName(person.senderId)}}</span>
-              <h6>{{(person.createdAt) | timeAgo}}</h6>
-            </div>
-            <p>{{person.text}}</p>
-          </div>
+          <p>{{person.message}}</p>
         </div>
       </div>
     </section>

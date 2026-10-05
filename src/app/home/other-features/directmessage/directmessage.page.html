@@ -22,41 +22,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list lines="none">
-    <div
-      *ngFor="let msg of messages"
-      [class.my-message]="isMyMessage(msg.senderId)"
-      [class.other-message]="!isMyMessage(msg.senderId)"
-      class="message-wrapper"
-    >
-      <!-- Optional Sender Avatar for incoming messages -->
-      <div class="sender-pic">
-        <ion-avatar class="msg-person" *ngIf="!isMyMessage(msg.senderId)">
-          <ion-img [src]="activeUserProfilePic" alt="User Avatar"></ion-img>
-        </ion-avatar>
-      </div>
-
-      <div class="message-bubble">
-        <!-- Sender Name (Shown only for received messages) -->
-        <div class="sender-name" *ngIf="!isMyMessage(msg.senderId)">
-          {{ getSenderName(msg.senderId) }}
-        </div>
-
-        <!-- Render Media (Image) if messageType is image -->
-        <div *ngIf="msg.messageType === 'image' && msg.mediaUrl" class="media-container">
-          <img [src]="msg.mediaUrl" alt="Shared Image" class="chat-media-image" />
-        </div>
-
-        <!-- Text Message Content -->
-        <p class="message-text" *ngIf="msg.text">{{ msg.text }}</p>
-
-        <!-- Time Badge -->
-        <span class="message-time">
-          {{ msg.createdAt | timeAgo }}
-        </span>
-      </div>
-    </div>
-  </ion-list>
+  
 
   <ion-modal [isOpen]="isUserModalOpen" (didDismiss)="isUserModalOpen = false">
     

@@ -171,3 +171,18 @@ export interface ChatList{
   lastMessage: string;
   lastMessageTime: string | Date;
 }
+
+export interface DirectMessagePayload {
+  senderId: string | number | null;
+  senderFirstName: string | null;
+  senderLastName: string | null;
+  senderEmail: string | null;
+  senderUserName: string | null;
+  receiverId: string | number | null;
+  receiverFirstName: string | null;
+  receiverLastName: string | null;
+  receiverEmail: string | null;
+  receiverUserName: string | null;
+  message: string;
+  createdAt?: string;
+}

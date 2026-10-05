@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonContent, NavController } from '@ionic/angular';
 import { PreviousRouteServe } from 'src/app/core/previous-route-serve';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
-import { ContentAuthor, DirectMessage, User } from 'src/app/core/authcontroller/authInterface';
+import { ContentAuthor, DirectMessage, DirectMessagePayload, User } from 'src/app/core/authcontroller/authInterface';
 import { slideRightToLeftAnimation } from 'src/app/animation/rightToleft.animation';
 import { ChatService } from 'src/app/home/features/chatbox/chat-service';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ export class DirectmessagePage implements OnInit, OnDestroy {
   private messageSub?: Subscription;
 
   roomId = '';
-  messages: DirectMessage[] = [];
+  messages: DirectMessagePayload[] = [];
   newMessageText: string = '';
   
   activeUser: DirectMessage | null = null;
@@ -83,8 +83,8 @@ export class DirectmessagePage implements OnInit, OnDestroy {
 
     // 6. Listen for live incoming messages for this room
     this.messageSub = this.chatServe.getMessages().subscribe({
-      next: (message: DirectMessage) => {
-        if (message && message.roomId === this.roomId) {
+      next: (message: DirectMessagePayload) => {
+        if (message) {
           this.messages.push(message);
           this.scrollToBottom();
         }
@@ -111,11 +111,19 @@ export class DirectmessagePage implements OnInit, OnDestroy {
   onSend(){
     if(!this.newMessageText.trim() || !this.roomId || !this.profile) return;
 
-    const payload: DirectMessage = {
-      roomId: this.roomId,
-      senderId: this.profile,
-      text: this.newMessageText,
-      messageType: 'text'
+    const payload: DirectMessagePayload = {
+      senderId: this.profile?.userId ?? '',
+      senderFirstName: this.profile?.authorName ?? null,
+      senderLastName: this.profile?.authorName ?? null,
+      senderEmail: 'user1@gmail.com',
+      senderUserName: this.profile.authorName ,
+      receiverId: '101' ,
+      receiverFirstName: this.activeUserName,
+      receiverLastName: this.activeUserName ,
+      receiverEmail: 'user1@gmail.com' ,
+      receiverUserName: this.activeUserName ,
+
+      message: this.newMessageText.trim(),
     }
 
     this.chatServe.sendMessage(payload);
@@ -127,7 +135,7 @@ export class DirectmessagePage implements OnInit, OnDestroy {
     if (!roomId) return;
 
     this.chatServe.getRoomHistory(roomId).subscribe({
-      next: (res: DirectMessage[]) => {
+      next: (res: DirectMessagePayload[]) => {
         // Filter out messages sent by the logged-in user
         this.messages = res;
         this.scrollToBottom();

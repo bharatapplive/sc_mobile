@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProfileService } from 'src/app/home/features/profile/profile-service';
 import { ChatService } from 'src/app/home/features/chatbox/chat-service';
-import { ContentAuthor, DirectMessage, Followers, User } from 'src/app/core/authcontroller/authInterface';
+import { ContentAuthor, DirectMessage, DirectMessagePayload, Followers, User } from 'src/app/core/authcontroller/authInterface';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
 import { NavController } from '@ionic/angular';
@@ -18,7 +18,7 @@ export class ChatboxPage implements OnInit, OnDestroy {
   private messageSub?: Subscription;
 
   roomId = '';
-  messages: DirectMessage[] = [];
+  messages: DirectMessagePayload[] = [];
 
   profile: ContentAuthor | null = null;
   user: User | null = null;
@@ -53,8 +53,8 @@ export class ChatboxPage implements OnInit, OnDestroy {
     this.unsubscribe();
 
     this.messageSub = this.chatServe.getMessages().subscribe({
-      next: (message: DirectMessage) => {
-        if (message && message.roomId) {
+      next: (message: DirectMessagePayload) => {
+        if (message && message.receiverId) {
           this.updateRoomSummary(message);
         }
       },
@@ -114,29 +114,20 @@ export class ChatboxPage implements OnInit, OnDestroy {
   callAllRooms(event?: any){
     this.chatServe.getAllRooms().subscribe({
       next: (res)=>{
-        const ids = res.map((room:any)=> room._id);
-        if(ids.length > 0){
-          ids.forEach((id:any)=>{
-            const userIds = id.split('_');
-            const otherUserId = userIds.some((uid: string) => uid === this.user?._id);
-            if(!otherUserId) return;
-            this.loadHistory([id]);
-          });
-        }
-        if (event) {
-          event.target.complete();
-        }
+        console.log(res)
+        this.messages = res
+        this.loadHistory(res.receiverId);
       }
     });
   }
 
   // Load Whole room history...
-  loadHistory(roomId?: string[]) {
-    if (!roomId || roomId.length === 0) return;
+  loadHistory(recID?: string[]) {
+    if (!recID || recID.length === 0) return;
 
-    roomId?.forEach(id=>{
+    recID?.forEach(id=>{
       this.chatServe.getRoomHistory(id).subscribe({
-        next: (res: DirectMessage[]) => {
+        next: (res: DirectMessagePayload[]) => {
           const list = Array.isArray(res) ? res : [];
           if (list.length === 0) return;
 
@@ -144,13 +135,16 @@ export class ChatboxPage implements OnInit, OnDestroy {
           const lastMsg = list[list.length - 1];
 
           // 2. Find the message sent by the other participant
-          const filteredMessages = list.find(item => {
-            const senderId = typeof item.senderId === 'object' ? item.senderId.userId : '';
-            return senderId !== this.user?._id;
-          });
+          const filteredMessages = list.filter(item => item.senderId !== this.user?._id);
 
-          // 3. Construct the room summary item
-          const roomSummary = {...(filteredMessages || lastMsg), roomId: id, text: lastMsg?.text, createdAt: lastMsg?.createdAt};
+          // 3. Ignore if no incoming msg from otheruser
+          if(filteredMessages.length === 0) return;
+          
+          // 4. Take Latest incoming message from other user.. 
+          const targetMsg = filteredMessages[filteredMessages.length - 1]
+
+          // 5. Construct the room summary item
+          const roomSummary: DirectMessagePayload = {...targetMsg, message: lastMsg?.message, createdAt: lastMsg?.createdAt};
 
           this.updateRoomSummary(roomSummary);
         },
@@ -160,8 +154,8 @@ export class ChatboxPage implements OnInit, OnDestroy {
   }
 
   // Update or insert room summary when a message arrives
-  private updateRoomSummary(newMessage: DirectMessage) {
-    const index = this.messages.findIndex((m) => m.roomId === newMessage.roomId);
+  private updateRoomSummary(newMessage: DirectMessagePayload) {
+    const index = this.messages.findIndex((m) => m.receiverId === newMessage.receiverId);
 
     if (index !== -1) {
       // Room exists: merge updated fields
@@ -177,6 +171,8 @@ export class ChatboxPage implements OnInit, OnDestroy {
       const timeB = new Date(b.createdAt || 0).getTime();
       return timeB - timeA; // Descending order (newest first)
     });
+
+    console.log(this.messages)
   }
 
   //#endregion

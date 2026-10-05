@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable, Subject } from 'rxjs';
-import { DirectMessage } from 'src/app/core/authcontroller/authInterface';
+import { DirectMessage, DirectMessagePayload } from 'src/app/core/authcontroller/authInterface';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -10,7 +10,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class ChatService {
   private socket!: Socket;
-  private messageSubject = new Subject<DirectMessage>();
+  private messageSubject = new Subject<DirectMessagePayload>();
 
   constructor(
     private http: HttpClient
@@ -25,7 +25,7 @@ export class ChatService {
       });
 
       // FIXED: Listens for 'newMessage' emitted by DirectMessageGateway
-      this.socket.on('newMessage', (message: DirectMessage) => {
+      this.socket.on('newMessage', (message: DirectMessagePayload) => {
         this.messageSubject.next(message);
       });
 
@@ -47,14 +47,14 @@ export class ChatService {
   }
 
   // Emit chat message to NestJS server
-  sendMessage(payload: DirectMessage){
+  sendMessage(payload: DirectMessagePayload){
     if (this.socket) {
       this.socket.emit('sendPrivateMessage', payload);
     }
   }
 
   // Listen for incoming messages from server
-  getMessages(): Observable<DirectMessage> {
+  getMessages(): Observable<DirectMessagePayload> {
     return this.messageSubject.asObservable();
   }
 
