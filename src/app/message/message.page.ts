@@ -107,7 +107,7 @@ export class MessagePage implements OnInit {
   callAllRooms(event?: any){
     this.messageService.getAllRooms().subscribe({
       next: (res)=>{
-        const ids = res.map((room:any)=> room._id);
+        const ids = res.map((room:any)=> room.roomId);
         if(ids.length > 0){
           ids.forEach((id:any)=>{
             const userIds = id.split('_');
