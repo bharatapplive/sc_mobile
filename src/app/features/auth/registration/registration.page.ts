@@ -74,7 +74,7 @@ export class RegisterPage {
       email: this.email,
       mobile: this.mobile,
       password: this.password,
-      avatar: this.avatar || 'assets/images/user-profile.jpg',
+      avatar: this.avatar || 'assets/images/default-avatar.png',
       role: 'user',
       active: true,
     };

@@ -47,6 +47,10 @@ export class LoginPage implements OnInit {
       next: (res: any) => {
         if (res?.user) {
           localStorage.setItem('currentUser', JSON.stringify(res.user));
+          if (!res.user.isProfileComplete) {
+            this.router.navigate(['/setup-profile']);
+            return;
+          }
         }
         this.router.navigate(['/home']);
       },

@@ -1,13 +1,239 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>post</ion-title>
+<ion-header class="ion-no-border post-header">
+  <ion-toolbar class="header-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" class="icon-nav-btn" (click)="goBack()" aria-label="Go back">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="header-title">New Post</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button class="text-nav-btn next-btn" (click)="openModal()" aria-label="Next">
+        <span>Next</span>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">post</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="post-content">
+  <!-- Hidden File Input for Device Photo / Gallery Selection -->
+  <input 
+    type="file" 
+    #fileInput 
+    accept="image/*" 
+    (change)="onFileSelected($event)" 
+    style="display: none;" 
+  />
+
+  <div class="container">
+    <div class="post-panel" [style.display]="activeTab === 'POST' ? 'flex' : 'none'">
+      <!-- Upper Large Preview of Currently Selected Photo -->
+      <div class="upper-container">
+        <img [src]="postUrl" alt="Selected Post Preview" class="upper-preview-img" (error)="onImgError($event)" />
+        <button class="expand-badge-btn" (click)="triggerFileInput()" title="Choose photo from device">
+          <ion-icon name="images-outline"></ion-icon>
+        </button>
+      </div>
+
+      <!-- Lower Gallery & Media Grid Section -->
+      <div class="lower-container">
+        <!-- Subheader: Recents Dropdown & Actions -->
+        <div class="btn-header">
+          <div class="recents-dropdown" (click)="triggerFileInput()">
+            <span class="dropdown-title">Recents</span>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </div>
+
+          <div class="header-right-actions">
+            <button class="select-multiple-btn" (click)="triggerFileInput()">
+              <ion-icon name="images-outline"></ion-icon>
+              <span>Select from Device</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Media Grid -->
+        <div class="grid">
+          <!-- Camera / Device Upload Tile -->
+          <div class="grid-tile camera-tile" (click)="triggerFileInput()">
+            <div class="camera-icon-wrap">
+              <ion-icon name="camera"></ion-icon>
+            </div>
+            <span class="camera-tile-label">Device</span>
+          </div>
+
+          <!-- Thumbnail Tiles -->
+          <div 
+            *ngFor="let post of posts" 
+            class="grid-tile" 
+            [class.active]="selectPost === post.id"
+            (click)="onChangePost(post.id)"
+          >
+            <img [src]="post.url" alt="Media thumbnail" class="tile-img" (error)="onImgError($event)" />
+            <div *ngIf="selectPost === post.id" class="tile-active-overlay">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Bottom Navigation Pill (Post / Story / Reel) -->
+    <div class="list-absolute">
+      <a [class.active]="activeTab === 'POST'" (click)="onChangeContentType('POST')">POST</a>
+      <a [class.active]="activeTab === 'STORY'" (click)="onChangeContentType('STORY')">STORY</a>
+      <a [class.active]="activeTab === 'REEL'" (click)="onChangeContentType('REEL')">REEL</a>
+    </div>
+  </div>
+
+  <!-- Create & Caption Modal (Triggered by 'Next') -->
+  <ion-modal [isOpen]="isCreateModel" (didDismiss)="isCreateModel = false" class="create-post-modal">
+    <ng-template>
+      <ion-header class="ion-no-border modal-header">
+        <ion-toolbar class="modal-toolbar">
+          <ion-buttons slot="start">
+            <ion-button fill="clear" class="icon-nav-btn" (click)="openModal()" aria-label="Back">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <ion-title class="modal-title">New Post</ion-title>
+
+          <ion-buttons slot="end">
+            <ion-button class="text-nav-btn share-header-btn" (click)="onCreatePost()" [disabled]="isUploading">
+              <span *ngIf="!isUploading">Share</span>
+              <ion-spinner *ngIf="isUploading" name="crescent" class="header-spinner"></ion-spinner>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-content">
+        <div class="modal-post-body">
+          <!-- Selected Image & Caption Input Row -->
+          <div class="caption-card-row">
+            <div class="selected-thumbnail-box">
+              <img [src]="newMediaUrl || postUrl" alt="Post thumbnail" class="modal-thumb-img" (error)="onImgError($event)" />
+            </div>
+
+            <div class="caption-input-area">
+              <ion-textarea 
+                id="caption-input" 
+                placeholder="Write a caption... What's on your mind?" 
+                [maxlength]="maxLength" 
+                [rows]="3"
+                [autoGrow]="true" 
+                [(ngModel)]="captionText" 
+                (ionInput)="onTextChange()" 
+                class="caption-textarea"
+              ></ion-textarea>
+              <span class="char-count">{{ captionText.length }}/{{ maxLength }}</span>
+            </div>
+          </div>
+
+          <!-- Add-on Rows (Music, Location, Tag) -->
+          <div class="add-on-section">
+            <div class="action-list-item" (click)="isMusicModalOpen = true">
+              <div class="item-left">
+                <div class="item-icon-circle music-icon-circle">
+                  <ion-icon name="musical-notes"></ion-icon>
+                </div>
+                <div class="item-meta">
+                  <span class="item-title">{{ selectedAudio ? selectedAudio.title : 'Add Music' }}</span>
+                  <span class="item-subtitle" *ngIf="selectedAudio">{{ selectedAudio.artist }}</span>
+                  <span class="item-subtitle" *ngIf="!selectedAudio">Select background music</span>
+                </div>
+              </div>
+              <div class="item-right">
+                <ion-icon 
+                  *ngIf="selectedAudio" 
+                  name="close-circle" 
+                  class="remove-audio-icon"
+                  (click)="removeSelectedMusic($event)"
+                ></ion-icon>
+                <ion-icon *ngIf="!selectedAudio" name="chevron-forward-outline"></ion-icon>
+              </div>
+            </div>
+
+            <div class="action-list-item">
+              <div class="item-left">
+                <div class="item-icon-circle location-icon-circle">
+                  <ion-icon name="location"></ion-icon>
+                </div>
+                <div class="item-meta">
+                  <input 
+                    type="text" 
+                    [(ngModel)]="location" 
+                    placeholder="Add Location" 
+                    class="location-text-input" 
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="action-list-item">
+              <div class="item-left">
+                <div class="item-icon-circle tag-icon-circle">
+                  <ion-icon name="person-add"></ion-icon>
+                </div>
+                <div class="item-meta">
+                  <span class="item-title">Tag People</span>
+                  <span class="item-subtitle">Tag friends in this post</span>
+                </div>
+              </div>
+              <div class="item-right">
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- Primary Bottom Share Button -->
+          <div class="share-btn-wrap">
+            <button class="primary-share-btn" (click)="onCreatePost()" [disabled]="isUploading">
+              <ion-spinner *ngIf="isUploading" name="crescent" class="btn-spinner"></ion-spinner>
+              <ion-icon *ngIf="!isUploading" name="paper-plane"></ion-icon>
+              <span *ngIf="!isUploading">Share Post</span>
+              <span *ngIf="isUploading">Uploading & Publishing...</span>
+            </button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Music Selection Modal -->
+  <ion-modal [isOpen]="isMusicModalOpen" (didDismiss)="closeMusicModal()" class="music-modal">
+    <ng-template>
+      <ion-header class="ion-no-border modal-header">
+        <ion-toolbar class="modal-toolbar">
+          <ion-title class="modal-title">Select Audio</ion-title>
+          <ion-buttons slot="end">
+            <button class="icon-nav-btn" (click)="closeMusicModal()">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-content">
+        <div class="music-list">
+          <div 
+            *ngFor="let track of musicLibrary" 
+            class="music-item" 
+            (click)="selectMusicTrack(track)"
+          >
+            <img [src]="track.coverUrl" [alt]="track.title" class="music-cover" />
+            <div class="music-details">
+              <span class="track-title">{{ track.title }}</span>
+              <span class="track-artist">{{ track.artist }}</span>
+            </div>
+            <button class="preview-play-btn" (click)="previewTrack(track, $event)">
+              <ion-icon [name]="playingTrackId === track.id ? 'pause-circle' : 'play-circle'"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

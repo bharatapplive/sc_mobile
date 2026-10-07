@@ -1,0 +1,85 @@
+<ion-content [fullscreen]="true" class="profile-setup-page">
+  <main class="setup-container">
+
+    <header class="welcome-header">
+      <div class="welcome-badge">
+        <span class="material-symbols-outlined star-icon">auto_awesome</span>
+        <span>Welcome to Social Circle</span>
+      </div>
+      <h1>Set Up Your Profile</h1>
+      <p>Hey <strong>{{ displayName }}</strong>, customize your photo and bio to get started.</p>
+    </header>
+
+    <div class="profile-form-card">
+
+      <!-- Avatar -->
+      <section class="avatar-picker">
+        <div class="avatar-preview" (click)="fileInput.click()">
+          <div class="avatar-ring">
+            <img [src]="avatarPreview" alt="Profile Avatar" class="avatar-image" />
+          </div>
+          <button type="button" class="upload-photo-btn" aria-label="Upload profile picture">
+            <span class="material-symbols-outlined">photo_camera</span>
+          </button>
+        </div>
+
+        <input #fileInput type="file" accept="image/*" class="hidden-file-input" (change)="onFileSelected($event)" />
+
+        <span class="upload-hint-text" (click)="fileInput.click()">
+          {{ selectedAvatarBase64 ? 'Tap to change photo' : 'Tap to add profile photo' }}
+        </span>
+      </section>
+
+      <!-- Username -->
+      <section class="username-section">
+        <div class="field-label-row">
+          <label for="username-input">Username</label>
+          <span class="field-hint">Your unique @handle</span>
+        </div>
+        <div class="username-input-box">
+          <span class="prefix-at">@</span>
+          <input id="username-input" type="text" [(ngModel)]="username" placeholder="choose_username"
+            autocapitalize="none" autocorrect="off" spellcheck="false" />
+        </div>
+      </section>
+
+      <!-- Bio -->
+      <section class="bio-section">
+
+        <div class="bio-label-row">
+          <label for="bio-input">Bio</label>
+          <span class="char-counter" [class.near-limit]="bio.length > 130">{{ bio.length }} / {{ maxBioLength }}</span>
+        </div>
+
+        <textarea id="bio-input" rows="3" placeholder="Tell the community about yourself, your hobbies or passion..."
+          [(ngModel)]="bio" [maxlength]="maxBioLength"></textarea>
+
+        <div class="bio-suggestions">
+          <span class="suggestions-label">Suggestions:</span>
+          <div class="suggestion-chips">
+            <button *ngFor="let tag of quickTags" type="button" class="suggestion-chip" (click)="addTag(tag)">
+              {{ tag }}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <button class="save-continue-btn vibrant-gradient" type="button" (click)="saveAndContinue()"
+          [disabled]="isLoading">
+          <ng-container *ngIf="!isLoading; else saving">
+            Save & Continue
+            <span class="material-symbols-outlined btn-arrow">arrow_forward</span>
+          </ng-container>
+          <ng-template #saving>
+            <ion-spinner name="crescent" color="light"></ion-spinner>
+          </ng-template>
+        </button>
+
+        <button class="skip-link-btn" type="button" (click)="skip()">Skip for now</button>
+      </div>
+
+    </div>
+  </main>
+</ion-content>

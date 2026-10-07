@@ -1,164 +1,329 @@
-<ion-header class="ion-no-border chat-header" [translucent]="true">
-  <ion-toolbar>
-    <div class="header-content">
-      <div class="brand-title">
-        <h1 class="page-title">Chats</h1>
-        <ion-icon name="chevron-down" class="dropdown-icon"></ion-icon>
-      </div>
+<ng-container *ngIf="!activeChatUser">
+  <ion-header class="ion-no-border chat-header" [translucent]="true">
+    <ion-toolbar>
+      <div class="header-content">
+        <div class="brand-title" (click)="toggleUserSwitcher()">
+          <div class="title-meta">
+            <h1 class="page-title">Chats</h1>
+            <span class="current-user-tag" *ngIf="currentUser">@{{ currentUser.userName || 'user' }}</span>
+          </div>
+          <ion-icon [name]="showUserSwitcher ? 'chevron-up' : 'chevron-down'" class="dropdown-icon"></ion-icon>
+        </div>
 
-      <div class="header-actions">
-        <button class="icon-btn" aria-label="Create note or group">
-          <ion-icon name="create-outline"></ion-icon>
-        </button>
-        <button class="icon-btn" aria-label="Camera">
-          <ion-icon name="camera-outline"></ion-icon>
-        </button>
+        <div class="header-actions">
+          <button class="icon-btn highlight-btn" (click)="showNewChatModal = true" aria-label="New Chat">
+            <ion-icon name="create-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="showUserSwitcher" class="user-switcher-panel">
+    <div class="switcher-header">
+      <span class="switcher-title">Switch User</span>
+      <button class="switcher-close" (click)="showUserSwitcher = false">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+    <div class="switcher-list">
+      <div *ngFor="let u of allUsers" class="switcher-item" [class.active-user]="(u.id || u._id) === currentUserId"
+        (click)="switchUser(u)">
+        <img [src]="u.avatar || defaultAvatar" [alt]="u.firstName" class="switcher-avatar"
+          (error)="onImgError($event)" />
+        <div class="switcher-info">
+          <span class="switcher-name">{{ u.firstName }} {{ u.lastName }}</span>
+          <span class="switcher-handle">@{{ u.userName }}</span>
+        </div>
+        <span *ngIf="(u.id || u._id) === currentUserId" class="current-badge">Active</span>
       </div>
     </div>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" class="chat-content">
-  <div class="chat-container">
-
-    <!-- 1. Search Bar -->
-    <section class="search-section">
-      <div class="search-box">
-        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-        <input type="text" [(ngModel)]="searchQuery" placeholder="Search creators, messages, tags..."
-          class="search-input" />
-        <button *ngIf="searchQuery" (click)="searchQuery = ''" class="clear-btn" aria-label="Clear search">
-          <ion-icon name="close-circle"></ion-icon>
-        </button>
-      </div>
-    </section>
-
-    <!-- 2. Story Notes Carousel (Instagram-style notes) -->
-    <section class="notes-section">
-      <div class="notes-scroll">
-        <div *ngFor="let item of notes" class="note-item">
-          <!-- Note Thought Bubble -->
-          <div *ngIf="item.note" class="note-bubble">
-            <span>{{ item.note }}</span>
-            <div class="bubble-tail"></div>
-          </div>
-
-          <!-- Avatar with Online / Add Badge -->
-          <div class="avatar-wrapper">
-            <div class="avatar-ring" [class.user-ring]="item.isCurrentUser">
-              <img [src]="item.avatar" [alt]="item.name" class="note-avatar" (error)="onImgError($event)" />
-            </div>
-
-            <!-- Current user add badge -->
-            <div *ngIf="item.isCurrentUser" class="add-note-badge">
-              <ion-icon name="add"></ion-icon>
-            </div>
-
-            <!-- Online green indicator -->
-            <span *ngIf="item.isOnline && !item.isCurrentUser" class="online-dot"></span>
-          </div>
-
-          <span class="note-name">{{ item.name }}</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Category Tags Filter -->
-    <section class="tags-section">
-      <div class="tags-row">
-        <button *ngFor="let tag of tags" class="tag-pill" [class.active]="selectedTag === tag" (click)="selectTag(tag)">
-          <span>{{ tag }}</span>
-          <span *ngIf="tag === 'Requests' && getRequestCount() > 0" class="tag-badge">
-            {{ getRequestCount() }}
-          </span>
-        </button>
-      </div>
-    </section>
-
-    <!-- 4. Messages List -->
-    <section class="messages-section">
-      <div class="section-title-row">
-        <h2>Messages</h2>
-        <span class="active-count" *ngIf="filteredChats.length > 0">{{ filteredChats.length }} chats</span>
-      </div>
-
-      <div *ngIf="filteredChats.length > 0; else noChatsTemplate" class="chats-list">
-        <article *ngFor="let chat of filteredChats" class="chat-row" [class.unread]="chat.unreadCount > 0">
-          <!-- Left: Avatar with Ring / Online indicator -->
-          <div class="avatar-col">
-            <div class="chat-avatar-ring" [class.has-story]="chat.hasStory">
-              <img [src]="chat.avatar" [alt]="chat.name" class="chat-avatar-img" (error)="onImgError($event)" />
-            </div>
-            <span *ngIf="chat.isOnline" class="chat-online-dot"></span>
-          </div>
-
-          <!-- Middle: Info & Message Preview -->
-          <div class="info-col">
-            <div class="name-time-row">
-              <div class="name-wrap">
-                <span class="user-fullname">{{ chat.name }}</span>
-                <ion-icon *ngIf="chat.isVerified" name="checkmark-circle" class="verified-icon"></ion-icon>
-              </div>
-              <span class="message-time">{{ chat.time }}</span>
-            </div>
-
-            <div class="preview-row">
-              <p class="last-message" [class.bold-unread]="chat.unreadCount > 0">
-                {{ chat.lastMessage }}
-              </p>
-              <div *ngIf="chat.unreadCount > 0" class="unread-pill">
-                {{ chat.unreadCount }}
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Quick Camera Action -->
-          <div class="action-col">
-            <button class="camera-btn" aria-label="Send photo">
-              <ion-icon name="camera-outline"></ion-icon>
-            </button>
-          </div>
-        </article>
-      </div>
-
-      <!-- No chats matching filter/search -->
-      <ng-template #noChatsTemplate>
-        <div class="empty-state">
-          <ion-icon name="chatbubbles-outline" class="empty-icon"></ion-icon>
-          <h3>No messages found</h3>
-          <p>Try searching for a different name or switch tags.</p>
-        </div>
-      </ng-template>
-    </section>
-
-    <!-- 5. Accounts to Follow Section -->
-    <section class="suggestions-section" *ngIf="suggestions.length > 0">
-      <div class="suggestions-header">
-        <h3>Accounts to follow</h3>
-        <button class="see-all-btn">See all</button>
-      </div>
-
-      <div class="suggestions-list">
-        <div *ngFor="let person of suggestions" class="suggestion-card">
-          <div class="person-info">
-            <img [src]="person.avatar" [alt]="person.name" class="suggestion-avatar" (error)="onImgError($event)" />
-            <div class="person-details">
-              <span class="suggestion-name">{{ person.name }}</span>
-              <span class="suggestion-username">@{{ person.username }}</span>
-            </div>
-          </div>
-
-          <div class="suggestion-actions">
-            <button class="follow-btn" [class.following]="person.isFollowing" (click)="toggleFollow(person)">
-              {{ person.isFollowing ? 'Following' : 'Follow' }}
-            </button>
-            <button class="dismiss-btn" (click)="dismissSuggestion(person.id)" aria-label="Dismiss">
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </div>
-</ion-content>
+
+  <ion-content [fullscreen]="true" class="chat-content">
+    <div class="chat-container">
+
+      <section class="search-section">
+        <div class="search-box">
+          <ion-icon name="search-outline" class="search-icon"></ion-icon>
+          <input type="text" [(ngModel)]="searchQuery" placeholder="Search conversations, friends..."
+            class="search-input" />
+          <button *ngIf="searchQuery" (click)="searchQuery = ''" class="clear-btn" aria-label="Clear search">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </div>
+      </section>
+
+      <section class="notes-section">
+        <div class="notes-scroll">
+          <div *ngFor="let item of storyNotes" class="note-item" [class.clickable]="!!item.user"
+            (click)="item.user && openChatWithPartner(item.user)">
+            <div *ngIf="item.note" class="note-bubble">
+              <span>{{ item.note }}</span>
+              <div class="bubble-tail"></div>
+            </div>
+
+            <div class="avatar-wrapper">
+              <div class="avatar-ring" [class.user-ring]="item.isCurrentUser">
+                <img [src]="item.avatar" [alt]="item.name" class="note-avatar" (error)="onImgError($event)" />
+              </div>
+              <div *ngIf="item.isCurrentUser" class="add-note-badge">
+                <ion-icon name="add"></ion-icon>
+              </div>
+              <span *ngIf="item.isOnline && !item.isCurrentUser" class="online-dot"></span>
+            </div>
+
+            <span class="note-name">{{ item.name }}</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="tags-section">
+        <div class="tags-row">
+          <button *ngFor="let tag of tags" class="tag-pill" [class.active]="selectedTag === tag"
+            (click)="selectTag(tag)">
+            {{ tag }}
+          </button>
+        </div>
+      </section>
+
+      <section class="messages-section">
+        <div class="section-title-row">
+          <h2>Messages</h2>
+          <span class="active-count" *ngIf="filteredConversations.length">
+            {{ filteredConversations.length }} conversations
+          </span>
+        </div>
+
+        <div *ngIf="filteredConversations.length; else noChatsTemplate" class="chats-list">
+          <article *ngFor="let conv of filteredConversations" class="chat-row" [class.unread]="conv.unreadCount > 0"
+            (click)="openChatWithPartner(conv.partner)">
+            <div class="avatar-col">
+              <div class="chat-avatar-ring">
+                <img [src]="conv.partner.avatar || defaultAvatar" [alt]="conv.partner.firstName" class="chat-avatar-img"
+                  (error)="onImgError($event)" />
+              </div>
+              <span class="chat-online-dot"></span>
+            </div>
+
+            <div class="info-col">
+              <div class="name-time-row">
+                <span class="user-fullname">{{ conv.partner.firstName }} {{ conv.partner.lastName }}</span>
+                <span class="message-time">{{ formatRelativeTime(conv.lastMessage.createdAt) }}</span>
+              </div>
+
+              <div class="preview-row">
+                <p class="last-message" [class.bold-unread]="conv.unreadCount > 0">
+                  <span *ngIf="conv.lastMessage.senderId === currentUserId" class="you-prefix">You: </span>
+                  {{ conv.lastMessage.text }}
+                </p>
+                <div *ngIf="conv.unreadCount > 0" class="unread-pill">{{ conv.unreadCount }}</div>
+              </div>
+            </div>
+
+            <ion-icon name="chevron-forward" class="row-arrow"></ion-icon>
+          </article>
+        </div>
+
+        <ng-template #noChatsTemplate>
+          <div class="empty-state">
+            <ion-icon name="chatbubbles-outline" class="empty-icon"></ion-icon>
+            <h3>No messages yet</h3>
+            <p>Select any user above or tap below to start chatting!</p>
+            <button class="start-chat-btn" (click)="showNewChatModal = true">
+              <ion-icon name="add-circle-outline"></ion-icon>
+              <span>Start New Conversation</span>
+            </button>
+          </div>
+        </ng-template>
+      </section>
+
+      <section class="suggestions-section" *ngIf="suggestionUsers.length">
+        <div class="suggestions-header">
+          <h3>People to chat with</h3>
+        </div>
+
+        <div class="suggestions-list">
+          <div *ngFor="let person of suggestionUsers" class="suggestion-card">
+            <div class="person-info" (click)="openChatWithPartner(person)">
+              <img [src]="person.avatar || defaultAvatar" [alt]="person.firstName" class="suggestion-avatar"
+                (error)="onImgError($event)" />
+              <div class="person-details">
+                <span class="suggestion-name">{{ person.firstName }} {{ person.lastName }}</span>
+                <span class="suggestion-username">@{{ person.userName }}</span>
+              </div>
+            </div>
+
+            <button class="message-action-btn" (click)="openChatWithPartner(person)">
+              <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+              <span>Message</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </ion-content>
+</ng-container>
+
+<ng-container *ngIf="activeChatUser">
+  <div class="active-conversation-overlay">
+    <ion-header class="ion-no-border conversation-header" [translucent]="true">
+      <ion-toolbar>
+        <div class="room-header-content">
+          <button class="back-btn" (click)="closeChat()" aria-label="Back to chats">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+
+          <div class="recipient-info" (click)="openChatWithPartner(activeChatUser)">
+            <div class="recipient-avatar-wrapper">
+              <img [src]="activeChatUser.avatar || defaultAvatar" [alt]="activeChatUser.firstName"
+                class="recipient-avatar" (error)="onImgError($event)" />
+              <span class="online-status-dot"></span>
+            </div>
+
+            <div class="recipient-meta">
+              <span class="recipient-name">{{ activeChatUser.firstName }} {{ activeChatUser.lastName }}</span>
+              <span class="recipient-status" [class.is-typing]="partnerIsTyping">
+                {{ partnerIsTyping ? 'typing...' : (activeChatUser.isOnline ? 'Active now' : 'Offline') }} • @{{ activeChatUser.userName }}
+              </span>
+            </div>
+          </div>
+
+          <div class="room-actions">
+            <button class="room-action-btn" aria-label="Audio call">
+              <ion-icon name="call-outline"></ion-icon>
+            </button>
+            <button class="room-action-btn" aria-label="Video call">
+              <ion-icon name="videocam-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content #messageScroll [fullscreen]="true" class="room-content">
+      <div class="messages-container">
+
+        <div class="conversation-hero">
+          <div class="hero-avatar-ring">
+            <img [src]="activeChatUser.avatar || defaultAvatar" [alt]="activeChatUser.firstName" class="hero-avatar"
+              (error)="onImgError($event)" />
+          </div>
+          <h3 class="hero-name">{{ activeChatUser.firstName }} {{ activeChatUser.lastName }}</h3>
+          <p class="hero-username">@{{ activeChatUser.userName }} • Social Circle</p>
+          <p class="hero-bio" *ngIf="activeChatUser.bio">{{ activeChatUser.bio }}</p>
+        </div>
+
+        <div *ngIf="!messages.length" class="icebreakers-box">
+          <p class="icebreaker-title">Say hello to {{ activeChatUser.firstName }}! 👋</p>
+          <div class="icebreaker-chips">
+            <button *ngFor="let phrase of iceBreakers" class="icebreaker-chip" (click)="sendIceBreaker(phrase)">
+              {{ phrase }}
+            </button>
+          </div>
+        </div>
+
+        <div class="message-feed">
+          <div *ngFor="let msg of messages" class="message-row" [class.outgoing]="isSender(msg)"
+            [class.incoming]="!isSender(msg)">
+            <div *ngIf="!isSender(msg)" class="msg-avatar-col">
+              <img [src]="activeChatUser.avatar || defaultAvatar" [alt]="activeChatUser.firstName" class="msg-avatar"
+                (error)="onImgError($event)" />
+            </div>
+
+            <div class="bubble-col">
+              <div class="message-bubble" [class.sending]="msg.isSending">
+                <p class="message-text">{{ msg.text }}</p>
+              </div>
+
+              <div class="meta-row">
+                <span class="msg-timestamp">{{ formatTime(msg.createdAt) }}</span>
+                <span *ngIf="isSender(msg)" class="read-receipt">
+                  <ion-icon *ngIf="msg.isSending" name="time-outline" class="sending-icon"></ion-icon>
+                  <ion-icon *ngIf="!msg.isSending" name="checkmark-done" class="read-icon"
+                    [class.is-read]="msg.isRead"></ion-icon>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-time Typing Bubble -->
+          <div *ngIf="partnerIsTyping" class="message-row incoming typing-row">
+            <div class="msg-avatar-col">
+              <img [src]="activeChatUser.avatar || defaultAvatar" [alt]="activeChatUser.firstName" class="msg-avatar"
+                (error)="onImgError($event)" />
+            </div>
+            <div class="bubble-col">
+              <div class="message-bubble typing-bubble">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ion-content>
+
+    <ion-footer class="ion-no-border conversation-footer">
+      <div class="input-bar-container">
+        <div class="input-pill">
+          <button class="pill-btn" aria-label="Camera">
+            <ion-icon name="camera-outline"></ion-icon>
+          </button>
+
+          <input #messageInput type="text" [(ngModel)]="newMessageText" (keydown)="onInputKeyDown($event)"
+            (input)="onMessageInputChange()" placeholder="Message..." class="chat-text-input" autocomplete="off" />
+
+          <button *ngIf="!newMessageText.trim()" class="pill-btn" aria-label="Voice">
+            <ion-icon name="mic-outline"></ion-icon>
+          </button>
+
+          <button *ngIf="newMessageText.trim()" class="send-btn" [disabled]="isSending" (click)="sendMessage()"
+            aria-label="Send message">
+            <ion-icon name="arrow-up"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </ion-footer>
+  </div>
+</ng-container>
+
+<div *ngIf="showNewChatModal" class="modal-backdrop" (click)="showNewChatModal = false">
+  <div class="new-chat-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title-row">
+        <h3>New Message</h3>
+        <button class="modal-close-btn" (click)="showNewChatModal = false">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+
+      <div class="modal-search-box">
+        <ion-icon name="search-outline"></ion-icon>
+        <input type="text" [(ngModel)]="userSearchQuery" placeholder="Search name or username..."
+          class="modal-search-input" />
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-users-list">
+        <div *ngFor="let user of modalFilteredUsers" class="user-pick-row" (click)="openChatWithPartner(user)">
+          <img [src]="user.avatar || defaultAvatar" [alt]="user.firstName" class="pick-avatar"
+            (error)="onImgError($event)" />
+          <div class="pick-details">
+            <span class="pick-fullname">{{ user.firstName }} {{ user.lastName }}</span>
+            <span class="pick-handle">@{{ user.userName }}</span>
+          </div>
+          <button class="chat-now-btn">Chat</button>
+        </div>
+
+        <div *ngIf="!modalFilteredUsers.length" class="no-users-box">
+          <p>No creators found matching "{{ userSearchQuery }}"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

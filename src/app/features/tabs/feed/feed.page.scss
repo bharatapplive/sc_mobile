@@ -82,6 +82,57 @@ ion-content {
   padding-bottom: 90px;
 }
 
+// Circular Refresh Loading Bar Above Stories Grid
+.feed-refresh-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 16px 2px;
+  animation: refreshSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .circular-refresh-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 6px 16px 6px 12px;
+    background: #ffffff;
+    border-radius: 9999px;
+    border: 1px solid rgba(124, 58, 237, 0.16);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12), 0 2px 5px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(8px);
+
+    .circular-spinner-anim {
+      width: 20px;
+      height: 20px;
+      color: #7c3aed;
+      --color: #7c3aed;
+    }
+
+    .refresh-status-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4b5563;
+      letter-spacing: 0.1px;
+    }
+  }
+}
+
+@keyframes refreshSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+ion-refresher {
+  --color: #7c3aed;
+}
+
 // 1. Stories Carousel
 .stories-section {
   width: 100%;
@@ -349,6 +400,22 @@ ion-content {
         font-size: 13.5px;
         font-weight: 700;
         color: #111827;
+
+        &.clickable-likes {
+          cursor: pointer;
+          display: inline-block;
+          width: fit-content;
+          transition: opacity 0.15s ease, color 0.15s ease;
+
+          &:hover {
+            color: #7c3aed;
+            text-decoration: underline;
+          }
+
+          &:active {
+            opacity: 0.6;
+          }
+        }
       }
 
       .caption-line {

@@ -18,7 +18,13 @@ const routes: Routes = [
   {
     path: 'registration',
     loadChildren: () => import('./features/auth/registration/registration.module').then(m => m.RegistrationPageModule)
-  },  {
+  },
+  {
+    path: 'setup-profile',
+    loadComponent: () => import('./features/auth/setup-profile/setup-profile.page').then(m => m.SetupProfilePage)
+  },
+
+  {
     path: 'search',
     loadChildren: () => import('./features/tabs/search/search.module').then( m => m.SearchPageModule)
   },

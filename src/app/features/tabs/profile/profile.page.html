@@ -65,17 +65,14 @@
         <h2 class="display-name">{{ user.fullname }}</h2>
         <span class="category-badge">{{ user.category }}</span>
 
-        <p class="bio-text">
-          <span>💡 Chasing moments & light across the world</span>
-          <span>📍 New Delhi, India</span>
-          <span>📸 Capturing reality, one frame at a time ✨</span>
-        </p>
+        <p class="bio-text" style="white-space: pre-line;">{{ user.bio }}</p>
 
-        <a [href]="user.website" target="_blank" rel="noopener noreferrer" class="link-chip">
+        <a *ngIf="user.website" [href]="user.website" target="_blank" rel="noopener noreferrer" class="link-chip">
           <ion-icon name="link-outline"></ion-icon>
-          <span>amanfolio.me</span>
+          <span>{{ user.website }}</span>
         </a>
       </div>
+
 
       <!-- Action Buttons Row -->
       <div class="profile-actions-row">
@@ -138,7 +135,7 @@
 
       <!-- 1. Posts Grid (Square 1:1) -->
       <div *ngIf="activeTab === 'posts'" class="media-grid posts-grid">
-        <div *ngFor="let item of posts" class="grid-card">
+        <div *ngFor="let item of posts" class="grid-card" (click)="onPostClick(item)">
           <ion-img [src]="item.image" alt="Post" class="grid-img"></ion-img>
 
           <span *ngIf="item.isMultiple" class="badge-icon" title="Multiple photos">
@@ -149,7 +146,19 @@
             <span class="overlay-stat">
               <ion-icon name="heart"></ion-icon> {{ item.likes }}
             </span>
+            <span class="overlay-options" title="Post options">
+              <ion-icon name="ellipsis-horizontal"></ion-icon>
+            </span>
           </div>
+        </div>
+
+        <!-- Empty state when no posts -->
+        <div *ngIf="posts.length === 0" class="empty-posts-state">
+          <div class="empty-icon-circle">
+            <ion-icon name="camera-outline"></ion-icon>
+          </div>
+          <h3>No Posts Yet</h3>
+          <p>Tap the + icon in the feed to share your first post</p>
         </div>
       </div>
 
@@ -185,4 +194,144 @@
       </div>
     </section>
   </div>
-</ion-content>
+
+  <!-- Edit Profile Modal -->
+  <ion-modal [isOpen]="isEditModalOpen" (didDismiss)="closeEditModal()" class="edit-profile-modal">
+    <ng-template>
+      <ion-header class="ion-no-border edit-modal-header">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button color="medium" (click)="closeEditModal()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title class="modal-title">Edit Profile</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="primary" [strong]="true" (click)="saveProfile()" [disabled]="isSavingProfile">
+              <span *ngIf="!isSavingProfile">Done</span>
+              <ion-spinner *ngIf="isSavingProfile" name="crescent" color="primary"></ion-spinner>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+
+      <ion-content class="edit-modal-content">
+        <div class="edit-modal-body">
+          <!-- Avatar Preview & Change Action -->
+          <div class="edit-avatar-section">
+            <div class="edit-avatar-wrapper" (click)="modalFileInput.click()">
+              <img [src]="editForm.avatarPreview" alt="Profile avatar" class="edit-avatar-img" />
+              <div class="edit-avatar-overlay">
+                <ion-icon name="camera"></ion-icon>
+              </div>
+            </div>
+            <button type="button" class="change-photo-link" (click)="modalFileInput.click()">
+              Change profile photo
+            </button>
+            <input #modalFileInput type="file" accept="image/*" (change)="onModalAvatarSelected($event)" style="display: none;" />
+          </div>
+
+          <!-- Form Fields Card -->
+          <div class="edit-form-card">
+            <div class="edit-field">
+              <label for="edit-fname">First Name</label>
+              <input id="edit-fname" type="text" [(ngModel)]="editForm.firstName" placeholder="First Name" />
+            </div>
+
+            <div class="edit-field">
+              <label for="edit-lname">Last Name</label>
+              <input id="edit-lname" type="text" [(ngModel)]="editForm.lastName" placeholder="Last Name" />
+            </div>
+
+            <div class="edit-field">
+              <label for="edit-uname">Username</label>
+              <div class="prefix-input-wrap">
+                <span class="input-prefix">@</span>
+                <input id="edit-uname" type="text" [(ngModel)]="editForm.userName" placeholder="username" />
+              </div>
+            </div>
+
+            <div class="edit-field">
+              <label for="edit-cat">Category / Title</label>
+              <input id="edit-cat" type="text" [(ngModel)]="editForm.category" placeholder="e.g. Digital Creator, Designer" />
+            </div>
+
+            <div class="edit-field">
+              <label for="edit-web">Website / Link</label>
+              <div class="prefix-input-wrap">
+                <ion-icon name="link-outline" class="input-icon-prefix"></ion-icon>
+                <input id="edit-web" type="url" [(ngModel)]="editForm.website" placeholder="https://yourwebsite.com" />
+              </div>
+            </div>
+
+            <div class="edit-field bio-field">
+              <div class="bio-header-row">
+                <label for="edit-bio">Bio</label>
+                <span class="bio-counter" [class.near-limit]="editForm.bio.length > 130">
+                  {{ editForm.bio.length }} / 150
+                </span>
+              </div>
+              <textarea id="edit-bio" rows="4" [(ngModel)]="editForm.bio" maxlength="150"
+                placeholder="Tell your story, passion, or hobbies..."></textarea>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Edit Post Modal -->
+  <ion-modal [isOpen]="isEditPostModalOpen" (didDismiss)="closeEditPostModal()" class="edit-profile-modal edit-post-modal">
+    <ng-template>
+      <ion-header class="ion-no-border edit-modal-header">
+        <ion-toolbar class="edit-modal-toolbar">
+          <ion-buttons slot="start">
+            <ion-button (click)="closeEditPostModal()" class="modal-cancel-btn">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title class="modal-title">Edit Post</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="saveEditedPost()" [disabled]="isSavingPost" class="modal-save-btn">
+              <span *ngIf="!isSavingPost">Done</span>
+              <ion-spinner *ngIf="isSavingPost" name="crescent" class="save-spinner"></ion-spinner>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="edit-modal-content">
+        <div class="edit-modal-body" *ngIf="editingPost">
+          <!-- Thumbnail preview -->
+          <div class="edit-post-preview-card">
+            <img [src]="editingPost.image" alt="Post preview" class="edit-post-img" />
+          </div>
+
+          <!-- Edit Fields -->
+          <div class="edit-form-card">
+            <div class="edit-field">
+              <label for="edit-post-caption">Caption</label>
+              <textarea 
+                id="edit-post-caption" 
+                rows="4" 
+                [(ngModel)]="editPostForm.caption" 
+                placeholder="Write a caption..."
+                maxlength="500"
+              ></textarea>
+            </div>
+
+            <div class="edit-field">
+              <label for="edit-post-location">Location</label>
+              <div class="prefix-input-wrap">
+                <ion-icon name="location-outline" class="input-icon-prefix"></ion-icon>
+                <input 
+                  id="edit-post-location" 
+                  type="text" 
+                  [(ngModel)]="editPostForm.location" 
+                  placeholder="Add location (e.g. New Delhi, India)" 
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -6,7 +6,7 @@
         <h1 class="top-username">Social Circle</h1>
       </div>
 
-      <button class="top-btn" aria-label="Add story or post">
+      <button class="top-btn" aria-label="Add story or post" (click)="goToCreatePost()">
         <ion-icon name="add-outline"></ion-icon>
       </button>
     </div>
@@ -16,18 +16,26 @@
 <ion-content [fullscreen]="true">
   <!-- Pull to Refresh -->
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="crescent">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="circular">
     </ion-refresher-content>
   </ion-refresher>
 
   <main class="feed-container">
+    <!-- Refreshing Circular Loading Bar Above Stories Grid -->
+    <div class="feed-refresh-bar-container" *ngIf="isRefreshing">
+      <div class="circular-refresh-bar">
+        <ion-spinner name="circular" class="circular-spinner-anim"></ion-spinner>
+        <span class="refresh-status-text">Refreshing...</span>
+      </div>
+    </div>
+
     <!-- Stories Carousel -->
     <section class="stories-section">
       <div class="stories-row">
         <div *ngFor="let story of stories" class="story-item">
           <!-- Story Avatar with Purple Ring -->
           <div class="story-ring" [class.user-ring]="story.isUser">
-            <img [src]="story.avatar || defaultAvatar" [alt]="story.username" class="story-avatar-img" />
+            <img [src]="story.avatar || defaultAvatar" [alt]="story.username" class="story-avatar-img" (error)="onImgError($event)" />
 
             <!-- User + Badge -->
             <div *ngIf="story.isUser" class="story-add-badge">
@@ -47,7 +55,7 @@
         <div class="card-header">
           <div class="user-block">
             <div class="avatar-ring">
-              <img [src]="post.author.avatar || defaultAvatar" [alt]="post.author.username" class="avatar-img" />
+              <img [src]="post.author.avatar || defaultAvatar" [alt]="post.author.username" class="avatar-img" (error)="onImgError($event)" />
             </div>
 
             <div class="user-info">
@@ -97,14 +105,16 @@
 
           <!-- Likes and Caption Meta -->
           <div class="meta-section">
-            <p class="likes-count">{{ post.likesCount | number }} likes</p>
+            <p class="likes-count clickable-likes" (click)="openLikesModal(post)">
+              {{ post.likesCount | number }} likes
+            </p>
 
             <p class="caption-line">
               <span class="caption-username">{{ post.author.username }}</span>
               <span class="caption-text">{{ post.caption }}</span>
             </p>
 
-            <button *ngIf="post.commentsCount > 0" class="view-comments-btn" (click)="toggleComments(post)">
+            <button *ngIf="post.commentsCount > 0" class="view-comments-btn" (click)="openCommentsModal(post)">
               View all {{ post.commentsCount }} comments
             </button>
 
@@ -114,4 +124,134 @@
       </article>
     </section>
   </main>
+
+  <!-- Likes Sheet Modal -->
+  <ion-modal 
+    [isOpen]="isLikesModalOpen" 
+    (didDismiss)="closeLikesModal()"
+    [initialBreakpoint]="0.6" 
+    [breakpoints]="[0, 0.6, 0.9]" 
+    class="sheet-modal likes-sheet-modal"
+  >
+    <ng-template>
+      <ion-header class="ion-no-border sheet-header">
+        <ion-toolbar class="sheet-toolbar">
+          <ion-title class="sheet-title">Likes</ion-title>
+          <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="closeLikesModal()" class="close-sheet-btn" aria-label="Close">
+              <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="sheet-content">
+        <!-- Loading state -->
+        <div *ngIf="isLoadingLikes" class="sheet-loading-wrap">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+          <span>Loading likes...</span>
+        </div>
+
+        <!-- Empty state -->
+        <div *ngIf="!isLoadingLikes && likedUsers.length === 0" class="sheet-empty-wrap">
+          <div class="empty-icon-wrap heart-empty">
+            <ion-icon name="heart-outline"></ion-icon>
+          </div>
+          <h3>No Likes Yet</h3>
+          <p>Be the first one to like this post!</p>
+        </div>
+
+        <!-- Users List -->
+        <div *ngIf="!isLoadingLikes && likedUsers.length > 0" class="liked-users-list">
+          <div *ngFor="let user of likedUsers" class="liked-user-item">
+            <div class="user-avatar-wrap">
+              <img [src]="user.avatar || defaultAvatar" [alt]="user.userName" (error)="onImgError($event)" />
+            </div>
+            <div class="user-info">
+              <span class="username">{{ user.userName }}</span>
+              <span class="fullname" *ngIf="user.fullName && user.fullName !== user.userName">{{ user.fullName }}</span>
+            </div>
+            <button class="action-follow-btn">Follow</button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Comments Sheet Modal -->
+  <ion-modal 
+    [isOpen]="isCommentsModalOpen" 
+    (didDismiss)="closeCommentsModal()"
+    [initialBreakpoint]="0.75" 
+    [breakpoints]="[0, 0.75, 1]" 
+    class="sheet-modal comments-sheet-modal"
+  >
+    <ng-template>
+      <ion-header class="ion-no-border sheet-header">
+        <ion-toolbar class="sheet-toolbar">
+          <ion-title class="sheet-title">Comments ({{ postComments.length }})</ion-title>
+          <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="closeCommentsModal()" class="close-sheet-btn" aria-label="Close">
+              <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="sheet-content comments-content">
+        <!-- Loading state -->
+        <div *ngIf="isLoadingComments" class="sheet-loading-wrap">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+          <span>Loading comments...</span>
+        </div>
+
+        <!-- Empty state -->
+        <div *ngIf="!isLoadingComments && postComments.length === 0" class="sheet-empty-wrap">
+          <div class="empty-icon-wrap comment-empty">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          </div>
+          <h3>No Comments Yet</h3>
+          <p>Start the conversation by sharing your thoughts.</p>
+        </div>
+
+        <!-- Comments List -->
+        <div *ngIf="!isLoadingComments && postComments.length > 0" class="comments-list">
+          <div *ngFor="let comment of postComments" class="comment-item">
+            <div class="comment-avatar-wrap">
+              <img [src]="comment.userAvatar || defaultAvatar" [alt]="comment.userName" (error)="onImgError($event)" />
+            </div>
+            <div class="comment-bubble">
+              <div class="comment-header-row">
+                <span class="comment-author">{{ comment.userName }}</span>
+                <span class="comment-time">{{ formatTimeAgo(comment.createdAt) }}</span>
+              </div>
+              <p class="comment-text">{{ comment.text }}</p>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+
+      <!-- Bottom Comment Input Box -->
+      <ion-footer class="ion-no-border comment-footer">
+        <div class="comment-input-bar">
+          <input 
+            type="text" 
+            [(ngModel)]="newCommentInput" 
+            placeholder="Add a comment..." 
+            (keyup.enter)="submitComment()"
+            class="comment-input-field"
+          />
+          <button 
+            class="send-comment-btn" 
+            (click)="submitComment()" 
+            [disabled]="!newCommentInput.trim() || isSubmittingComment"
+            aria-label="Post comment"
+          >
+            <ion-spinner *ngIf="isSubmittingComment" name="crescent" class="send-spinner"></ion-spinner>
+            <ion-icon *ngIf="!isSubmittingComment" name="paper-plane"></ion-icon>
+          </button>
+        </div>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 </ion-content>

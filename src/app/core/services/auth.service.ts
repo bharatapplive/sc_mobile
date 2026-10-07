@@ -16,9 +16,14 @@ export interface UserData {
   mobile?: string;
   avatarUrl?: string;
   avatar?: string;
+  bio?: string;
+  website?: string;
+  category?: string;
+  isProfileComplete?: boolean;
   role?: string;
   [key: string]: any;
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +87,43 @@ export class AuthService {
       })
     );
   }
+
+  updateProfile(
+    userId: string,
+    data: {
+      avatar?: string;
+      bio?: string;
+      firstName?: string;
+      lastName?: string;
+      userName?: string;
+      website?: string;
+      category?: string;
+    },
+  ): Observable<any> {
+    return this.http
+      .post<any>(`${environment.apiUrl}/auth/update-profile`, { userId, ...data })
+      .pipe(
+        tap((res: any) => {
+          if (res?.user) {
+            this.setCurrentUser(res.user);
+          } else {
+            const current = this.getCurrentUser();
+            if (current) {
+              if (data.avatar) current.avatar = data.avatar;
+              if (data.bio !== undefined) current.bio = data.bio;
+              if (data.firstName !== undefined) current.firstName = data.firstName;
+              if (data.lastName !== undefined) current.lastName = data.lastName;
+              if (data.userName !== undefined) current.userName = data.userName;
+              if (data.website !== undefined) current.website = data.website;
+              if (data.category !== undefined) current.category = data.category;
+              current.isProfileComplete = true;
+              this.setCurrentUser(current);
+            }
+          }
+        }),
+      );
+  }
+
 
   logout() {
     this.setCurrentUser(null);
