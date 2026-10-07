@@ -63,7 +63,12 @@ export class MessageDetailPage implements OnInit {
 
     // Create roomId..
     //#region Himanshu Code...
-    this.roomId = [this.session.user?._id, this.userId].sort().join('_');
+
+    const currentUserId = this.session?.user?._id;
+
+    if (currentUserId && this.userId) {
+      this.roomId = [currentUserId, this.userId].sort().join('_');
+    }
     
     // 5. Clean subscription before creating new one
     this.unsubscribe();
@@ -72,14 +77,16 @@ export class MessageDetailPage implements OnInit {
     this.messageSub = this.messageServic.recivedMessages().subscribe({
       next: (message: any) => {
         if (message && message.roomId === this.roomId) {
-          this.messages.push(message);
+          this.messages = [...this.messages, message];
         }
       },
       error: (err) => console.error('Error in direct message stream:', err)
     });
     
-    
-    this.loadHistory(this.roomId);
+    // 6. Fetch room chat history
+    if (this.roomId) {
+      this.loadHistory(this.roomId);
+    }
     //#endregion
   }
 
@@ -113,7 +120,18 @@ export class MessageDetailPage implements OnInit {
   //#endregion
 
   sendMessageHandler(): void {   
-    if (!this.messageText.trim()) return;    
+    const trimmedMessage = this.messageText.trim();
+    if (!trimmedMessage) return;
+
+    if (!this.session?.user) {
+      console.error('Cannot send message: User session is missing.');
+      return;
+    }
+
+    if (!this.user) {
+      console.error('Cannot send message: Receiver info is missing.');
+      return;
+    }
 
     this.messagePayload = {
       roomId: this.roomId,
@@ -128,7 +146,7 @@ export class MessageDetailPage implements OnInit {
       receiverEmail: this.user.email ,
       receiverUserName: this.user.userName ,
 
-      message: this.messageText.trim(),
+      message: trimmedMessage,
     };
 
     this.messageServic.sendMessage(this.messagePayload);

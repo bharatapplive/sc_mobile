@@ -60,7 +60,6 @@ export class MessagePage implements OnInit {
       },
     });
 
-    //#region Himanshu Code...
     this.messageService.connectSocket(this.session?.token)
     // Clean old subscription if existing
     this.unsubscribe();
@@ -76,7 +75,6 @@ export class MessagePage implements OnInit {
     });
 
     this.callAllRooms();
-    //#endregion
   }
   
   ionViewWillLeave() {
@@ -100,50 +98,65 @@ export class MessagePage implements OnInit {
     localStorage.setItem('selectedUser', JSON.stringify(user));
 
     // step 3 navigate to message detail page with userId as parameter
-    void this.router.navigate(user?.id ? ['/home/message-detail', user.id] : ['/home/message-detail']).catch((error) => console.error('Could not open message detail:', error));
+    const targetRoute = user?.id ? ['/home/message-detail', user.id] : ['/home/message-detail'];
+    void this.router
+      .navigate(targetRoute)
+      .catch((error) => console.error('Could not open message detail:', error));
   }
 
   //#region  Himanshu Code...
   callAllRooms(event?: any){
     this.messageService.getAllRooms().subscribe({
       next: (res)=>{
-        const ids = res.map((room:any)=> room.roomId);
-        if(ids.length > 0){
-          ids.forEach((id:any)=>{
+        const roomIds: string[] = res.map((room: any) => room.roomId).filter(Boolean);
+        const currentUserId = this.session?.user?._id;
+        
+        if(roomIds.length > 0){
+          roomIds.forEach((id: string) => {
             const userIds = id.split('_');
-            const otherUserId = userIds.some((uid: string) => uid === this.session?.user?._id);
-            if(!otherUserId) return;
+            const isUserInRoom = userIds.includes(currentUserId);
+
+            // Skip rooms where the current user is not a participant
+            if(!isUserInRoom) return;
             this.loadHistory([id]);
           });
         }
         if (event) {
           event.target.complete();
         }
-      }
+      },
+      error: (err) => {
+        console.error('Error fetching rooms:', err);
+        if (event?.target?.complete) {
+          event.target.complete();
+        }
+      },
     });
   }
 
   // Load Whole room history...
-  loadHistory(roomId?: string[]) {
-    if (!roomId || roomId.length === 0) return;
+  loadHistory(roomIds?: string[]) {
+    if (!roomIds || roomIds.length === 0) return;
 
-    roomId?.forEach(id=>{
+    roomIds?.forEach(id=>{
       this.messageService.getRoomHistory(id).subscribe({
         next: (res: DirectMessagePayload[]) => {
           const list = Array.isArray(res) ? res : [];
           if (list.length === 0) return;
 
+          const currentUserId = this.session?.user?._id;
+
           // 1. Get the most recent message in this specific room
           const lastMsg = list[list.length - 1];
 
           // 2. Find the message sent by the other participant
-          const filteredMessages = list.filter(item => item.senderId !== this.session.user?._id);
+          const incomingMessage = list.filter(item => item.senderId !== currentUserId);
 
           // 3. Ignore if no incoming msg from otheruser
-          if(filteredMessages.length === 0) return;
+          if(incomingMessage.length === 0) return;
           
           // 4. Take Latest incoming message from other user.. 
-          const targetMsg = filteredMessages[filteredMessages.length - 1]
+          const targetMsg = incomingMessage[incomingMessage.length - 1]
 
           // 5. Construct the room summary item
           const roomSummary: DirectMessagePayload = {...targetMsg, roomId: id, message: lastMsg?.message, createdAt: lastMsg?.createdAt};
@@ -156,19 +169,20 @@ export class MessagePage implements OnInit {
   }
 
   // Update or insert room summary when a message arrives
-  private updateRoomSummary(newMessage: DirectMessagePayload) {
-    const index = this.messages.findIndex((m) => m.roomId === newMessage.roomId);
+  private updateRoomSummary(newMessage: DirectMessagePayload): void {
+    const updatedMessages = [...this.messages];
+    const index = updatedMessages.findIndex((m) => m.roomId === newMessage.roomId);
 
     if (index !== -1) {
       // Room exists: merge updated fields
-      this.messages[index] = { ...this.messages[index], ...newMessage };
+      updatedMessages[index] = { ...updatedMessages[index], ...newMessage };
     } else {
       // New room: prepend to array
-      this.messages.push(newMessage);
+      updatedMessages.push(newMessage);
     }
 
     // Always keep array sorted so the most recent timestamp is at top
-    this.messages = [...this.messages].sort((a, b) => {
+    this.messages = updatedMessages.sort((a, b) => {
       const timeA = new Date(a.createdAt || 0).getTime();
       const timeB = new Date(b.createdAt || 0).getTime();
       return timeB - timeA; // Descending order (newest first)
