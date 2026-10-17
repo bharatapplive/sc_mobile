@@ -181,3 +181,31 @@ html.dark .card {
   opacity: 0.8;
 }
 
+
+.error {
+  display: block;
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.input input {
+  flex: 1;
+  min-width: 0;
+}
+
+.input button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

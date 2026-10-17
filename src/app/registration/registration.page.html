@@ -1,167 +1,264 @@
-<!---<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registration</ion-title>
-  </ion-toolbar>
-</ion-header>>----->
-
-
 <ion-content [fullscreen]="true" class="page">
-  <main class="box">
 
-    <header class="head">
-      <div class="icon vibrant-gradient">
-        <span class="material-symbols-outlined">person_add</span>
+<main class="box">
+
+<header class="head">
+  <div class="icon vibrant-gradient">
+    <span class="material-symbols-outlined">person_add</span>
+  </div>
+
+  <h1>Create Account</h1>
+
+  <p>
+    Join Social Circle, connect with creators, and share your story.
+  </p>
+</header>
+
+<div class="card">
+
+  <form
+    class="form"
+    [formGroup]="registrationForm"
+    (ngSubmit)="register()"
+    novalidate
+  >
+
+    <!-- Full Name -->
+    <div class="field">
+      <label for="name">Full Name</label>
+
+      <div class="input">
+        <span class="material-symbols-outlined">person</span>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter your full name"
+          autocomplete="name"
+          [class.invalid]="f['name'].touched && f['name'].invalid"
+        />
       </div>
 
-      <h1>Create Account</h1>
+      <div class="error" *ngIf="f['name'].touched && f['name'].errors">
+        <small *ngIf="f['name'].errors['required']">
+          Full name is required.
+        </small>
 
-      <p>
-        Join Social Circle, connect with creators, and share your story.
-      </p>
-    </header>
+        <small *ngIf="f['name'].errors['minlength']">
+          Name must contain at least 2 characters.
+        </small>
 
-    <div class="card">
-      <form class="form">
+        <small *ngIf="f['name'].errors['maxlength']">
+          Name cannot exceed 50 characters.
+        </small>
 
-        <!-- Full Name -->
-        <div class="field">
-          <label for="name">Full Name</label>
-
-          <div class="input">
-            <span class="material-symbols-outlined">person</span>
-
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
-        </div>
-
-        <!-- Mobile / Email -->
-        <div class="field">
-          <label for="identity">Mobile Number or Email</label>
-
-          <div class="input">
-            <span class="material-symbols-outlined">contact_mail</span>
-
-            <input
-              id="identity"
-              name="identity"
-              type="text"
-              placeholder="+91 9876543210 or email@address.com"
-              required
-            />
-          </div>
-        </div>
-
-        <!-- Username -->
-        <div class="field">
-          <label for="username">Username</label>
-
-          <div class="input">
-            <span class="material-symbols-outlined">alternate_email</span>
-
-            <input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Choose a username"
-              required
-            />
-          </div>
-        </div>
-
-        <!-- Password -->
-        <div class="field">
-          <label for="password">Password</label>
-
-          <div class="input">
-            <span class="material-symbols-outlined">lock</span>
-
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Create a password"
-              required
-            />
-
-            <button
-              type="button"
-              aria-label="Show password"
-            >
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="field">
-          <label for="confirmPassword">Confirm Password</label>
-
-          <div class="input">
-            <span class="material-symbols-outlined">lock_reset</span>
-
-            <input
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm your password"
-              required
-            />
-
-            <button
-              type="button"
-              aria-label="Show password"
-            >
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Terms -->
-        <div class="terms">
-          <input
-            id="terms"
-            name="terms"
-            type="checkbox"
-            required
-          />
-
-          <label for="terms">
-            I agree to the
-            <a href="#">Terms & Conditions</a>
-            and
-            <a href="#">Privacy Policy</a>.
-          </label>
-        </div>
-
-        <!-- Register -->
-        <button
-          class="btn vibrant-gradient"
-          type="submit"
-        >
-          Create Account
-        </button>
-
-      </form>
+        <small *ngIf="f['name'].errors['pattern']">
+          Enter a valid name using letters, spaces, apostrophes or hyphens.
+        </small>
+      </div>
     </div>
 
-    <footer class="foot">
-      <p>
-        Already have an account?
-        <a routerLink="/login">Log In</a>
-      </p>
+    <!-- Email or Mobile -->
+    <div class="field">
+      <label for="identity">Mobile Number or Email</label>
 
-      <div class="links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Help</a>
+      <div class="input">
+        <span class="material-symbols-outlined">contact_mail</span>
+
+        <input
+          id="identity"
+          type="text"
+          formControlName="identity"
+          placeholder="+91 9876543210 or email@address.com"
+          autocomplete="username"
+          [class.invalid]="f['identity'].touched && f['identity'].invalid"
+        />
       </div>
-    </footer>
 
-  </main>
+      <div class="error" *ngIf="f['identity'].touched && f['identity'].errors">
+        <small *ngIf="f['identity'].errors['required']">
+          Email or mobile number is required.
+        </small>
+
+        <small *ngIf="f['identity'].errors['invalidIdentity']">
+          Enter a valid email address or Indian mobile number.
+        </small>
+      </div>
+    </div>
+
+    <!-- Username -->
+    <div class="field">
+      <label for="username">Username</label>
+
+      <div class="input">
+        <span class="material-symbols-outlined">alternate_email</span>
+
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Choose a username"
+          autocomplete="username"
+          [class.invalid]="f['username'].touched && f['username'].invalid"
+        />
+      </div>
+
+      <div class="error" *ngIf="f['username'].touched && f['username'].errors">
+        <small *ngIf="f['username'].errors['required']">
+          Username is required.
+        </small>
+
+        <small *ngIf="f['username'].errors['minlength']">
+          Username must contain at least 3 characters.
+        </small>
+
+        <small *ngIf="f['username'].errors['maxlength']">
+          Username cannot exceed 20 characters.
+        </small>
+
+        <small *ngIf="f['username'].errors['pattern']">
+          Use only letters, numbers and underscores.
+        </small>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="field">
+      <label for="password">Password</label>
+
+      <div class="input">
+        <span class="material-symbols-outlined">lock</span>
+
+        <input
+          id="password"
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Create a password"
+          autocomplete="new-password"
+          [class.invalid]="f['password'].touched && f['password'].invalid"
+        />
+
+        <button
+          type="button"
+          (click)="togglePassword()"
+          [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+        >
+          <span class="material-symbols-outlined">
+            {{ showPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
+
+      <div class="error" *ngIf="f['password'].touched && f['password'].errors">
+        <small *ngIf="f['password'].errors['required']">
+          Password is required.
+        </small>
+
+        <small *ngIf="f['password'].errors['minlength']">
+          Password must contain at least 8 characters.
+        </small>
+
+        <small *ngIf="f['password'].errors['maxlength']">
+          Password cannot exceed 64 characters.
+        </small>
+
+        <small *ngIf="f['password'].errors['pattern']">
+          Include uppercase and lowercase letters, a number and a special character. Spaces are not allowed.
+        </small>
+      </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="field">
+      <label for="confirmPassword">Confirm Password</label>
+
+      <div class="input">
+        <span class="material-symbols-outlined">lock_reset</span>
+
+        <input
+          id="confirmPassword"
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          formControlName="confirmPassword"
+          placeholder="Confirm your password"
+          autocomplete="new-password"
+          [class.invalid]="
+            f['confirmPassword'].touched &&
+            (f['confirmPassword'].invalid || registrationForm.errors?.['passwordMismatch'])
+          "
+        />
+
+        <button
+          type="button"
+          (click)="toggleConfirmPassword()"
+          [attr.aria-label]="showConfirmPassword ? 'Hide password' : 'Show password'"
+        >
+          <span class="material-symbols-outlined">
+            {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
+
+      <div
+        class="error"
+        *ngIf="f['confirmPassword'].touched &&
+          (f['confirmPassword'].invalid || registrationForm.errors?.['passwordMismatch'])"
+      >
+        <small *ngIf="f['confirmPassword'].errors?.['required']">
+          Please confirm your password.
+        </small>
+
+        <small *ngIf="registrationForm.errors?.['passwordMismatch']">
+          Passwords do not match.
+        </small>
+      </div>
+    </div>
+
+    <!-- Terms -->
+    <div class="terms">
+      <input
+        id="terms"
+        type="checkbox"
+        formControlName="terms"
+      />
+
+      <label for="terms">
+        I agree to the
+        <a href="#">Terms &amp; Conditions</a>
+        and
+        <a href="#">Privacy Policy</a>.
+      </label>
+    </div>
+
+    <div class="error" *ngIf="f['terms'].touched && f['terms'].invalid">
+      <small>You must accept the Terms &amp; Conditions.</small>
+    </div>
+
+    <!-- Register -->
+    <button
+      class="btn vibrant-gradient"
+      type="submit"
+      [disabled]="registrationForm.pending"
+    >
+      Create Account
+    </button>
+
+  </form>
+</div>
+
+<footer class="foot">
+  <p>
+    Already have an account?
+    <a routerLink="/login">Log In</a>
+  </p>
+
+  <div class="links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Help</a>
+  </div>
+</footer>
+
+</main>
+
 </ion-content>

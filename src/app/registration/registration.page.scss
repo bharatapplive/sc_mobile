@@ -212,3 +212,32 @@ html.dark .card {
 
   opacity: 0.8;
 }
+.error {
+display: block;
+margin: 5px 0 0 4px;
+color: #e53935;
+font-size: 12px;
+line-height: 1.5;
+}
+
+.input input.invalid {
+border-color: #e53935;
+}
+
+.input button {
+border: none;
+background: transparent;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.btn {
+opacity: 0.6;
+cursor: not-allowed;
+}
+
+.terms input[type='checkbox'] {
+cursor: pointer;
+}
