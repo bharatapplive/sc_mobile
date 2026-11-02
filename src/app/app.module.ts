@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core/authcontroller/auth.interceptor';
+import { Location } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,4 +22,15 @@ import { AuthInterceptor } from './core/authcontroller/auth.interceptor';
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule implements OnInit {
+
+  constructor(
+    private readonly location: Location
+  ){}
+
+  ngOnInit(): void {
+    this.location.subscribe((popState)=>{
+      window.close();
+    })
+  }
+}

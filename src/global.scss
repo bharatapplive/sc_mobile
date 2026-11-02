@@ -80,7 +80,6 @@ html, body {
 ion-content{
     width: 100%;
     height: 100%;
-    padding: 0;
     margin: 0;
     //--background: #{$bg-primary};
     --color: #{$text-primary};
@@ -92,6 +91,8 @@ ion-content{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0px;
+    margin: 0px;
 
     ion-icon{
         font-size: 24px;
@@ -226,15 +227,12 @@ ion-content{
     }
 }
 
-ion-toolbar {
-  //--background: #{$bg-primary};
-  --border-width: 0;
-
-  .footer-button-container {
-    background: #{$bg-primary}; // Standard CSS for the div wrapper
+.footer-button-container {
+    --background: #{$bg-primary}; // Standard CSS for the div wrapper
 
     ion-tab-bar {
       //--background: #{$bg-primary};
+      padding: 0px;
       --color-selected: #{$text-primary};
       --color: #{$text-muted}; // Muted color for unselected tabs
         border-top: none;
@@ -243,11 +241,6 @@ ion-toolbar {
     ion-tab-button {
       --background: transparent;
       --color: #102a43;
-    }
-  }
-
-    .panels{
-        border-bottom: none !important;
     }
 }
 

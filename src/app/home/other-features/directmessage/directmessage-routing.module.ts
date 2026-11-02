@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: DirectmessagePage
+  },  {
+    path: 'directmessageinfo',
+    loadChildren: () => import('./directmessageinfo/directmessageinfo.module').then( m => m.DirectmessageinfoPageModule)
   }
+
 ];
 
 @NgModule({

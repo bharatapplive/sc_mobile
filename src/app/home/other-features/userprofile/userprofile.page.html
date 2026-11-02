@@ -1,0 +1,183 @@
+<ion-toolbar slot="top">
+  <div class="panels">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-button fill="clear">
+      <ion-label>{{user?.username}}</ion-label>
+    </ion-button>
+    <div>
+      <ion-button fill="clear">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <section class="profile-panel card-board">
+      <div class="profileDetails">
+        <div class="height-light">
+          <ion-avatar class="person">
+            <ion-img [src]="this.user?.avatarUrl" alt="User"></ion-img>
+          </ion-avatar>
+        </div>
+
+        <div class="profile-content">
+          <h2>{{user?.fullname}}</h2>
+          <div class="follow-list">
+            <div class="list">
+              <p>{{postNumber}}</p>
+              <p>posts</p>
+            </div>
+            <div class="list" (click)="isFollowerModel = true">
+              <p>{{followerNum}}</p>
+              <p>followers</p>
+            </div>
+            <div class="list" (click)="isFollowingModel = true">
+              <p>{{followingNum}}</p>
+              <p>following</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-buttons">
+        <ion-button class="edit-btn-primary" shape="round" fill="clear" size="small">
+          <span>Following</span>
+        </ion-button>
+        <ion-button class="share-btn" shape="round" fill="clear" size="small">
+          <span>Message</span>
+        </ion-button>
+      </div>
+    </section>
+
+    <section class="user-content card-board">
+      <div class="header-bar">
+        <ion-segment [(ngModel)]="activeTab" mode="md" class="profile-tabs">
+          <ion-segment-button value="posts">
+            <ion-icon [name]="activeTab === 'posts' ? 'grid' : 'grid-outline'"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="drafts">
+            <ion-icon [name]="activeTab === 'drafts' ? 'musical-notes' : 'musical-notes-outline'"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="replays">
+            <ion-icon [name]="activeTab === 'replays' ? 'sync-circle' : 'sync-circle-outline'"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="activeTab" class="files">
+        <div *ngSwitchCase="'posts'">
+          <div class="grid">
+            <div class="grid-box" *ngFor="let post of posts">
+              <ion-img [src]="post.mediaUrl" class="imaged"></ion-img>
+              <div class="view-port">
+                <ion-icon slot="icon-only" name="play-outline"></ion-icon>
+                <span>{{post.likesCount}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'drafts'" class="grid-main">
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="draft-badge">Draft</span>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"></ion-img>
+            <span class="draft-badge">Draft</span>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'replays'" class="grid-main">
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80"></ion-img>
+          </div>
+          <div class="grid-box">
+            <ion-img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"></ion-img>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FollowerList Model -->
+  <!-- <ion-modal [isOpen]="isFollowerModel" class="follower-class">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar class="header-class">
+          <ion-button slot="start" shape="round" fill="clear" (click)="isFollowerModel = false">
+            <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-label>{{user?.username}}</ion-label>
+          </ion-button>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="follow-list card-board">
+        <div class="person-list" *ngFor="let item of followerList">
+        <div class="avatar">
+          <ion-avatar>           
+            <ion-img [src]="item.avatarUrl" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <div class="title">
+            <h2>{{item?.username}}</h2>
+            <span>{{item?.fullname}}</span>
+          </div>
+        </div>
+        <div class="tabs">
+          @if(!isFollowing(item?._id)){
+            <ion-button shape="round" size="small" fill="clear" (click)="onClickFollow(item)">follow back</ion-button>
+          }@else{
+            <ion-button shape="round" size="small" fill="clear">Message</ion-button>
+          }
+          <ion-icon name="close-outline" (click)="onClickRemove(item)"></ion-icon>
+        </div>
+      </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal> -->
+
+  <!-- FollowingList Model -->
+  <!-- <ion-modal [isOpen]="isFollowingModel" class="follower-class">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar class="header-class">
+          <ion-button slot="start" shape="round" fill="clear" (click)="isFollowingModel = false">
+            <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-label>{{user?.username}}</ion-label>
+          </ion-button>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="follow-list card-board">
+        <div class="person-list" *ngFor="let item of followingList">
+        <div class="avatar">
+          <ion-avatar>           
+            <ion-img [src]="item.avatarUrl" alt="User Avatar"></ion-img>
+          </ion-avatar>
+          <div class="title">
+            <h2>{{item?.username}}</h2>
+            <span>{{item?.fullname}}</span>
+          </div>
+        </div>
+        <div class="tabs">
+          <ion-button shape="round" size="small" fill="clear">Message</ion-button>
+          <ion-icon name="ellipsis-vertical-outline" (click)="presentActionSheet(item)"></ion-icon>
+        </div>
+      </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal> -->
+</ion-content>

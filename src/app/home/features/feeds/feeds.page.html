@@ -1,19 +1,21 @@
-<ion-toolbar slot="top">
-  <div class="panels">
-    <ion-button fill="clear">
-      <ion-label>{{username}}</ion-label>
-    </ion-button>
-    <div>
-      <ion-button fill="clear" (click)="openPostPage()">
-        <ion-icon name="add"></ion-icon>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="panels">
+      <ion-button fill="clear">
+        <ion-label>{{username}}</ion-label>
       </ion-button>
-      <ion-button fill="clear" >
-        <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-      </ion-button>
+      <div>
+        <ion-button fill="clear" (click)="openPostPage()">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" >
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+      </div>
     </div>
-  </div>
-</ion-toolbar>
-
+  </ion-toolbar>
+</ion-header>
+ 
 <ion-content [fullscreen]="true">
   <div class="mainHolder">
   <!-- Pull to Refresh Component -->

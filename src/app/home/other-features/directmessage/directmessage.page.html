@@ -1,17 +1,13 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <div class="user-details" 
-      (touchstart)="openUserModel(activeUser)"
-      (touchend)="endHold()"
-      (touchcancel)="endHold()"
-      (mousedown)="openUserModel(activeUser)"
-      (mouseup)="endHold()"
-      (mouseleave)="endHold()"
-    >
-      <ion-avatar class="msg-person">
+    <div class="user-details">
+      <ion-avatar class="msg-person" >
         <ion-img [src]="activeUserProfilePic" alt="User Avatar"></ion-img>
       </ion-avatar>
-      <ion-title class="U-name">{{ activeUserName || 'Private Chat' }}</ion-title>
+      <div class="title" (click)="openUserInfo()">
+        <ion-title class="U-name">{{ activeUserFName || 'Private Chat' }}</ion-title>
+        <span>{{activeUserUName}}</span>
+      </div>
     </div>
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
@@ -22,7 +18,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-   <ion-list lines="none">
+  <ion-list lines="none">
     <div
       *ngFor="let msg of messages"
       [class.my-message]="isMyMessage(msg.senderId)"
@@ -39,11 +35,16 @@
       <div class="message-bubble">
         <!-- Sender Name (Shown only for received messages) -->
         <div class="sender-name" *ngIf="!isMyMessage(msg.senderId)">
-          {{ msg.senderUserName }}
+          {{ getSenderName(msg.senderId) }}
+        </div>
+
+        <!-- Render Media (Image) if messageType is image -->
+        <div *ngIf="msg.messageType === 'image' && msg.mediaUrl" class="media-container">
+          <img [src]="msg.mediaUrl" alt="Shared Image" class="chat-media-image" />
         </div>
 
         <!-- Text Message Content -->
-        <p class="message-text" *ngIf="msg.message">{{ msg.message }}</p>
+        <p class="message-text" *ngIf="msg.text">{{ msg.text }}</p>
 
         <!-- Time Badge -->
         <span class="message-time">
@@ -52,8 +53,8 @@
       </div>
     </div>
   </ion-list>
-
 </ion-content>
+
 <ion-footer>
   <ion-toolbar class="input-holder">
     <ion-input
@@ -61,10 +62,28 @@
       placeholder="Type a message..."
       (keyup.enter)="onSend()"
     ></ion-input>
-    <ion-buttons slot="end">
-      <ion-button (click)="onSend()">
-        <ion-icon name="send"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    @if(!newMessageText){
+      <ion-buttons slot="end" class="otherButtons">
+        <ion-button>
+          <ion-icon name="mic-outline"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon name="image-outline"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon name="sad-outline"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    }@else{
+      <ion-buttons slot="end">
+        <!-- Step1. Sending the massage -->
+        <ion-button (click)="onSend()">
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    }
   </ion-toolbar>
 </ion-footer>

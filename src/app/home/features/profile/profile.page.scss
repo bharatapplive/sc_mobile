@@ -1,4 +1,10 @@
-.container{
+ion-header{
+  ion-toolbar{
+    padding: 0px;
+  }
+}
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,78 +12,72 @@
   font-family: 'Segoe UI', sans-serif;
   width: 100%;
 
-  .profile-panel{
+  .profile-panel {
     display: flex;
     flex-direction: column;
     padding: 10px;
     width: 100%;
 
-    .profileDetails{
+    .profileDetails {
       display: flex;
       gap: 20px;
       margin: 0;
 
-      .profile-content{
+      .profile-content {
         display: flex;
         flex-direction: column;
         width: 300px;
         margin-bottom: 15px;
         padding-top: 8px;
 
-        h2{
-          margin: 0;
-          margin-bottom: 2px;
+        h2 {
+          margin: 0 0 2px 0;
           font-size: 18px;
         }
 
-        .follow-list{
+        .follow-list {
           display: flex;
           align-items: center;
           gap: 45px;
           width: 100%;
 
-          .list {
-            p{
-              font-size: 13px;
-              font-weight: 500;
-              margin: 0;
-            }
+          .list p {
+            font-size: 13px;
+            font-weight: 500;
+            margin: 0;
           }
         }
       }
     }
 
-    .creator{
-
-      h2{
-        font-size: 13px;
-        margin: 0;
-      }
+    .creator h2 {
+      font-size: 13px;
+      margin: 0;
     }
-    
-    .profileBio{
+
+    .profileBio {
       height: 70px;
       overflow: auto;
       margin: 10px 0;
 
-      p{
+      p {
         font-size: 13px;
         padding: 0;
-        margin:0;
+        margin: 0;
       }
     }
 
-    .add-links{
+    .add-links {
       height: auto;
 
-      ion-button{
-        background: rgb(197, 197, 197);
+      ion-button {
+        background: #c5c5c5;
         border-radius: 12px;
         width: 30%;
         text-transform: none;
-        color: black;
+        color: #000;
 
-        span{
+        span {
           margin-left: 8px;
           font-weight: 600;
           font-size: 0.9rem;
@@ -85,22 +85,21 @@
       }
     }
 
-    .profile-buttons{
+    .profile-buttons {
       display: flex;
       align-items: center;
       justify-content: space-evenly;
 
-      ion-button{
+      ion-button {
         border-radius: 14px;
         letter-spacing: 0.5px;
         width: 50%;
         cursor: pointer;
 
-        
-        &.edit-btn{          
-           &-primary {
+        &.edit-btn {
+          &-primary {
             background: linear-gradient(135deg, #0091ff, #62b6ff);
-            color: #ffffff;
+            color: #fff;
 
             &:hover {
               opacity: 0.9;
@@ -116,51 +115,46 @@
               background-color: #f0f7ff;
             }
           }
-          ion-icon{
-            font-size: 14px;
-            margin-right: 8px;
-          }
         }
 
-        &.share-btn{
-          background: rgb(197, 197, 197);
-          color: black;
-
-          ion-icon{
-            font-size: 14px;
-            margin-right: 8px;
-          }
+        &.share-btn,
+        &.follow-btn {
+          background: #c5c5c5;
+          color: #000;
         }
 
-        &.follow-btn{
-          background: rgb(197, 197, 197);
-          color: black;
+        &.follow-btn {
           width: auto;
 
-          ion-icon{
+          ion-icon {
             font-size: 22px;
           }
         }
 
-        span{
+        &.edit-btn ion-icon,
+        &.share-btn ion-icon {
+          font-size: 14px;
+          margin-right: 8px;
+        }
+
+        span {
           font-size: 10px;
-        }        
+        }
       }
     }
-
   }
 
-  .highlight-panel{
+  .highlight-panel {
     display: flex;
     align-items: center;
     overflow: auto;
     scrollbar-width: none;
     width: 100%;
-    background: white;
+    background: #fff;
     border-radius: 10px;
     margin: 5px;
 
-    .highlight-context{
+    .highlight-context {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -168,7 +162,7 @@
       height: 90px;
       margin: 8px 4px;
 
-      .story{
+      .story {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -176,16 +170,14 @@
         height: 68px;
         border: 2px solid transparent;
         box-sizing: border-box;
-        border-radius: 50%; /* or 12px for rounded cards */
-        
-        /* Layer 1: Solid background color inside | Layer 2: Gradient for border */
+        border-radius: 50%;
         background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #e3f2fd, #102a43) border-box;
 
-        ion-img{          
+        ion-img {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 58px !important;    /* Overrides Ionic's default 64px avatar width */
+          width: 58px !important;
           height: 58px !important;
           margin: 0 auto;
           border-radius: 50%;
@@ -193,99 +185,101 @@
         }
       }
 
-      .add-btn{
+      .add-btn {
         width: 62px;
         height: 68px;
         background-color: #c1c1c2a1;
         border: 2px solid gray;
-        color: black;
+        color: #000;
         font-size: 20px;
         border-radius: 50%;
       }
     }
   }
 
-  .user-content{
+  .user-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     margin-top: 5px;
- 
-    .header-bar{
+
+    .header-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding-bottom: 5px;
       margin: 0 15px;
 
-      ion-segment-button{
-        color: black;
+      ion-segment-button {
+        color: #000;
         font-size: 0.9rem;
         letter-spacing: 0.5px;
       }
     }
-    
-    .files{
+
+    .files {
       display: flex;
       align-items: center;
-      
-      .grid{  
+
+      .grid {
         position: relative;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
 
-        ion-img{
+        ion-img {
           aspect-ratio: 1 / 1;
         }
 
-        span{
+        span {
           font-size: 10px;
           background: none;
-          color: white;
+          color: #fff;
         }
 
-        .grid-box{
-          background: black;
-          border: 1px solid rgb(255, 255, 255);
-          
-          .view-port{
+        .grid-box {
+          background: #000;
+          border: 1px solid #fff;
+
+          .view-port {
             display: flex;
-            color: white;
+            color: #fff;
             margin-left: 10px;
           }
 
           ion-img::part(image) {
             overflow: hidden;
           }
-        }        
+        }
       }
     }
   }
 }
 
-.header{
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding:0 15px;
+  padding: 0 15px;
+
+  .icon-class {
+    font-size: 18px;
+    --color: #fff;
+  }
 }
 
-.toggleAccount{
+.toggleAccount {
   width: auto;
   font-size: 15px;
-  --color: white;
+  --color: #fff;
   text-transform: none;
 }
 
-.header .icon-class{
-  font-size: 18px;
-  --color:  white;
-}
-
-.view-count, .duration-badge, .draft-badge {
+.view-count,
+.duration-badge,
+.draft-badge {
   position: absolute;
   bottom: 6px;
   left: 6px;
@@ -306,210 +300,207 @@
   border-radius: 4px;
 }
 
-.person{
+.person {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid #797680; /* Story ring border color */
+  border: 2px solid #797680;
 }
 
-.post-panel{
-  padding-top: 0px;
+.post-panel {
+  padding-top: 0;
 }
 
-.main-container{
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+
+  .main-avatar .person {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+  }
+
+  .edit-card-board {
+    padding: 0 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-top: 10px;
+    gap: 8px;
 
-    .main-avatar{
-      display: flex;
-
-      .person{
-        width: 74px;
-        height: 74px;
-        border-radius: 50%;
-      }
+    .edit-title,
+    .edit-gender {
+      width: 100%;
+      border: 1px solid gray;
+      border-radius: 8px;
+      padding: 0 10px;
     }
 
-    .edit-card-board{
-      padding: 0px 10px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-
-      .edit-title, .edit-gender{
+    .edit-gender {
+      select {
         width: 100%;
-        border: 1px solid gray;
-        border-radius: 8px;
-        padding:0px 10px;
+        background: none;
+        border: none;
+        font-size: 18px;
       }
 
-      .edit-gender{
-        select{
-          width: 100%;
-          background: none;
-          border: none;
-          font-size: 18px;
-        }
-
-        span{
-          color: gray;
-        }
+      span {
+        color: gray;
       }
-    }
-
-    .link{
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-
-      .add-links, .banners{
-        display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-
-        h5{
-          margin: 0;
-          color: black;
-          font-size: 15px;
-        }
-
-        span{
-          font-size: 14px;
-          color: gray;
-        }
-      }
-    }
-
-    .pro-info{
-      width: 100%;
-      border: {
-        top: 1px solid #000;
-        bottom: 1px solid #000;
-      }
-
-      .container{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin: 10px 0;
-        gap: 10px;
-        padding: 0 10px;
-      
-        h5{
-          width: 100%;
-          margin: 0;
-          font-size: 16px;
-          font-weight: 400;
-          color: black;
-        }
-
-        .title-info{
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          span{
-            display: inline-flex;
-            align-items: flex-end;
-            gap: 4px;
-            font-size: 14px;
-            font-weight: 300;
-            color: gray;
-
-            ion-icon {
-              text-align: right;
-              font-size: 16px;   // Scales the Ionic icon cleanly
-            }
-          }
-        }
-      }
-    }
-}
-
-.follower-class{
-  .header-class{
-    ion-label{
-      color: black;
-      text-transform: none;
-    }
-
-    ion-icon{
-      font-size: 20px;
-      color: black;
     }
   }
 
-  .follow-list{
+  .link {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .add-links,
+    .banners {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 15px;
+      justify-content: space-between;
       padding: 0 10px;
 
-      .header-bar{
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          ion-button{
-              font-size: 13px;
-              text-transform: none;
-          }
+      h5 {
+        margin: 0;
+        color: #000;
+        font-size: 15px;
       }
 
-      .person-list{
-          display: flex;
-          justify-content: space-between;
-          margin: 15px 8px;
-
-          .avatar{
-              width: 50%;
-              display: flex;
-              gap: 15px;
-
-              .title{
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  gap: 2px;
-
-                  h2{
-                      font-size: 16px;
-                      margin: 0;
-                  }
-                  span{
-                      font-size: 12px;
-                  }
-              }
-
-              ion-avatar{
-                  width: 52px;
-                  height: 52px;
-                  border-radius: 50%;
-              }
-          }
-
-          .tabs{
-              display: flex;
-              align-items: center;
-
-              ion-button{
-                  background: linear-gradient(135deg, #0091ff, #8fbff5);
-                  color: white;
-                  border-radius: 10px;
-                  margin-right: 5px;
-                  width: auto;
-                  height: auto;
-                  text-transform: none;
-              }
-          }
+      span {
+        font-size: 14px;
+        color: gray;
       }
+    }
+  }
+
+  .pro-info {
+    width: 100%;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+
+    .container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0;
+      gap: 10px;
+      padding: 0 10px;
+
+      h5 {
+        width: 100%;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 400;
+        color: #000;
+      }
+
+      .title-info {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+          display: inline-flex;
+          align-items: flex-end;
+          gap: 4px;
+          font-size: 14px;
+          font-weight: 300;
+          color: gray;
+
+          ion-icon {
+            text-align: right;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.follower-class {
+  .header-class {
+    ion-label {
+      color: #000;
+      text-transform: none;
+    }
+
+    ion-icon {
+      font-size: 20px;
+      color: #000;
+    }
+  }
+
+  .follow-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    padding: 0 10px;
+
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      ion-button {
+        font-size: 13px;
+        text-transform: none;
+      }
+    }
+
+    .person-list {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 8px;
+
+      .avatar {
+        width: 50%;
+        display: flex;
+        gap: 15px;
+
+        .title {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 2px;
+
+          h2 {
+            font-size: 16px;
+            margin: 0;
+          }
+
+          span {
+            font-size: 12px;
+          }
+        }
+
+        ion-avatar {
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+        }
+      }
+
+      .tabs {
+        display: flex;
+        align-items: center;
+
+        ion-button {
+          background: linear-gradient(135deg, #0091ff, #8fbff5);
+          color: #fff;
+          border-radius: 10px;
+          margin-right: 5px;
+          width: auto;
+          height: auto;
+          text-transform: none;
+        }
+      }
+    }
   }
 }

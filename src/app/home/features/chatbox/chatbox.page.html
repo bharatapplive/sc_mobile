@@ -1,15 +1,17 @@
-<ion-toolbar slot="top">
-  <div class="panels">
-    <ion-button fill="clear">
-      <ion-label>Social Circle</ion-label>
-    </ion-button>
-    <div>
-      <ion-button fill="clear" slot="end">
-        <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="panels">
+      <ion-button fill="clear">
+        <ion-label>Social Circle</ion-label>
       </ion-button>
+      <div>
+        <ion-button fill="clear" slot="end">
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+      </div>
     </div>
-  </div>
-</ion-toolbar>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="container">
@@ -63,15 +65,16 @@
         <div class="card-board" *ngFor="let person of messages" (click)="openGroupChat(person)">
           <div class="online-relative">
             <ion-avatar class="msg-person">
+              <ion-img [src]="getSenderAvatar(person.senderId)" alt="User Avatar"></ion-img>
             </ion-avatar>
             <ion-icon class="story-add-absolute" name="ellipse" color="success"></ion-icon>
           </div>
           <div class="card-title-msg" [class.seen]="isMessageRead(person)" [class.unseen]="!isMessageRead(person)">
             <div class="person-name-time">
-              <span>{{person.senderUserName}}</span>
+              <span>{{getSenderName(person.senderId)}}</span>
               <h6>{{(person.createdAt) | timeAgo}}</h6>
             </div>
-            <p>{{person.message}}</p>
+            <p>{{person.text}}</p>
           </div>
         </div>
       </div>

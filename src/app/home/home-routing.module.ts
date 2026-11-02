@@ -38,9 +38,14 @@ const routes: Routes = [
       {
         path: 'directmessage',
         loadChildren: () => import('./other-features/directmessage/directmessage.module').then( m => m.DirectmessagePageModule),
+      },
+      {
+        path: 'userprofile',
+        loadChildren: () => import('./other-features/userprofile/userprofile.module').then( m => m.UserprofilePageModule)
       }
     ]
   }
+
 
 
 ];

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">sc_app</string>
+    <string name="title_activity_main">sc_app</string>
+    <string name="package_name">com.sc_app.king</string>
+    <string name="custom_url_scheme">com.sc_app.king</string>
+</resources>

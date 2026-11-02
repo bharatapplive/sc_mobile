@@ -170,7 +170,7 @@ export class PostService {
   }
 
   // 8.Create Story..
- loadAllStory(){
+  loadAllStory(){
     return this.http.get<PostResponse>(`${environment.apiUrl}/post/story`).pipe(
       map((user) => {
         if (user) {

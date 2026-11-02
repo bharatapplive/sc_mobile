@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonContent, NavController } from '@ionic/angular';
 import { PreviousRouteServe } from 'src/app/core/previous-route-serve';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
-import { ContentAuthor, DirectMessage, DirectMessagePayload, User } from 'src/app/core/authcontroller/authInterface';
+import { ContentAuthor, DirectMessage, DMAuthor, User } from 'src/app/core/authcontroller/authInterface';
 import { slideRightToLeftAnimation } from 'src/app/animation/rightToleft.animation';
 import { ChatService } from 'src/app/home/features/chatbox/chat-service';
 import { Subscription } from 'rxjs';
 import { ProfileService } from '../../features/profile/profile-service';
+import { slideLeftToRightAnimation } from 'src/app/animation/leftToright.animation';
 
 @Component({
   selector: 'app-directmessage',
@@ -19,15 +20,14 @@ export class DirectmessagePage implements OnInit, OnDestroy {
   private messageSub?: Subscription;
 
   roomId = '';
-  messages: DirectMessagePayload[] = [];
+  messages: DirectMessage[] = [];
   newMessageText: string = '';
   
   activeUser: DirectMessage | null = null;
-  activeUserName: any | null = null;
+  activeUserFName: any | null = null;
+  activeUserUName: any | null = null;
   activeUserProfilePic: string | null = null;
-  profile: ContentAuthor | null = null;
-
-  private prevUrl: string | null = null;
+  profile: DMAuthor | null = null;
 
   //Modal..
   targetUser: User | null = null;
@@ -38,7 +38,6 @@ export class DirectmessagePage implements OnInit, OnDestroy {
 
   constructor(
     private navCtrl: NavController,
-    private readonly previousRoute: PreviousRouteServe,
     private readonly authServe: AuthService,
     private readonly chatServe: ChatService,
     private readonly profileServe: ProfileService
@@ -61,11 +60,10 @@ export class DirectmessagePage implements OnInit, OnDestroy {
       this.roomId = state.roomId;
       this.activeUser = state.targetUser;
       this.profile = state.user;
-      this.activeUserName = state.targetName;
+      this.activeUserFName = state.targetFName;
+      this.activeUserUName = state.targetUName;
       this.activeUserProfilePic = state.targetAvatar || null;
     }
-    
-    this.prevUrl = this.previousRoute.getPreviousUrl() || '/home/chat';
         
     if (this.roomId && this.profile?.userId) {
       // 2. Ensure room socket connection is active
@@ -83,8 +81,8 @@ export class DirectmessagePage implements OnInit, OnDestroy {
 
     // 6. Listen for live incoming messages for this room
     this.messageSub = this.chatServe.getMessages().subscribe({
-      next: (message: DirectMessagePayload) => {
-        if (message) {
+      next: (message: DirectMessage) => {
+        if (message && message.roomId === this.roomId) {
           this.messages.push(message);
           this.scrollToBottom();
         }
@@ -108,25 +106,19 @@ export class DirectmessagePage implements OnInit, OnDestroy {
     }
   }
 
+  // Step 2. Function of sending the message..
   onSend(){
     if(!this.newMessageText.trim() || !this.roomId || !this.profile) return;
 
-    const payload: DirectMessagePayload = {
+    // Step 3. the main content where have roomid, senderID, etc...
+    const payload: DirectMessage = {
       roomId: this.roomId,
-      senderId: this.profile?.userId ?? '',
-      senderFirstName: this.profile?.authorName ?? null,
-      senderLastName: this.profile?.authorName ?? null,
-      senderEmail: 'user1@gmail.com',
-      senderUserName: this.profile.authorName ,
-      receiverId: '101' ,
-      receiverFirstName: this.activeUserName,
-      receiverLastName: this.activeUserName ,
-      receiverEmail: 'user1@gmail.com' ,
-      receiverUserName: this.activeUserName ,
-
-      message: this.newMessageText.trim(),
+      senderId: this.profile,  //// we can add more as per requirement...{receiver Id, name and image..}
+      text: this.newMessageText,
+      messageType: 'text'
     }
 
+    // Step 4. Move to service..
     this.chatServe.sendMessage(payload);
     this.newMessageText = '';
     this.scrollToBottom();
@@ -136,7 +128,7 @@ export class DirectmessagePage implements OnInit, OnDestroy {
     if (!roomId) return;
 
     this.chatServe.getRoomHistory(roomId).subscribe({
-      next: (res: DirectMessagePayload[]) => {
+      next: (res: DirectMessage[]) => {
         // Filter out messages sent by the logged-in user
         this.messages = res;
         this.scrollToBottom();
@@ -145,39 +137,32 @@ export class DirectmessagePage implements OnInit, OnDestroy {
     });
   }
 
-  isMyMessage(senderId: DirectMessagePayload['senderId']): boolean {
+  isMyMessage(senderId: DirectMessage['senderId']): boolean {
     if(!this.profile?.userId || !senderId) return false;
-   
-    return senderId === this.profile.userId;
+    const id = typeof senderId === 'object' ? senderId.userId : senderId;
+    return id === this.profile.userId;
   }
 
   getSenderName(senderId: DirectMessage['senderId']): string {
-    if (typeof senderId === 'object' && senderId !== null && 'authorName' in senderId) 
+    if (typeof senderId === 'object' && senderId !== null && 'authorFullName' in senderId) 
       {
-        return senderId.authorName;
+        return senderId.authorFullName;
       }
     return 'User';
   }
 
-  openUserModel(item: any){
-    const room: string[] = item.roomId.split('_');
-    const targetId = room.find(ids => ids !== this.profile?.userId);
-    
-    if(!targetId) return;
-    this.profileServe.loadUserDataById(targetId).subscribe({
-      next: (data) =>{
-        this.targetUser = data;
-        console.log(this.targetUser)
+  openUserInfo(){
+    this.navCtrl.navigateForward('/home/directmessage/directmessageinfo',{
+      animation: slideRightToLeftAnimation,
+      state: {
+        msg: this.messages,
+        username: this.activeUserUName,
+        fullname: this.activeUserFName,
+        avatar: this.activeUserProfilePic
       }
     })
   }
-
-  endHold(){
-    if(this.holdTimer){
-      clearTimeout(this.holdTimer);
-      this.holdTimer =null;
-    }
-  }
+  
   scrollToBottom() {
     setTimeout(() => {
       if (this.content) {
@@ -187,11 +172,9 @@ export class DirectmessagePage implements OnInit, OnDestroy {
   }
 
   goBack(){
-    if(this.prevUrl){
-      this.navCtrl.navigateBack(this.prevUrl, {
-        animation: slideRightToLeftAnimation
-      })
-    }
+    this.navCtrl.navigateBack('/home/chat', {
+      animation: slideLeftToRightAnimation
+    })
     this.activeUser = null;
   }
 }

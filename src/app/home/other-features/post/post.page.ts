@@ -7,6 +7,7 @@ import { PreviousRouteServe } from 'src/app/core/previous-route-serve';
 import { AuthService } from 'src/app/core/authcontroller/auth-service';
 import { createButtonCollapseAnimation } from 'src/app/animation/button-collapse.animation';
 import { slideRightToLeftAnimation } from 'src/app/animation/rightToleft.animation';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-post',
@@ -99,6 +100,7 @@ export class PostPage implements OnInit {
   @Output() captionChange = new EventEmitter<string>();
   private prevUrl: string | null = null;
 
+  croppedImage: any = '';
   constructor(    
     private navCtrl: NavController,
     private readonly profileServe: ProfileService,
@@ -296,5 +298,19 @@ export class PostPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  async onImageCropped(event: ImageCroppedEvent) {
+    const image = event.objectUrl || event.base64;
+
+    if(image){
+      const response = await fetch(image);
+      const blob = await response.blob();
+      const fileName = `cropped_${Date.now()}.jpg`;
+      const file = new File([blob], fileName, {type:'image/jpeg'})
+
+      this.croppedImage = file;
+      console.log(this.croppedImage)
+    }
   }
 }

@@ -1,20 +1,28 @@
-<ion-toolbar slot="top">
-  <div class="panels">
-    <ion-button fill="clear" slot="start" (click)="goBack()">
-      <ion-icon slot="icon-only" name="close"></ion-icon>
-    </ion-button>    
-    <ion-title>New post</ion-title>
-    <ion-button fill="clear" slot="end" (click)="openModal()">
-      <span>Next</span>
-    </ion-button>
-  </div>
-</ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="panels">
+      <ion-button fill="clear" slot="start" (click)="goBack()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>    
+      <ion-title>New post</ion-title>
+      <ion-button fill="clear" slot="end" (click)="openModal()">
+        <span>Next</span>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="container">
     <div class="post-panel" [style.display]="activeTab === 'POST' ? 'flex' : 'none'">
-     <div class="upper-container">
-        <ion-img [src]="postUrl" class="post-image"></ion-img>
+     <div class="upper-container" *ngIf="postUrl">
+        <image-cropper
+          [imageURL]="postUrl"
+          [maintainAspectRatio]="false"
+          [resizeToWidth]="800"
+          format="jpeg"
+          (imageCropped)="onImageCropped($event)">
+        </image-cropper>
       </div>
       <div class="lower-conatiner">
         <div class="btn-header">

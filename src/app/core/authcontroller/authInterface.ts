@@ -147,10 +147,17 @@ export interface MediaComposerState {
   aspectRatio:    '1:1' | '9:16' | '4:5';
 }
 
+export interface DMAuthor{
+  userId:         string;
+  authorFullName: string;
+  authorUserName: string;
+  avatarUrl:      string;  
+}
+
 export interface DirectMessage {
   _id?: string;
   roomId: string;
-  senderId: ContentAuthor | string;
+  senderId: DMAuthor | string;
   text: string;
   messageType?: 'text' | 'image' | 'file';
   mediaUrl?: string;
@@ -170,20 +177,4 @@ export interface ChatList{
   avatarUrl?: string;
   lastMessage: string;
   lastMessageTime: string | Date;
-}
-
-export interface DirectMessagePayload {
-  roomId: string;
-  senderId: string | number | null;
-  senderFirstName: string | null;
-  senderLastName: string | null;
-  senderEmail: string | null;
-  senderUserName: string | null;
-  receiverId: string | number | null;
-  receiverFirstName: string | null;
-  receiverLastName: string | null;
-  receiverEmail: string | null;
-  receiverUserName: string | null;
-  message: string;
-  createdAt?: string;
 }

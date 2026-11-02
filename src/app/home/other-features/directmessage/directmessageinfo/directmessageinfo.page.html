@@ -1,0 +1,99 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button fill="clear" (click)="goBack()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="file-container">
+    <!-- Profile Picture-->
+    <ion-avatar class="person">
+      <ion-img [src]="activeUserProfilePic" alt="User Avatar"></ion-img>
+    </ion-avatar>
+    <!-- Name -->
+    <ion-title class="U-name">{{ activeUserFName || 'Private Chat' }}</ion-title>
+
+    <div class="user-options">
+      <div class="list">
+        <ion-icon name="person-outline"></ion-icon>
+        <span>Profile</span>
+      </div>
+      <div class="list">
+        <ion-icon name="search-outline"></ion-icon>
+        <span>Search</span>
+      </div>
+      <div class="list">
+        <ion-icon name="notifications-outline"></ion-icon>
+        <span>Mute</span>
+      </div>
+      <div class="list">
+        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+        <span>Options</span>
+      </div>
+    </div>
+
+    <div class="more-tabs">
+      <ion-button fill="clear">
+        <div class="btn-list">
+          <ion-icon slot="icon-only" name="contrast-outline"></ion-icon>
+          <div class="title">
+            <h6>Customize</h6>
+            <span>Theme and font</span>
+          </div>
+        </div>
+      </ion-button>
+
+      <ion-button fill="clear">
+        <div class="btn-list">
+          <ion-icon slot="icon-only" name="contrast-outline"></ion-icon>
+          <div class="title">
+            <h6>Disappearing messages</h6>
+            <span>Off</span>
+          </div>
+        </div>
+      </ion-button>
+
+      <ion-button fill="clear">
+        <div class="btn-list">
+          <ion-icon slot="icon-only" name="chatbubble-outline"></ion-icon>
+          <h6>Chat controls</h6>
+        </div>
+      </ion-button>
+      
+      <ion-button fill="clear">
+        <div class="btn-list">
+          <ion-icon slot="icon-only" name="lock-closed-outline"></ion-icon>
+          <h6>Privacy & safety</h6>
+        </div>
+      </ion-button>
+      
+      <ion-button fill="clear">
+        <div class="btn-list">
+          <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+          <h6>Nicknames</h6>
+        </div>
+      </ion-button>
+      
+      <ion-button fill="clear">
+        <div class="btn-list">
+          <ion-icon slot="icon-only" name="people-outline"></ion-icon>
+          <h6>Create a group chat</h6>
+        </div>
+      </ion-button>
+    </div>
+
+    <div class="sharedMedia">
+      <ion-title>SharedMedia</ion-title>
+      <div class="grid">
+        <div *ngFor="let msg of messages">
+          @if(msg.messageType !== 'text')
+          {
+            <ion-img [src]="msg.mediaUrl" ></ion-img>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
