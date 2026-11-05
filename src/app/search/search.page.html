@@ -1,204 +1,86 @@
 <ion-header class="search-header">
   <ion-toolbar>
-
     <div class="search-logo" slot="start">
       <ion-icon name="search-outline"></ion-icon>
       <span>Discover</span>
     </div>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <div class="search-page">
-
-    <!-- Search bar -->
+  <main class="search-page">
     <ion-searchbar
+      [(ngModel)]="query"
       placeholder="Search people, posts, hashtags..."
+      aria-label="Search people, posts, and hashtags"
       mode="ios">
     </ion-searchbar>
 
-
-    <!-- Categories -->
-    <div class="categories">
-
-      <button class="category active">
-        All
+    <div class="categories" role="group" aria-label="Explore categories">
+      <button
+        class="category"
+        type="button"
+        *ngFor="let item of categories"
+        [class.active]="category === item"
+        (click)="selectCategory(item)">
+        {{ item }}
       </button>
-
-      <button class="category">
-        People
-      </button>
-
-      <button class="category">
-        Posts
-      </button>
-
-      <button class="category">
-        Hashtags
-      </button>
-
     </div>
 
-
-    <!-- PEOPLE -->
-    <section>
-
+    <section *ngIf="category === 'All' || category === 'People'">
       <div class="section-heading">
         <h2>People you may know</h2>
-        <span>See all</span>
+        <button type="button" (click)="selectCategory('People')">See all</button>
       </div>
-
-      <div class="people">
-
-        <div class="person-card">
-
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200">
-
-          <strong>creative_soul</strong>
-          <p>Digital creator</p>
-
-          <button>Follow</button>
-
-        </div>
-
-
-        <div class="person-card">
-
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200">
-
-          <strong>apex_editor</strong>
-          <p>Photographer</p>
-
-          <button>Follow</button>
-
-        </div>
-
-
-        <div class="person-card">
-
-          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200">
-
-          <strong>travel_joy</strong>
-          <p>Traveller</p>
-
-          <button>Follow</button>
-
-        </div>
-
-
-        <div class="person-card">
-
-          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200">
-
-          <strong>luna.art</strong>
-          <p>Artist</p>
-
-          <button>Follow</button>
-
-        </div>
-
+      <div class="people" *ngIf="filteredPeople.length; else noPeople">
+        <article class="person-card" *ngFor="let person of filteredPeople">
+          <img [src]="person.avatar" [alt]="person.name + ' profile photo'">
+          <strong>{{ person.username }}</strong>
+          <p>{{ person.description }}</p>
+          <button type="button" (click)="toggleFollow(person)">
+            {{ person.followed ? 'Following' : 'Follow' }}
+          </button>
+        </article>
       </div>
-
+      <ng-template #noPeople><p class="empty-result">No people found. Try another name.</p></ng-template>
     </section>
 
-
-    <!-- TRENDING -->
-    <section>
-
+    <section *ngIf="category === 'All' || category === 'Hashtags'">
       <div class="section-heading">
-        <h2>Trending</h2>
-        <span>See all</span>
+        <h2>Trending in your circle</h2>
+        <button type="button" (click)="selectCategory('Hashtags')">See all</button>
       </div>
-
-      <div class="trending">
-
-        <div class="trend">
-          <div>
-            <strong>#DigitalArt</strong>
-            <p>24.6K posts</p>
-          </div>
+      <div class="trending" *ngIf="filteredTags.length; else noTags">
+        <button class="trend" type="button" *ngFor="let tag of filteredTags" (click)="selectTag(tag.name)">
+          <span>
+            <strong>{{ tag.name }}</strong>
+            <small>{{ tag.count }}</small>
+          </span>
           <ion-icon name="trending-up-outline"></ion-icon>
-        </div>
-
-        <div class="trend">
-          <div>
-            <strong>#TravelVibes</strong>
-            <p>18.2K posts</p>
-          </div>
-          <ion-icon name="trending-up-outline"></ion-icon>
-        </div>
-
-        <div class="trend">
-          <div>
-            <strong>#Photography</strong>
-            <p>15.8K posts</p>
-          </div>
-          <ion-icon name="trending-up-outline"></ion-icon>
-        </div>
-
-        <div class="trend">
-          <div>
-            <strong>#CollegeLife</strong>
-            <p>12.4K posts</p>
-          </div>
-          <ion-icon name="trending-up-outline"></ion-icon>
-        </div>
-
+        </button>
       </div>
-
+      <ng-template #noTags><p class="empty-result">No hashtags found. Try another search.</p></ng-template>
     </section>
 
-
-    <!-- EXPLORE -->
-    <section>
-
+    <section *ngIf="category === 'All' || category === 'Posts'">
       <div class="section-heading">
-        <h2>Explore</h2>
-        <span>See more</span>
+        <h2>Explore moments</h2>
+        <button type="button" (click)="selectCategory('Posts')">See more</button>
       </div>
-
-      <div class="explore-grid">
-
-        <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600">
-
-        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600">
-
-        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600">
-
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600">
-
-        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600">
-
-        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600">
-
+      <div class="explore-grid" *ngIf="filteredPosts.length; else noPosts">
+        <figure *ngFor="let post of filteredPosts">
+          <img [src]="post.image" [alt]="post.description" loading="lazy">
+        </figure>
       </div>
-
+      <ng-template #noPosts><p class="empty-result">No posts found. Try another search.</p></ng-template>
     </section>
 
-
-    <!-- MORE POSTS -->
-    <section class="more-section">
-
-      <div class="section-heading">
-        <h2>More to discover</h2>
-      </div>
-
-      <div class="explore-grid">
-
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600">
-
-        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=600">
-
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600">
-
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600">
-
-      </div>
-
-    </section>
-
-  </div>
-
+    <div
+      class="empty-state"
+      *ngIf="query && !filteredPeople.length && !filteredPosts.length && !filteredTags.length">
+      <ion-icon name="search-outline"></ion-icon>
+      <strong>Nothing found for “{{ query }}”</strong>
+      <span>Try a different name, place, or hashtag.</span>
+    </div>
+  </main>
 </ion-content>

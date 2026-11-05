@@ -1,13 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>reel</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reel</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="reels-container">
+
+    <!-- Reel 1 -->
+    <div class="reel">
+      <video
+        class="reel-video"
+        src="assets/videos/reel1.mp4"
+        autoplay
+        loop
+        muted
+        playsinline>
+      </video>
+
+      <div class="reel-actions">
+        <button>♡</button>
+        <button>💬</button>
+        <button>↗</button>
+        <button>🔖</button>
+      </div>
+
+      <div class="reel-info">
+        <h3>@socialcircle</h3>
+        <p>Welcome to Social Circle ✨</p>
+      </div>
+    </div>
+
+    <!-- Reel 2 -->
+    <div class="reel">
+      <video
+        class="reel-video"
+        src="assets/videos/reel1.mp4"
+        autoplay
+        loop
+        muted
+        playsinline>
+      </video>
+
+      <div class="reel-actions">
+        <button>♡</button>
+        <button>💬</button>
+        <button>↗</button>
+        <button>🔖</button>
+      </div>
+
+      <div class="reel-info">
+        <h3>@socialcircle</h3>
+        <p>Another reel 🎥</p>
+      </div>
+    </div>
+
+  </div>
+
 </ion-content>

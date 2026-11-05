@@ -1,0 +1,62 @@
+ion-content {
+  --background: #000;
+}
+
+.reels-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.reels-container::-webkit-scrollbar {
+  display: none;
+}
+
+.reel {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  overflow: hidden;
+  background: #000;
+}
+
+.reel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-actions {
+  position: absolute;
+  right: 15px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.reel-actions button {
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 28px;
+}
+
+.reel-info {
+  position: absolute;
+  left: 15px;
+  bottom: 25px;
+  color: white;
+}
+
+.reel-info h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.reel-info p {
+  margin: 0;
+  font-size: 14px;
+}

@@ -1,0 +1,56 @@
+<ion-header class="notifications-header">
+  <ion-toolbar>
+    <ion-title>Notifications</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="markAllRead()">Mark all read</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <main class="notifications-page">
+    <div class="page-intro">
+      <p class="eyebrow">YOUR SOCIAL CIRCLE</p>
+      <h1>Good things are happening<span>.</span></h1>
+      <p>Catch up on the latest from your people.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter notifications">
+      <button type="button" [class.active]="filter === 'all'" (click)="setFilter('all')">All activity</button>
+      <button type="button" [class.active]="filter === 'mentions'" (click)="setFilter('mentions')">Mentions</button>
+    </div>
+
+    <section class="notification-list" *ngIf="visibleNotifications.length; else emptyState">
+      <article
+        class="notification"
+        *ngFor="let notification of visibleNotifications; trackBy: trackNotification"
+        [class.unread]="notification.unread">
+        <img [src]="notification.avatar" [alt]="notification.username + ' profile photo'">
+        <p><strong>{{ notification.username }}</strong> {{ notification.message }} <span>{{ notification.time }}</span></p>
+        <a
+          *ngIf="notification.kind === 'like' || notification.kind === 'comment' || notification.kind === 'mention'"
+          class="post-preview"
+          routerLink="/tabs/home"
+          aria-label="View post">
+          <ion-icon [name]="notification.kind === 'like' ? 'heart' : 'chatbubble'"></ion-icon>
+        </a>
+        <button
+          *ngIf="notification.kind === 'follow'"
+          class="follow-button"
+          type="button"
+          (click)="toggleFollow(notification)">
+          {{ notification.following ? 'Following' : 'Follow back' }}
+        </button>
+        <span class="unread-dot" *ngIf="notification.unread" aria-label="Unread"></span>
+      </article>
+    </section>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <span><ion-icon name="at-outline"></ion-icon></span>
+        <h2>No mentions just yet</h2>
+        <p>When someone mentions you, you’ll find it here.</p>
+      </div>
+    </ng-template>
+  </main>
+</ion-content>

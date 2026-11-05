@@ -1,8 +1,5 @@
-<ion-tabs>
-  <ion-router-outlet></ion-router-outlet>
-
-  <ion-tab-bar slot="bottom">
-
+<ion-tabs class="social-tabs">
+  <ion-tab-bar slot="bottom" aria-label="Main navigation">
     <ion-tab-button tab="home" routerLink="/tabs/home">
       <ion-icon name="home-outline"></ion-icon>
       <ion-label>Home</ion-label>
@@ -10,23 +7,22 @@
 
     <ion-tab-button tab="search" routerLink="/tabs/search">
       <ion-icon name="search-outline"></ion-icon>
-      <ion-label>Search</ion-label>
+      <ion-label>Explore</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="add" routerLink="/tabs/add">
-  <ion-icon name="people-outline"></ion-icon>
-  <ion-label>Connect</ion-label>
-</ion-tab-button>
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Create</ion-label>
+    </ion-tab-button>
 
-    <ion-tab-button tab="reel" routerLink="/tabs/reel">
-      <ion-icon name="play-outline"></ion-icon>
-      <ion-label>Reels</ion-label>
+    <ion-tab-button tab="notifications" routerLink="/tabs/notifications">
+      <ion-icon name="heart-outline"></ion-icon>
+      <ion-label>Activity</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="profile" routerLink="/tabs/profile">
-      <ion-icon name="person-outline"></ion-icon>
+      <ion-icon name="person-circle-outline"></ion-icon>
       <ion-label>Profile</ion-label>
     </ion-tab-button>
-
   </ion-tab-bar>
 </ion-tabs>

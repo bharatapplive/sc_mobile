@@ -1,256 +1,89 @@
-<ion-header>
+<ion-header class="create-header">
   <ion-toolbar>
-    <ion-title>Connect</ion-title>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" routerLink="/tabs/home" aria-label="Cancel post">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Create post</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="publish-button" fill="clear" [disabled]="!canPublish" (click)="publish()">
+        {{ isPublishing ? 'Sharing...' : 'Share' }}
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-  <div class="connect-page">
-
-    <!-- INTRO -->
-    <div class="intro">
-      <ion-icon name="people-outline"></ion-icon>
-
-      <div>
-        <h2>Grow your Social Circle</h2>
-        <p>Connect, chat and stay in touch.</p>
-      </div>
+<ion-content [fullscreen]="true">
+  <main class="create-page">
+    <div class="create-intro">
+      <p class="eyebrow">MAKE IT A MOMENT</p>
+      <h1>Share what moves you<span>.</span></h1>
+      <p>Your people are always happy to see what you’re up to.</p>
     </div>
 
+    <div class="composer">
+      <section class="media-section">
+        <div class="media-preview" *ngIf="mediaUrl; else emptyMedia">
+          <img *ngIf="mediaType === 'image'" [src]="mediaUrl" alt="Post preview">
+          <video *ngIf="mediaType === 'video'" [src]="mediaUrl" controls playsinline></video>
+          <button type="button" class="remove-media" aria-label="Remove selected media" (click)="removeMedia()">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+        <ng-template #emptyMedia>
+          <button class="upload-prompt" type="button" (click)="openMediaPicker()">
+            <span class="upload-icon"><ion-icon name="images-outline"></ion-icon></span>
+            <strong>Choose a photo or video</strong>
+            <span>Share a moment from your camera roll</span>
+            <span class="choose-button">Browse files</span>
+          </button>
+        </ng-template>
+        <input
+          #mediaPicker
+          class="visually-hidden"
+          type="file"
+          accept="image/*,video/*"
+          (change)="selectMedia($event)">
+        <div class="media-meta" *ngIf="mediaName">
+          <span><ion-icon name="checkmark-circle"></ion-icon>{{ mediaName }}</span>
+          <button type="button" (click)="openMediaPicker()">Change</button>
+        </div>
+      </section>
 
-    <!-- CONNECTION REQUESTS -->
-
-    <div class="section">
-
-      <div class="section-header">
-        <h2>Connection Requests</h2>
-        <button>See All</button>
-      </div>
-
-      <div class="request">
-
-        <img
-           src="https://randomuser.me/api/portraits/women/68.jpg"
-            >
-        <div class="person-info">
-          <strong>Rinicutie</strong>
-          <span>@rini_complex</span>
-          <small>3 mutual connections</small>
+      <section class="post-details">
+        <div class="creator">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120" alt="Ayushi Singh">
+          <div><strong>Ayushi Singh</strong><span>@ayushi.singh</span></div>
         </div>
 
-        <div class="request-buttons">
-          <button class="accept">Accept</button>
-          <button class="remove">×</button>
+        <label for="post-caption">Caption</label>
+        <textarea
+          id="post-caption"
+          name="caption"
+          [(ngModel)]="caption"
+          maxlength="2200"
+          placeholder="Write a caption...">
+        </textarea>
+        <div class="caption-count">{{ caption.length }}/2,200</div>
+
+        <label for="post-location">Location</label>
+        <div class="input-with-icon">
+          <ion-icon name="location-outline"></ion-icon>
+          <input id="post-location" name="location" [(ngModel)]="location" maxlength="80" placeholder="Add a location">
         </div>
 
-      </div>
-
-
-      <div class="request">
-
-        <img
-          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200"
-        >
-
-        <div class="person-info">
-          <strong>DMT</strong>
-          <span>@TheDMT</span>
-          <small>5 mutual connections</small>
+        <label for="post-hashtags">Hashtags <span>Optional</span></label>
+        <div class="input-with-icon">
+          <ion-icon name="pricetag-outline"></ion-icon>
+          <input id="post-hashtags" name="hashtags" [(ngModel)]="hashtags" placeholder="travel, goodvibes">
         </div>
+        <p class="field-hint">Separate tags with spaces or commas. We’ll add the # for you.</p>
 
-        <div class="request-buttons">
-          <button class="accept">Accept</button>
-          <button class="remove">×</button>
-        </div>
-
-      </div>
-
+        <p class="error-message" role="alert" *ngIf="errorMessage">{{ errorMessage }}</p>
+        <button class="share-submit" type="button" [disabled]="!canPublish" (click)="publish()">
+          <ion-icon name="paper-plane-outline"></ion-icon>
+          {{ isPublishing ? 'Sharing your moment...' : 'Share with your circle' }}
+        </button>
+      </section>
     </div>
-
-
-    <!-- PEOPLE YOU KNOW -->
-
-    <div class="section">
-
-      <div class="section-header">
-        <h2>People You Know</h2>
-        <button>See All</button>
-      </div>
-
-      <div class="known-person">
-
-        <div class="avatar">
-          <img
-             src="https://randomuser.me/api/portraits/men/32.jpg"
->
-          <i></i>
-        </div>
-
-        <div class="person-info">
-          <strong>Aashif_Cool</strong>
-          <span>@aashif</span>
-          <small>2 mutual connections</small>
-        </div>
-
-        <span class="connected">Connected</span>
-
-      </div>
-
-
-      <div class="known-person">
-
-        <div class="avatar">
-          <img
-            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200"
-          >
-        </div>
-
-        <div class="person-info">
-          <strong>Raizzz</strong>
-          <span>@raizz_kumar</span>
-          <small>8 mutual connections</small>
-        </div>
-
-        <span class="connected">Connected</span>
-
-      </div>
-
-    </div>
-
-
-    <!-- RECENT CHATS -->
-
-    <div class="section">
-
-      <div class="section-header">
-        <h2>Recent Chats</h2>
-        <button>See All</button>
-      </div>
-
-
-      <div class="chat-person">
-
-        <div class="avatar">
-          <img
-            src="https://randomuser.me/api/portraits/women/68.jpg"
->
-          <i></i>
-        </div>
-
-        <div class="chat-info">
-          <strong>Rinicutie</strong>
-          <p>Hey! Are you coming tomorrow?</p>
-        </div>
-
-        <div class="chat-time">
-          <span>10:42 AM</span>
-          <b>2</b>
-        </div>
-
-      </div>
-
-
-      <div class="chat-person">
-
-        <div class="avatar">
-          <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200"
-          >
-        </div>
-
-        <div class="chat-info">
-          <strong>Neha Singh</strong>
-          <p>That photo looks amazing ✨</p>
-        </div>
-
-        <div class="chat-time">
-          <span>Yesterday</span>
-        </div>
-
-      </div>
-
-
-      <div class="chat-person">
-
-        <div class="avatar">
-          <img
-            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200"
-          >
-        </div>
-
-        <div class="chat-info">
-          <strong>Aman Verma</strong>
-          <p>Let's catch up soon!</p>
-        </div>
-
-        <div class="chat-time">
-          <span>Mon</span>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- PEOPLE YOU MAY KNOW -->
-
-    <div class="section">
-
-      <div class="section-header">
-        <h2>People You May Know</h2>
-        <button>See All</button>
-      </div>
-
-
-      <div class="suggestion">
-
-        <img
-          src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200"
-        >
-
-        <div class="person-info">
-          <strong>Simran Kapoor</strong>
-          <span>@simran_kapoor</span>
-          <small>4 mutual connections</small>
-        </div>
-
-        <button class="connect">Connect</button>
-
-      </div>
-
-
-      <div class="suggestion">
-
-        <img
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200"
-        >
-
-        <div class="person-info">
-          <strong>Arjun Mehta</strong>
-          <span>@arjun_mehta</span>
-          <small>6 mutual connections</small>
-        </div>
-
-        <button class="connect">Connect</button>
-
-      </div>
-
-    </div>
-
-
-    <!-- END MESSAGE -->
-
-    <div class="end-message">
-
-      <ion-icon name="checkmark-circle-outline"></ion-icon>
-
-      <strong>You're all caught up</strong>
-
-      <span>New people and requests will appear here.</span>
-
-    </div>
-
-  </div>
-
+  </main>
 </ion-content>

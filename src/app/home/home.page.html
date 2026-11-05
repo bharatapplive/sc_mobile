@@ -1,181 +1,192 @@
-<ion-header class="home-header">
+<ion-header class="feed-header">
   <ion-toolbar>
-    
-    <div class="app-logo" slot="start">
-      <ion-icon name="camera-outline"></ion-icon>
-      <span>Social Circle</span>
-    </div>
-
-    
-
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="menu-outline"></ion-icon>
+    <a class="brand" routerLink="/tabs/home" aria-label="Social Circle home">
+      <span class="brand-mark"><ion-icon name="aperture-outline"></ion-icon></span>
+      <span class="brand-name">social<span>circle</span></span>
+    </a>
+    <div class="header-actions">
+      <ion-button fill="clear" routerLink="/tabs/search" aria-label="Search">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
+      <ion-button fill="clear" routerLink="/tabs/notifications" aria-label="Notifications">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" routerLink="/tabs/chat" aria-label="Messages">
+        <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <!-- Stories -->
-  <div class="stories">
-
-    <div class="story">
-      <div class="story-image add-story">
-        <img
-          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200"
-        />
-        <span class="plus">+</span>
-      </div>
-      <p>you</p>
-    </div>
-
-    <div class="story">
-      <div class="story-image">
-        <img
-          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=2000"
-        />
-      </div>
-      <p>alex_vibe</p>
-    </div>
-
-    <div class="story">
-      <div class="story-image">
-        <img
-          src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200"
-        />
-      </div>
-      <p>neo_pixel</p>
-    </div>
-
-    <div class="story">
-      <div class="story-image">
-        <img
-          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200"
-        />
-      </div>
-      <p>luna.art</p>
-    </div>
-
-    <div class="story">
-      <div class="story-image">
-        <img
-          src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200"
-        />
-      </div>
-      <p>travel_joy</p>
-    </div>
-
-  </div>
-
-
-  <!-- POST 1 -->
-  <div class="post-card">
-
-    <div class="post-header">
-
-      <div class="user-info">
-
-        <img
-          class="post-avatar"
-          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"
-        />
-
+  <main class="feed-page">
+    <section class="feed-column">
+      <div class="welcome-row">
         <div>
-          <h3>creative-soul</h3>
-          <p>Tokyo, Japan</p>
+          <p class="eyebrow">THURSDAY, NOVEMBER 5</p>
+          <h1>Your circle, your moments<span>.</span></h1>
+          <p class="welcome-copy">A little inspiration from the people you follow.</p>
+        </div>
+        <a class="desktop-create" routerLink="/tabs/add">
+          <ion-icon name="add-outline"></ion-icon>
+          Create post
+        </a>
+      </div>
+
+      <section class="stories-panel" aria-label="Stories">
+        <div class="section-title">
+          <div>
+            <h2>Stories</h2>
+            <span>Little moments, shared</span>
+          </div>
+          <a routerLink="/tabs/search">Discover people <ion-icon name="arrow-forward-outline"></ion-icon></a>
+        </div>
+        <div class="stories">
+          <button
+            class="story"
+            type="button"
+            *ngFor="let story of stories"
+            (click)="openStory(story)"
+            [attr.aria-label]="story.isOwn ? 'Add to your story' : 'View ' + story.username + ' story'">
+            <span class="story-ring" [class.own-story]="story.isOwn">
+              <img [src]="story.avatar" [alt]="story.username + ' profile photo'">
+              <span class="story-plus" *ngIf="story.isOwn"><ion-icon name="add"></ion-icon></span>
+            </span>
+            <span class="story-name">{{ story.isOwn ? 'Your story' : story.username }}</span>
+          </button>
+        </div>
+        <input
+          id="story-picker"
+          class="visually-hidden"
+          type="file"
+          accept="image/*"
+          (change)="addStory($event)">
+      </section>
+
+      <div class="feed-heading">
+        <div>
+          <h2>For you</h2>
+          <span>Fresh from your circle</span>
+        </div>
+        <button type="button" class="sort-button" aria-label="Feed is sorted by latest">
+          <ion-icon name="options-outline"></ion-icon>
+          Latest
+        </button>
+      </div>
+
+      <article class="post-card" *ngFor="let post of posts; trackBy: trackPost" [hidden]="post.hidden">
+        <header class="post-header">
+          <a class="author" routerLink="/tabs/profile">
+            <img class="author-avatar" [src]="post.avatar" [alt]="post.name + ' profile photo'">
+            <span class="author-copy">
+              <strong>{{ post.username }}</strong>
+              <small><ion-icon name="location-outline"></ion-icon>{{ post.location }}</small>
+            </span>
+          </a>
+          <button class="icon-button" type="button" aria-label="More post options" (click)="openPostMenu(post)">
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
+          </button>
+        </header>
+
+        <img
+          *ngIf="post.mediaType !== 'video'"
+          class="post-image"
+          [src]="post.image"
+          [alt]="'Photo shared by ' + post.name"
+          loading="lazy">
+        <video
+          *ngIf="post.mediaType === 'video'"
+          class="post-image"
+          [src]="post.image"
+          controls
+          playsinline>
+        </video>
+
+        <div class="post-actions">
+          <div class="action-group">
+            <button
+              class="icon-button"
+              [class.liked]="post.liked"
+              type="button"
+              [attr.aria-label]="post.liked ? 'Unlike post' : 'Like post'"
+              (click)="toggleLike(post)">
+              <ion-icon [name]="post.liked ? 'heart' : 'heart-outline'"></ion-icon>
+            </button>
+            <button class="icon-button" type="button" aria-label="Show comments" (click)="toggleComments(post)">
+              <ion-icon name="chatbubble-outline"></ion-icon>
+            </button>
+            <button class="icon-button" type="button" aria-label="Share post" (click)="sharePost(post)">
+              <ion-icon name="paper-plane-outline"></ion-icon>
+            </button>
+          </div>
+          <button
+            class="icon-button"
+            [class.saved]="post.saved"
+            type="button"
+            [attr.aria-label]="post.saved ? 'Remove saved post' : 'Save post'"
+            (click)="toggleSave(post)">
+            <ion-icon [name]="post.saved ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+          </button>
         </div>
 
-      </div>
+        <div class="post-copy">
+          <strong class="like-count">{{ post.likes.toLocaleString() }} likes</strong>
+          <p class="caption"><strong>{{ post.username }}</strong> {{ post.caption }}</p>
+          <button class="comments-toggle" type="button" (click)="toggleComments(post)">
+            {{ post.commentsOpen ? 'Hide comments' : 'View all ' + post.comments.length + ' comments' }}
+          </button>
+          <span class="post-time">{{ post.time }}</span>
 
-      <ion-icon
-        class="more-icon"
-        name="ellipsis-horizontal">
-      </ion-icon>
-
-    </div>
-
-
-    <img
-      class="post-image"
-      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900"
-    />
-
-
-    <div class="post-actions">
-
-      <div class="left-actions">
-
-        <ion-icon name="heart-outline"></ion-icon>
-
-        <ion-icon name="chatbubble-outline"></ion-icon>
-
-        <ion-icon name="send-outline"></ion-icon>
-
-      </div>
-
-      <ion-icon name="bookmark-outline"></ion-icon>
-
-    </div>
-
-
-    <div class="post-content">
-
-      <strong>1,284 likes</strong>
-
-      <p>
-        <b>Ayushi Singh</b>
-        Exploring the boundaries of digital reality today.
-        This installation in Tokyo is pure magic.
-        ✨ #DigitalArt #TokyoVibes
-      </p>
-
-      <p class="comments">
-        View all 42 comments
-      </p>
-
-      <p class="time">
-        2 HOURS AGO
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <!-- POST 2 -->
-  <div class="post-card">
-
-    <div class="post-header">
-
-      <div class="user-info">
-
-        <img
-          class="post-avatar"
-          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"
-        />
-
-        <div>
-          <h3>apex_editor</h3>
-          <p>New York, USA</p>
+          <section class="comments-panel" *ngIf="post.commentsOpen">
+            <p class="comment" *ngFor="let comment of post.comments">
+              <strong>{{ comment.username }}</strong> {{ comment.text }}
+            </p>
+            <form class="comment-form" (ngSubmit)="addComment(post)">
+              <input
+                type="text"
+                name="comment-{{ post.id }}"
+                [(ngModel)]="post.commentDraft"
+                placeholder="Add a comment..."
+                aria-label="Write a comment">
+              <button type="submit" [disabled]="!post.commentDraft.trim()">Post</button>
+            </form>
+          </section>
         </div>
+      </article>
 
-      </div>
+      <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="crescent"
+          loadingText="Finding more moments...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </section>
 
-      <ion-icon
-        class="more-icon"
-        name="ellipsis-horizontal">
-      </ion-icon>
+    <aside class="right-rail">
+      <section class="profile-summary">
+        <div class="profile-line">
+          <img [src]="currentAvatar" alt="Ayushi Singh profile photo">
+          <div><strong>Ayushi Singh</strong><span>@ayushi.singh</span></div>
+          <a routerLink="/tabs/profile">View</a>
+        </div>
+        <p>Good things happen when we share them. Keep your circle close. 💜</p>
+      </section>
 
-    </div>
+      <section class="suggestions">
+        <div class="section-title">
+          <div><h2>People to know</h2><span>Find your next favourite account</span></div>
+          <a routerLink="/tabs/search">See all</a>
+        </div>
+        <div class="suggestion" *ngFor="let person of suggestions">
+          <img [src]="person.avatar" [alt]="person.name + ' profile photo'">
+          <div class="suggestion-copy"><strong>{{ person.username }}</strong><span>{{ person.name }}</span></div>
+          <button type="button" (click)="toggleFollow(person)">
+            {{ person.followed ? 'Following' : 'Follow' }}
+          </button>
+        </div>
+      </section>
 
-    <img
-      class="post-image"
-      src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900"
-    />
-
-  </div>
-
-  
+      <p class="rail-footer">About · Community · Privacy · Help<br>© 2026 Social Circle</p>
+    </aside>
+  </main>
 </ion-content>

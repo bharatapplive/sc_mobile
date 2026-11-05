@@ -27,6 +27,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../reel/reel.module').then(m => m.ReelPageModule),
       },
+      {
+        path: 'notifications',
+        loadComponent: () =>
+          import('../notifications/notifications.page').then(m => m.NotificationsPage),
+      },
        
 
       {

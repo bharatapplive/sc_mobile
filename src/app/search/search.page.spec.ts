@@ -14,4 +14,20 @@ describe('SearchPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('filters people and hashtags by the search query', () => {
+    component.query = 'Riya';
+    expect(component.filteredPeople.map((person) => person.username)).toEqual(['creative_soul']);
+
+    component.query = 'travel';
+    expect(component.filteredTags.map((tag) => tag.name)).toEqual(['#TravelVibes']);
+  });
+
+  it('toggles follow state for a suggested account', () => {
+    const person = component.people[0];
+    component.toggleFollow(person);
+    expect(person.followed).toBeTrue();
+    component.toggleFollow(person);
+    expect(person.followed).toBeFalse();
+  });
 });

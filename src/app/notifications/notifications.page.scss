@@ -1,0 +1,31 @@
+:host{--purple:#6b38d4;--ink:#25212d;--muted:#85818e;display:block}
+.notifications-header ion-toolbar{--background:#fff;--min-height:60px;--border-width:0}
+.notifications-header ion-title{padding-inline:20px;color:var(--ink);font-size:17px;font-weight:750}
+.notifications-header ion-button{--color:var(--purple);font-size:11px;font-weight:700}
+.notifications-page{max-width:760px;margin:0 auto;padding:34px 22px 60px}
+.page-intro{margin-bottom:26px}
+.eyebrow{margin:0 0 8px;color:var(--purple);font-size:10px;font-weight:800;letter-spacing:1.2px}
+h1{margin:0;color:var(--ink);font-size:26px;letter-spacing:-.7px}
+h1 span{color:var(--purple)}
+.page-intro>p:last-child{margin:8px 0 0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;margin-bottom:14px}
+.filters button{padding:9px 13px;border:1px solid #ece8f1;border-radius:20px;background:#fff;color:#746e7d;font-size:11px;font-weight:650}
+.filters button.active{border-color:#6b38d4;background:#f2edfc;color:#6b38d4}
+.notification-list{overflow:hidden;border:1px solid #eeebf2;border-radius:16px;background:#fff}
+.notification{position:relative;display:flex;align-items:center;gap:13px;min-height:76px;padding:13px 17px;border-bottom:1px solid #f1eef4}
+.notification:last-child{border-bottom:0}
+.notification.unread{background:#fbf9ff}
+.notification>img{width:43px;height:43px;flex:none;border-radius:50%;object-fit:cover}
+.notification>p{flex:1;margin:0;color:#575260;font-size:12px;line-height:1.6}
+.notification>p strong{color:var(--ink)}
+.notification>p span{display:inline-block;margin-left:5px;color:#a19ba8;font-size:10px}
+.post-preview{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#f1edfa;color:var(--purple);text-decoration:none}
+.post-preview ion-icon{font-size:16px}
+.follow-button{padding:8px 11px;border:0;border-radius:8px;background:#6b38d4;color:#fff;font-size:10px;font-weight:700}
+.unread-dot{position:absolute;right:9px;top:10px;width:7px;height:7px;border-radius:50%;background:#6b38d4}
+.empty-state{display:grid;justify-items:center;padding:56px 18px;border:1px solid #eeebf2;border-radius:16px;background:#fff;text-align:center}
+.empty-state>span{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;background:#f2edfc;color:#6b38d4}
+.empty-state>span ion-icon{font-size:23px}
+.empty-state h2{margin:15px 0 6px;color:var(--ink);font-size:16px}
+.empty-state p{margin:0;color:var(--muted);font-size:12px}
+@media(max-width:560px){.notifications-page{padding:25px 14px 40px}h1{font-size:22px}.notification{gap:10px;padding:12px}.notification>img{width:38px;height:38px}.notification>p{font-size:11px}}
